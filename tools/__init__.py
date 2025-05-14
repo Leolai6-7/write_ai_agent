@@ -18,8 +18,11 @@ from tools.main_character_tools import (
     tool_summarize_main_arc,
 )
 
+from tools.plot_tools import plot_tools, tool_suggest_next_objectives, tool_log_objective
+
+
 # 所有提供給 GPT 使用的工具 schema
-tool_schemas = character_tools + main_character_tools
+tool_schemas = character_tools + main_character_tools + plot_tools
 
 # GPT 工具呼叫對應的實際 Python 函數
 tool_function_map = {
@@ -35,3 +38,9 @@ tool_function_map = {
     "update_main_field": tool_update_main_field,
     "summarize_main_arc": tool_summarize_main_arc,
 }
+
+tool_function_map.update({
+    "suggest_next_objectives": tool_suggest_next_objectives,
+    "log_objective": tool_log_objective,
+})
+

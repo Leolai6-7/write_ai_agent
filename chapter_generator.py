@@ -20,16 +20,19 @@ def save_text(path, content):
 
 # ========= Prompt 建構 =========
 
-def build_prompt(main_char, world, objective, summary=None):
+def build_prompt(main_char, world, objective, summary=None, context=None):
     prompt = ""
 
+    if context:
+        prompt += f"{context}\n\n"
+        
     if summary:
         prompt += f"【前情提要】\n{summary}\n\n"
 
     prompt += f"【故事目標】\n{objective}\n\n"
     prompt += f"【主角設定】\n{yaml.dump(main_char, allow_unicode=True)}\n\n"
     prompt += f"【世界觀設定】\n{yaml.dump(world, allow_unicode=True)}\n\n"
-    prompt += "請根據上述內容撰寫本章小說內容，語氣真摯，描述具體，約 500 字。"
+    prompt += "請根據上述內容撰寫本章小說內容，語氣真摯，描述具體，約 800 字。"
 
     return prompt
 
@@ -51,7 +54,8 @@ def summarize_chapter(chapter_text: str):
 
 # ========= 主函數 =========
 
-def generate_chapter(character_path, world_path, objective, chapter_id=None, save_to=None):
+def generate_chapter(character_path, world_path, objective, chapter_id=None, save_to=None, context=None):
+
     # 載入角色與世界觀設定
     character = load_yaml(character_path)
     world = load_yaml(world_path)
@@ -65,14 +69,14 @@ def generate_chapter(character_path, world_path, objective, chapter_id=None, sav
                 summary = f.read()
 
     # 建立 prompt
-    prompt = build_prompt(character, world, objective, summary=summary)
+    prompt = build_prompt(character, world, objective, summary=summary, context=context)
 
     # 生成小說內容
     response = client.chat.completions.create(
         model="gpt-4",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.8,
-        max_tokens=1000
+        max_tokens=2000
     )
 
     chapter_text = response.choices[0].message.content.strip()
