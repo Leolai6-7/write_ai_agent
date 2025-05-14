@@ -1,0 +1,28 @@
+伊澤·艾爾文:
+  name: 伊澤·艾爾文
+  race: 人類
+  occupation: 魔導學徒
+  role_in_story: 主角
+  personality:
+    - 倔強
+    - 求知慾強
+    - 不輕易相信他人
+  background: >
+    伊澤出生於東大陸邊境的阿羅恩村，母親是草藥師，父親在他幼年時失踪。
+    他自幼對魔法充滿異常感應，曾無意觸發古代符文。
+  relationships:
+    芙蕾雅: 導師
+
+芙蕾雅:
+  name: 芙蕾雅
+  race: 精靈
+  occupation: 星環之塔高階魔導士
+  role_in_story: 導師與潛在盟友
+  personality:
+    - 冷靜
+    - 規律
+    - 隱藏情緒
+  background: >
+    芙蕾雅曾是伊澤父親的學生，在禁咒事件後選擇封印過去，現任職於星環之塔。
+  relationships:
+    伊澤·艾爾文: 學生
