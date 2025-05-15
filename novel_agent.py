@@ -4,7 +4,7 @@ from tools import tool_schemas, tool_function_map
 from chapter_generator import build_prompt
 import yaml
 from timeline_generator import update_timeline
-
+from character_memory_agent import update_all_active_characters_memory
 client = OpenAI()
 
 def load_yaml(path):
@@ -172,6 +172,11 @@ def write_chapter(chapter_id: int, objective: str = None):
     else:
         print("⚠️ 沒有偵測到【改寫版本】，以下是 GPT 回傳的完整內容：")
         print(result)
+    # === 更新角色記憶
+    update_all_active_characters_memory(final_text, chapter_id)
+
+    # === 更新 timeline
+    update_timeline()
 
 
 def write_story_loop():
