@@ -12,8 +12,8 @@ class PlotPlannerAgent:
 
     def suggest_next_objectives(self, summary_text: str, n=3):
         system_prompt = (
-            "你是一位奇幻小說編劇，根據前情摘要與主角性格，請提出下一章可能的故事任務（目標），條列 "
-            f"{n} 條，每條不超過 25 字。"
+            "你是一位奇幻小說編劇，根據前情摘要與主角性格，請提出接下來可能的發生的故事與轉折，條列 "
+            f"{n} 條，每條不超過 200 字，包含可能出現新的人物、物品、事件等。"
         )
         user_prompt = f"【前情提要】\n{summary_text}\n\n【主角性格】\n{', '.join(self.main_char.get('personality', []))}"
 
@@ -24,7 +24,7 @@ class PlotPlannerAgent:
                 {"role": "user", "content": user_prompt}
             ],
             temperature=0.7,
-            max_tokens=300
+            max_tokens=1000
         )
         return response.choices[0].message.content.strip()
 

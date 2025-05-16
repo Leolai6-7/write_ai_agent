@@ -8,6 +8,8 @@ client = OpenAI()
 
 CHARACTER_DIR = "characters"
 MEMORY_SUMMARY_FILE = "character_memory.yaml"
+ACTIVE_CHARACTERS_FILE = "active_characters.yaml"
+TIMELINE_FILE = "timeline.md"
 
 os.makedirs(CHARACTER_DIR, exist_ok=True)
 
@@ -81,12 +83,31 @@ def summarize_and_update_memory(name: str, text: str, chapter: int):
     append_global_summary(name, chapter, memory_summary)
     return memory_summary
 
+def get_recent_other_characters_memory(n: int = 2):
+    active_characters = load_yaml(ACTIVE_CHARACTERS_FILE).get("active", [])
+    section = ""
+    for name in active_characters:
+        path = os.path.join(CHARACTER_DIR, f"{name}.yaml")
+        data = load_yaml(path)
+        memory = data.get("memory", [])[-n:]
+        lines = [f"- 第 {m['chapter']} 章：{m['event']}" for m in memory if 'chapter' in m and 'event' in m]
+        if lines:
+            section += f"{name}：\n" + "\n".join(lines) + "\n\n"
+    return section.strip()
+
+def get_recent_timeline(n: int = 5):
+    if not os.path.exists("timeline.md"):
+        return ""
+    with open("timeline.md", "r", encoding="utf-8") as f:
+        lines = [line.strip() for line in f.readlines() if line.strip()]
+    return "\n".join(lines[-n:])
+
 
 # ✅ 固定流程統一化版本
 
 def update_all_active_characters_memory(chapter_text: str, chapter_id: int):
-    active_characters = ["伊澤", "莉亞"]  # 可以從設定檔中讀取
-    for name in active_characters:
+    active = load_yaml(ACTIVE_CHARACTERS_FILE).get("active", [])
+    for name in active:
         summarize_and_update_memory(name, chapter_text, chapter_id)
         
 # 🔧 用於生成 prompt 的主角記憶整合
