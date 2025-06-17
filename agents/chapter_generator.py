@@ -63,14 +63,25 @@ class ChapterGeneratorAgent:
         if world:
             prompt_parts.append(f"【世界觀設定】\n{yaml.dump(world, allow_unicode=True)}")
 
-        # 10. 寫作指令 (從舊版 prompt 複製)
-        writing_instructions = """請從【前章結尾銜接段落】自然延續故事，並根據上述章節目標與背景撰寫本章小說內容，字數約為 800 字。
+        # 10. 角色對話指引
+        dialogue_guidance = ""
+        if main_char and main_char.get("speaking_style"):
+            dialogue_guidance = f"""
+【角色對話指引】
+- 主角伊澤：{main_char['speaking_style']}，對話應簡潔、內斂，多思考少說話
+- 其他角色應與主角形成對比，各具特色的說話方式
+- 避免所有角色說話風格相同或過於正式"""
+
+        # 11. 寫作指令 (優化版)
+        writing_instructions = f"""請從【前章結尾銜接段落】自然延續故事，並根據上述章節目標與背景撰寫本章小說內容，字數約為 800 字。
 
 - 本章僅需描述主角朝向目標邁進的「一小段過程」，不需完成整個任務。
-- 以具體的場景細節、人物之間的互動、主角的內心變化與情感流動為描寫重點。
-- 敘事語氣請保持真摯、細膩，避免快速敘述事件進展。
+- 重點強化：角色心理變化、對話張力、劇情轉折
+- 場景描寫應推進劇情，避免純裝飾性描述
+- 敘事語氣請保持真摯、細膩，節奏張弛有度
+- 節奏比例：具體行動50%，內心思考30%，環境描寫20%{dialogue_guidance}
 
-請讓讀者透過細節感受故事氛圍與角色心理，而非直接交代任務進度。"""
+請讓讀者透過角色行動與對話感受故事推進與角色成長。"""
         prompt_parts.append(writing_instructions)
 
         # 將所有部分用換行符連接起來
