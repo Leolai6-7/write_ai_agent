@@ -157,21 +157,33 @@ def generate_timeline_markdown():
     objectives = load_objectives()
     timeline_md = "# 📖 小說劇情時間線\n\n"
 
-    # 解析 objectives_expanded.yaml 的結構
-    for key, value in objectives.items():
-        if isinstance(value, list):
-            for i, obj in enumerate(value):
-                chapter_id = i + 1
-                summary = load_summary(chapter_id)
-                
-                timeline_md += f"## 第 {chapter_id} 章\n"
-                timeline_md += f"**章節目標：** {obj}\n\n"
-                if summary:
-                    timeline_md += f"**章節摘要：**\n{summary}\n"
-                else:
-                    timeline_md += "*⚠️ 本章尚無摘要。*\n"
-                timeline_md += "\n---\n\n"
-            break  # 只處理第一個主要目標的子目標
+    # 解析 objectives_expanded.yaml 的結構，找到正確的目標
+    target_objectives = None
+    
+    # 尋找當前主要目標對應的子目標列表
+    main_goal_data = load_yaml(settings.MAIN_GOAL_FILE)
+    current_main_goal = main_goal_data.get("main_goal") if main_goal_data else None
+    
+    if current_main_goal and current_main_goal in objectives:
+        target_objectives = objectives[current_main_goal]
+    else:
+        # 如果找不到匹配的目標，使用最後一個非空的列表
+        for key, value in objectives.items():
+            if isinstance(value, list) and len(value) > 0 and value[0]:  # 確保不是空字符串
+                target_objectives = value
+
+    if target_objectives:
+        for i, obj in enumerate(target_objectives):
+            chapter_id = i + 1
+            summary = load_summary(chapter_id)
+            
+            timeline_md += f"## 第 {chapter_id} 章\n"
+            timeline_md += f"**章節目標：** {obj}\n\n"
+            if summary:
+                timeline_md += f"**章節摘要：**\n{summary}\n"
+            else:
+                timeline_md += "*⚠️ 本章尚無摘要。*\n"
+            timeline_md += "\n---\n\n"
 
     return timeline_md
 

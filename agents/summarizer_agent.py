@@ -19,7 +19,7 @@ class SummarizerAgent:
                 {"role": "user", "content": chapter_text}
             ],
             temperature=0.7,
-            max_tokens=500
+            max_tokens=800
         )
         summary = response.choices[0].message.content.strip()
         print("✅ 摘要完成。")
