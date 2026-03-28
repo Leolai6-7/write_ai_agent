@@ -5,6 +5,7 @@ description = "AI-powered novel writing pipeline with multi-agent orchestration"
 requires-python = ">=3.11"
 dependencies = [
     # LLM
+    "boto3>=1.34",
     "openai>=1.30",
     "anthropic>=0.30",
     "tiktoken>=0.7",

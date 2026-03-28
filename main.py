@@ -18,10 +18,17 @@ console = Console()
 
 
 def _load_config() -> NovelConfig:
-    """Load config with API keys from environment."""
+    """Load config from environment variables.
+
+    AWS Bedrock (default): uses AWS credentials from ~/.aws or env vars.
+    Set AWS_REGION / AWS_PROFILE to configure.
+    Optional: OPENAI_API_KEY / ANTHROPIC_API_KEY for direct API access.
+    """
     from config.settings import LLMConfig
     return NovelConfig(
         llm=LLMConfig(
+            aws_region=os.getenv("AWS_REGION", "us-west-2"),
+            aws_profile=os.getenv("AWS_PROFILE", ""),
             openai_api_key=os.getenv("OPENAI_API_KEY", ""),
             anthropic_api_key=os.getenv("ANTHROPIC_API_KEY", ""),
         ),

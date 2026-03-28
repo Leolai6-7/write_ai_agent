@@ -40,6 +40,8 @@ class NovelOrchestrator:
 
         # Initialize infrastructure
         self.llm = LLMClient(
+            aws_region=config.llm.aws_region,
+            aws_profile=config.llm.aws_profile or None,
             openai_api_key=config.llm.openai_api_key,
             anthropic_api_key=config.llm.anthropic_api_key,
         )

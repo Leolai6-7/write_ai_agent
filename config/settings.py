@@ -9,16 +9,26 @@ from pydantic_settings import BaseSettings
 
 
 class LLMConfig(BaseSettings):
-    """LLM provider configuration."""
-    # Model assignments per agent role
-    planning_model: str = "gpt-4-turbo"
-    generation_model: str = "claude-sonnet-4-20250514"
-    judge_model: str = "gpt-4-turbo"
-    rewrite_model: str = "claude-sonnet-4-20250514"
-    summary_model: str = "gpt-3.5-turbo"
-    consistency_model: str = "gpt-3.5-turbo"
+    """LLM provider configuration.
 
-    # API keys (loaded from env)
+    Model format:
+        - "bedrock:<model_id>" → AWS Bedrock (default)
+        - "claude-..." → Anthropic direct API
+        - "gpt-..." → OpenAI
+    """
+    # Model assignments per agent role (default: Bedrock)
+    planning_model: str = "bedrock:us.anthropic.claude-sonnet-4-20250514-v1:0"
+    generation_model: str = "bedrock:us.anthropic.claude-sonnet-4-20250514-v1:0"
+    judge_model: str = "bedrock:us.anthropic.claude-sonnet-4-20250514-v1:0"
+    rewrite_model: str = "bedrock:us.anthropic.claude-sonnet-4-20250514-v1:0"
+    summary_model: str = "bedrock:us.anthropic.claude-haiku-4-5-20251001-v1:0"
+    consistency_model: str = "bedrock:us.anthropic.claude-haiku-4-5-20251001-v1:0"
+
+    # AWS Bedrock config
+    aws_region: str = "us-west-2"
+    aws_profile: str = ""
+
+    # Optional direct API keys (leave empty to use Bedrock)
     openai_api_key: str = ""
     anthropic_api_key: str = ""
 
