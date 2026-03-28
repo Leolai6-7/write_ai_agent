@@ -79,15 +79,8 @@ $RECYCLE.BIN/
 *.swp
 *.swo
 
-# Project specific - Generated content
-outputs/chapter_*.md
-summaries/chapter_*.md
-timeline.md
-objectives_expanded.yaml
-context_snapshot.yaml
-character_memory.yaml
-active_characters.yaml
-
-# Keep example directories
-!outputs/.gitkeep
-!summaries/.gitkeep
+# Project specific - Runtime data
+data/novel.db
+data/chroma/
+data/outputs/
+data/planning/
