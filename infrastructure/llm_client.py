@@ -106,6 +106,18 @@ class LLMClient:
             return "bedrock"
         return "openai"
 
+    @staticmethod
+    def _strip_code_fence(text: str) -> str:
+        """Strip markdown code fences from LLM response (e.g. ```json ... ```)."""
+        text = text.strip()
+        if text.startswith("```"):
+            # Remove opening fence (```json or ```)
+            first_newline = text.index("\n") if "\n" in text else len(text)
+            text = text[first_newline + 1:]
+        if text.endswith("```"):
+            text = text[:-3]
+        return text.strip()
+
     def _estimate_cost(self, model: str, prompt_tokens: int, completion_tokens: int) -> float:
         # Strip "bedrock:" prefix for pricing lookup
         clean_model = model.removeprefix("bedrock:")
@@ -153,11 +165,14 @@ class LLMClient:
                 logger.warning("Parse error (attempt %d/%d): %s", attempt, max_retries, e)
                 last_error = e
                 if response_model and attempt < max_retries:
+                    # Retry with error hint — use assistant+user pair to avoid
+                    # consecutive same-role messages (Bedrock requirement)
                     messages = messages + [
-                        {"role": "assistant", "content": ""},
+                        {"role": "assistant", "content": "I apologize for the formatting error."},
                         {"role": "user", "content": (
                             f"Your previous response failed to parse: {e}\n"
-                            f"Please respond with valid JSON matching the schema."
+                            f"Please respond with valid JSON only. "
+                            f"Do NOT wrap in markdown code fences like ```json."
                         )},
                     ]
             except Exception as e:
@@ -221,7 +236,7 @@ class LLMClient:
         usage.cost_usd = self._estimate_cost(model_id, usage.prompt_tokens, usage.completion_tokens)
 
         if response_model:
-            return response_model.model_validate_json(content), usage
+            return response_model.model_validate_json(self._strip_code_fence(content)), usage
         return content, usage
 
     # ── OpenAI ───────────────────────────────────────────────────
@@ -262,7 +277,7 @@ class LLMClient:
         usage.cost_usd = self._estimate_cost(model, usage.prompt_tokens, usage.completion_tokens)
 
         if response_model:
-            return response_model.model_validate_json(content), usage
+            return response_model.model_validate_json(self._strip_code_fence(content)), usage
         return content, usage
 
     # ── Anthropic Direct ─────────────────────────────────────────
@@ -309,7 +324,7 @@ class LLMClient:
         usage.cost_usd = self._estimate_cost(model, usage.prompt_tokens, usage.completion_tokens)
 
         if response_model:
-            return response_model.model_validate_json(content), usage
+            return response_model.model_validate_json(self._strip_code_fence(content)), usage
         return content, usage
 
     # ── Helpers ───────────────────────────────────────────────────
