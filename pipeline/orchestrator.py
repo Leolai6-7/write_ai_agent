@@ -15,10 +15,12 @@ from agents.chapter_generator import ChapterGeneratorAgent
 from agents.judge_agent import JudgeAgent
 from agents.rewrite_agent import RewriteAgent
 from agents.summarizer import SummarizerAgent
+from agents.consistency_checker import ConsistencyChecker
 from infrastructure.llm_client import LLMClient
 from infrastructure.db import Database
 from infrastructure.logger import get_logger
 from memory.memory_manager import MemoryManager
+from memory.retrieval import SemanticRetriever
 from memory.token_budget import TokenBudget
 from pipeline.chapter_graph import ChapterGraphBuilder, ChapterState
 
@@ -44,6 +46,9 @@ class NovelOrchestrator:
         self.db = Database(config.db_path)
         self.db.initialize()
 
+        # Initialize semantic retriever
+        self.retriever = SemanticRetriever(config.chroma_dir)
+
         # Initialize memory
         self.memory = MemoryManager(
             db=self.db,
@@ -58,6 +63,7 @@ class NovelOrchestrator:
                 world=config.memory.world_budget,
                 instruction=config.memory.instruction_budget,
             ),
+            retriever=self.retriever,
         )
 
         # Initialize agents
@@ -75,9 +81,12 @@ class NovelOrchestrator:
         judge = JudgeAgent(self.llm, config.llm.judge_model)
         rewriter = RewriteAgent(self.llm, config.llm.rewrite_model)
         summarizer = SummarizerAgent(self.llm, config.llm.summary_model)
+        consistency = ConsistencyChecker(self.llm, config.llm.consistency_model)
 
         # Build LangGraph
-        builder = ChapterGraphBuilder(generator, judge, rewriter, summarizer, self.memory)
+        builder = ChapterGraphBuilder(
+            generator, judge, rewriter, summarizer, self.memory, consistency
+        )
         self.chapter_graph = builder.build().compile(
             checkpointer=MemorySaver(),
         )

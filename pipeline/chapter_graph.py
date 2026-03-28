@@ -20,6 +20,7 @@ from agents.chapter_generator import ChapterGeneratorAgent
 from agents.judge_agent import JudgeAgent
 from agents.rewrite_agent import RewriteAgent
 from agents.summarizer import SummarizerAgent
+from agents.consistency_checker import ConsistencyChecker
 from memory.memory_manager import MemoryManager
 
 
@@ -67,12 +68,14 @@ class ChapterGraphBuilder:
         rewriter: RewriteAgent,
         summarizer: SummarizerAgent,
         memory: MemoryManager,
+        consistency_checker: ConsistencyChecker | None = None,
     ):
         self.generator = generator
         self.judge = judge
         self.rewriter = rewriter
         self.summarizer = summarizer
         self.memory = memory
+        self.consistency_checker = consistency_checker
 
     def build(self) -> StateGraph:
         """Build the compiled graph with real agent implementations."""
@@ -155,11 +158,22 @@ class ChapterGraphBuilder:
         }
 
     def _check_consistency(self, state: ChapterState) -> dict:
-        # Phase 3: ConsistencyChecker.run()
-        # For now, pass through
+        if not self.consistency_checker:
+            return {
+                "final_chapter": state["draft"],
+                "consistency": ConsistencyReport(is_consistent=True),
+            }
+
+        context = state.get("context")
+        report = self.consistency_checker.run(
+            chapter_text=state["draft"],
+            chapter_id=state["chapter_objective"].chapter_id,
+            character_context=context.character_context if context else "",
+            relevant_history=context.short_term_memory if context else "",
+        )
         return {
             "final_chapter": state["draft"],
-            "consistency": ConsistencyReport(is_consistent=True),
+            "consistency": report,
         }
 
     def _rewrite_consistency(self, state: ChapterState) -> dict:

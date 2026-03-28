@@ -10,6 +10,8 @@ from infrastructure.db import Database
 from infrastructure.logger import get_logger
 from memory.token_budget import TokenBudget
 
+from memory.retrieval import SemanticRetriever
+
 if TYPE_CHECKING:
     from infrastructure.llm_client import LLMClient
 
@@ -33,12 +35,14 @@ class MemoryManager:
         short_term_window: int = 5,
         compression_interval: int = 10,
         token_budget: TokenBudget | None = None,
+        retriever: SemanticRetriever | None = None,
     ):
         self.db = db
         self.llm = llm
         self.short_term_window = short_term_window
         self.compression_interval = compression_interval
         self.budget = token_budget or TokenBudget()
+        self.retriever = retriever
 
     def assemble_context(self, objective: ChapterObjective) -> ChapterContext:
         """Assemble context for chapter generation within token budget."""
@@ -63,11 +67,15 @@ class MemoryManager:
             world_ctx, "world", self.llm.count_tokens
         )
 
+        # Semantic retrieval for relevant memories
+        relevant = self._get_relevant_memories(objective)
+
         context = ChapterContext(
             short_term_memory=short_term_text,
             long_term_memory=long_term_text,
             character_context=character_text,
             world_context=world_text,
+            relevant_memories=relevant,
             total_tokens=self.budget.total_used(),
         )
 
@@ -163,8 +171,19 @@ class MemoryManager:
     def _get_world_context(self) -> str:
         """Get world setting context. Returns static world info."""
         # For now, return a minimal world context
-        # Phase 3: load from YAML + dynamic world state from DB
+        # Future: load from YAML + dynamic world state from DB
         return ""
+
+    def _get_relevant_memories(self, objective: ChapterObjective) -> list[str]:
+        """Use semantic retrieval to find relevant past chapter summaries."""
+        if not self.retriever:
+            return []
+
+        results = self.retriever.query(objective.objective, n_results=5)
+        return [
+            f"(第{r['chapter_id']}章) {r['summary']}"
+            for r in results
+        ]
 
     # ── Memory Updates ───────────────────────────────────────────
 
@@ -187,6 +206,13 @@ class MemoryManager:
             ),
         )
         self.db.conn.commit()
+        # Add to semantic index
+        if self.retriever:
+            self.retriever.add_chapter(
+                chapter_id=summary.chapter_id,
+                summary=summary.one_line_summary,
+            )
+
         logger.info("Saved summary for chapter %d", summary.chapter_id)
 
         # Update unresolved threads
