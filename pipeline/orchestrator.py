@@ -23,6 +23,7 @@ from memory.memory_manager import MemoryManager
 from memory.retrieval import SemanticRetriever
 from memory.token_budget import TokenBudget
 from memory.world_state import WorldState
+from prompts.loader import PromptLoader
 from pipeline.chapter_graph import ChapterGraphBuilder, ChapterState
 
 logger = get_logger("orchestrator")
@@ -72,25 +73,44 @@ class NovelOrchestrator:
             world_state=self.world,
         )
 
-        # Initialize agents
+        # Load prompt templates
+        prompts = PromptLoader()
+
+        # Initialize agents with prompt templates
         self.architect = VolumeArchitectAgent(
             self.llm, config.llm.planning_model,
+            prompt=prompts.load("volume_architect"),
         )
         self.arc_planner = ArcPlannerAgent(
             self.llm, config.llm.planning_model,
+            prompt=prompts.load("arc_planner"),
         )
         self.chapter_planner = ChapterPlannerAgent(
             self.llm, config.llm.planning_model,
+            prompt=prompts.load("chapter_planner"),
         )
 
-        generator = ChapterGeneratorAgent(self.llm, config.llm.generation_model)
+        generator = ChapterGeneratorAgent(
+            self.llm, config.llm.generation_model,
+            prompt=prompts.load("chapter_generator"),
+        )
         judge = JudgeAgent(
             self.llm, config.llm.judge_model,
+            prompt=prompts.load("judge"),
             voting_rounds=config.generation.judge_voting_rounds,
         )
-        rewriter = RewriteAgent(self.llm, config.llm.rewrite_model)
-        summarizer = SummarizerAgent(self.llm, config.llm.summary_model)
-        consistency = ConsistencyChecker(self.llm, config.llm.consistency_model)
+        rewriter = RewriteAgent(
+            self.llm, config.llm.rewrite_model,
+            prompt=prompts.load("rewrite"),
+        )
+        summarizer = SummarizerAgent(
+            self.llm, config.llm.summary_model,
+            prompt=prompts.load("summarizer"),
+        )
+        consistency = ConsistencyChecker(
+            self.llm, config.llm.consistency_model,
+            prompt=prompts.load("consistency_checker"),
+        )
 
         # Build LangGraph
         builder = ChapterGraphBuilder(

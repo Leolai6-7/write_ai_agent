@@ -2,12 +2,18 @@
 
 from config.models import ConsistencyReport
 from agents.consistency_checker import ConsistencyChecker
+from prompts.loader import PromptTemplate
 from tests.conftest import MockLLMClient
+
+_PROMPT = PromptTemplate(
+    system="Check consistency. Respond in JSON.",
+    user="Chapter {chapter_id}: {chapter_text} {history_block}",
+)
 
 
 def test_consistency_checker_returns_report():
     llm = MockLLMClient()
-    checker = ConsistencyChecker(llm=llm, model="mock")
+    checker = ConsistencyChecker(llm=llm, model="mock", prompt=_PROMPT)
     result = checker.run(
         chapter_text="伊澤走進圖書館",
         chapter_id=5,
@@ -32,6 +38,6 @@ def test_consistency_checker_structured_output():
         }
     }
     llm = MockLLMClient(responses=responses)
-    checker = ConsistencyChecker(llm=llm, model="mock")
+    checker = ConsistencyChecker(llm=llm, model="mock", prompt=_PROMPT)
     result = checker.run(chapter_text="伊澤雙手結印", chapter_id=5)
     assert isinstance(result, ConsistencyReport)

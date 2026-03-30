@@ -11,6 +11,7 @@ from pydantic import BaseModel
 
 from config.models import ChapterObjective
 from infrastructure.llm_client import LLMClient, TokenUsage
+from prompts.loader import PromptTemplate
 
 
 class MockLLMClient(LLMClient):
@@ -100,6 +101,15 @@ def sample_objective():
         key_events=["到達圖書館", "遇見米娜", "發現父親的線索"],
         characters_involved=["伊澤", "米娜"],
         emotional_tone="期待與不安",
+    )
+
+
+@pytest.fixture
+def mock_prompt():
+    """Provide a simple mock prompt template."""
+    return PromptTemplate(
+        system="You are a test agent.",
+        user="Do the task: {task}",
     )
 
 
