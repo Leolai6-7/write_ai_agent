@@ -213,11 +213,9 @@ class ChapterGraphBuilder:
         return {"summary": summary}
 
     def _update_memory(self, state: ChapterState) -> dict:
-        if state.get("summary"):
-            self.memory.save_summary(state["summary"])
-        elif state.get("final_chapter"):
-            # Force-accepted without summary — still save the chapter
-            self.memory.save_summary(ChapterSummary(
+        summary = state.get("summary")
+        if not summary and state.get("final_chapter"):
+            summary = ChapterSummary(
                 chapter_id=state["chapter_objective"].chapter_id,
                 plot_events=["(force accepted, no summary)"],
                 character_changes={},
@@ -225,7 +223,39 @@ class ChapterGraphBuilder:
                 unresolved_threads=[],
                 emotional_arc="unknown",
                 one_line_summary="(force accepted)",
-            ))
+            )
+
+        if summary:
+            self.memory.save_summary(summary)
+
+            # Auto-update character states from summary
+            chapter_id = state["chapter_objective"].chapter_id
+            for char_name, change_desc in summary.character_changes.items():
+                try:
+                    # Load existing state or create new
+                    row = self.memory.db.conn.execute(
+                        "SELECT * FROM character_states WHERE name = ?", (char_name,)
+                    ).fetchone()
+
+                    import json
+                    if row:
+                        key_memories = json.loads(row["key_memories"]) if row["key_memories"] else []
+                        key_memories.append(f"第{chapter_id}章: {change_desc}")
+                        # Keep last 10 memories
+                        key_memories = key_memories[-10:]
+                    else:
+                        key_memories = [f"第{chapter_id}章: {change_desc}"]
+
+                    from config.models import CharacterState
+                    self.memory.update_character(CharacterState(
+                        name=char_name,
+                        emotional_state=change_desc,
+                        key_memories=key_memories,
+                        last_appeared=chapter_id,
+                    ))
+                except Exception as e:
+                    logger.warning("Failed to update character %s: %s", char_name, e)
+
         return {}
 
 

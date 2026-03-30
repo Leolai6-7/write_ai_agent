@@ -182,9 +182,15 @@ class MemoryManager:
         if not self.retriever:
             return []
 
-        results = self.retriever.query(objective.objective, n_results=5)
+        results = self.retriever.query(
+            objective.objective,
+            n_results=5,
+            max_distance=0.5,
+            filter_characters=objective.characters_involved or None,
+            exclude_chapters=[objective.chapter_id],
+        )
         return [
-            f"(第{r['chapter_id']}章) {r['summary']}"
+            f"(第{r['chapter_id']}章, 相關度:{1-r['distance']:.0%}) {r['summary']}"
             for r in results
         ]
 
@@ -209,11 +215,12 @@ class MemoryManager:
             ),
         )
         self.db.conn.commit()
-        # Add to semantic index
+        # Add to semantic index with character metadata
         if self.retriever:
             self.retriever.add_chapter(
                 chapter_id=summary.chapter_id,
                 summary=summary.one_line_summary,
+                characters=list(summary.character_changes.keys()) if summary.character_changes else [],
             )
 
         logger.info("Saved summary for chapter %d", summary.chapter_id)

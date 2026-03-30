@@ -15,10 +15,10 @@ def test_add_and_query(retriever):
     retriever.add_chapter(2, "伊澤通過守護者考驗獲得基礎區域權限")
     retriever.add_chapter(3, "伊澤發現父親留下的禁咒筆記")
 
-    results = retriever.query("父親的線索", n_results=2)
-    assert len(results) == 2
+    results = retriever.query("父親的線索", n_results=2, max_distance=1.0)
+    assert len(results) >= 1
     # Chapter 3 should be most relevant (mentions 父親)
-    assert any(r["chapter_id"] == 3 for r in results)
+    assert results[0]["chapter_id"] == 3
 
 
 def test_empty_query(retriever):
