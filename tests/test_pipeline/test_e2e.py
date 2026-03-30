@@ -17,13 +17,18 @@ from tests.conftest import MockLLMClient
 
 @pytest.fixture
 def full_memory(tmp_path):
-    """Set up a full memory system with DB and retriever."""
+    """Set up a full memory system with DB, repos, and retriever."""
+    from memory.repositories import SummaryRepository, CharacterRepository, ThreadRepository, CompressedRepository
     db = Database(tmp_path / "test.db")
     db.initialize()
     llm = MockLLMClient()
     retriever = SemanticRetriever(tmp_path / "chroma")
     memory = MemoryManager(
-        db=db, llm=llm,
+        summary_repo=SummaryRepository(db),
+        character_repo=CharacterRepository(db),
+        thread_repo=ThreadRepository(db),
+        compressed_repo=CompressedRepository(db),
+        llm=llm,
         short_term_window=3, compression_interval=5,
         retriever=retriever,
     )
@@ -92,10 +97,7 @@ def test_character_state_auto_update(full_memory):
     full_memory.save_summary(summary)
 
     # Check characters were indexed
-    row = full_memory.db.conn.execute(
-        "SELECT * FROM character_states WHERE name = '伊澤'"
-    ).fetchone()
-    # Note: character auto-update happens in chapter_graph._update_memory,
+    # character auto-update happens in chapter_graph._update_memory,
     # not in memory_manager.save_summary. Testing the data flow here.
     assert full_memory.get_last_chapter_id() == 1
 
@@ -134,9 +136,9 @@ def test_memory_compression_with_retriever(full_memory):
         ))
 
     # Compression should have triggered (uses mock LLM)
-    rows = full_memory.db.conn.execute("SELECT * FROM compressed_memories").fetchall()
-    assert len(rows) == 1
-    assert rows[0]["compressed_summary"] != ""  # Mock returns "Mock LLM response"
+    assert full_memory.compressed.count() == 1
+    rows = full_memory.compressed.get_all()
+    assert rows[0]["compressed_summary"] != ""
 
 
 def test_token_budget_limits_context(full_memory):

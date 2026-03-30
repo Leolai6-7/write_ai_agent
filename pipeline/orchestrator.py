@@ -20,6 +20,7 @@ from infrastructure.llm_client import LLMClient
 from infrastructure.db import Database
 from infrastructure.logger import get_logger
 from memory.memory_manager import MemoryManager
+from memory.repositories import SummaryRepository, CharacterRepository, ThreadRepository, CompressedRepository
 from memory.retrieval import SemanticRetriever
 from memory.token_budget import TokenBudget
 from memory.world_state import WorldState
@@ -55,9 +56,18 @@ class NovelOrchestrator:
         self.world = WorldState(config.world_dir)
         self.world.load()
 
-        # Initialize memory
+        # Initialize repositories
+        summary_repo = SummaryRepository(self.db)
+        character_repo = CharacterRepository(self.db, max_memories=config.memory.max_character_memories)
+        thread_repo = ThreadRepository(self.db)
+        compressed_repo = CompressedRepository(self.db)
+
+        # Initialize memory manager
         self.memory = MemoryManager(
-            db=self.db,
+            summary_repo=summary_repo,
+            character_repo=character_repo,
+            thread_repo=thread_repo,
+            compressed_repo=compressed_repo,
             llm=self.llm,
             short_term_window=config.memory.short_term_window,
             compression_interval=config.memory.compression_interval,

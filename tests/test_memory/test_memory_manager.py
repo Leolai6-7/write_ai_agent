@@ -10,10 +10,17 @@ from tests.conftest import MockLLMClient
 
 @pytest.fixture
 def memory(tmp_db):
+    from memory.repositories import SummaryRepository, CharacterRepository, ThreadRepository, CompressedRepository
     db = Database(tmp_db)
     db.initialize()
     llm = MockLLMClient()
-    mgr = MemoryManager(db=db, llm=llm, short_term_window=3, compression_interval=5)
+    mgr = MemoryManager(
+        summary_repo=SummaryRepository(db),
+        character_repo=CharacterRepository(db),
+        thread_repo=ThreadRepository(db),
+        compressed_repo=CompressedRepository(db),
+        llm=llm, short_term_window=3, compression_interval=5,
+    )
     yield mgr
     db.close()
 
@@ -30,9 +37,7 @@ def test_save_and_retrieve_summary(memory):
     )
     memory.save_summary(summary)
 
-    row = memory.db.conn.execute(
-        "SELECT * FROM chapter_summaries WHERE chapter_id = 1"
-    ).fetchone()
+    row = memory.summaries.get_by_id(1)
     assert row is not None
     assert row["one_line_summary"] == "伊澤到達圖書館並遇見守護者米娜"
 
@@ -84,20 +89,12 @@ def test_assemble_context_with_data(memory):
 
 
 def test_update_character(memory):
-    state = CharacterState(
-        name="伊澤",
-        current_location="圖書館",
-        emotional_state="好奇",
-        key_memories=["遇見米娜"],
-        last_appeared=1,
-    )
-    memory.update_character(state)
+    memory.update_character("伊澤", "從緊張變為好奇", chapter_id=1)
 
-    row = memory.db.conn.execute(
-        "SELECT * FROM character_states WHERE name = '伊澤'"
-    ).fetchone()
-    assert row is not None
-    assert row["current_location"] == "圖書館"
+    state = memory.characters.get("伊澤")
+    assert state is not None
+    assert state.last_appeared == 1
+    assert "好奇" in state.emotional_state
 
 
 def test_compression_triggers(memory):
@@ -113,10 +110,8 @@ def test_compression_triggers(memory):
             one_line_summary=f"Chapter {i}",
         ))
 
-    rows = memory.db.conn.execute(
-        "SELECT * FROM compressed_memories"
-    ).fetchall()
-    assert len(rows) == 1
+    assert memory.compressed.count() == 1
+    rows = memory.compressed.get_all()
     assert rows[0]["chapter_range"] == "1-5"
 
 
@@ -131,7 +126,5 @@ def test_unresolved_threads_tracked(memory):
         one_line_summary="test",
     ))
 
-    threads = memory.db.conn.execute(
-        "SELECT * FROM unresolved_threads"
-    ).fetchall()
+    threads = memory.threads.get_unresolved()
     assert len(threads) == 2
