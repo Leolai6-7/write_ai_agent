@@ -199,7 +199,8 @@ class LLMClient:
     ) -> tuple[str | BaseModel, TokenUsage]:
         model_id = model.removeprefix("bedrock:")
 
-        # Extract system message
+        # Extract system message with prompt caching support
+        # Bedrock caches system prompt content marked with cachePoint
         system_parts = []
         chat_messages = []
         for msg in messages:
@@ -211,6 +212,10 @@ class LLMClient:
         if response_model:
             schema_hint = json.dumps(response_model.model_json_schema(), ensure_ascii=False)
             system_parts.append({"text": f"Respond in JSON matching this schema:\n{schema_hint}"})
+
+        # Add cache point after all system content (enables prompt caching)
+        if system_parts:
+            system_parts.append({"cachePoint": {"type": "default"}})
 
         kwargs: dict[str, Any] = {
             "modelId": model_id,

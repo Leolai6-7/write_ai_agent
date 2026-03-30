@@ -256,12 +256,13 @@ class MemoryManager:
         self.db.conn.commit()
 
     def _compress_memories(self, up_to_chapter: int) -> None:
-        """Compress old chapter summaries into long-term memory."""
+        """Compress old chapter summaries into long-term memory using LLM."""
         start = max(1, up_to_chapter - self.compression_interval + 1)
         end = up_to_chapter
 
         rows = self.db.conn.execute(
-            """SELECT one_line_summary FROM chapter_summaries
+            """SELECT chapter_id, one_line_summary, plot_events, unresolved_threads
+               FROM chapter_summaries
                WHERE chapter_id BETWEEN ? AND ?
                ORDER BY chapter_id""",
             (start, end),
@@ -270,17 +271,42 @@ class MemoryManager:
         if not rows:
             return
 
-        summaries = [row["one_line_summary"] for row in rows]
-        compressed = " → ".join(summaries)  # Simple compression for now
-        # Phase 2.7: Use SummarizerAgent for LLM-based compression
+        # Build input for LLM compression
+        summaries = []
+        critical_events = []
+        for row in rows:
+            summaries.append(f"第{row['chapter_id']}章：{row['one_line_summary']}")
+            # Collect unresolved threads as critical (never compress these)
+            threads = json.loads(row["unresolved_threads"]) if row["unresolved_threads"] else []
+            critical_events.extend(threads)
+
+        summaries_text = "\n".join(summaries)
+
+        # Use LLM to compress into a coherent paragraph
+        try:
+            compressed = self.llm.chat(
+                messages=[
+                    {"role": "system", "content": (
+                        "你是故事記憶壓縮器。請將以下多章摘要壓縮為一段連貫的敘述（100-200字），"
+                        "保留關鍵情節轉折和角色發展，省略細節。直接輸出壓縮後的文字。"
+                    )},
+                    {"role": "user", "content": f"請壓縮第{start}-{end}章的摘要：\n\n{summaries_text}"},
+                ],
+                model=self.llm.total_usage[-1].model if self.llm.total_usage else "bedrock:us.anthropic.claude-haiku-4-5-20251001-v1:0",
+                temperature=0.3,
+                max_tokens=500,
+            )
+        except Exception as e:
+            logger.warning("LLM compression failed, using fallback: %s", e)
+            compressed = " → ".join(row["one_line_summary"] for row in rows)
 
         self.db.conn.execute(
             """INSERT INTO compressed_memories (chapter_range, compressed_summary, critical_events)
                VALUES (?, ?, ?)""",
-            (f"{start}-{end}", compressed, "[]"),
+            (f"{start}-{end}", compressed, json.dumps(critical_events, ensure_ascii=False)),
         )
         self.db.conn.commit()
-        logger.info("Compressed memories for chapters %d-%d", start, end)
+        logger.info("Compressed memories for chapters %d-%d (%d chars)", start, end, len(compressed))
 
     def get_last_chapter_id(self) -> int:
         """Get the ID of the last completed chapter."""
