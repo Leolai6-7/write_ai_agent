@@ -1,6 +1,8 @@
 """LangGraph StateGraph for single chapter generation pipeline.
 
-Flow: assemble_context → generate → judge → (rewrite loop) → consistency_check → summarize → update_memory
+Flow: assemble_context → generate → judge → (rewrite loop) → consistency → summarize → update_memory
+
+This module only handles graph wiring. Node implementations are in pipeline/nodes/.
 """
 
 from __future__ import annotations
@@ -10,21 +12,14 @@ from typing import TypedDict
 from langgraph.graph import StateGraph, END
 
 from config.models import (
-    ChapterObjective,
-    ChapterSummary,
-    ChapterContext,
-    JudgementResult,
-    ConsistencyReport,
+    ChapterObjective, ChapterSummary, ChapterContext,
+    JudgementResult, ConsistencyReport,
 )
-from agents.chapter_generator import ChapterGeneratorAgent
-from agents.judge_agent import JudgeAgent
-from agents.rewrite_agent import RewriteAgent
-from agents.summarizer import SummarizerAgent
-from agents.consistency_checker import ConsistencyChecker
-from infrastructure.logger import get_logger
-from memory.memory_manager import MemoryManager
-
-logger = get_logger("chapter_graph")
+from pipeline.nodes import (
+    AssembleContextNode, GenerateNode, JudgeNode,
+    RewriteNode, ConsistencyNode, SummarizeNode, UpdateMemoryNode,
+)
+from pipeline.nodes.rewrite import RewriteConsistencyNode
 
 
 class ChapterState(TypedDict):
@@ -42,7 +37,6 @@ class ChapterState(TypedDict):
 # ── Conditional Edges ────────────────────────────────────────────
 
 def should_rewrite(state: ChapterState) -> str:
-    """Decide whether to rewrite based on judge score."""
     judgement = state["judgement"]
     if judgement and judgement.pass_threshold:
         return "check_consistency"
@@ -52,55 +46,34 @@ def should_rewrite(state: ChapterState) -> str:
 
 
 def should_fix_consistency(state: ChapterState) -> str:
-    """Decide whether to fix consistency issues."""
     consistency = state.get("consistency")
     if consistency and consistency.is_consistent:
         return "summarize"
     return "rewrite_consistency"
 
 
+def _force_accept(state: ChapterState) -> dict:
+    return {"final_chapter": state["draft"]}
+
+
 # ── Graph Builder ────────────────────────────────────────────────
 
 class ChapterGraphBuilder:
-    """Builds the LangGraph StateGraph with injected agent dependencies."""
+    """Builds the LangGraph StateGraph from injected node callables."""
 
-    def __init__(
-        self,
-        generator: ChapterGeneratorAgent,
-        judge: JudgeAgent,
-        rewriter: RewriteAgent,
-        summarizer: SummarizerAgent,
-        memory: MemoryManager,
-        consistency_checker: ConsistencyChecker | None = None,
-        dual_draft: bool = False,
-    ):
-        self.generator = generator
-        self.judge = judge
-        self.rewriter = rewriter
-        self.summarizer = summarizer
-        self.memory = memory
-        self.consistency_checker = consistency_checker
-        self.dual_draft = dual_draft
+    def __init__(self, nodes: dict[str, callable]):
+        self.nodes = nodes
 
     def build(self) -> StateGraph:
-        """Build the compiled graph with real agent implementations."""
         graph = StateGraph(ChapterState)
 
-        # Add nodes with closures that capture agent references
-        graph.add_node("assemble_context", self._assemble_context)
-        graph.add_node("generate", self._generate)
-        graph.add_node("judge", self._judge)
-        graph.add_node("rewrite", self._rewrite)
+        # Add all nodes
+        for name, node in self.nodes.items():
+            graph.add_node(name, node)
         graph.add_node("force_accept", _force_accept)
-        graph.add_node("check_consistency", self._check_consistency)
-        graph.add_node("rewrite_consistency", self._rewrite_consistency)
-        graph.add_node("summarize", self._summarize)
-        graph.add_node("update_memory", self._update_memory)
 
-        # Set entry point
+        # Wire edges
         graph.set_entry_point("assemble_context")
-
-        # Add edges
         graph.add_edge("assemble_context", "generate")
         graph.add_edge("generate", "judge")
         graph.add_conditional_edges("judge", should_rewrite, {
@@ -120,135 +93,8 @@ class ChapterGraphBuilder:
 
         return graph
 
-    # ── Node implementations (with error handling) ────────────────
 
-    def _assemble_context(self, state: ChapterState) -> dict:
-        try:
-            context = self.memory.assemble_context(state["chapter_objective"])
-            return {"context": context}
-        except Exception as e:
-            logger.error("Context assembly failed: %s", e)
-            return {"context": ChapterContext(
-                short_term_memory="", long_term_memory="",
-                character_context="", world_context="",
-            )}
-
-    def _generate(self, state: ChapterState) -> dict:
-        draft_a = self.generator.run(
-            objective=state["chapter_objective"],
-            context=state["context"],
-        )
-
-        # Dual draft mode: generate a second draft and pick the better one
-        if self.dual_draft:
-            try:
-                draft_b = self.generator.run(
-                    objective=state["chapter_objective"],
-                    context=state["context"],
-                )
-                draft = self.judge.compare(draft_a, draft_b, state["chapter_objective"])
-                logger.info("Dual draft: selected best of 2 drafts")
-                return {"draft": draft}
-            except Exception as e:
-                logger.warning("Dual draft failed, using first draft: %s", e)
-
-        return {"draft": draft_a}
-
-    def _judge(self, state: ChapterState) -> dict:
-        try:
-            prev_summary = self.memory.get_previous_summary(
-                state["chapter_objective"].chapter_id
-            )
-            judgement = self.judge.run(
-                chapter_text=state["draft"],
-                objective=state["chapter_objective"],
-                previous_summary=prev_summary,
-            )
-            return {"judgement": judgement}
-        except Exception as e:
-            logger.error("Judge failed, auto-passing: %s", e)
-            return {"judgement": JudgementResult(
-                overall_score=7.0, plot_progression=7.0, character_consistency=7.0,
-                writing_quality=7.0, pacing=7.0, objective_alignment=7.0,
-                pass_threshold=True, issues=[f"Judge error: {e}"], rewrite_suggestions=[],
-            )}
-
-    def _rewrite(self, state: ChapterState) -> dict:
-        try:
-            rewritten = self.rewriter.run(
-                chapter_text=state["draft"],
-                judgement=state["judgement"],
-            )
-            return {"draft": rewritten, "rewrite_count": state["rewrite_count"] + 1}
-        except Exception as e:
-            logger.error("Rewrite failed, keeping original: %s", e)
-            return {"draft": state["draft"], "rewrite_count": state["rewrite_count"] + 1}
-
-    def _check_consistency(self, state: ChapterState) -> dict:
-        try:
-            if not self.consistency_checker:
-                return {
-                    "final_chapter": state["draft"],
-                    "consistency": ConsistencyReport(is_consistent=True),
-                }
-
-            context = state.get("context")
-            report = self.consistency_checker.run(
-                chapter_text=state["draft"],
-                chapter_id=state["chapter_objective"].chapter_id,
-                character_context=context.character_context if context else "",
-                relevant_history=context.short_term_memory if context else "",
-            )
-            return {"final_chapter": state["draft"], "consistency": report}
-        except Exception as e:
-            logger.error("Consistency check failed, auto-passing: %s", e)
-            return {
-                "final_chapter": state["draft"],
-                "consistency": ConsistencyReport(is_consistent=True, warnings=[f"Check error: {e}"]),
-            }
-
-    def _rewrite_consistency(self, state: ChapterState) -> dict:
-        rewritten = self.rewriter.run(
-            chapter_text=state["draft"],
-            consistency=state["consistency"],
-        )
-        return {"draft": rewritten}
-
-    def _summarize(self, state: ChapterState) -> dict:
-        summary = self.summarizer.run(
-            chapter_id=state["chapter_objective"].chapter_id,
-            chapter_text=state["final_chapter"],
-        )
-        return {"summary": summary}
-
-    def _update_memory(self, state: ChapterState) -> dict:
-        summary = state.get("summary")
-        if not summary and state.get("final_chapter"):
-            summary = ChapterSummary(
-                chapter_id=state["chapter_objective"].chapter_id,
-                plot_events=["(force accepted, no summary)"],
-                character_changes={},
-                world_state_changes=[],
-                unresolved_threads=[],
-                emotional_arc="unknown",
-                one_line_summary="(force accepted)",
-            )
-
-        if summary:
-            self.memory.save_summary(summary)
-
-            # Auto-update character states via repository
-            chapter_id = state["chapter_objective"].chapter_id
-            for char_name, change_desc in summary.character_changes.items():
-                try:
-                    self.memory.update_character(char_name, change_desc, chapter_id)
-                except Exception as e:
-                    logger.warning("Failed to update character %s: %s", char_name, e)
-
-        return {}
-
-
-# ── Standalone builder for testing ──────────────────────────────
+# ── Test helper ──────────────────────────────────────────────────
 
 def build_chapter_graph() -> StateGraph:
     """Build a placeholder graph for testing (no real agents)."""
@@ -304,7 +150,3 @@ def build_chapter_graph() -> StateGraph:
     graph.add_edge("update_memory", END)
 
     return graph
-
-
-def _force_accept(state: ChapterState) -> dict:
-    return {"final_chapter": state["draft"]}

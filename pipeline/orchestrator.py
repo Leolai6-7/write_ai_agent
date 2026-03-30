@@ -122,11 +122,24 @@ class NovelOrchestrator:
             prompt=prompts.load("consistency_checker"),
         )
 
-        # Build LangGraph
-        builder = ChapterGraphBuilder(
-            generator, judge, rewriter, summarizer, self.memory, consistency,
-            dual_draft=config.generation.dual_draft,
+        # Build LangGraph with node classes
+        from pipeline.nodes import (
+            AssembleContextNode, GenerateNode, JudgeNode,
+            RewriteNode, ConsistencyNode, SummarizeNode, UpdateMemoryNode,
         )
+        from pipeline.nodes.rewrite import RewriteConsistencyNode
+
+        nodes = {
+            "assemble_context": AssembleContextNode(self.memory),
+            "generate": GenerateNode(generator, judge, dual_draft=config.generation.dual_draft),
+            "judge": JudgeNode(judge, self.memory),
+            "rewrite": RewriteNode(rewriter),
+            "check_consistency": ConsistencyNode(consistency),
+            "rewrite_consistency": RewriteConsistencyNode(rewriter),
+            "summarize": SummarizeNode(summarizer),
+            "update_memory": UpdateMemoryNode(self.memory),
+        }
+        builder = ChapterGraphBuilder(nodes)
         self.chapter_graph = builder.build().compile(
             checkpointer=MemorySaver(),
         )
