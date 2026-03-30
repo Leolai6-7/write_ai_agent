@@ -22,6 +22,7 @@ from infrastructure.logger import get_logger
 from memory.memory_manager import MemoryManager
 from memory.retrieval import SemanticRetriever
 from memory.token_budget import TokenBudget
+from memory.world_state import WorldState
 from pipeline.chapter_graph import ChapterGraphBuilder, ChapterState
 
 logger = get_logger("orchestrator")
@@ -48,8 +49,10 @@ class NovelOrchestrator:
         self.db = Database(config.db_path)
         self.db.initialize()
 
-        # Initialize semantic retriever
+        # Initialize semantic retriever and world state
         self.retriever = SemanticRetriever(config.chroma_dir)
+        self.world = WorldState(config.world_dir)
+        self.world.load()
 
         # Initialize memory
         self.memory = MemoryManager(
@@ -66,6 +69,7 @@ class NovelOrchestrator:
                 instruction=config.memory.instruction_budget,
             ),
             retriever=self.retriever,
+            world_state=self.world,
         )
 
         # Initialize agents
@@ -135,13 +139,19 @@ class NovelOrchestrator:
                 logger.info("Skipping chapter %d (already completed)", obj.chapter_id)
                 continue
 
-            try:
-                result = self.run_chapter(obj)
-                results.append(result)
-            except Exception as e:
-                logger.error("Chapter %d failed: %s", obj.chapter_id, e)
-                # Continue with next chapter instead of stopping
-                continue
+            max_retries = 2
+            for attempt in range(1, max_retries + 1):
+                try:
+                    result = self.run_chapter(obj)
+                    results.append(result)
+                    break
+                except Exception as e:
+                    logger.error(
+                        "Chapter %d failed (attempt %d/%d): %s",
+                        obj.chapter_id, attempt, max_retries, e,
+                    )
+                    if attempt == max_retries:
+                        logger.error("Chapter %d skipped after %d failures", obj.chapter_id, max_retries)
 
         logger.info("Arc '%s' completed: %d/%d chapters", arc.arc_name, len(results), len(objectives))
         return results

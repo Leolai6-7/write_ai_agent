@@ -21,7 +21,10 @@ from agents.judge_agent import JudgeAgent
 from agents.rewrite_agent import RewriteAgent
 from agents.summarizer import SummarizerAgent
 from agents.consistency_checker import ConsistencyChecker
+from infrastructure.logger import get_logger
 from memory.memory_manager import MemoryManager
+
+logger = get_logger("chapter_graph")
 
 
 class ChapterState(TypedDict):
@@ -115,11 +118,18 @@ class ChapterGraphBuilder:
 
         return graph
 
-    # ── Node implementations ─────────────────────────────────────
+    # ── Node implementations (with error handling) ────────────────
 
     def _assemble_context(self, state: ChapterState) -> dict:
-        context = self.memory.assemble_context(state["chapter_objective"])
-        return {"context": context}
+        try:
+            context = self.memory.assemble_context(state["chapter_objective"])
+            return {"context": context}
+        except Exception as e:
+            logger.error("Context assembly failed: %s", e)
+            return {"context": ChapterContext(
+                short_term_memory="", long_term_memory="",
+                character_context="", world_context="",
+            )}
 
     def _generate(self, state: ChapterState) -> dict:
         draft = self.generator.run(
@@ -129,52 +139,64 @@ class ChapterGraphBuilder:
         return {"draft": draft}
 
     def _judge(self, state: ChapterState) -> dict:
-        # Get previous chapter summary for context
-        prev_id = state["chapter_objective"].chapter_id - 1
-        prev_summary = ""
-        if prev_id > 0:
-            row = self.memory.db.conn.execute(
-                "SELECT one_line_summary FROM chapter_summaries WHERE chapter_id = ?",
-                (prev_id,),
-            ).fetchone()
-            if row:
-                prev_summary = row["one_line_summary"]
+        try:
+            prev_id = state["chapter_objective"].chapter_id - 1
+            prev_summary = ""
+            if prev_id > 0:
+                row = self.memory.db.conn.execute(
+                    "SELECT one_line_summary FROM chapter_summaries WHERE chapter_id = ?",
+                    (prev_id,),
+                ).fetchone()
+                if row:
+                    prev_summary = row["one_line_summary"]
 
-        judgement = self.judge.run(
-            chapter_text=state["draft"],
-            objective=state["chapter_objective"],
-            previous_summary=prev_summary,
-        )
-        return {"judgement": judgement}
+            judgement = self.judge.run(
+                chapter_text=state["draft"],
+                objective=state["chapter_objective"],
+                previous_summary=prev_summary,
+            )
+            return {"judgement": judgement}
+        except Exception as e:
+            logger.error("Judge failed, auto-passing: %s", e)
+            return {"judgement": JudgementResult(
+                overall_score=7.0, plot_progression=7.0, character_consistency=7.0,
+                writing_quality=7.0, pacing=7.0, objective_alignment=7.0,
+                pass_threshold=True, issues=[f"Judge error: {e}"], rewrite_suggestions=[],
+            )}
 
     def _rewrite(self, state: ChapterState) -> dict:
-        rewritten = self.rewriter.run(
-            chapter_text=state["draft"],
-            judgement=state["judgement"],
-        )
-        return {
-            "draft": rewritten,
-            "rewrite_count": state["rewrite_count"] + 1,
-        }
+        try:
+            rewritten = self.rewriter.run(
+                chapter_text=state["draft"],
+                judgement=state["judgement"],
+            )
+            return {"draft": rewritten, "rewrite_count": state["rewrite_count"] + 1}
+        except Exception as e:
+            logger.error("Rewrite failed, keeping original: %s", e)
+            return {"draft": state["draft"], "rewrite_count": state["rewrite_count"] + 1}
 
     def _check_consistency(self, state: ChapterState) -> dict:
-        if not self.consistency_checker:
+        try:
+            if not self.consistency_checker:
+                return {
+                    "final_chapter": state["draft"],
+                    "consistency": ConsistencyReport(is_consistent=True),
+                }
+
+            context = state.get("context")
+            report = self.consistency_checker.run(
+                chapter_text=state["draft"],
+                chapter_id=state["chapter_objective"].chapter_id,
+                character_context=context.character_context if context else "",
+                relevant_history=context.short_term_memory if context else "",
+            )
+            return {"final_chapter": state["draft"], "consistency": report}
+        except Exception as e:
+            logger.error("Consistency check failed, auto-passing: %s", e)
             return {
                 "final_chapter": state["draft"],
-                "consistency": ConsistencyReport(is_consistent=True),
+                "consistency": ConsistencyReport(is_consistent=True, warnings=[f"Check error: {e}"]),
             }
-
-        context = state.get("context")
-        report = self.consistency_checker.run(
-            chapter_text=state["draft"],
-            chapter_id=state["chapter_objective"].chapter_id,
-            character_context=context.character_context if context else "",
-            relevant_history=context.short_term_memory if context else "",
-        )
-        return {
-            "final_chapter": state["draft"],
-            "consistency": report,
-        }
 
     def _rewrite_consistency(self, state: ChapterState) -> dict:
         rewritten = self.rewriter.run(

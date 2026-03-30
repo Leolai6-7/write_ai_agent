@@ -11,6 +11,7 @@ from infrastructure.logger import get_logger
 from memory.token_budget import TokenBudget
 
 from memory.retrieval import SemanticRetriever
+from memory.world_state import WorldState
 
 if TYPE_CHECKING:
     from infrastructure.llm_client import LLMClient
@@ -36,6 +37,7 @@ class MemoryManager:
         compression_interval: int = 10,
         token_budget: TokenBudget | None = None,
         retriever: SemanticRetriever | None = None,
+        world_state: WorldState | None = None,
     ):
         self.db = db
         self.llm = llm
@@ -43,6 +45,7 @@ class MemoryManager:
         self.compression_interval = compression_interval
         self.budget = token_budget or TokenBudget()
         self.retriever = retriever
+        self.world_state = world_state
 
     def assemble_context(self, objective: ChapterObjective) -> ChapterContext:
         """Assemble context for chapter generation within token budget."""
@@ -51,7 +54,7 @@ class MemoryManager:
         short_term = self._get_short_term_memory(objective.chapter_id)
         long_term = self._get_long_term_memory()
         character_ctx = self._get_character_context(objective.characters_involved)
-        world_ctx = self._get_world_context()
+        world_ctx = self._get_world_context(objective.characters_involved)
 
         # Truncate each layer to fit budget
         short_term_text = self.budget.truncate_text(
@@ -168,11 +171,11 @@ class MemoryManager:
             )
         return "\n".join(parts)
 
-    def _get_world_context(self) -> str:
-        """Get world setting context. Returns static world info."""
-        # For now, return a minimal world context
-        # Future: load from YAML + dynamic world state from DB
-        return ""
+    def _get_world_context(self, characters: list[str] | None = None) -> str:
+        """Get world setting context from YAML files."""
+        if not self.world_state:
+            return ""
+        return self.world_state.get_context(characters_involved=characters)
 
     def _get_relevant_memories(self, objective: ChapterObjective) -> list[str]:
         """Use semantic retrieval to find relevant past chapter summaries."""
