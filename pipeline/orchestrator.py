@@ -84,14 +84,18 @@ class NovelOrchestrator:
         )
 
         generator = ChapterGeneratorAgent(self.llm, config.llm.generation_model)
-        judge = JudgeAgent(self.llm, config.llm.judge_model)
+        judge = JudgeAgent(
+            self.llm, config.llm.judge_model,
+            voting_rounds=config.generation.judge_voting_rounds,
+        )
         rewriter = RewriteAgent(self.llm, config.llm.rewrite_model)
         summarizer = SummarizerAgent(self.llm, config.llm.summary_model)
         consistency = ConsistencyChecker(self.llm, config.llm.consistency_model)
 
         # Build LangGraph
         builder = ChapterGraphBuilder(
-            generator, judge, rewriter, summarizer, self.memory, consistency
+            generator, judge, rewriter, summarizer, self.memory, consistency,
+            dual_draft=config.generation.dual_draft,
         )
         self.chapter_graph = builder.build().compile(
             checkpointer=MemorySaver(),

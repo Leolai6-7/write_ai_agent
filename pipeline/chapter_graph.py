@@ -72,6 +72,7 @@ class ChapterGraphBuilder:
         summarizer: SummarizerAgent,
         memory: MemoryManager,
         consistency_checker: ConsistencyChecker | None = None,
+        dual_draft: bool = False,
     ):
         self.generator = generator
         self.judge = judge
@@ -79,6 +80,7 @@ class ChapterGraphBuilder:
         self.summarizer = summarizer
         self.memory = memory
         self.consistency_checker = consistency_checker
+        self.dual_draft = dual_draft
 
     def build(self) -> StateGraph:
         """Build the compiled graph with real agent implementations."""
@@ -132,11 +134,25 @@ class ChapterGraphBuilder:
             )}
 
     def _generate(self, state: ChapterState) -> dict:
-        draft = self.generator.run(
+        draft_a = self.generator.run(
             objective=state["chapter_objective"],
             context=state["context"],
         )
-        return {"draft": draft}
+
+        # Dual draft mode: generate a second draft and pick the better one
+        if self.dual_draft:
+            try:
+                draft_b = self.generator.run(
+                    objective=state["chapter_objective"],
+                    context=state["context"],
+                )
+                draft = self.judge.compare(draft_a, draft_b, state["chapter_objective"])
+                logger.info("Dual draft: selected best of 2 drafts")
+                return {"draft": draft}
+            except Exception as e:
+                logger.warning("Dual draft failed, using first draft: %s", e)
+
+        return {"draft": draft_a}
 
     def _judge(self, state: ChapterState) -> dict:
         try:

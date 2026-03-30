@@ -56,6 +56,8 @@ class GenerationConfig(BaseSettings):
     max_rewrite_attempts: int = 2
     judge_pass_threshold: float = 7.0
     target_words_per_chapter: int = 3000
+    judge_voting_rounds: int = 1  # Self-consistency voting (1=disabled, 3=recommended)
+    dual_draft: bool = False  # Generate 2 drafts and pick the better one
 
 
 class NovelConfig(BaseSettings):
