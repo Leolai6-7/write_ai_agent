@@ -152,6 +152,7 @@ Foreshadowing directives: {from foreshadowing.md for this chapter}
 Read context from: {STORY_DIR}/planning/story_log.md (last 5 entries)
 Read character voices from: {STORY_DIR}/world/character_cast.md
 Save to: {STORY_DIR}/outputs/chapter_{NNN}.md
+Do NOT update story_log.md — that is the main agent's job after judging.
 ```
 
 ### 2.3: Judge
@@ -161,7 +162,8 @@ Read .claude/skills/novel-judge/SKILL.md and follow.
 Read chapter from: {STORY_DIR}/outputs/chapter_{NNN}.md
 Chapter objective: {objective}
 Read previous summary from: {STORY_DIR}/planning/story_log.md (last entry)
-Return scores and issues. No file save.
+Return: scores, issues, suggestions, AND a standardized story_log entry.
+No file save — return everything to main agent.
 ```
 
 If score >= 7.0 → proceed to 2.4
@@ -177,15 +179,18 @@ Save revised to: {STORY_DIR}/outputs/chapter_{NNN}.md (overwrite)
 Re-judge. Max 2 rewrites, then force-accept.
 
 ### 2.4: Update Progress (main agent, not sub-agent)
-Append to `{STORY_DIR}/planning/story_log.md`:
+Take the story_log entry from judge sub-agent's output and append it to
+`{STORY_DIR}/planning/story_log.md`. Do NOT write your own summary — use
+the judge's standardized entry verbatim. Format:
 ```
 ## 第{N}章：{title}
-- 摘要：{summary}
-- 評分：{score}/10
-- 角色變化：{notes}
-- 伏筆進展：{planted/hinted/resolved}
-- 情感基調：{tone}
+- 摘要：{from judge, under 80 chars}
+- 評分：{from judge}/10
+- 角色變化：{from judge}
+- 伏筆進展：{from judge}
+- 情感基調：{from judge}
 ```
+No extra fields. This is an index, not a full record.
 
 If during judging or writing, any issue suggests core settings need revision
 (e.g., "this character's motivation doesn't work", "world rule is inconsistent",

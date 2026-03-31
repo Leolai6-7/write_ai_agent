@@ -86,3 +86,18 @@ As a web novel reader: do you want to read the next chapter?
 - Give specific examples from the text, not vague criticism
 - Prioritize issues by impact: plot holes > character inconsistency > prose style
 - If overall score < 7.0, the rewrite suggestions MUST be specific enough to act on
+
+## Story Log Entry
+
+After evaluation, output a standardized log entry in this EXACT format (for the main agent to append to story_log.md):
+
+```
+## 第{N}章：{title}
+- 摘要：{one-line summary, under 80 chars}
+- 評分：{overall}/10
+- 角色變化：{brief character changes}
+- 伏筆進展：{planted/hinted/resolved}
+- 情感基調：{tone}
+```
+
+No extra fields. No "關鍵意象". Keep it concise — this is an index, not a full record.
