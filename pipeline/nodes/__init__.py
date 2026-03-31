@@ -5,3 +5,5 @@ from pipeline.nodes.rewrite import RewriteNode
 from pipeline.nodes.consistency import ConsistencyNode
 from pipeline.nodes.summarize import SummarizeNode
 from pipeline.nodes.update_memory import UpdateMemoryNode
+from pipeline.nodes.pacing import PacingAdvisorNode
+from pipeline.nodes.story_bible import StoryBibleKeeperNode

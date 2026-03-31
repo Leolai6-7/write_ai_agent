@@ -74,7 +74,14 @@ class ChapterGraphBuilder:
 
         # Wire edges
         graph.set_entry_point("assemble_context")
-        graph.add_edge("assemble_context", "generate")
+
+        # Pacing advisor is optional — skip if not in nodes
+        if "pacing_advisor" in self.nodes:
+            graph.add_edge("assemble_context", "pacing_advisor")
+            graph.add_edge("pacing_advisor", "generate")
+        else:
+            graph.add_edge("assemble_context", "generate")
+
         graph.add_edge("generate", "judge")
         graph.add_conditional_edges("judge", should_rewrite, {
             "check_consistency": "check_consistency",
@@ -88,7 +95,14 @@ class ChapterGraphBuilder:
             "rewrite_consistency": "rewrite_consistency",
         })
         graph.add_edge("rewrite_consistency", "judge")
-        graph.add_edge("summarize", "update_memory")
+
+        # Story bible keeper is optional — between summarize and update_memory
+        if "story_bible_keeper" in self.nodes:
+            graph.add_edge("summarize", "story_bible_keeper")
+            graph.add_edge("story_bible_keeper", "update_memory")
+        else:
+            graph.add_edge("summarize", "update_memory")
+
         graph.add_edge("update_memory", END)
 
         return graph
