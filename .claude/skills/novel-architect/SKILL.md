@@ -98,10 +98,12 @@ Rhythm rules:
 - Both lines need active protagonists who drive events, not just one active + one passive
 - The lines should create dramatic irony: the reader knows things from line A that make line B more tense, and vice versa
 
-### On Character Introductions
-- Important characters should be MENTIONED before they APPEAR (through dialogue, reputation, or indirect effects)
-- Mark each major character's "first mention" and "first appearance" chapter separately in the beat sheet
-- A character who appears fully formed with no setup feels like a plot device, not a person
+### On Introducing Story Elements
+This applies to characters, organizations, technologies, locations, and concepts equally:
+- Important elements should cast a SHADOW before they appear — mentioned in dialogue, visible in the background, felt through indirect effects
+- Mark each major element's "first shadow" and "first full appearance" chapter separately
+- Example: before an organization becomes a plot force, characters should argue about it in passing; before a technology drives a scene, a character should encounter its everyday consequences
+- An element that appears fully formed with no setup feels artificial
 
 ### On World-Building Chapters
 - Chapters that establish setting/world should still advance plot. Pure "tour guide" chapters lose readers.
