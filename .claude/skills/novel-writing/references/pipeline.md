@@ -52,7 +52,7 @@ Synthesize into Story Brief:
 ## 故事概要
 - **一句話概述**: [核心故事線]
 - **類型**: [genre]
-- **主角**: [name, key trait, goal]
+- **主角**: [name (REQUIRED — must have a name), key trait, goal]
 - **核心衝突**: [what stands in the way]
 - **世界觀基調**: [what makes this world special]
 - **情感核心**: [what readers should feel]
