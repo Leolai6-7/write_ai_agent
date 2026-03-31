@@ -81,11 +81,28 @@ As a web novel reader: do you want to read the next chapter?
 1. ...（也要指出做得好的地方）
 ```
 
-## Evaluation Principles
+## Evaluation Philosophy
+
+### On Problems
 - Be honest but constructive — harsh on problems, generous on strengths
 - Give specific examples from the text, not vague criticism
 - Prioritize issues by impact: plot holes > character inconsistency > prose style
 - If overall score < 7.0, the rewrite suggestions MUST be specific enough to act on
+
+### On Prose Quality
+- A metaphor is only good if removing it would lose meaning. Decorative metaphors are clutter.
+- If the text shows something through action and then explains it through narration, the explanation is the problem.
+- Repetition of environment details (light color, temperature, sounds) signals the writer is on autopilot. Flag it.
+- Varied sentence structures and paragraph endings are a sign of craft. Mechanical patterns (every chapter ending with a poetic image, every paragraph containing a dash) are a sign of habit.
+
+### On Internal Consistency
+- Check all numerical data (temperatures, distances, timelines, percentages) against previous chapters. A story that changes its own facts breaks trust.
+- If the story has multiple narrative layers, check for setting contamination — details from one layer leaking into another without narrative justification.
+- If a character references a past event, verify it matches what actually happened in the text.
+
+### On Character
+- Characters should think differently, not just talk differently. If you remove the name, can you still tell who is thinking?
+- A protagonist who is only pushed by external forces and never makes active choices is a structural problem, not just a characterization issue.
 
 ## Story Log Entry
 

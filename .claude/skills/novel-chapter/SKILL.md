@@ -49,10 +49,42 @@ EVERY chapter MUST end with one of:
 ### Prose Rules
 - Alternate long and short sentences (長短句交替)
 - Use 成語/四字詞 sparingly (1-2 per paragraph, not stacked)
-- Each character must have a distinct speaking voice
 - Internal monologue uses close narrative distance
-- Show emotions through actions, not labels (不是「他很緊張」而是「他下意識摸了摸手腕上的疤痕」)
-- **NEVER use meta-narrative terms**: 「主角」「第一章」「讀者」「作者」are forbidden. Characters don't know they're in a story. Use character names and in-world time references (「模擬啟動那天」not「第一章」)
+- **NEVER use meta-narrative terms**: 「主角」「第一章」「讀者」「作者」are forbidden
+
+### Metaphor Discipline
+- Metaphors exist to help readers understand unfamiliar concepts, NOT for decoration
+- If a sentence is clear without the metaphor, delete the metaphor
+- Never use two structurally similar similes (像...的...) in consecutive paragraphs
+- Avoid the "machine" metaphor family (像一台機器、像重啟、像過載) — it's overused in this genre
+
+### Show Don't Tell
+- After showing a character's state through action and dialogue, do NOT add an explanatory inner monologue restating what was just shown
+- Trust the reader to infer emotions from behavior
+- If a paragraph starts with "他知道..." or "他意識到..." after a scene already demonstrated it, delete that paragraph
+
+### Repetition Control
+- Environment tags (藍綠色冷光、恆溫十八度、低頻嗡鳴) should appear AT MOST once per chapter. The reader remembers after the first time.
+- Avoid repeating the same physical gesture for a character (指尖發白、手指懸在鍵盤上方). Give each scene a fresh gesture.
+- Vary chapter endings — not every chapter should end with a "poetic suspended image." Use abrupt cuts, dialogue, action, or silence.
+- Reduce dash (——) usage. Use them for genuine interruptions, not as a default punctuation habit.
+
+### Character Voice in Narration
+- Each character's INNER THOUGHTS should sound different, not just their dialogue:
+  - Analytical characters think in fragments and data
+  - Emotional characters think in sensory images
+  - Cautious characters think in conditionals and qualifications
+- If you remove the character name, a reader should still identify who is thinking
+
+### World Layer Separation
+- If the story has multiple narrative layers (reality vs simulation, present vs past), each layer has its own independent setting data (temperatures, locations, rules)
+- NEVER let setting details from one layer bleed into another unless it's a deliberate plot point that the POV character notices and reacts to
+- Before writing, confirm: what are the established numbers/facts for THIS layer?
+
+### Continuity Check
+- Before writing a new chapter, review all established numerical data from previous chapters (temperatures, distances, timelines, headcounts, percentages)
+- If you reference a previously established value, use the SAME number
+- If a value must change, the POV character must notice and react to the change
 
 ## Output
 

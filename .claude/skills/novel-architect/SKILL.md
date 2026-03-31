@@ -86,8 +86,31 @@ Rhythm rules:
 | 1  | ... | ... | 期待 |
 ```
 
+## Structural Philosophy
+
+### On Protagonist Agency
+- Every protagonist must make at least one ACTIVE choice per arc — something driven by internal desire, not external pressure
+- "Being forced to" is not a choice. "Choosing to despite the cost" is.
+- If a protagonist spends an entire arc only reacting, the structure has failed
+
+### On Multi-Line Narratives
+- If the story has dual/multiple narrative lines, each line must have its OWN momentum — not just serve as contrast to the other
+- Both lines need active protagonists who drive events, not just one active + one passive
+- The lines should create dramatic irony: the reader knows things from line A that make line B more tense, and vice versa
+
+### On Character Introductions
+- Important characters should be MENTIONED before they APPEAR (through dialogue, reputation, or indirect effects)
+- Mark each major character's "first mention" and "first appearance" chapter separately in the beat sheet
+- A character who appears fully formed with no setup feels like a plot device, not a person
+
+### On World-Building Chapters
+- Chapters that establish setting/world should still advance plot. Pure "tour guide" chapters lose readers.
+- World details are best revealed through character need, not narrator exposition
+
 ## Quality Criteria
 - [ ] 每卷有明確且不同的主題
-- [ ] 弧線之間有因果關係（前一個弧線的結尾驅動下一個弧線）
+- [ ] 弧線之間有因果關係
 - [ ] 章節節奏有起伏，不單調
 - [ ] 主角在每卷有可見的成長變化
+- [ ] 每條敘事線的主角都有主動行為推進
+- [ ] 重要角色在正式登場前已被提及或側寫
