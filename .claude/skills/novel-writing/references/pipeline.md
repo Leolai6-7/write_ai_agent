@@ -153,7 +153,16 @@ Read context from: {STORY_DIR}/planning/story_log.md (last 5 entries)
 Read character voices from: {STORY_DIR}/world/character_cast.md
 Save to: {STORY_DIR}/outputs/chapter_{NNN}.md
 Do NOT update story_log.md — that is the main agent's job after judging.
+
+If you introduce any NEW characters not in character_cast.md, you MUST
+report them at the end of your output in this format:
+NEW_CHARACTERS:
+- {name}：{role/identity}，{speaking style in one sentence}
 ```
+
+After chapter generation, if the sub-agent reports NEW_CHARACTERS,
+the main agent appends them to `{STORY_DIR}/world/character_cast.md`
+under a "## 新增配角" section.
 
 ### 2.3: Judge
 ```
