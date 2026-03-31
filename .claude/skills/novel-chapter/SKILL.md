@@ -52,6 +52,7 @@ EVERY chapter MUST end with one of:
 - Each character must have a distinct speaking voice
 - Internal monologue uses close narrative distance
 - Show emotions through actions, not labels (不是「他很緊張」而是「他下意識摸了摸手腕上的疤痕」)
+- **NEVER use meta-narrative terms**: 「主角」「第一章」「讀者」「作者」are forbidden. Characters don't know they're in a story. Use character names and in-world time references (「模擬啟動那天」not「第一章」)
 
 ## Output
 
