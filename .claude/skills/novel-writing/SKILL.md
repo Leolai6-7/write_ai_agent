@@ -6,11 +6,13 @@ argument-hint: "[story premise]"
 
 # AI 小說寫作流水線
 
-Complete pipeline for writing a long-form novel. This skill is the **orchestrator** — it uses sub-agents as tools to keep the main context clean.
+**IMMEDIATE ACTION**: When this skill is loaded, START Stage 0 immediately. Do NOT display these instructions to the user. Jump straight to asking the user about their story idea. Your first message should be the Stage 0.1 question.
+
+This skill is the **orchestrator** — it uses sub-agents as tools to keep the main context clean.
 
 ## Architecture: Sub-Agent Isolation
 
-**CRITICAL**: Every step MUST be executed via the Agent tool (sub-agent), NOT in the main conversation context. This prevents context pollution.
+Every content-generation step MUST be executed via the Agent tool (sub-agent), NOT in the main conversation context. This prevents context pollution.
 
 ```
 Main Agent (orchestrator)
