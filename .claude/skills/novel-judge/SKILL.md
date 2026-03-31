@@ -4,52 +4,48 @@ description: Evaluate the quality of a novel chapter across multiple dimensions.
 argument-hint: "[chapter text or file path]"
 ---
 
-Evaluate a novel chapter's quality as a professional web novel editor.
+Evaluate a novel chapter's quality. Read the story brief first to understand the genre, style, and conventions being targeted.
 
 ## Input
 
 From $ARGUMENTS or conversation:
 - **Chapter text**: the full chapter to evaluate (or file path to read)
+- **Story brief** (if available): determines what "good" means for THIS story
 - **Chapter objective** (optional): what the chapter was supposed to achieve
 - **Previous chapter summary** (optional): for continuity checking
 
 ## Evaluation Dimensions (6 dimensions, 0-10 each)
 
-### 1. 情節推進 (Plot Progression)
+### 1. Plot Progression
 - Does the chapter advance the story?
 - Is there at least one meaningful event (not filler)?
 - Does it set up future developments?
-- **9-10**: Major plot advancement, satisfying revelations
-- **7-8**: Clear forward momentum
-- **5-6**: Story moves but slowly
-- **3-4**: Mostly filler, little happens
-- **1-2**: Nothing happens, could be deleted
 
-### 2. 角色一致性 (Character Consistency)
+### 2. Character Consistency
 - Do characters behave according to their established personality?
 - Does dialogue match each character's voice?
+- Do characters THINK differently from each other, not just talk differently?
 - Are motivations clear and believable?
-- **Special check**: Do all characters sound the same? If yes, max score 5.
 
-### 3. 文筆品質 (Writing Quality)
-- 長短句節奏: sentence rhythm variety?
-- 描寫生動度: vivid sensory descriptions?
-- 對話自然度: natural dialogue flow?
-- 成語運用: appropriate (not excessive) use of idioms?
-- **Special check**: 水字數 (word padding) — unnecessary repetition, meaningless exchanges? If found, deduct 2 points.
+### 3. Writing Quality
+- Sentence rhythm: variety in length and structure?
+- Sensory richness: grounded in specific details, not generic descriptions?
+- Dialogue: natural, revealing character, advancing scene?
+- Metaphor discipline: serving understanding, not decorating?
+- Padding check: unnecessary repetition, meaningless exchanges, over-explanation?
 
-### 4. 節奏感 (Pacing)
-- 張弛有度: tension-release balance?
-- Not too rushed, not too dragging?
-- **Special check**: Does the chapter end with a cliffhanger/hook? If not, deduct 1-2 points.
+### 4. Pacing
+- Tension-release balance appropriate for the genre?
+- Does the chapter earn its length? (Could any section be cut without loss?)
+- Does the ending create forward momentum? (Method should vary — not always a dramatic cliffhanger)
 
-### 5. 目標吻合度 (Objective Alignment)
+### 5. Objective Alignment
 - Did the chapter achieve its stated objective?
 - Were the key events included?
 - Does the emotional tone match the plan?
 
-### 6. 綜合評分 (Overall Score)
-As a web novel reader: do you want to read the next chapter?
+### 6. Overall
+Would the target reader (as defined in the story brief) want to continue reading?
 
 ## Output Format
 
@@ -67,46 +63,43 @@ As a web novel reader: do you want to read the next chapter?
 | **綜合** | **X/10** | ... |
 
 ### 通過判定
-[通過 ✅ / 需改寫 ❌]（綜合 ≥ 7.0 通過）
+[通過 ✅ / 需改寫 ❌]（pass threshold defined in story brief, default ≥ 7.0）
 
 ### 具體問題
 1. ...
-2. ...
 
 ### 改寫建議
 1. ...
-2. ...
 
 ### 亮點
-1. ...（也要指出做得好的地方）
+1. ...
 ```
 
 ## Evaluation Philosophy
 
-### On Problems
-- Be honest but constructive — harsh on problems, generous on strengths
-- Give specific examples from the text, not vague criticism
-- Prioritize issues by impact: plot holes > character inconsistency > prose style
-- If overall score < 7.0, the rewrite suggestions MUST be specific enough to act on
+### On Craft
+- A metaphor is only good if removing it would lose meaning
+- If the text shows then explains, the explanation is the problem
+- Repetition of environment details signals autopilot — flag it
+- Mechanical patterns (same ending style, same punctuation habits) are signs of habit, not craft
 
-### On Prose Quality
-- A metaphor is only good if removing it would lose meaning. Decorative metaphors are clutter.
-- If the text shows something through action and then explains it through narration, the explanation is the problem.
-- Repetition of environment details (light color, temperature, sounds) signals the writer is on autopilot. Flag it.
-- Varied sentence structures and paragraph endings are a sign of craft. Mechanical patterns (every chapter ending with a poetic image, every paragraph containing a dash) are a sign of habit.
-
-### On Internal Consistency
-- Check all numerical data (temperatures, distances, timelines, percentages) against previous chapters. A story that changes its own facts breaks trust.
-- If the story has multiple narrative layers, check for setting contamination — details from one layer leaking into another without narrative justification.
-- If a character references a past event, verify it matches what actually happened in the text.
+### On Consistency
+- Check numerical data against previous chapters — a story that changes its own facts breaks trust
+- If the story has multiple narrative layers, check for setting contamination between layers
+- If a character references a past event, verify it matches what actually happened
 
 ### On Character
-- Characters should think differently, not just talk differently. If you remove the name, can you still tell who is thinking?
-- A protagonist who is only pushed by external forces and never makes active choices is a structural problem, not just a characterization issue.
+- Characters should think differently, not just talk differently
+- A protagonist who only reacts to external forces is a structural problem
+
+### On Genre Awareness
+- "Good" writing depends on what the story is trying to be — don't judge a literary novel by web novel standards or vice versa
+- Read the story brief to understand the target audience, tone, and conventions
+- A quiet literary chapter and an action-packed web novel chapter are both valid — judge each by its own standards
 
 ## Story Log Entry
 
-After evaluation, output a standardized log entry in this EXACT format (for the main agent to append to story_log.md):
+After evaluation, output a standardized log entry (for the main agent to append to story_log.md):
 
 ```
 ## 第{N}章：{title}
@@ -116,5 +109,3 @@ After evaluation, output a standardized log entry in this EXACT format (for the 
 - 伏筆進展：{planted/hinted/resolved}
 - 情感基調：{tone}
 ```
-
-No extra fields. No "關鍵意象". Keep it concise — this is an index, not a full record.
