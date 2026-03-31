@@ -127,6 +127,14 @@ Output in 繁體中文.
 
 ## Stage 2: Creation (創作)
 
+### HARD RULES — Do not violate these under any circumstances:
+
+1. **SEQUENTIAL ONLY**: Chapters MUST be generated one at a time. Never launch chapter N+1 until chapter N is fully complete (generated + judged + logged). Each chapter's output becomes the next chapter's input context.
+
+2. **ONE TASK PER SUB-AGENT**: Never combine judge + generate (or any two tasks) into the same sub-agent. Each sub-agent does exactly ONE thing. Combining tasks causes output to be truncated.
+
+3. **STRICT STEP ORDER**: For each chapter, execute 2.1 → 2.2 → 2.3 → 2.4 in order. No skipping, no reordering.
+
 Per chapter, in sequence:
 
 ### 2.1: Pacing
