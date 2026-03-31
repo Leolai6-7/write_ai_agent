@@ -1,7 +1,7 @@
 # AI 小說寫作系統 (write_ai_agent)
 
 ## 專案概述
-一個基於 LangGraph + AWS Bedrock 的多 Agent 長篇小說自動生成系統。支援 300+ 章的分卷式網路小說創作。
+一個基於 LangGraph + AWS Bedrock 的多 Agent 長篇小說自動生成系統。支援多故事管理和 300+ 章的分卷式小說創作。
 
 ## 技術棧
 - **Agent 框架**: LangGraph (StateGraph)
@@ -10,7 +10,7 @@
 - **結構化輸出**: Pydantic + JSON mode
 - **CLI**: Typer + Rich
 
-## 小說寫作 Skills（快速驗證用）
+## 小說寫作 Skills
 
 完整工作流入口：`/novel-writing`
 
@@ -26,35 +26,64 @@
 | `/novel-rewrite` | 章節改寫 |
 | `/novel-style-audit` | 文風審查 |
 
-## 檔案結構
+## 多故事管理
+
+每個故事有獨立的子目錄。`data/active_story.txt` 記錄當前正在寫的故事。
 
 ```
-config/          — Pydantic models + settings
-agents/          — 16 個 Agent（BaseAgent 繼承）
-prompts/         — YAML prompt templates（agent 系統用）
-memory/          — MemoryManager + 7 個 Repository
-pipeline/        — LangGraph graph + 9 個 Node + Orchestrator
-infrastructure/  — LLM Client (3 providers) + DB + Logger + Errors
-.claude/skills/  — 9 個 Skills（快速驗證用）
-data/            — 運行時資料（DB、向量、輸出、規劃）
-tests/           — 45 tests
+data/
+├── active_story.txt              → 當前故事名稱
+└── stories/
+    ├── star-ring-tower/          # 星環之塔（奇幻冒險）
+    │   ├── world/
+    │   ├── planning/
+    │   └── outputs/
+    └── civilization-disease/     # 文明病（哲思科幻）
+        ├── world/
+        │   └── world_bible.md
+        ├── planning/
+        │   ├── story_brief.md
+        │   ├── structure.md
+        │   ├── foreshadowing.md
+        │   └── story_log.md
+        └── outputs/
+            ├── chapter_001.md
+            └── novel_complete.md
 ```
+
+## 路徑規則
+
+所有 sub-agent 的檔案路徑必須使用 active story 的目錄：
+
+```
+STORY_DIR = data/stories/{active_story}/
+- world bible  → {STORY_DIR}/world/world_bible.md
+- characters   → {STORY_DIR}/world/character_cast.md
+- story brief  → {STORY_DIR}/planning/story_brief.md
+- structure    → {STORY_DIR}/planning/structure.md
+- foreshadow   → {STORY_DIR}/planning/foreshadowing.md
+- story log    → {STORY_DIR}/planning/story_log.md
+- chapters     → {STORY_DIR}/outputs/chapter_NNN.md
+```
+
+## 當前進度載入
+
+每次新對話，如果用戶提到寫小說：
+1. 讀取 `data/active_story.txt` 確認當前故事
+2. 讀取 `{STORY_DIR}/planning/story_log.md` — 上次寫到哪裡
+3. 讀取 `{STORY_DIR}/planning/story_brief.md` — 故事概要
+4. 如果這些檔案存在，告訴用戶當前進度並詢問要繼續還是開新故事
+5. 如果不存在，從 `/novel-writing` 開始
+
+## 切換故事
+
+如果用戶想切換到另一個故事：
+1. 更新 `data/active_story.txt`
+2. 載入該故事的進度檔案
 
 ## 開發須知
 
 - **測試**: `uv run pytest tests/ -v`
 - **AWS 認證過期**: 用 `/refresh-aws` 刷新
 - **Prompt 迭代**: 先改 `.claude/skills/*/SKILL.md` 驗證，確認後同步到 `prompts/*.yaml`
-- **新增 Agent**: 建 `agents/xxx.py` + `prompts/xxx.yaml` + `pipeline/nodes/xxx.py`，在 orchestrator 的 nodes dict 加一行
-
-## 當前進度的載入
-
-每次開始新對話時，如果要繼續寫小說，請先檢查：
-1. `data/planning/story_log.md` — 上次寫到哪裡
-2. `data/planning/structure.md` — 整體結構規劃
-3. `data/planning/foreshadowing.md` — 伏筆追蹤表
-4. `data/world/world_bible.md` — 世界聖經
-5. `data/world/character_cast.md` — 角色群像
-6. `data/outputs/` — 已生成的章節
-
-如果這些檔案存在，讀取它們以恢復上下文。如果不存在，從 `/novel-writing` 開始。
+- **新增 Agent**: 建 `agents/xxx.py` + `prompts/xxx.yaml` + `pipeline/nodes/xxx.py`

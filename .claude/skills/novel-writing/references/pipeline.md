@@ -1,5 +1,21 @@
 # Novel Writing Pipeline — Complete Workflow
 
+## Multi-Story Path Convention
+
+All file paths use the active story directory:
+```
+STORY_DIR = data/stories/{active_story}/
+```
+
+Before starting any work:
+1. Read `data/active_story.txt` to get the active story name
+2. If starting a new story, create the directory and update active_story.txt:
+   ```
+   mkdir -p data/stories/{story-name}/{world,planning,outputs}
+   echo "{story-name}" > data/active_story.txt
+   ```
+3. All sub-agent prompts below use `{STORY_DIR}` — replace with the actual path
+
 ## Architecture: Sub-Agent Isolation
 
 Every content-generation step MUST use the Agent tool (sub-agent). The main agent only:
@@ -48,7 +64,13 @@ Synthesize into Story Brief:
 Show to user: "這個方向對嗎？要調整什麼？"
 
 ### 0.4: Confirm
-Save approved brief to `data/planning/story_brief.md`. Proceed to Stage 1.
+Create story directory and save:
+```
+mkdir -p {STORY_DIR}/{world,planning,outputs}
+echo "{story-name}" > data/active_story.txt
+Save brief to: {STORY_DIR}/planning/story_brief.md
+```
+Proceed to Stage 1.
 
 ---
 
@@ -60,9 +82,8 @@ Each step via Agent tool. Show BRIEF summary after each, confirm before next.
 ```
 Agent prompt:
 Read .claude/skills/novel-worldbuilding/SKILL.md and follow completely.
-Read story brief from: data/planning/story_brief.md
-Read any existing world YAML from: data/world/ (if exists)
-Save output to: data/world/world_bible.md
+Read story brief from: {STORY_DIR}/planning/story_brief.md
+Save output to: {STORY_DIR}/world/world_bible.md
 Output in 繁體中文.
 ```
 → 3-line summary. "世界觀設定完成，要看詳情或調整嗎？"
@@ -71,9 +92,9 @@ Output in 繁體中文.
 ```
 Agent prompt:
 Read .claude/skills/novel-characters/SKILL.md and follow completely.
-Read story brief from: data/planning/story_brief.md
-Read world bible from: data/world/world_bible.md
-Save output to: data/world/character_cast.md
+Read story brief from: {STORY_DIR}/planning/story_brief.md
+Read world bible from: {STORY_DIR}/world/world_bible.md
+Save output to: {STORY_DIR}/world/character_cast.md
 Output in 繁體中文.
 ```
 → 3-line summary. "角色設計完成，要看詳情或調整嗎？"
@@ -82,10 +103,10 @@ Output in 繁體中文.
 ```
 Agent prompt:
 Read .claude/skills/novel-architect/SKILL.md and follow completely.
-Read story brief from: data/planning/story_brief.md
-Read world bible from: data/world/world_bible.md
-Read character cast from: data/world/character_cast.md
-Save output to: data/planning/structure.md
+Read story brief from: {STORY_DIR}/planning/story_brief.md
+Read world bible from: {STORY_DIR}/world/world_bible.md
+Read character cast from: {STORY_DIR}/world/character_cast.md
+Save output to: {STORY_DIR}/planning/structure.md
 Output in 繁體中文.
 ```
 → Volume/arc overview. "結構設計完成，滿意嗎？"
@@ -94,10 +115,10 @@ Output in 繁體中文.
 ```
 Agent prompt:
 Read .claude/skills/novel-foreshadowing/SKILL.md and follow completely.
-Read structure from: data/planning/structure.md
-Read character cast from: data/world/character_cast.md
-Read world bible from: data/world/world_bible.md
-Save output to: data/planning/foreshadowing.md
+Read structure from: {STORY_DIR}/planning/structure.md
+Read character cast from: {STORY_DIR}/world/character_cast.md
+Read world bible from: {STORY_DIR}/world/world_bible.md
+Save output to: {STORY_DIR}/planning/foreshadowing.md
 Output in 繁體中文.
 ```
 → Count summary. "伏筆規劃完成。準備開始寫第一章了嗎？"
@@ -112,7 +133,7 @@ Per chapter, in sequence:
 ```
 Agent prompt:
 Read .claude/skills/novel-pacing/SKILL.md and follow.
-Read last 5 entries from: data/planning/story_log.md (or "first chapter")
+Read last 5 entries from: {STORY_DIR}/planning/story_log.md (or "first chapter")
 Current chapter objective: {from structure.md}
 Output ONLY 3-line pacing recommendation. No file save.
 ```
@@ -128,35 +149,35 @@ Characters: {characters}
 Emotional tone: {tone}
 Pacing advice: {from 2.1}
 Foreshadowing directives: {from foreshadowing.md for this chapter}
-Read context from: data/planning/story_log.md (last 5 entries)
-Read character voices from: data/world/character_cast.md
-Save to: data/outputs/chapter_{NNN}.md
+Read context from: {STORY_DIR}/planning/story_log.md (last 5 entries)
+Read character voices from: {STORY_DIR}/world/character_cast.md
+Save to: {STORY_DIR}/outputs/chapter_{NNN}.md
 ```
 
 ### 2.3: Judge
 ```
 Agent prompt:
 Read .claude/skills/novel-judge/SKILL.md and follow.
-Read chapter from: data/outputs/chapter_{NNN}.md
+Read chapter from: {STORY_DIR}/outputs/chapter_{NNN}.md
 Chapter objective: {objective}
-Read previous summary from: data/planning/story_log.md (last entry)
+Read previous summary from: {STORY_DIR}/planning/story_log.md (last entry)
 Return scores and issues. No file save.
 ```
 
-If score ≥ 7.0 → proceed to 2.4
+If score >= 7.0 → proceed to 2.4
 If score < 7.0 → launch rewrite:
 ```
 Agent prompt:
 Read .claude/skills/novel-rewrite/SKILL.md and follow.
-Read chapter from: data/outputs/chapter_{NNN}.md
+Read chapter from: {STORY_DIR}/outputs/chapter_{NNN}.md
 Issues: {from judge}
 Suggestions: {from judge}
-Save revised to: data/outputs/chapter_{NNN}.md (overwrite)
+Save revised to: {STORY_DIR}/outputs/chapter_{NNN}.md (overwrite)
 ```
 Re-judge. Max 2 rewrites, then force-accept.
 
 ### 2.4: Update Progress (main agent, not sub-agent)
-Append to `data/planning/story_log.md`:
+Append to `{STORY_DIR}/planning/story_log.md`:
 ```
 ## 第{N}章：{title}
 - 摘要：{summary}
@@ -175,19 +196,20 @@ Every 5 chapters: "前5章寫完了，要檢查再繼續嗎？"
 ```
 Agent prompt:
 Read .claude/skills/novel-style-audit/SKILL.md and follow.
-Read all chapters from: data/outputs/
-Read character voices from: data/world/character_cast.md
-Save report to: data/planning/style_report.md
+Read all chapters from: {STORY_DIR}/outputs/
+Read character voices from: {STORY_DIR}/world/character_cast.md
+Save report to: {STORY_DIR}/planning/style_report.md
 ```
 → Show summary. Apply fixes if agreed.
 
 ## Stage 4: Assembly
 Main agent combines chapters:
-1. Read all `data/outputs/chapter_*.md`
+1. Read all `{STORY_DIR}/outputs/chapter_*.md`
 2. Create TOC + metadata
-3. Save to `data/outputs/novel_complete.md`
+3. Save to `{STORY_DIR}/outputs/novel_complete.md`
 
 ## Recovery
-1. Read `data/planning/story_log.md` — last chapter
-2. Read `data/planning/structure.md` — next objective
-3. Resume from next unwritten chapter
+1. Read `data/active_story.txt` — which story
+2. Read `{STORY_DIR}/planning/story_log.md` — last chapter
+3. Read `{STORY_DIR}/planning/structure.md` — next objective
+4. Resume from next unwritten chapter
