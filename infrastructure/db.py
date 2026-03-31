@@ -48,6 +48,38 @@ CREATE TABLE IF NOT EXISTS unresolved_threads (
     resolved_chapter INTEGER,
     related_characters TEXT DEFAULT '[]'
 );
+
+CREATE TABLE IF NOT EXISTS character_profiles (
+    name TEXT PRIMARY KEY,
+    role TEXT DEFAULT 'ally',
+    age TEXT DEFAULT '',
+    personality TEXT DEFAULT '[]',
+    speaking_style TEXT DEFAULT '',
+    motivation TEXT DEFAULT '',
+    background TEXT DEFAULT '',
+    arc_summary TEXT DEFAULT '',
+    relationships TEXT DEFAULT '{}',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS foreshadows (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    description TEXT NOT NULL,
+    plant_chapter INTEGER NOT NULL,
+    hint_chapters TEXT DEFAULT '[]',
+    resolve_chapter INTEGER NOT NULL,
+    importance TEXT DEFAULT 'minor',
+    related_characters TEXT DEFAULT '[]',
+    status TEXT DEFAULT 'planned'
+);
+
+CREATE TABLE IF NOT EXISTS world_events (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    description TEXT NOT NULL,
+    chapter_id INTEGER NOT NULL,
+    event_type TEXT DEFAULT 'world_change',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 """
 
 

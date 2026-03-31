@@ -2,3 +2,6 @@ from memory.repositories.summary_repo import SummaryRepository
 from memory.repositories.character_repo import CharacterRepository
 from memory.repositories.thread_repo import ThreadRepository
 from memory.repositories.compressed_repo import CompressedRepository
+from memory.repositories.foreshadow_repo import ForeshadowRepository
+from memory.repositories.world_repo import WorldRepository
+from memory.repositories.profile_repo import ProfileRepository
