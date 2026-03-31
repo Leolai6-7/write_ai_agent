@@ -137,50 +137,100 @@ Output in 繁體中文.
 
 Per chapter, in sequence:
 
+### 2.0: Context Assembly (sub-agent, NOT main agent)
+
+The main agent must NOT read large planning/world files directly.
+Instead, launch a sub-agent to extract what this chapter needs.
+
+```
+Agent prompt:
+You are a context assembler. Read the following files and extract
+ONLY what chapter {N} needs. Return a condensed CHAPTER BRIEF.
+
+Read these files:
+- {STORY_DIR}/planning/structure.md → extract chapter {N}'s row only
+  (title, line, objective, key events, characters, emotional tone)
+- {STORY_DIR}/planning/foreshadowing.md → extract chapter {N}'s
+  directives only (what to plant, hint, resolve this chapter)
+- {STORY_DIR}/world/character_cast.md → extract ONLY the speaking
+  styles of characters involved in chapter {N}
+- {STORY_DIR}/planning/story_log.md → extract last 5 entries
+- {STORY_DIR}/planning/story_brief.md → extract genre, language, style
+
+Output a single CHAPTER BRIEF text block. Target: under 1500 tokens.
+Format:
+
+CHAPTER BRIEF — Chapter {N}
+Story: {genre, language, style}
+Title: {title}
+Line: {R/S/R+S}
+Objective: {objective}
+Key events: {events}
+Characters: {characters involved}
+Emotional tone: {tone}
+
+Foreshadowing directives:
+- Plant: {what to plant}
+- Hint: {what to hint}
+- Resolve: {what to resolve}
+
+Character voices (this chapter only):
+- {character}: {speaking style summary}
+
+Recent context:
+- Ch{N-5}: {summary}
+- Ch{N-4}: {summary}
+...
+- Ch{N-1}: {summary}
+
+Do NOT save any file. Return the brief directly.
+```
+
+The main agent stores this brief (~1500 tokens) and passes it
+to all subsequent sub-agents for this chapter.
+
 ### 2.1: Pacing
 ```
 Agent prompt:
 Read .claude/skills/novel-pacing/SKILL.md and follow.
-Read last 5 entries from: {STORY_DIR}/planning/story_log.md (or "first chapter")
-Current chapter objective: {from structure.md}
-Output ONLY 3-line pacing recommendation. No file save.
+
+{paste the CHAPTER BRIEF from 2.0}
+
+Output ONLY a 3-line pacing recommendation. No file save.
 ```
 
 ### 2.2: Generate Chapter
 ```
 Agent prompt:
 Read .claude/skills/novel-chapter/SKILL.md and follow.
-Chapter {N}: {title}
-Objective: {objective}
-Key events: {events}
-Characters: {characters}
-Emotional tone: {tone}
-Pacing advice: {from 2.1}
-Foreshadowing directives: {from foreshadowing.md for this chapter}
-Read context from: {STORY_DIR}/planning/story_log.md (last 5 entries)
-Read character voices from: {STORY_DIR}/world/character_cast.md
-Save to: {STORY_DIR}/outputs/chapter_{NNN}.md
-Do NOT update story_log.md — that is the main agent's job after judging.
 
-If you introduce any NEW characters not in character_cast.md, you MUST
-report them at the end of your output in this format:
+{paste the CHAPTER BRIEF from 2.0}
+Pacing advice: {from 2.1}
+
+Save to: {STORY_DIR}/outputs/chapter_{NNN}.md
+Do NOT update story_log.md.
+Do NOT read any planning or world files — everything you need is above.
+
+If you introduce NEW characters, report at the end:
 NEW_CHARACTERS:
-- {name}：{role/identity}，{speaking style in one sentence}
+- {name}：{role}，{speaking style}
 ```
 
-After chapter generation, if the sub-agent reports NEW_CHARACTERS,
-the main agent appends them to `{STORY_DIR}/world/character_cast.md`
-under a "## 新增配角" section.
+After generation, if NEW_CHARACTERS reported,
+main agent appends to `{STORY_DIR}/world/character_cast.md`.
 
 ### 2.3: Judge
 ```
 Agent prompt:
 Read .claude/skills/novel-judge/SKILL.md and follow.
 Read chapter from: {STORY_DIR}/outputs/chapter_{NNN}.md
-Chapter objective: {objective}
-Read previous summary from: {STORY_DIR}/planning/story_log.md (last entry)
+
+{paste the CHAPTER BRIEF from 2.0 — so the judge knows the objective,
+tone, and foreshadowing directives without reading full planning files}
+
 Return: scores, issues, suggestions, AND a standardized story_log entry.
 No file save — return everything to main agent.
+Do NOT read planning or world files — the brief has what you need.
 ```
 
 If score >= 7.0 → proceed to 2.4
