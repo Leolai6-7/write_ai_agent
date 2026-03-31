@@ -34,13 +34,59 @@ The main agent NEVER generates content itself. It only:
 3. Passes minimal context between steps (via files, not conversation)
 4. Communicates with the user
 
-## Input
+## Stage 0: Brainstorm (腦力激盪)
 
-From $ARGUMENTS or conversation, gather:
-- **Story premise**: the core conflict/goal (1-2 sentences)
-- **Genre**: 奇幻冒險、都市、科幻、武俠、etc.
-- **Scale**: how many volumes? chapters per volume?
-- **Any existing materials**: world setting, character ideas, outlines
+**This stage runs in the MAIN agent context — it's a conversation, not a sub-agent task.**
+
+Before generating anything, have a creative brainstorming session with the user. This shapes everything.
+
+### 0.1: Seed (種子)
+
+Start by asking what sparked this story idea. Open-ended:
+
+"你想寫一個什麼樣的故事？可以是一句話、一個畫面、一個角色、甚至只是一種感覺。"
+
+If the user provided $ARGUMENTS, use that as the seed and skip to 0.2.
+
+### 0.2: Explore (探索)
+
+Ask probing questions to expand the idea. Pick 2-3 that feel relevant, conversational pace:
+
+- "這個故事的核心衝突是什麼？主角想要什麼，什麼在阻擋他？"
+- "你想讓讀者看完有什麼感受？熱血？心痛？思考人生？"
+- "有沒有特別喜歡的小說/動漫/遊戲，想要類似的感覺？"
+- "主角是什麼樣的人？你最想寫他的哪一面？"
+- "這個世界有什麼特別的？魔法？科技？社會制度？"
+- "有沒有特別想寫或想避免的橋段？"
+
+Don't dump all questions at once. React to answers, dig deeper on interesting threads. This should feel like two writers chatting at a coffee shop, not a form.
+
+### 0.3: Shape (定型)
+
+When enough material emerges, synthesize into a **Story Brief**:
+
+```markdown
+## 故事概要
+- **一句話概述**: [核心故事線]
+- **類型**: [genre]
+- **主角**: [name, key trait, goal]
+- **核心衝突**: [what stands in the way]
+- **世界觀基調**: [what makes this world special]
+- **情感核心**: [what readers should feel]
+- **規模**: [volumes × chapters]
+- **參考作品**: [similar works for tone/style]
+- **特別要求**: [things to include or avoid]
+```
+
+Show to user: "這個方向對嗎？要調整什麼？"
+
+### 0.4: Confirm (確認)
+
+Once approved, save it:
+
+Save Story Brief to `data/planning/story_brief.md`
+
+This file is the **source of truth** for all subsequent sub-agents. Now proceed to Stage 1.
 
 ---
 
@@ -55,11 +101,11 @@ Launch Agent with this prompt:
 Read the skill instructions at .claude/skills/novel-worldbuilding/SKILL.md and follow them completely.
 
 Input:
-- Story premise: {premise}
-- Genre: {genre}
-- Base world details: {any world details user provided}
+- Read story brief from: data/planning/story_brief.md
+- Read any existing world YAML from: data/world/ (if exists)
 
 Save the complete output to data/world/world_bible.md
+Output in 繁體中文.
 ```
 
 → After agent completes, read `data/world/world_bible.md`, show user a 3-line summary. Ask: "世界觀設定完成，要看詳情或調整嗎？"
@@ -71,11 +117,11 @@ Launch Agent with this prompt:
 Read the skill instructions at .claude/skills/novel-characters/SKILL.md and follow them completely.
 
 Input:
-- Story premise: {premise}
+- Read story brief from: data/planning/story_brief.md
 - Read world bible from: data/world/world_bible.md
-- Protagonist: {protagonist details}
 
 Save the complete output to data/world/character_cast.md
+Output in 繁體中文.
 ```
 
 → Show 3-line summary. Ask: "角色設計完成，要看詳情或調整嗎？"
@@ -87,13 +133,12 @@ Launch Agent with this prompt:
 Read the skill instructions at .claude/skills/novel-architect/SKILL.md and follow them completely.
 
 Input:
-- Story premise: {premise}
-- Genre: {genre}
-- Scale: {volumes} volumes × {chapters_per_volume} chapters
+- Read story brief from: data/planning/story_brief.md
 - Read world bible from: data/world/world_bible.md
 - Read character cast from: data/world/character_cast.md
 
 Save the complete output to data/planning/structure.md
+Output in 繁體中文.
 ```
 
 → Show volume/arc overview. Ask: "結構設計完成，滿意嗎？"
