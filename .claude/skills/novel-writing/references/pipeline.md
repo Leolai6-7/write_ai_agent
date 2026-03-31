@@ -187,8 +187,19 @@ Append to `{STORY_DIR}/planning/story_log.md`:
 - 情感基調：{tone}
 ```
 
+If during judging or writing, any issue suggests core settings need revision
+(e.g., "this character's motivation doesn't work", "world rule is inconsistent",
+"need a new location"), append to `{STORY_DIR}/planning/revision_notes.md`:
+```
+## 第{N}章發現
+- [描述需要修訂的核心設定問題]
+```
+
 Report: "第{N}章完成（{score}/10）：{summary}"
 Every 5 chapters: "前5章寫完了，要檢查再繼續嗎？"
+Every 10 chapters: check revision_notes.md — if it has 3+ entries, ask:
+  "累積了一些設定修訂建議，要暫停來更新世界觀/角色設定嗎？"
+  If yes → re-run worldbuilding/character sub-agents with revision notes as input
 
 ---
 
