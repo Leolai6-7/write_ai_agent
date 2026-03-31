@@ -60,18 +60,19 @@ For each faction:
 
 The faction ecosystem must create a web of tension, not a simple good-vs-evil binary.
 
-### 4. 魔法/力量體系
+### 4. 核心系統（如果存在）
 
-This is where most worldbuilding fails — overpowered systems with no cost. Design with constraints:
+If the world has a unique power/technology/rule system (magic, martial arts, sci-fi tech, superpowers, etc.), describe it. If not (e.g., realistic fiction, modern drama), skip this section entirely. Don't force a system where the story doesn't need one.
+
+When applicable, design with constraints — overpowered systems with no cost make bad stories:
 
 - **來源**：where does power come from?
-- **分類**：schools/types (3-5 types)
-- **代價**：what does using magic COST? (physical toll, moral cost, resource depletion)
-- **限制**：what CAN'T magic do? (at least 3 hard limits)
-- **等級體系**：ranking system (4-6 tiers with names)
+- **分類**：schools/types
+- **代價**：what does it COST? (physical toll, moral cost, resource depletion)
+- **限制**：what CAN'T it do? (hard limits)
 - **禁忌**：what's forbidden and why?
 
-Rule of thumb: the more powerful the magic, the higher the cost. No free power.
+Rule of thumb: the more powerful the system, the higher the cost. No free power.
 
 ### 5. 文化細節
 
@@ -85,7 +86,7 @@ The texture that makes a world feel lived-in:
 
 Before outputting, verify:
 - [ ] No two locations feel interchangeable
-- [ ] Magic has clear costs that create dramatic tension
+- [ ] If a core system exists, it has clear costs that create dramatic tension
 - [ ] Factions have conflicting goals (not just "good guys vs bad guys")
 - [ ] History events connect to current story conflicts
 - [ ] Cultural details are specific enough to influence character behavior
