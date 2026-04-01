@@ -54,7 +54,7 @@
     {
       "type": "character",
       "name": "顧則",
-      "events": "ch2: 重新檢視37個文明崩潰曲線，確認複雜度0.7334臨界點；向方院長提交報告並被引導思考「邊界條件」；注意到南牆與北牆溫度相同的異常但未深究；入睡前閃過一幀藍綠冷光中疲憊人影的畫面",
+      "events": "ch2: 重新檢視37個文明崩潰曲線，確認複雜度0.7334臨界點；向方院長提交報告並被引導思考「邊界條件」；注意到南牆與北牆溫度相同的異常但未深究；入睡前閃過一幀藍綠冷光中疲憊人影的畫面 · ch4: 系統性記錄世界「接縫」清單（共15項：表面溫度均一、門鉸無磨損、重力加速度精確吻合標準值、施工精度零偏差、環境參數穩定、食物鹹淡恆定、環境噪聲缺失、人員行為時間精確性等）；發現物理常數呈現有限精度截斷（光速、普朗克常數等到教科書末位即停）；向紀恆透露重力加速度異常但被駁回；被同事疏遠後獨自深化研究；重新審視37個文明崩潰曲線，意識到0.7334不是發現而是「參數」；夜晚夢見深潛研究所走廊——封閉灰白走廊、冷白燈帶、臭氧金屬氣味、綠色指示燈的門、環形結構、螢幕顯示0xFFFF；夢中門把溫度是「真實的涼」與日常均溫形成對比",
       "id": "character:顧則"
     },
     {
@@ -80,7 +80,7 @@
     {
       "type": "character",
       "name": "紀恆",
-      "events": "ch2: 每天帶早飯給顧則、記得他喝的牛奶牌子、優化回歸模型代碼收斂快一倍、講統計組實習生故事；總在顧則開口前就知道他需要什麼",
+      "events": "ch2: 每天帶早飯給顧則、記得他喝的牛奶牌子、優化回歸模型代碼收斂快一倍、講統計組實習生故事；總在顧則開口前就知道他需要什麼 · ch4: 發現顧則在量窗框，以「標準化建材」合理化；第二次不帶咖啡登門嚴肅對話，指出顧則在非專業領域做不嚴謹觀測；提醒顧則先完成37個文明樣本報告；疑似向同事（李明華、張薇）通報顧則異常行為，導致眾人迴避顧則",
       "id": "character:紀恆"
     },
     {
@@ -104,7 +104,7 @@
     {
       "type": "location",
       "name": "模擬世界-研究院",
-      "description": "陽光、銀杏、日常辦公室；ch2確立: 主樓玻璃門入口有銀杏樹與花壇、磨石子地板走廊有落地窗、辦公室在三樓東側（顧則紀恆共用面牆兩桌）、食堂在一樓有玻璃穹頂、方院長辦公室在四樓最裡面、茶水間朝北無日照、午餐鈴為兩聲短促電子音",
+      "description": "陽光、銀杏、日常辦公室；ch2確立: 主樓玻璃門入口有銀杏樹與花壇、磨石子地板走廊有落地窗、辦公室在三樓東側（顧則紀恆共用面牆兩桌）、食堂在一樓有玻璃穹頂、方院長辦公室在四樓最裡面、茶水間朝北無日照、午餐鈴為兩聲短促電子音；ch4增補: 辦公室有沙發可過夜、備用外套；每日早八行政助理各辦公室放茶；夜間校園完全安靜無背景噪聲；窗外銀杏擺動幅度精確到像重複同一段動畫；所有窗框尺寸零偏差（六扇實測）",
       "id": "location:模擬世界-研究院"
     },
     {
@@ -122,7 +122,7 @@
     {
       "type": "foreshadow",
       "name": "①牆壁溫度",
-      "status": "已植入（ch2: 顧則午餐時碰南牆、茶水間碰北牆，日照面與背陰面溫度完全相同；走廊中猶豫是否觸碰比較但走過去了；合理化為空調系統好）",
+      "status": "已暗示（ch2植入: 顧則午餐時碰南牆、茶水間碰北牆，日照面與背陰面溫度完全相同；走廊中猶豫是否觸碰比較但走過去了；合理化為空調系統好；ch4暗示: 牆壁溫度作為接縫清單第一項被正式記錄——「研究院所有可觸及表面呈現相同觸感溫度，無材質導致的熱傳導差異」；不再合理化，歸類為異常）",
       "id": "foreshadow:①牆壁溫度"
     },
     {
@@ -151,7 +151,7 @@
     {
       "type": "foreshadow",
       "name": "⑥迭代者預知",
-      "status": "規劃中",
+      "status": "已植入（ch4: 顧則發現物理常數精度過於完美——重力加速度9.80665五份來源完全一致無地區修正；光速、普朗克常數等到教科書末位即截斷無實驗延伸；將此歸納為「精度悖論」——世界只被渲染到某一層細節）",
       "id": "foreshadow:⑥迭代者預知"
     },
     {
@@ -383,6 +383,78 @@
       "id": "event:兩條線索進入同一引力系統，為後續合流埋伏筆"
     },
     {
+      "type": "event",
+      "description": "方院長「邊界條件」啟發 + 牆壁溫度異常感知",
+      "chapter": "ch2",
+      "id": "event:方院長「邊界條件」啟發 + 牆壁溫度異常感知"
+    },
+    {
+      "type": "event",
+      "description": "顧則開始系統性測量世界——重力加速度、物理常數精度、建材尺寸、環境參數",
+      "chapter": "ch4",
+      "id": "event:顧則開始系統性測量世界——重力加速度、物理常數精度、建材尺寸、環境參數"
+    },
+    {
+      "type": "event",
+      "description": "顧則向紀恆透露重力加速度異常",
+      "chapter": "ch4",
+      "id": "event:顧則向紀恆透露重力加速度異常"
+    },
+    {
+      "type": "event",
+      "description": "紀恆以「非專業領域不嚴謹觀測」駁回，並通報同事",
+      "chapter": "ch4",
+      "id": "event:紀恆以「非專業領域不嚴謹觀測」駁回，並通報同事"
+    },
+    {
+      "type": "event",
+      "description": "紀恆通報同事顧則異常行為",
+      "chapter": "ch4",
+      "id": "event:紀恆通報同事顧則異常行為"
+    },
+    {
+      "type": "event",
+      "description": "同事（李明華、張薇等）迴避顧則，形成社交隔離",
+      "chapter": "ch4",
+      "id": "event:同事（李明華、張薇等）迴避顧則，形成社交隔離"
+    },
+    {
+      "type": "event",
+      "description": "顧則發現物理常數精度截斷",
+      "chapter": "ch4",
+      "id": "event:顧則發現物理常數精度截斷"
+    },
+    {
+      "type": "event",
+      "description": "重新審視37個文明崩潰曲線，意識到0.7334是參數而非發現",
+      "chapter": "ch4",
+      "id": "event:重新審視37個文明崩潰曲線，意識到0.7334是參數而非發現"
+    },
+    {
+      "type": "event",
+      "description": "顧則社交隔離 + 獨自留在辦公室過夜",
+      "chapter": "ch4",
+      "id": "event:顧則社交隔離 + 獨自留在辦公室過夜"
+    },
+    {
+      "type": "event",
+      "description": "夢見深潛研究所走廊、環形結構、0xFFFF",
+      "chapter": "ch4",
+      "id": "event:夢見深潛研究所走廊、環形結構、0xFFFF"
+    },
+    {
+      "type": "event",
+      "description": "夢中觸碰門把感受到「真實的涼」",
+      "chapter": "ch4",
+      "id": "event:夢中觸碰門把感受到「真實的涼」"
+    },
+    {
+      "type": "event",
+      "description": "與日常均溫表面形成對比，強化「這個世界不真實」的認知",
+      "chapter": "ch4",
+      "id": "event:與日常均溫表面形成對比，強化「這個世界不真實」的認知"
+    },
+    {
       "type": "mirror",
       "line": "R",
       "description": "沈逸站在觀測窗前",
@@ -417,6 +489,30 @@
       "line": "S",
       "description": "顧則發現不均勻的冰晶",
       "id": "mirror_s:顧則發現不均勻的冰晶"
+    },
+    {
+      "type": "mirror",
+      "line": "R",
+      "description": "沈逸控制室藍綠冷光走廊",
+      "id": "mirror_r:沈逸控制室藍綠冷光走廊"
+    },
+    {
+      "type": "mirror",
+      "line": "S",
+      "description": "顧則夢見封閉灰白走廊、冷白燈帶、臭氧金屬氣味",
+      "id": "mirror_s:顧則夢見封閉灰白走廊、冷白燈帶、臭氧金屬氣味"
+    },
+    {
+      "type": "mirror",
+      "line": "R",
+      "description": "0xFFFF出現在控制室異常標記",
+      "id": "mirror_r:0xFFFF出現在控制室異常標記"
+    },
+    {
+      "type": "mirror",
+      "line": "S",
+      "description": "0xFFFF出現在顧則夢中螢幕（他不應該懂十六進制）",
+      "id": "mirror_s:0xFFFF出現在顧則夢中螢幕（他不應該懂十六進制）"
     },
     {
       "type": "mirror",
@@ -814,6 +910,62 @@
       "value": "約6公尺",
       "note": "ch3確立（沈逸三年來離螢幕最遠）",
       "id": "value:備餐區距螢幕距離"
+    },
+    {
+      "type": "value",
+      "setting": "本地重力加速度",
+      "value": "9.80665",
+      "note": "ch4確立：精確到小數後五位，五份獨立來源完全一致，無地區修正",
+      "id": "value:本地重力加速度"
+    },
+    {
+      "type": "value",
+      "setting": "顧則接縫清單總項數",
+      "value": "15項（至ch4末）",
+      "note": "ch4確立：從物理測量延伸到環境噪聲、人員行為、夢境",
+      "id": "value:顧則接縫清單總項數"
+    },
+    {
+      "type": "value",
+      "setting": "精密溫度計規格",
+      "value": "量程-20~50°C，精度0.01°C",
+      "note": "ch4確立：顧則向物理系借用",
+      "id": "value:精密溫度計規格"
+    },
+    {
+      "type": "value",
+      "setting": "窗框實測數量",
+      "value": "6扇",
+      "note": "ch4確立：尺寸零偏差",
+      "id": "value:窗框實測數量"
+    },
+    {
+      "type": "value",
+      "setting": "物理常數比對來源數",
+      "value": "3本不同年代教科書",
+      "note": "ch4確立",
+      "id": "value:物理常數比對來源數"
+    },
+    {
+      "type": "value",
+      "setting": "重力加速度比對來源數",
+      "value": "5份獨立來源",
+      "note": "ch4確立（原始測量、天文觀測站、大學物理系、工程手冊、氣象局）",
+      "id": "value:重力加速度比對來源數"
+    },
+    {
+      "type": "value",
+      "setting": "夢中環形結構直徑",
+      "value": "約6-7米",
+      "note": "ch4確立：金屬與玻璃構成，表面佈滿接線和指示燈",
+      "id": "value:夢中環形結構直徑"
+    },
+    {
+      "type": "value",
+      "setting": "C-001文明崩潰時間點",
+      "value": "複雜度0.7334後第63個時間單位",
+      "note": "ch4確立：農業核心早期社會",
+      "id": "value:C-001文明崩潰時間點"
     }
   ],
   "edges": [
@@ -1233,6 +1385,66 @@
       "target": "chapter:ch3"
     },
     {
+      "type": "causes",
+      "source": "event:方院長「邊界條件」啟發 + 牆壁溫度異常感知",
+      "target": "event:顧則開始系統性測量世界——重力加速度、物理常數精度、建材尺寸、環境參數"
+    },
+    {
+      "type": "occurs_in",
+      "source": "event:方院長「邊界條件」啟發 + 牆壁溫度異常感知",
+      "target": "chapter:ch2"
+    },
+    {
+      "type": "causes",
+      "source": "event:顧則向紀恆透露重力加速度異常",
+      "target": "event:紀恆以「非專業領域不嚴謹觀測」駁回，並通報同事"
+    },
+    {
+      "type": "occurs_in",
+      "source": "event:顧則向紀恆透露重力加速度異常",
+      "target": "chapter:ch4"
+    },
+    {
+      "type": "causes",
+      "source": "event:紀恆通報同事顧則異常行為",
+      "target": "event:同事（李明華、張薇等）迴避顧則，形成社交隔離"
+    },
+    {
+      "type": "occurs_in",
+      "source": "event:紀恆通報同事顧則異常行為",
+      "target": "chapter:ch4"
+    },
+    {
+      "type": "causes",
+      "source": "event:顧則發現物理常數精度截斷",
+      "target": "event:重新審視37個文明崩潰曲線，意識到0.7334是參數而非發現"
+    },
+    {
+      "type": "occurs_in",
+      "source": "event:顧則發現物理常數精度截斷",
+      "target": "chapter:ch4"
+    },
+    {
+      "type": "causes",
+      "source": "event:顧則社交隔離 + 獨自留在辦公室過夜",
+      "target": "event:夢見深潛研究所走廊、環形結構、0xFFFF"
+    },
+    {
+      "type": "occurs_in",
+      "source": "event:顧則社交隔離 + 獨自留在辦公室過夜",
+      "target": "chapter:ch4"
+    },
+    {
+      "type": "causes",
+      "source": "event:夢中觸碰門把感受到「真實的涼」",
+      "target": "event:與日常均溫表面形成對比，強化「這個世界不真實」的認知"
+    },
+    {
+      "type": "occurs_in",
+      "source": "event:夢中觸碰門把感受到「真實的涼」",
+      "target": "chapter:ch4"
+    },
+    {
       "type": "mirrors",
       "source": "mirror_r:沈逸站在觀測窗前",
       "target": "mirror_s:顧則站在落地窗前看銀杏/走廊"
@@ -1246,6 +1458,16 @@
       "type": "mirrors",
       "source": "mirror_r:沈逸看到不均勻的真實世界",
       "target": "mirror_s:顧則發現不均勻的冰晶"
+    },
+    {
+      "type": "mirrors",
+      "source": "mirror_r:沈逸控制室藍綠冷光走廊",
+      "target": "mirror_s:顧則夢見封閉灰白走廊、冷白燈帶、臭氧金屬氣味"
+    },
+    {
+      "type": "mirrors",
+      "source": "mirror_r:0xFFFF出現在控制室異常標記",
+      "target": "mirror_s:0xFFFF出現在顧則夢中螢幕（他不應該懂十六進制）"
     },
     {
       "type": "mirrors",
@@ -1446,6 +1668,46 @@
       "type": "established_in",
       "source": "value:備餐區距螢幕距離",
       "target": "chapter:ch3"
+    },
+    {
+      "type": "established_in",
+      "source": "value:本地重力加速度",
+      "target": "chapter:ch4"
+    },
+    {
+      "type": "established_in",
+      "source": "value:顧則接縫清單總項數",
+      "target": "chapter:ch4"
+    },
+    {
+      "type": "established_in",
+      "source": "value:精密溫度計規格",
+      "target": "chapter:ch4"
+    },
+    {
+      "type": "established_in",
+      "source": "value:窗框實測數量",
+      "target": "chapter:ch4"
+    },
+    {
+      "type": "established_in",
+      "source": "value:物理常數比對來源數",
+      "target": "chapter:ch4"
+    },
+    {
+      "type": "established_in",
+      "source": "value:重力加速度比對來源數",
+      "target": "chapter:ch4"
+    },
+    {
+      "type": "established_in",
+      "source": "value:夢中環形結構直徑",
+      "target": "chapter:ch4"
+    },
+    {
+      "type": "established_in",
+      "source": "value:C-001文明崩潰時間點",
+      "target": "chapter:ch4"
     }
   ]
 }
