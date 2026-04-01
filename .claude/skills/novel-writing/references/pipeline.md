@@ -140,61 +140,72 @@ Per chapter, in sequence:
 ### 2.0: Context Assembly (sub-agent, NOT main agent)
 
 The main agent must NOT read large planning/world files directly.
-Instead, launch a sub-agent to extract what this chapter needs.
+Instead, launch a sub-agent to retrieve the relevant context.
+
+**Key principle: selective ≠ summarized.** Select WHICH sections to
+include based on the chapter plan, but include them IN FULL. Do not
+compress or paraphrase — the writing quality depends on having rich,
+textured source material.
 
 ```
 Agent prompt:
-You are a context assembler. Read the following files and extract
-ONLY what chapter {N} needs. Return a condensed CHAPTER BRIEF.
+You are a context assembler. Your job is to read the source files,
+identify what chapter {N} needs, and return the RELEVANT SECTIONS
+in full — not summarized, not compressed.
 
-Read these files:
-- {STORY_DIR}/planning/structure.md → extract chapter {N}'s row only
-  (title, line, objective, key events, characters, emotional tone)
-- {STORY_DIR}/planning/foreshadowing.md → extract chapter {N}'s
-  directives only (what to plant, hint, resolve this chapter)
-- {STORY_DIR}/world/character_cast.md → extract ONLY the speaking
-  styles of characters involved in chapter {N}
-- {STORY_DIR}/planning/story_log.md → extract last 5 entries
-- {STORY_DIR}/planning/story_brief.md → extract genre, language, style
+Step 1: Read {STORY_DIR}/planning/structure.md
+  → Find chapter {N}'s row (title, line, objective, events, characters, tone)
+  → This tells you WHAT the chapter needs
 
-Output a single CHAPTER BRIEF text block. Target: under 1500 tokens.
-Format:
+Step 2: Based on what you found, retrieve FULL sections from:
+  - {STORY_DIR}/world/character_cast.md → FULL profiles of characters
+    involved in this chapter (not just speaking style — include
+    motivation, background, arc, relationships)
+  - {STORY_DIR}/world/world_bible.md → FULL descriptions of locations
+    and settings used in this chapter
+  - {STORY_DIR}/planning/foreshadowing.md → FULL details of any
+    foreshadowing threads to plant/hint/resolve this chapter
 
-CHAPTER BRIEF — Chapter {N}
-Story: {genre, language, style}
-Title: {title}
+Step 3: Also retrieve:
+  - {STORY_DIR}/planning/story_log.md → last 5 entries (as-is)
+  - {STORY_DIR}/planning/story_brief.md → genre, language, style
+
+Output format — CHAPTER CONTEXT PACKAGE:
+
+=== Chapter {N}: {title} ===
 Line: {R/S/R+S}
 Objective: {objective}
 Key events: {events}
-Characters: {characters involved}
 Emotional tone: {tone}
+Genre/Style: {from story_brief}
 
-Foreshadowing directives:
-- Plant: {what to plant}
-- Hint: {what to hint}
-- Resolve: {what to resolve}
+--- CHARACTER PROFILES (full, for this chapter's cast) ---
+{paste full profiles of involved characters}
 
-Character voices (this chapter only):
-- {character}: {speaking style summary}
+--- SETTING (full, for this chapter's locations) ---
+{paste full location descriptions from world_bible}
 
-Recent context:
-- Ch{N-5}: {summary}
-- Ch{N-4}: {summary}
-...
-- Ch{N-1}: {summary}
+--- FORESHADOWING (full thread details) ---
+{paste full foreshadowing thread designs for this chapter}
 
-Do NOT save any file. Return the brief directly.
+--- RECENT CHAPTERS ---
+{last 5 story_log entries}
+===
+
+Do NOT summarize or compress any section. The writer needs the
+texture and specificity of the original material.
+Do NOT save any file. Return the package directly.
 ```
 
-The main agent stores this brief (~1500 tokens) and passes it
-to all subsequent sub-agents for this chapter.
+The main agent stores this context package and passes it to
+subsequent sub-agents for this chapter.
 
 ### 2.1: Pacing
 ```
 Agent prompt:
 Read .claude/skills/novel-pacing/SKILL.md and follow.
 
-{paste the CHAPTER BRIEF from 2.0}
+{paste the CHAPTER CONTEXT PACKAGE from 2.0}
 
 Output ONLY a 3-line pacing recommendation. No file save.
 ```
@@ -204,7 +215,7 @@ Output ONLY a 3-line pacing recommendation. No file save.
 Agent prompt:
 Read .claude/skills/novel-chapter/SKILL.md and follow.
 
-{paste the CHAPTER BRIEF from 2.0}
+{paste the CHAPTER CONTEXT PACKAGE from 2.0}
 Pacing advice: {from 2.1}
 
 Save to: {STORY_DIR}/outputs/chapter_{NNN}.md
@@ -225,8 +236,8 @@ Agent prompt:
 Read .claude/skills/novel-judge/SKILL.md and follow.
 Read chapter from: {STORY_DIR}/outputs/chapter_{NNN}.md
 
-{paste the CHAPTER BRIEF from 2.0 — so the judge knows the objective,
-tone, and foreshadowing directives without reading full planning files}
+{paste the CHAPTER CONTEXT PACKAGE from 2.0 — the judge needs the
+objective, tone, character profiles, and foreshadowing context}
 
 Return: scores, issues, suggestions, AND a standardized story_log entry.
 No file save — return everything to main agent.
