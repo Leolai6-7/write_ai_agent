@@ -127,91 +127,79 @@ Output in 繁體中文.
 
 ## Stage 2: Creation (創作)
 
-### HARD RULES — Do not violate these under any circumstances:
+### Execution Protocol
 
-1. **SEQUENTIAL ONLY**: Chapters MUST be generated one at a time. Never launch chapter N+1 until chapter N is fully complete (generated + judged + logged). Each chapter's output becomes the next chapter's input context.
+For each chapter, follow these steps EXACTLY. Do not combine, skip, or reorder.
+Copy the prompts below and fill in {N} and {STORY_DIR}. One sub-agent per step.
 
-2. **ONE TASK PER SUB-AGENT**: Never combine judge + generate (or any two tasks) into the same sub-agent. Each sub-agent does exactly ONE thing. Combining tasks causes output to be truncated.
+---
 
-3. **STRICT STEP ORDER**: For each chapter, execute 2.1 → 2.2 → 2.3 → 2.4 in order. No skipping, no reordering.
+**STEP 1 — Context Assembly**
+Launch ONE sub-agent with this EXACT prompt:
 
-Per chapter, in sequence:
+> Read .claude/skills/novel-context/SKILL.md and follow.
+> Chapter: {N}
+> Story directory: {STORY_DIR}
+> Return a CHAPTER CONTEXT PACKAGE. No file save.
 
-### 2.0: Context Assembly (ONE sub-agent)
-```
-Agent prompt:
-Read .claude/skills/novel-context/SKILL.md and follow.
-Chapter: {N}
-Story directory: {STORY_DIR}
-Return a CHAPTER CONTEXT PACKAGE. No file save.
-```
+Wait for completion. Store the returned context package.
 
-The main agent stores this package and passes it to generate + judge.
+---
 
-### 2.1: Generate Chapter (ONE sub-agent)
-```
-Agent prompt:
-Read .claude/skills/novel-chapter/SKILL.md and follow.
+**STEP 2 — Chapter Generation**
+Launch ONE sub-agent with this EXACT prompt:
 
-{paste the CHAPTER CONTEXT PACKAGE from 2.0}
+> Read .claude/skills/novel-chapter/SKILL.md and follow.
+>
+> {paste the CHAPTER CONTEXT PACKAGE from Step 1 here}
+>
+> Save to: {STORY_DIR}/outputs/chapter_{NNN}.md
+> Do NOT update story_log.md.
+> Do NOT read any planning or world files.
+>
+> If you introduce NEW characters, report at the end:
+> NEW_CHARACTERS:
+> - {name}：{role}，{speaking style}
 
-Save to: {STORY_DIR}/outputs/chapter_{NNN}.md
-Do NOT update story_log.md.
-Do NOT read any planning or world files — everything you need is above.
+Wait for completion. If NEW_CHARACTERS reported, append to character_cast.md.
 
-If you introduce NEW characters, report at the end:
-NEW_CHARACTERS:
-- {name}：{role}，{speaking style}
-```
+---
 
-After generation, if NEW_CHARACTERS reported,
-main agent appends to `{STORY_DIR}/world/character_cast.md`.
+**STEP 3 — Update Progress (main agent, no sub-agent)**
+Read the generated chapter's first and last paragraphs. Append to story_log.md:
 
-### 2.2: Update Progress (main agent, not sub-agent)
-
-After chapter generation, the main agent writes a brief log entry.
-Read the first and last paragraphs of the generated chapter to
-produce a one-line summary. Format:
 ```
 ## 第{N}章：{title}
-- 摘要：{one-line summary, under 80 chars}
-- 角色變化：{from context package — who appeared, what changed}
-- 伏筆進展：{from context package — what was planted/hinted/resolved}
-- 情感基調：{from the chapter's tone}
+- 摘要：{one-line, under 80 chars}
+- 角色變化：{who appeared, what changed}
+- 伏筆進展：{planted/hinted/resolved}
+- 情感基調：{tone}
 ```
 
-Quality control is handled at the ARC level by `/novel-style-audit`,
-not per-chapter. Per-chapter judging added cost without triggering
-any improvements in practice.
+---
 
-### 2.5: Update Story Graph (sub-agent)
+**STEP 4 — Update Story Graph**
+Launch ONE sub-agent with this EXACT prompt:
 
-After each chapter, launch a sub-agent to update the narrative graph:
+> Read {STORY_DIR}/outputs/chapter_{NNN}.md (the chapter just written).
+> Read {STORY_DIR}/planning/story_graph.md (the current graph).
+>
+> Update the graph:
+> - 角色出場表: add/update character appearances
+> - 地點使用表: add/update locations
+> - 伏筆追蹤: update thread status
+> - 因果鏈: add new causal links
+> - 數值設定: add any new established values
+>
+> Save updated graph to: {STORY_DIR}/planning/story_graph.md
 
-```
-Agent prompt:
-Read the completed chapter from: {STORY_DIR}/outputs/chapter_{NNN}.md
-Read the current graph from: {STORY_DIR}/planning/story_graph.md
+Wait for completion.
 
-Update the graph with new information from this chapter:
-- Add/update character appearances in 角色出場表
-- Add/update location usage in 地點使用表
-- Update foreshadowing status in 伏筆追蹤
-- Add new causal links in 因果鏈
-- Add new dual-line mirrors if applicable in 雙線鏡像
-- Add any new numerical values in 已確立的數值設定
-- If new characters appeared, add them to 角色出場表
+---
 
-Save the updated graph back to: {STORY_DIR}/planning/story_graph.md
-```
+**THEN** proceed to the next chapter. Start from Step 1 again with {N+1}.
 
-If during judging or writing, any issue suggests core settings need revision
-(e.g., "this character's motivation doesn't work", "world rule is inconsistent",
-"need a new location"), append to `{STORY_DIR}/planning/revision_notes.md`:
-```
-## 第{N}章發現
-- [描述需要修訂的核心設定問題]
-```
+Quality control is at the ARC level via `/novel-style-audit`, not per-chapter.
 
 Report: "第{N}章完成（{score}/10）：{summary}"
 Every 5 chapters: "前5章寫完了，要檢查再繼續嗎？"
