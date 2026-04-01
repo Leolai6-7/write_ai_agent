@@ -167,49 +167,22 @@ NEW_CHARACTERS:
 After generation, if NEW_CHARACTERS reported,
 main agent appends to `{STORY_DIR}/world/character_cast.md`.
 
-### 2.2: Judge (ONE sub-agent)
-```
-Agent prompt:
-Read .claude/skills/novel-judge/SKILL.md and follow.
-Read chapter from: {STORY_DIR}/outputs/chapter_{NNN}.md
+### 2.2: Update Progress (main agent, not sub-agent)
 
-{paste the CHAPTER CONTEXT PACKAGE from 2.0}
-
-Return: scores, issues, suggestions, AND a standardized story_log entry.
-No file save — return everything to main agent.
-```
-
-If score >= pass threshold → proceed to 2.3
-If score < pass threshold → rewrite using /novel-chapter with feedback:
-```
-Agent prompt:
-Read .claude/skills/novel-chapter/SKILL.md and follow.
-This is a REWRITE. Read the existing chapter first.
-
-{paste the CHAPTER CONTEXT PACKAGE from 2.0}
-
-JUDGE FEEDBACK:
-Issues: {from judge}
-Suggestions: {from judge}
-
-Read existing chapter from: {STORY_DIR}/outputs/chapter_{NNN}.md
-Save revised to: {STORY_DIR}/outputs/chapter_{NNN}.md (overwrite)
-```
-Re-judge. Max 2 rewrites, then force-accept.
-
-### 2.4: Update Progress (main agent, not sub-agent)
-Take the story_log entry from judge sub-agent's output and append it to
-`{STORY_DIR}/planning/story_log.md`. Do NOT write your own summary — use
-the judge's standardized entry verbatim. Format:
+After chapter generation, the main agent writes a brief log entry.
+Read the first and last paragraphs of the generated chapter to
+produce a one-line summary. Format:
 ```
 ## 第{N}章：{title}
-- 摘要：{from judge, under 80 chars}
-- 評分：{from judge}/10
-- 角色變化：{from judge}
-- 伏筆進展：{from judge}
-- 情感基調：{from judge}
+- 摘要：{one-line summary, under 80 chars}
+- 角色變化：{from context package — who appeared, what changed}
+- 伏筆進展：{from context package — what was planted/hinted/resolved}
+- 情感基調：{from the chapter's tone}
 ```
-No extra fields. This is an index, not a full record.
+
+Quality control is handled at the ARC level by `/novel-style-audit`,
+not per-chapter. Per-chapter judging added cost without triggering
+any improvements in practice.
 
 ### 2.5: Update Story Graph (sub-agent)
 
