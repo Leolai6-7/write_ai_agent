@@ -25,7 +25,7 @@ Launch ALL of these simultaneously:
 2. **Story brief** — Read `{STORY_DIR}/planning/story_brief.md` in full.
    Always needed. (~2KB)
 
-3. **Story log** — Read `{STORY_DIR}/planning/story_log.md`. Take the
+3. **Story log** — Read `{STORY_DIR}/runtime/story_log.md`. Take the
    last 5 entries. Always needed.
 
 4. **Semantic search** (if indexed chapters exist) — Run:
@@ -61,7 +61,7 @@ Launch ALL of these simultaneously:
    to find the heading line number. Then Read the full thread design.
 
 7. **Story graph** (CONDITIONAL — only if needed):
-   Read `{STORY_DIR}/planning/story_graph.md` ONLY when:
+   Read `{STORY_DIR}/runtime/story_graph.md` ONLY when:
    - A character hasn't appeared for 5+ chapters (check story_log)
    - The beat sheet references events from a distant chapter
    - Numerical values need consistency checking

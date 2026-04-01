@@ -35,10 +35,11 @@ data/
         ├── world/
         │   ├── world_bible.md
         │   └── character_cast.md
-        ├── planning/
+        ├── planning/           → 設計文檔（寫章前定好，不隨章節更新）
         │   ├── story_brief.md
         │   ├── structure.md
-        │   ├── foreshadowing.md
+        │   └── foreshadowing.md
+        ├── runtime/            → 運行時文檔（每章更新）
         │   ├── story_log.md
         │   └── story_graph.md
         ├── outputs/
@@ -59,7 +60,7 @@ STORY_DIR = data/stories/{active_story}/
 
 每次新對話，如果用戶提到寫小說：
 1. 讀取 `data/active_story.txt` 確認當前故事
-2. 讀取 `{STORY_DIR}/planning/story_log.md` — 上次寫到哪裡
+2. 讀取 `{STORY_DIR}/runtime/story_log.md` — 上次寫到哪裡
 3. 讀取 `{STORY_DIR}/planning/story_brief.md` — 故事概要
 4. 如果這些檔案存在，告訴用戶當前進度並詢問要繼續還是開新故事
 5. 如果不存在，從 `/novel-writing` 開始

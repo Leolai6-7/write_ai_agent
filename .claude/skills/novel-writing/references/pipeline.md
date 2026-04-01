@@ -194,7 +194,7 @@ Read the generated chapter. Append to story_log.md:
 Launch ONE sub-agent with this EXACT prompt:
 
 > Read {STORY_DIR}/outputs/chapter_{NNN}.md (the chapter just written).
-> Read {STORY_DIR}/planning/story_graph.md (the current graph).
+> Read {STORY_DIR}/runtime/story_graph.md (the current graph).
 >
 > Update the graph:
 > - 角色出場表: add/update character appearances
@@ -203,7 +203,7 @@ Launch ONE sub-agent with this EXACT prompt:
 > - 因果鏈: add new causal links
 > - 數值設定: add any new established values
 >
-> Save updated graph to: {STORY_DIR}/planning/story_graph.md
+> Save updated graph to: {STORY_DIR}/runtime/story_graph.md
 
 Run in FOREGROUND so hooks can track the graph update.
 
@@ -262,6 +262,6 @@ Main agent combines chapters:
 
 ## Recovery
 1. Read `data/active_story.txt` — which story
-2. Read `{STORY_DIR}/planning/story_log.md` — last chapter
+2. Read `{STORY_DIR}/runtime/story_log.md` — last chapter
 3. Read `{STORY_DIR}/planning/structure.md` — next objective
 4. Resume from next unwritten chapter
