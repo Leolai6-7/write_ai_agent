@@ -149,25 +149,38 @@ textured source material.
 
 ```
 Agent prompt:
-You are a context assembler. Your job is to read the source files,
-identify what chapter {N} needs, and return the RELEVANT SECTIONS
-in full — not summarized, not compressed.
+You are a context assembler. Your job is to use the STORY GRAPH
+to identify what chapter {N} needs, then retrieve the relevant
+source material IN FULL.
 
-Step 1: Read {STORY_DIR}/planning/structure.md
+Step 1: Read {STORY_DIR}/planning/story_graph.md
+  This is the narrative relationship graph. It tells you:
+  - Which characters appear in which chapters
+  - Which locations are used where
+  - Which foreshadowing threads are active
+  - Causal chains between events
+  - Dual-line mirror relationships
+  - Established numerical values
+
+Step 2: Read {STORY_DIR}/planning/structure.md
   → Find chapter {N}'s row (title, line, objective, events, characters, tone)
-  → This tells you WHAT the chapter needs
 
-Step 2: Based on what you found, retrieve FULL sections from:
-  - {STORY_DIR}/world/character_cast.md → FULL profiles of characters
-    involved in this chapter (not just speaking style — include
-    motivation, background, arc, relationships)
-  - {STORY_DIR}/world/world_bible.md → FULL descriptions of locations
-    and settings used in this chapter
-  - {STORY_DIR}/planning/foreshadowing.md → FULL details of any
-    foreshadowing threads to plant/hint/resolve this chapter
+Step 3: Using the chapter plan + graph, identify what to retrieve:
+  - CHARACTERS: look up involved characters in the graph → find their
+    previous appearance chapters → retrieve FULL profiles from
+    {STORY_DIR}/world/character_cast.md
+  - LOCATIONS: look up the chapter's setting → retrieve FULL description
+    from {STORY_DIR}/world/world_bible.md
+  - FORESHADOWING: look up active threads for this chapter → retrieve
+    FULL thread designs from {STORY_DIR}/planning/foreshadowing.md
+  - CAUSAL CONTEXT: trace back causal chains in the graph to find
+    source chapters → retrieve their summaries from story_log
+  - NUMERICAL VALUES: list all established values that might be
+    referenced (temperatures, distances, percentages)
 
-Step 3: Also retrieve:
-  - {STORY_DIR}/planning/story_log.md → last 5 entries (as-is)
+Step 4: Also retrieve:
+  - {STORY_DIR}/planning/story_log.md → last 5 entries PLUS any
+    earlier entries that the graph's causal chains point to
   - {STORY_DIR}/planning/story_brief.md → genre, language, style
 
 Output format — CHAPTER CONTEXT PACKAGE:
@@ -269,6 +282,27 @@ the judge's standardized entry verbatim. Format:
 - 情感基調：{from judge}
 ```
 No extra fields. This is an index, not a full record.
+
+### 2.5: Update Story Graph (sub-agent)
+
+After each chapter, launch a sub-agent to update the narrative graph:
+
+```
+Agent prompt:
+Read the completed chapter from: {STORY_DIR}/outputs/chapter_{NNN}.md
+Read the current graph from: {STORY_DIR}/planning/story_graph.md
+
+Update the graph with new information from this chapter:
+- Add/update character appearances in 角色出場表
+- Add/update location usage in 地點使用表
+- Update foreshadowing status in 伏筆追蹤
+- Add new causal links in 因果鏈
+- Add new dual-line mirrors if applicable in 雙線鏡像
+- Add any new numerical values in 已確立的數值設定
+- If new characters appeared, add them to 角色出場表
+
+Save the updated graph back to: {STORY_DIR}/planning/story_graph.md
+```
 
 If during judging or writing, any issue suggests core settings need revision
 (e.g., "this character's motivation doesn't work", "world rule is inconsistent",
