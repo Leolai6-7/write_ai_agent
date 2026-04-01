@@ -156,25 +156,31 @@ Store the output as the CHAPTER CONTEXT PACKAGE.
 ---
 
 **STEP 2 — Chapter Generation**
-Launch ONE sub-agent with this EXACT prompt:
 
-> Read .claude/skills/novel-chapter/SKILL.md and follow.
-> Read {STORY_DIR}/planning/story_brief.md for style and length target.
+Main agent first reads these two files:
+- `.claude/skills/novel-chapter/SKILL.md`
+- `{STORY_DIR}/planning/story_brief.md`
+
+Then launch ONE sub-agent with ALL content pasted directly into the prompt
+(so the sub-agent needs NO file reads — only Write):
+
+> === WRITING SKILL ===
+> {paste the full content of novel-chapter/SKILL.md here}
 >
+> === STORY BRIEF ===
+> {paste the full content of story_brief.md here}
+>
+> === CHAPTER CONTEXT PACKAGE ===
 > {paste the CHAPTER CONTEXT PACKAGE from Step 1 here}
 >
+> Write the chapter based on the skill, brief, and context above.
 > Save to: {STORY_DIR}/outputs/chapter_{NNN}.md
->
-> IMPORTANT: The context package above contains ALL the information you need.
-> Do NOT read any other files. Do NOT search for planning, world, or runtime files.
-> Do NOT update story_log.md. Only read SKILL.md and story_brief.md, then write.
 >
 > If you introduce NEW characters, report at the end:
 > NEW_CHARACTERS:
 > - {name}：{role}，{speaking style}
 
-Run in FOREGROUND (not background) so the user can approve Write permission.
-Hooks will automatically track that chapter file was written.
+Run in FOREGROUND. Sub-agent should only need 1 tool call (Write).
 If NEW_CHARACTERS reported, append to character_cast.md.
 
 ---
