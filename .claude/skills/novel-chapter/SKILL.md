@@ -166,6 +166,21 @@ Vary your endings. Not every chapter needs a dramatic cliffhanger.
 - Follow the story brief for language, cultural references, and stylistic conventions
 - Never use meta-narrative terms (主角, 第一章, 讀者, protagonist, chapter one, reader) — characters don't know they're in a story
 
+## Rewrite Mode
+
+If the input includes JUDGE FEEDBACK (issues + suggestions from a previous
+evaluation), this is a rewrite — not a fresh generation.
+
+In rewrite mode:
+- Read the existing chapter file first
+- Preserve the skeleton: core plot events, character actions, chapter structure
+- Fix ONLY what the feedback identifies — don't rewrite unrelated parts
+- Maintain character voices and narrative style
+- Net positive length: rewrites should maintain or slightly increase word count
+
+The same craft principles apply. The feedback tells you WHAT to fix;
+the skill instructions tell you HOW to write well.
+
 ## Output
 
 Output the chapter text directly. No titles, no formatting markers, no explanations.

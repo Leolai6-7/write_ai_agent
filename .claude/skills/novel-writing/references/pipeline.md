@@ -137,62 +137,23 @@ Output in 繁體中文.
 
 Per chapter, in sequence:
 
-### 2.0: Context Assembly — 3-Layer RAG (sub-agents, NOT main agent)
-
-The main agent must NOT read large files directly. Instead, use
-the 3-layer RAG system to assemble context.
-
-**Key principle: selective ≠ summarized.** The RAG system selects
-WHICH sections to include, but includes them IN FULL.
-
-**Layer 1: Graph Query** (Sub-agent A)
+### 2.0: Context Assembly (ONE sub-agent)
 ```
 Agent prompt:
-Read .claude/skills/novel-graph-query/SKILL.md and follow.
+Read .claude/skills/novel-context/SKILL.md and follow.
 Chapter: {N}
-Story directory: {STORY_DIR}
-Return a RETRIEVAL PLAN. No file save.
-```
-
-**Layer 2: Full Section Retrieval** (Sub-agent B)
-```
-Agent prompt:
-Read .claude/skills/novel-context-retrieve/SKILL.md and follow.
-Use this retrieval plan: {output from Layer 1}
 Story directory: {STORY_DIR}
 Return a CHAPTER CONTEXT PACKAGE. No file save.
 ```
 
-**Layer 3: Semantic Fallback** (Optional, for 50+ chapter stories)
-If ChromaDB is available, query with the chapter objective to find
-semantically related chapters not connected in the graph.
-Append any relevant findings to the context package.
+The main agent stores this package and passes it to generate + judge.
 
-Do NOT summarize or compress any section. The writer needs the
-texture and specificity of the original material.
-Do NOT save any file. Return the package directly.
-```
-
-The main agent stores this context package and passes it to
-subsequent sub-agents for this chapter.
-
-### 2.1: Pacing
-```
-Agent prompt:
-Read .claude/skills/novel-pacing/SKILL.md and follow.
-
-{paste the CHAPTER CONTEXT PACKAGE from 2.0}
-
-Output ONLY a 3-line pacing recommendation. No file save.
-```
-
-### 2.2: Generate Chapter
+### 2.1: Generate Chapter (ONE sub-agent)
 ```
 Agent prompt:
 Read .claude/skills/novel-chapter/SKILL.md and follow.
 
 {paste the CHAPTER CONTEXT PACKAGE from 2.0}
-Pacing advice: {from 2.1}
 
 Save to: {STORY_DIR}/outputs/chapter_{NNN}.md
 Do NOT update story_log.md.
@@ -206,28 +167,32 @@ NEW_CHARACTERS:
 After generation, if NEW_CHARACTERS reported,
 main agent appends to `{STORY_DIR}/world/character_cast.md`.
 
-### 2.3: Judge
+### 2.2: Judge (ONE sub-agent)
 ```
 Agent prompt:
 Read .claude/skills/novel-judge/SKILL.md and follow.
 Read chapter from: {STORY_DIR}/outputs/chapter_{NNN}.md
 
-{paste the CHAPTER CONTEXT PACKAGE from 2.0 — the judge needs the
-objective, tone, character profiles, and foreshadowing context}
+{paste the CHAPTER CONTEXT PACKAGE from 2.0}
 
 Return: scores, issues, suggestions, AND a standardized story_log entry.
 No file save — return everything to main agent.
-Do NOT read planning or world files — the brief has what you need.
 ```
 
-If score >= 7.0 → proceed to 2.4
-If score < 7.0 → launch rewrite:
+If score >= pass threshold → proceed to 2.3
+If score < pass threshold → rewrite using /novel-chapter with feedback:
 ```
 Agent prompt:
-Read .claude/skills/novel-rewrite/SKILL.md and follow.
-Read chapter from: {STORY_DIR}/outputs/chapter_{NNN}.md
+Read .claude/skills/novel-chapter/SKILL.md and follow.
+This is a REWRITE. Read the existing chapter first.
+
+{paste the CHAPTER CONTEXT PACKAGE from 2.0}
+
+JUDGE FEEDBACK:
 Issues: {from judge}
 Suggestions: {from judge}
+
+Read existing chapter from: {STORY_DIR}/outputs/chapter_{NNN}.md
 Save revised to: {STORY_DIR}/outputs/chapter_{NNN}.md (overwrite)
 ```
 Re-judge. Max 2 rewrites, then force-accept.
