@@ -14,16 +14,22 @@ Query the story graph to produce a RETRIEVAL PLAN for a specific chapter.
 
 ## Process
 
-### Step 1: Read the chapter plan
-From structure.md, extract chapter N's: title, line (R/S), objective, key events, characters involved, emotional tone.
+### Step 1: Read the chapter's retrieval tags
+From structure.md, find chapter N's beat sheet row. If the beat sheet has
+tagged columns (角色, 地點, 伏筆, 概念), these are PRE-BUILT retrieval keys:
+- **角色**: directly tells you which character profiles to retrieve
+- **地點**: directly tells you which location descriptions to retrieve
+- **伏筆**: directly tells you which foreshadowing threads to retrieve
+- **概念**: tells you which world_bible concepts need context
 
-### Step 2: Query the story graph
-Read story_graph.md and answer these questions:
+Also extract: title, line (R/S), objective, key events, emotional tone.
+
+### Step 2: Enrich with story graph
+Read story_graph.md to ADD context beyond what the tags provide:
 
 **Characters:**
-- Who appears in this chapter? (from structure)
-- When did they last appear? (from 角色出場表)
-- What happened in their last appearance? (cross-ref with story_log)
+- Tags tell you WHO. Graph tells you WHEN they last appeared and WHAT happened.
+- Cross-ref 角色出場表 to find last appearance chapter
 - → Output: list of characters + their source chapters
 
 **Locations:**

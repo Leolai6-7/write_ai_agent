@@ -81,10 +81,20 @@ Rhythm rules:
 - 結尾轉折：...
 
 ## 章節節拍（弧線一，可選）
-| 章 | 標題 | 目標 | 情感 |
-|----|------|------|------|
-| 1  | ... | ... | 期待 |
+| 章 | 標題 | 線 | 目標 | 角色 | 地點 | 伏筆 | 概念 | 情感 |
+|----|------|----|------|------|------|------|------|------|
+| 1  | ... | R | ... | 沈逸,林昭明 | 深潛研究所 | ⑨觀察者效應 | 模擬啟動 | 期待 |
 ```
+
+The beat sheet columns serve as a pre-built retrieval index:
+- **角色**: which character profiles to retrieve from character_cast
+- **地點**: which location descriptions to retrieve from world_bible
+- **伏筆**: which foreshadowing threads to retrieve (plant/hint/resolve)
+- **概念**: key concepts/technologies that need world_bible context
+
+These tags are the KEYS for the RAG system. When the context assembler
+queries "what does chapter 15 need?", it looks up row 15 in this table
+and immediately knows which sections to retrieve — no inference needed.
 
 ## Structural Philosophy
 
