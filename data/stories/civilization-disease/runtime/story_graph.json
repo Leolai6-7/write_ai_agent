@@ -1,0 +1,1067 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "type": "character",
+      "name": "沈逸",
+      "events": "ch1: 啟動第1024次文明模擬；將觀測窗口縮到第三階段、前兩階段降為Level 3自動記錄；獨自留守控制室不休息；關注個體0447的美感萌芽行為；得知異常標記0xFFFF後下令全歷史搜索",
+      "id": "character:沈逸"
+    },
+    {
+      "type": "chapter",
+      "number": 1,
+      "id": "chapter:ch1"
+    },
+    {
+      "type": "chapter",
+      "number": 3,
+      "id": "chapter:ch3"
+    },
+    {
+      "type": "chapter",
+      "number": 5,
+      "id": "chapter:ch5"
+    },
+    {
+      "type": "chapter",
+      "number": 7,
+      "id": "chapter:ch7"
+    },
+    {
+      "type": "chapter",
+      "number": 9,
+      "id": "chapter:ch9"
+    },
+    {
+      "type": "chapter",
+      "number": 10,
+      "id": "chapter:ch10"
+    },
+    {
+      "type": "character",
+      "name": "林昭明",
+      "events": "ch1: 微調星際塵埃密度+0.7%；私下使用Level 4精度監控；發現觀察者效應——沈逸注視區域的空間曲率微偏移；報告異常標記0xFFFF；回憶第847次模擬的七聲音階旋律；獨自進行「模擬悼念」儀式",
+      "id": "character:林昭明"
+    },
+    {
+      "type": "character",
+      "name": "顧則",
+      "events": "ch2: 重新檢視37個文明崩潰曲線，確認複雜度0.7334臨界點；向方院長提交報告並被引導思考「邊界條件」；注意到南牆與北牆溫度相同的異常但未深究；入睡前閃過一幀藍綠冷光中疲憊人影的畫面",
+      "id": "character:顧則"
+    },
+    {
+      "type": "chapter",
+      "number": 2,
+      "id": "chapter:ch2"
+    },
+    {
+      "type": "chapter",
+      "number": 4,
+      "id": "chapter:ch4"
+    },
+    {
+      "type": "chapter",
+      "number": 6,
+      "id": "chapter:ch6"
+    },
+    {
+      "type": "chapter",
+      "number": 8,
+      "id": "chapter:ch8"
+    },
+    {
+      "type": "character",
+      "name": "紀恆",
+      "events": "ch2: 每天帶早飯給顧則、記得他喝的牛奶牌子、優化回歸模型代碼收斂快一倍、講統計組實習生故事；總在顧則開口前就知道他需要什麼",
+      "id": "character:紀恆"
+    },
+    {
+      "type": "character",
+      "name": "方院長",
+      "events": "ch2: 評價顧則報告方法與數據無問題但迴避了「為什麼」；引入「邊界條件」概念暗示崩潰模式源於系統外部約束；說出「答案在提問前已寫好」；行為極度靜止如校準好的儀器",
+      "id": "character:方院長"
+    },
+    {
+      "type": "location",
+      "name": "深潛研究所",
+      "description": "恆溫18°C、藍綠冷光、無窗地下、創世引擎；ch1確立: 地下42公尺、陽明山北坡花崗岩層、地面入口偽裝廢棄溫泉旅館（關了七年）、控制室為半圓形階梯佈局（42塊子螢幕弧形陣列）、三層空氣淨化系統、自動配餐系統每6小時送營養棒、防靜電地板、貨運電梯通地面、創世引擎三層樓高有量子核心與藍綠冷卻液管路",
+      "id": "location:深潛研究所"
+    },
+    {
+      "type": "location",
+      "name": "無感區（新北）",
+      "description": "空蕩街道、自動販賣機冷光",
+      "id": "location:無感區（新北）"
+    },
+    {
+      "type": "location",
+      "name": "模擬世界-研究院",
+      "description": "陽光、銀杏、日常辦公室；ch2確立: 主樓玻璃門入口有銀杏樹與花壇、磨石子地板走廊有落地窗、辦公室在三樓東側（顧則紀恆共用面牆兩桌）、食堂在一樓有玻璃穹頂、方院長辦公室在四樓最裡面、茶水間朝北無日照、午餐鈴為兩聲短促電子音",
+      "id": "location:模擬世界-研究院"
+    },
+    {
+      "type": "location",
+      "name": "1024號模擬宇宙",
+      "description": "ch1確立: 岩石行星、北半球河谷聚落（67個虛擬個體）、語言如火種般在多個部落同時獨立浮現",
+      "id": "location:1024號模擬宇宙"
+    },
+    {
+      "type": "foreshadow",
+      "name": "①牆壁溫度",
+      "status": "已植入（ch2: 顧則午餐時碰南牆、茶水間碰北牆，日照面與背陰面溫度完全相同；走廊中猶豫是否觸碰比較但走過去了；合理化為空調系統好）",
+      "id": "foreshadow:①牆壁溫度"
+    },
+    {
+      "type": "chapter",
+      "number": 40,
+      "id": "chapter:ch40"
+    },
+    {
+      "type": "foreshadow",
+      "name": "②粉筆樹",
+      "status": "規劃中",
+      "id": "foreshadow:②粉筆樹"
+    },
+    {
+      "type": "foreshadow",
+      "name": "④林昭明旋律",
+      "status": "已植入（ch1提前：第847次模擬的七聲音階旋律，創作者最終完全孤立）",
+      "id": "foreshadow:④林昭明旋律"
+    },
+    {
+      "type": "foreshadow",
+      "name": "⑤何守一NeuLink",
+      "status": "規劃中",
+      "id": "foreshadow:⑤何守一NeuLink"
+    },
+    {
+      "type": "foreshadow",
+      "name": "⑥迭代者預知",
+      "status": "規劃中",
+      "id": "foreshadow:⑥迭代者預知"
+    },
+    {
+      "type": "foreshadow",
+      "name": "⑧赫斯德語",
+      "status": "規劃中",
+      "id": "foreshadow:⑧赫斯德語"
+    },
+    {
+      "type": "foreshadow",
+      "name": "⑨觀察者效應",
+      "status": "已植入（ch1: 林昭明發現沈逸注視區域的空間曲率出現零點幾個標準差的微偏移，備註「觀察者效應——量子噪聲？」）",
+      "id": "foreshadow:⑨觀察者效應"
+    },
+    {
+      "type": "foreshadow",
+      "name": "⑩阮月河模擬親和力",
+      "status": "規劃中",
+      "id": "foreshadow:⑩阮月河模擬親和力"
+    },
+    {
+      "type": "foreshadow",
+      "name": "⑪迭代者家人",
+      "status": "規劃中",
+      "id": "foreshadow:⑪迭代者家人"
+    },
+    {
+      "type": "foreshadow",
+      "name": "⑫煙霧彈(自我模擬)",
+      "status": "規劃中",
+      "id": "foreshadow:⑫煙霧彈(自我模擬)"
+    },
+    {
+      "type": "foreshadow",
+      "name": "⑬異常標記0xFFFF",
+      "status": "已植入（ch1: 第三階段啟動後出現一次未定義標記，不關聯任何已知事件類型，前1023次從未出現，已啟動全歷史搜索）",
+      "id": "foreshadow:⑬異常標記0xFFFF"
+    },
+    {
+      "type": "event",
+      "description": "1023次模擬皆出現文明病（技術越發展→個體越孤立→意義感崩塌）",
+      "chapter": "背景",
+      "id": "event:1023次模擬皆出現文明病（技術越發展→個體越孤立→意義感崩塌）"
+    },
+    {
+      "type": "event",
+      "description": "沈逸放棄前兩階段即時監控，算力集中第三階段",
+      "chapter": "ch1",
+      "id": "event:沈逸放棄前兩階段即時監控，算力集中第三階段"
+    },
+    {
+      "type": "event",
+      "description": "林昭明微調塵埃密度+0.7%",
+      "chapter": "ch1",
+      "id": "event:林昭明微調塵埃密度+0.7%"
+    },
+    {
+      "type": "event",
+      "description": "第三階段提前11個模擬年啟動",
+      "chapter": "ch1",
+      "id": "event:第三階段提前11個模擬年啟動"
+    },
+    {
+      "type": "event",
+      "description": "林昭明私開Level 4精度",
+      "chapter": "ch1",
+      "id": "event:林昭明私開Level 4精度"
+    },
+    {
+      "type": "event",
+      "description": "發現觀察者效應微偏移（Level 3不可見）",
+      "chapter": "ch1",
+      "id": "event:發現觀察者效應微偏移（Level 3不可見）"
+    },
+    {
+      "type": "event",
+      "description": "第1024次模擬第三階段啟動",
+      "chapter": "ch1",
+      "id": "event:第1024次模擬第三階段啟動"
+    },
+    {
+      "type": "event",
+      "description": "異常標記0xFFFF出現",
+      "chapter": "ch1",
+      "id": "event:異常標記0xFFFF出現"
+    },
+    {
+      "type": "event",
+      "description": "沈逸三年未離開地下",
+      "chapter": "ch1",
+      "id": "event:沈逸三年未離開地下"
+    },
+    {
+      "type": "event",
+      "description": "對陽光的生理反應是刺痛而非舒適",
+      "chapter": "ch1",
+      "id": "event:對陽光的生理反應是刺痛而非舒適"
+    },
+    {
+      "type": "event",
+      "description": "顧則四年研究37個文明崩潰模式",
+      "chapter": "背景",
+      "id": "event:顧則四年研究37個文明崩潰模式"
+    },
+    {
+      "type": "event",
+      "description": "發現複雜度0.7334臨界點——所有文明在此處開始靜默衰退",
+      "chapter": "ch2",
+      "id": "event:發現複雜度0.7334臨界點——所有文明在此處開始靜默衰退"
+    },
+    {
+      "type": "event",
+      "description": "顧則提交崩潰報告",
+      "chapter": "ch2",
+      "id": "event:顧則提交崩潰報告"
+    },
+    {
+      "type": "event",
+      "description": "方院長引入「邊界條件」詮釋——崩潰模式可能源於系統外部約束",
+      "chapter": "ch2",
+      "id": "event:方院長引入「邊界條件」詮釋——崩潰模式可能源於系統外部約束"
+    },
+    {
+      "type": "event",
+      "description": "方院長說「答案在提問前已寫好」",
+      "chapter": "ch2",
+      "id": "event:方院長說「答案在提問前已寫好」"
+    },
+    {
+      "type": "event",
+      "description": "顧則開始隱約感到世界的「恰到好處」不自然",
+      "chapter": "ch2",
+      "id": "event:顧則開始隱約感到世界的「恰到好處」不自然"
+    },
+    {
+      "type": "event",
+      "description": "顧則觸碰南牆與北牆溫度相同",
+      "chapter": "ch2",
+      "id": "event:顧則觸碰南牆與北牆溫度相同"
+    },
+    {
+      "type": "event",
+      "description": "模擬世界物理缺陷的第一次感知（但被合理化）",
+      "chapter": "ch2",
+      "id": "event:模擬世界物理缺陷的第一次感知（但被合理化）"
+    },
+    {
+      "type": "event",
+      "description": "顧則入睡前閃過藍綠冷光中疲憊人影",
+      "chapter": "ch2",
+      "id": "event:顧則入睡前閃過藍綠冷光中疲憊人影"
+    },
+    {
+      "type": "event",
+      "description": "R線沈逸的形象滲漏進S線",
+      "chapter": "ch2",
+      "id": "event:R線沈逸的形象滲漏進S線"
+    },
+    {
+      "type": "mirror",
+      "line": "R",
+      "description": "沈逸站在觀測窗前",
+      "id": "mirror_r:沈逸站在觀測窗前"
+    },
+    {
+      "type": "mirror",
+      "line": "S",
+      "description": "顧則站在落地窗前看銀杏/走廊",
+      "id": "mirror_s:顧則站在落地窗前看銀杏/走廊"
+    },
+    {
+      "type": "mirror",
+      "line": "R",
+      "description": "赫斯最後通牒",
+      "id": "mirror_r:赫斯最後通牒"
+    },
+    {
+      "type": "mirror",
+      "line": "S",
+      "description": "顧則覺醒加速崩潰",
+      "id": "mirror_s:顧則覺醒加速崩潰"
+    },
+    {
+      "type": "mirror",
+      "line": "R",
+      "description": "沈逸看到不均勻的真實世界",
+      "id": "mirror_r:沈逸看到不均勻的真實世界"
+    },
+    {
+      "type": "mirror",
+      "line": "S",
+      "description": "顧則發現不均勻的冰晶",
+      "id": "mirror_s:顧則發現不均勻的冰晶"
+    },
+    {
+      "type": "mirror",
+      "line": "R",
+      "description": "「你聽得見我嗎」",
+      "id": "mirror_r:「你聽得見我嗎」"
+    },
+    {
+      "type": "mirror",
+      "line": "S",
+      "description": "「你聽得見我嗎」",
+      "id": "mirror_s:「你聽得見我嗎」"
+    },
+    {
+      "type": "value",
+      "setting": "研究所溫度",
+      "value": "18°C",
+      "note": "R線環境（敘述中用「涼」「冷」）",
+      "id": "value:研究所溫度"
+    },
+    {
+      "type": "value",
+      "setting": "研究所深度",
+      "value": "地下42公尺",
+      "note": "陽明山北坡花崗岩層",
+      "id": "value:研究所深度"
+    },
+    {
+      "type": "value",
+      "setting": "研究所地面偽裝",
+      "value": "廢棄溫泉旅館",
+      "note": "關了七年，招牌鏽蝕",
+      "id": "value:研究所地面偽裝"
+    },
+    {
+      "type": "value",
+      "setting": "控制室螢幕數",
+      "value": "42塊子螢幕",
+      "note": "弧形陣列，半圓階梯佈局",
+      "id": "value:控制室螢幕數"
+    },
+    {
+      "type": "value",
+      "setting": "創世引擎體積",
+      "value": "三層樓高",
+      "note": "量子核心，藍綠冷卻液管路",
+      "id": "value:創世引擎體積"
+    },
+    {
+      "type": "value",
+      "setting": "模擬世界牆壁溫度",
+      "value": "23°C",
+      "note": "S線異常（敘述中不說數字，用「一樣的涼」）",
+      "id": "value:模擬世界牆壁溫度"
+    },
+    {
+      "type": "value",
+      "setting": "模擬速度(初始)",
+      "value": "500年/小時",
+      "note": "",
+      "id": "value:模擬速度(初始)"
+    },
+    {
+      "type": "value",
+      "setting": "文明樣本數",
+      "value": "37個",
+      "note": "",
+      "id": "value:文明樣本數"
+    },
+    {
+      "type": "value",
+      "setting": "顧則年齡",
+      "value": "32歲",
+      "note": "",
+      "id": "value:顧則年齡"
+    },
+    {
+      "type": "value",
+      "setting": "林昭明年齡",
+      "value": "32歲",
+      "note": "ch1確立",
+      "id": "value:林昭明年齡"
+    },
+    {
+      "type": "value",
+      "setting": "研究所人數",
+      "value": "23人",
+      "note": "",
+      "id": "value:研究所人數"
+    },
+    {
+      "type": "value",
+      "setting": "赫斯期限",
+      "value": "第1100次迭代",
+      "note": "敘述中用「即將用盡」而非精確倒數",
+      "id": "value:赫斯期限"
+    },
+    {
+      "type": "value",
+      "setting": "當前迭代次數",
+      "value": "1024",
+      "note": "ch1確立",
+      "id": "value:當前迭代次數"
+    },
+    {
+      "type": "value",
+      "setting": "沈逸未離開地下時間",
+      "value": "3年",
+      "note": "ch1確立",
+      "id": "value:沈逸未離開地下時間"
+    },
+    {
+      "type": "value",
+      "setting": "林昭明入隊時間",
+      "value": "5年前",
+      "note": "ch1確立",
+      "id": "value:林昭明入隊時間"
+    },
+    {
+      "type": "value",
+      "setting": "配餐週期",
+      "value": "每6小時",
+      "note": "自動配餐系統，營養棒",
+      "id": "value:配餐週期"
+    },
+    {
+      "type": "value",
+      "setting": "空氣淨化層數",
+      "value": "3層",
+      "note": "",
+      "id": "value:空氣淨化層數"
+    },
+    {
+      "type": "value",
+      "setting": "自動記錄精度等級",
+      "value": "Level 3（指令）/ Level 4（林昭明實際）",
+      "note": "ch1確立的上下級張力",
+      "id": "value:自動記錄精度等級"
+    },
+    {
+      "type": "value",
+      "setting": "文明病臨界模式",
+      "value": "物質豐裕→連結斷裂→個體孤立→意義感崩塌",
+      "note": "1023次模擬的共同後半段走向",
+      "id": "value:文明病臨界模式"
+    },
+    {
+      "type": "chapter",
+      "number": 1023,
+      "id": "chapter:ch1023"
+    },
+    {
+      "type": "value",
+      "setting": "第三階段提前量",
+      "value": "11個模擬年",
+      "note": "1024號相對歷史均值",
+      "id": "value:第三階段提前量"
+    },
+    {
+      "type": "chapter",
+      "number": 1024,
+      "id": "chapter:ch1024"
+    },
+    {
+      "type": "value",
+      "setting": "異常標記ID",
+      "value": "0xFFFF",
+      "note": "十六進制全F，系統「未定義」值",
+      "id": "value:異常標記ID"
+    },
+    {
+      "type": "value",
+      "setting": "個體0447所在聚落",
+      "value": "北半球河谷，67個虛擬個體",
+      "note": "展現美感萌芽行為",
+      "id": "value:個體0447所在聚落"
+    },
+    {
+      "type": "value",
+      "setting": "第847次模擬音樂體系",
+      "value": "七聲音階",
+      "note": "創作個體最終完全孤立",
+      "id": "value:第847次模擬音樂體系"
+    },
+    {
+      "type": "value",
+      "setting": "複雜度臨界值",
+      "value": "0.7334 ± 0.02",
+      "note": "ch2確立：37個文明在此複雜度指數開始靜默衰退，無一例外",
+      "id": "value:複雜度臨界值"
+    },
+    {
+      "type": "chapter",
+      "number": 37,
+      "id": "chapter:ch37"
+    },
+    {
+      "type": "value",
+      "setting": "複雜度指數定義",
+      "value": "人口密度 × 資訊流量 × 技術迭代速度的複合指標",
+      "note": "ch2確立：顧則自定義指標",
+      "id": "value:複雜度指數定義"
+    },
+    {
+      "type": "value",
+      "setting": "顧則報告標題",
+      "value": "《文明崩潰的自相似結構：基於37個歷史樣本的數學分析》",
+      "note": "ch2確立",
+      "id": "value:顧則報告標題"
+    },
+    {
+      "type": "value",
+      "setting": "文明模型版本",
+      "value": "v7.3",
+      "note": "ch2確立：顧則桌面資料夾名稱",
+      "id": "value:文明模型版本"
+    },
+    {
+      "type": "value",
+      "setting": "顧則紀恆共事時間",
+      "value": "3年",
+      "note": "ch2確立：共用辦公室三年",
+      "id": "value:顧則紀恆共事時間"
+    },
+    {
+      "type": "value",
+      "setting": "回歸分析次數",
+      "value": "200多次",
+      "note": "ch2確立",
+      "id": "value:回歸分析次數"
+    },
+    {
+      "type": "value",
+      "setting": "第7號樣本",
+      "value": "河谷文明，灌溉技術驅動，存續1600年",
+      "note": "ch2確立",
+      "id": "value:第7號樣本"
+    },
+    {
+      "type": "value",
+      "setting": "第15號樣本",
+      "value": "島鏈貿易聯盟，去中心化海洋商業，存續900年",
+      "note": "ch2確立",
+      "id": "value:第15號樣本"
+    },
+    {
+      "type": "value",
+      "setting": "第23號樣本",
+      "value": "高原軍事君主制，存續不到400年，技術迭代最快",
+      "note": "ch2確立",
+      "id": "value:第23號樣本"
+    },
+    {
+      "type": "value",
+      "setting": "方院長外貌",
+      "value": "六十多歲，細框眼鏡，看起來比實際硬朗",
+      "note": "ch2確立",
+      "id": "value:方院長外貌"
+    },
+    {
+      "type": "value",
+      "setting": "研究院辦公室佈局",
+      "value": "顧則紀恆共用三樓東側，兩桌隔兩公尺面牆，紀恆靠窗",
+      "note": "ch2確立",
+      "id": "value:研究院辦公室佈局"
+    },
+    {
+      "type": "value",
+      "setting": "方院長辦公室位置",
+      "value": "四樓最裡面",
+      "note": "ch2確立",
+      "id": "value:方院長辦公室位置"
+    }
+  ],
+  "edges": [
+    {
+      "type": "appears_in",
+      "source": "character:沈逸",
+      "target": "chapter:ch1"
+    },
+    {
+      "type": "appears_in",
+      "source": "character:沈逸",
+      "target": "chapter:ch3"
+    },
+    {
+      "type": "appears_in",
+      "source": "character:沈逸",
+      "target": "chapter:ch5"
+    },
+    {
+      "type": "appears_in",
+      "source": "character:沈逸",
+      "target": "chapter:ch7"
+    },
+    {
+      "type": "appears_in",
+      "source": "character:沈逸",
+      "target": "chapter:ch9"
+    },
+    {
+      "type": "appears_in",
+      "source": "character:沈逸",
+      "target": "chapter:ch10"
+    },
+    {
+      "type": "located_in",
+      "source": "chapter:ch1",
+      "target": "location:深潛研究所"
+    },
+    {
+      "type": "located_in",
+      "source": "chapter:ch1",
+      "target": "location:1024號模擬宇宙"
+    },
+    {
+      "type": "plants",
+      "source": "chapter:ch1",
+      "target": "foreshadow:④林昭明旋律"
+    },
+    {
+      "type": "plants",
+      "source": "chapter:ch1",
+      "target": "foreshadow:⑨觀察者效應"
+    },
+    {
+      "type": "plants",
+      "source": "chapter:ch1",
+      "target": "foreshadow:⑬異常標記0xFFFF"
+    },
+    {
+      "type": "located_in",
+      "source": "chapter:ch3",
+      "target": "location:深潛研究所"
+    },
+    {
+      "type": "plants",
+      "source": "chapter:ch3",
+      "target": "foreshadow:⑧赫斯德語"
+    },
+    {
+      "type": "located_in",
+      "source": "chapter:ch5",
+      "target": "location:深潛研究所"
+    },
+    {
+      "type": "plants",
+      "source": "chapter:ch5",
+      "target": "foreshadow:⑫煙霧彈(自我模擬)"
+    },
+    {
+      "type": "located_in",
+      "source": "chapter:ch7",
+      "target": "location:深潛研究所"
+    },
+    {
+      "type": "located_in",
+      "source": "chapter:ch7",
+      "target": "location:無感區（新北）"
+    },
+    {
+      "type": "plants",
+      "source": "chapter:ch7",
+      "target": "foreshadow:②粉筆樹"
+    },
+    {
+      "type": "plants",
+      "source": "chapter:ch7",
+      "target": "foreshadow:⑤何守一NeuLink"
+    },
+    {
+      "type": "located_in",
+      "source": "chapter:ch9",
+      "target": "location:無感區（新北）"
+    },
+    {
+      "type": "hints",
+      "source": "chapter:ch9",
+      "target": "foreshadow:②粉筆樹"
+    },
+    {
+      "type": "plants",
+      "source": "chapter:ch9",
+      "target": "foreshadow:⑩阮月河模擬親和力"
+    },
+    {
+      "type": "located_in",
+      "source": "chapter:ch10",
+      "target": "location:深潛研究所"
+    },
+    {
+      "type": "hints",
+      "source": "chapter:ch10",
+      "target": "foreshadow:⑤何守一NeuLink"
+    },
+    {
+      "type": "hints",
+      "source": "chapter:ch10",
+      "target": "foreshadow:⑨觀察者效應"
+    },
+    {
+      "type": "hints",
+      "source": "chapter:ch10",
+      "target": "foreshadow:⑫煙霧彈(自我模擬)"
+    },
+    {
+      "type": "appears_in",
+      "source": "character:林昭明",
+      "target": "chapter:ch1"
+    },
+    {
+      "type": "appears_in",
+      "source": "character:林昭明",
+      "target": "chapter:ch3"
+    },
+    {
+      "type": "appears_in",
+      "source": "character:林昭明",
+      "target": "chapter:ch5"
+    },
+    {
+      "type": "appears_in",
+      "source": "character:林昭明",
+      "target": "chapter:ch10"
+    },
+    {
+      "type": "appears_in",
+      "source": "character:顧則",
+      "target": "chapter:ch2"
+    },
+    {
+      "type": "appears_in",
+      "source": "character:顧則",
+      "target": "chapter:ch4"
+    },
+    {
+      "type": "appears_in",
+      "source": "character:顧則",
+      "target": "chapter:ch6"
+    },
+    {
+      "type": "appears_in",
+      "source": "character:顧則",
+      "target": "chapter:ch8"
+    },
+    {
+      "type": "appears_in",
+      "source": "character:顧則",
+      "target": "chapter:ch10"
+    },
+    {
+      "type": "located_in",
+      "source": "chapter:ch2",
+      "target": "location:模擬世界-研究院"
+    },
+    {
+      "type": "plants",
+      "source": "chapter:ch2",
+      "target": "foreshadow:①牆壁溫度"
+    },
+    {
+      "type": "located_in",
+      "source": "chapter:ch4",
+      "target": "location:模擬世界-研究院"
+    },
+    {
+      "type": "hints",
+      "source": "chapter:ch4",
+      "target": "foreshadow:①牆壁溫度"
+    },
+    {
+      "type": "plants",
+      "source": "chapter:ch4",
+      "target": "foreshadow:⑥迭代者預知"
+    },
+    {
+      "type": "hints",
+      "source": "chapter:ch6",
+      "target": "foreshadow:①牆壁溫度"
+    },
+    {
+      "type": "hints",
+      "source": "chapter:ch6",
+      "target": "foreshadow:⑥迭代者預知"
+    },
+    {
+      "type": "plants",
+      "source": "chapter:ch6",
+      "target": "foreshadow:⑪迭代者家人"
+    },
+    {
+      "type": "hints",
+      "source": "chapter:ch8",
+      "target": "foreshadow:⑥迭代者預知"
+    },
+    {
+      "type": "appears_in",
+      "source": "character:紀恆",
+      "target": "chapter:ch2"
+    },
+    {
+      "type": "appears_in",
+      "source": "character:紀恆",
+      "target": "chapter:ch4"
+    },
+    {
+      "type": "appears_in",
+      "source": "character:紀恆",
+      "target": "chapter:ch6"
+    },
+    {
+      "type": "appears_in",
+      "source": "character:方院長",
+      "target": "chapter:ch2"
+    },
+    {
+      "type": "resolves",
+      "source": "chapter:ch40",
+      "target": "foreshadow:①牆壁溫度"
+    },
+    {
+      "type": "causes",
+      "source": "event:1023次模擬皆出現文明病（技術越發展→個體越孤立→意義感崩塌）",
+      "target": "event:沈逸放棄前兩階段即時監控，算力集中第三階段"
+    },
+    {
+      "type": "causes",
+      "source": "event:林昭明微調塵埃密度+0.7%",
+      "target": "event:第三階段提前11個模擬年啟動"
+    },
+    {
+      "type": "occurs_in",
+      "source": "event:林昭明微調塵埃密度+0.7%",
+      "target": "chapter:ch1"
+    },
+    {
+      "type": "causes",
+      "source": "event:林昭明私開Level 4精度",
+      "target": "event:發現觀察者效應微偏移（Level 3不可見）"
+    },
+    {
+      "type": "occurs_in",
+      "source": "event:林昭明私開Level 4精度",
+      "target": "chapter:ch1"
+    },
+    {
+      "type": "causes",
+      "source": "event:第1024次模擬第三階段啟動",
+      "target": "event:異常標記0xFFFF出現"
+    },
+    {
+      "type": "occurs_in",
+      "source": "event:第1024次模擬第三階段啟動",
+      "target": "chapter:ch1"
+    },
+    {
+      "type": "causes",
+      "source": "event:沈逸三年未離開地下",
+      "target": "event:對陽光的生理反應是刺痛而非舒適"
+    },
+    {
+      "type": "occurs_in",
+      "source": "event:沈逸三年未離開地下",
+      "target": "chapter:ch1"
+    },
+    {
+      "type": "causes",
+      "source": "event:顧則四年研究37個文明崩潰模式",
+      "target": "event:發現複雜度0.7334臨界點——所有文明在此處開始靜默衰退"
+    },
+    {
+      "type": "causes",
+      "source": "event:顧則提交崩潰報告",
+      "target": "event:方院長引入「邊界條件」詮釋——崩潰模式可能源於系統外部約束"
+    },
+    {
+      "type": "occurs_in",
+      "source": "event:顧則提交崩潰報告",
+      "target": "chapter:ch2"
+    },
+    {
+      "type": "causes",
+      "source": "event:方院長說「答案在提問前已寫好」",
+      "target": "event:顧則開始隱約感到世界的「恰到好處」不自然"
+    },
+    {
+      "type": "occurs_in",
+      "source": "event:方院長說「答案在提問前已寫好」",
+      "target": "chapter:ch2"
+    },
+    {
+      "type": "causes",
+      "source": "event:顧則觸碰南牆與北牆溫度相同",
+      "target": "event:模擬世界物理缺陷的第一次感知（但被合理化）"
+    },
+    {
+      "type": "occurs_in",
+      "source": "event:顧則觸碰南牆與北牆溫度相同",
+      "target": "chapter:ch2"
+    },
+    {
+      "type": "causes",
+      "source": "event:顧則入睡前閃過藍綠冷光中疲憊人影",
+      "target": "event:R線沈逸的形象滲漏進S線"
+    },
+    {
+      "type": "occurs_in",
+      "source": "event:顧則入睡前閃過藍綠冷光中疲憊人影",
+      "target": "chapter:ch2"
+    },
+    {
+      "type": "mirrors",
+      "source": "mirror_r:沈逸站在觀測窗前",
+      "target": "mirror_s:顧則站在落地窗前看銀杏/走廊"
+    },
+    {
+      "type": "mirrors",
+      "source": "mirror_r:赫斯最後通牒",
+      "target": "mirror_s:顧則覺醒加速崩潰"
+    },
+    {
+      "type": "mirrors",
+      "source": "mirror_r:沈逸看到不均勻的真實世界",
+      "target": "mirror_s:顧則發現不均勻的冰晶"
+    },
+    {
+      "type": "mirrors",
+      "source": "mirror_r:「你聽得見我嗎」",
+      "target": "mirror_s:「你聽得見我嗎」"
+    },
+    {
+      "type": "established_in",
+      "source": "value:林昭明年齡",
+      "target": "chapter:ch1"
+    },
+    {
+      "type": "established_in",
+      "source": "value:當前迭代次數",
+      "target": "chapter:ch1"
+    },
+    {
+      "type": "established_in",
+      "source": "value:沈逸未離開地下時間",
+      "target": "chapter:ch1"
+    },
+    {
+      "type": "established_in",
+      "source": "value:林昭明入隊時間",
+      "target": "chapter:ch1"
+    },
+    {
+      "type": "established_in",
+      "source": "value:自動記錄精度等級",
+      "target": "chapter:ch1"
+    },
+    {
+      "type": "established_in",
+      "source": "value:文明病臨界模式",
+      "target": "chapter:ch1023"
+    },
+    {
+      "type": "established_in",
+      "source": "value:第三階段提前量",
+      "target": "chapter:ch1024"
+    },
+    {
+      "type": "established_in",
+      "source": "value:複雜度臨界值",
+      "target": "chapter:ch2"
+    },
+    {
+      "type": "established_in",
+      "source": "value:複雜度臨界值",
+      "target": "chapter:ch37"
+    },
+    {
+      "type": "established_in",
+      "source": "value:複雜度指數定義",
+      "target": "chapter:ch2"
+    },
+    {
+      "type": "established_in",
+      "source": "value:顧則報告標題",
+      "target": "chapter:ch2"
+    },
+    {
+      "type": "established_in",
+      "source": "value:文明模型版本",
+      "target": "chapter:ch2"
+    },
+    {
+      "type": "established_in",
+      "source": "value:顧則紀恆共事時間",
+      "target": "chapter:ch2"
+    },
+    {
+      "type": "established_in",
+      "source": "value:回歸分析次數",
+      "target": "chapter:ch2"
+    },
+    {
+      "type": "established_in",
+      "source": "value:第7號樣本",
+      "target": "chapter:ch2"
+    },
+    {
+      "type": "established_in",
+      "source": "value:第15號樣本",
+      "target": "chapter:ch2"
+    },
+    {
+      "type": "established_in",
+      "source": "value:第23號樣本",
+      "target": "chapter:ch2"
+    },
+    {
+      "type": "established_in",
+      "source": "value:方院長外貌",
+      "target": "chapter:ch2"
+    },
+    {
+      "type": "established_in",
+      "source": "value:研究院辦公室佈局",
+      "target": "chapter:ch2"
+    },
+    {
+      "type": "established_in",
+      "source": "value:方院長辦公室位置",
+      "target": "chapter:ch2"
+    }
+  ]
+}

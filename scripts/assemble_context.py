@@ -93,42 +93,52 @@ def get_dual_line_info(story_dir: Path, current_line: str) -> str:
 
 
 def check_graph_conditions(story_dir: Path, characters: list[str], chapter_num: int) -> dict:
-    """Check if story graph needs to be read, and extract relevant data."""
-    graph_path = story_dir / "runtime" / "story_graph.md"
-    if not graph_path.exists():
-        return {"needed": False, "numerical_values": "", "causal_context": ""}
+    """Query the NetworkX story graph for context."""
+    from story_graph_nx import StoryGraph
 
-    graph_text = graph_path.read_text(encoding="utf-8")
+    json_path = story_dir / "runtime" / "story_graph.json"
     result = {"needed": False, "numerical_values": "", "causal_context": ""}
 
-    # Always extract numerical values table
-    num_section = extract_section(graph_text, "已確立的數值設定", "## ")
-    if num_section:
-        result["numerical_values"] = num_section
+    if not json_path.exists():
+        # Fallback: try to build from markdown
+        md_path = story_dir / "runtime" / "story_graph.md"
+        if md_path.exists():
+            graph = StoryGraph(json_path)
+            graph.sync_from_markdown(md_path)
+            graph.save()
+        else:
+            return result
+
+    graph = StoryGraph(json_path)
+    graph.load()
+
+    # Always get numerical values
+    values_text = graph.get_all_values()
+    if values_text:
+        result["numerical_values"] = values_text
         result["needed"] = True
 
-    # Check for absent characters (> 5 chapters since last appearance)
-    log_path = story_dir / "runtime" / "story_log.md"
-    if log_path.exists():
-        log_text = log_path.read_text(encoding="utf-8")
-        entry_count = len(re.findall(r"^## ", log_text, re.MULTILINE))
-        if entry_count > 5:
-            # Parse character appearance table
-            char_table = parse_md_table(graph_text, "## 角色出場表")
-            for char in characters:
-                for row in char_table:
-                    if char in row.get("角色", ""):
-                        events = row.get("主要事件", "")
-                        # Check if last mentioned chapter is > 5 chapters ago
-                        ch_nums = [int(n) for n in re.findall(r"ch(\d+)", events)]
-                        if ch_nums and (chapter_num - max(ch_nums)) > 5:
-                            result["causal_context"] += f"\n{char} 最後出場在 ch{max(ch_nums)}：{events}"
-                            result["needed"] = True
+    # Check for absent characters
+    for char in characters:
+        history = graph.get_character_history(char)
+        if history.get("found") and history["chapters"]:
+            last_ch = max(history["chapters"])
+            if chapter_num - last_ch > 5:
+                result["causal_context"] += f"\n{char} 最後出場在 ch{last_ch}：{history['events']}"
+                result["needed"] = True
 
-    # Extract causal chains
-    causal_section = extract_section(graph_text, "因果鏈", "## ")
-    if causal_section:
-        result["causal_context"] = causal_section + (result.get("causal_context", "") or "")
+    # Get causal context for this chapter
+    ch_context = graph.get_chapter_context(chapter_num)
+    if ch_context.get("found"):
+        if ch_context["events"]:
+            result["causal_context"] += "\n相關事件：" + "；".join(ch_context["events"])
+            result["needed"] = True
+
+    # Get all causal chains (for general context)
+    mirrors = graph.get_mirrors()
+    if mirrors:
+        mirror_lines = [f"R: {m['r_line']} ↔ S: {m['s_line']}" for m in mirrors]
+        result["causal_context"] += "\n\n雙線鏡像：\n" + "\n".join(mirror_lines)
         result["needed"] = True
 
     return result
