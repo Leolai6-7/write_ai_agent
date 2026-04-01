@@ -52,7 +52,7 @@ def extract_character_names(character_changes: str) -> list[str]:
     names = []
     for part in re.split(r"[；;]", character_changes):
         # Match name before a possessive/descriptive particle
-        m = re.match(r"\s*([一-龥]{2,4}?)(?:的|從|展現|開始|登場|首次)", part)
+        m = re.match(r"\s*([一-龥]{2,4}?)(?:的|從|展現|開始|登場|首次|建立|以|在|把|被|和|與|跟)", part)
         if m:
             names.append(m.group(1))
     return list(set(names)) if names else []

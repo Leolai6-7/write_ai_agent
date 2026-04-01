@@ -86,22 +86,41 @@ def sync_foreshadows(db, rows: list[dict]) -> int:
     return count
 
 
-def sync_causal_chains(db, rows: list[dict]) -> int:
-    """Sync 因果鏈 into world_events table."""
-    # Clear existing causal events to avoid duplicates
+def sync_causal_chains(db, graph_text: str) -> int:
+    """Sync 因果鏈 into world_events table.
+
+    Parses directly because the table has duplicate column names (章節 appears twice),
+    which breaks dict-based parsing.
+    Table format: | 因 | 章節 | 果 | 章節 | 備註 |
+    """
     db.conn.execute("DELETE FROM world_events WHERE event_type = 'causal_link'")
 
-    count = 0
-    for row in rows:
-        cause = row.get("原因", "").strip()
-        result = row.get("結果", "").strip()
-        cause_ch = parse_chapter_nums(row.get("章節", ""))
+    # Find the section
+    match = re.search(r"^## 因果鏈\s*$", graph_text, re.MULTILINE)
+    if not match:
+        return 0
 
-        if not cause:
+    rest = graph_text[match.end():]
+    next_heading = re.search(r"^## ", rest, re.MULTILINE)
+    section = rest[:next_heading.start()] if next_heading else rest
+
+    count = 0
+    for line in section.strip().split("\n"):
+        if not line.startswith("|") or line.startswith("|-"):
+            continue
+        cells = [c.strip() for c in line.split("|")]
+        # cells: ['', 因, 章節, 果, 章節, 備註, '']
+        if len(cells) < 6:
+            continue
+        cause = cells[1]
+        cause_ch_str = cells[2]
+        result = cells[3]
+
+        if not cause or cause == "因":  # skip header
             continue
 
-        # Use the first chapter column as the chapter_id
-        ch_id = cause_ch[0] if cause_ch else 0
+        ch_nums = parse_chapter_nums(cause_ch_str)
+        ch_id = ch_nums[0] if ch_nums else 0
         desc = f"{cause} → {result}"
 
         db.conn.execute(
@@ -113,21 +132,40 @@ def sync_causal_chains(db, rows: list[dict]) -> int:
     return count
 
 
-def sync_numerical_settings(db, rows: list[dict]) -> int:
-    """Sync 已確立的數值設定 into world_events table."""
+def sync_numerical_settings(db, graph_text: str) -> int:
+    """Sync 已確立的數值設定 into world_events table.
+
+    Parses directly because the section has a warning line (⚠) between
+    heading and table that confuses parse_md_table.
+    Table format: | 設定 | 值 | 備註 |
+    """
     db.conn.execute("DELETE FROM world_events WHERE event_type = 'numerical_setting'")
 
-    count = 0
-    for row in rows:
-        setting = row.get("設定", "").strip()
-        value = row.get("值", "").strip()
-        ch_nums = parse_chapter_nums(row.get("確立章節", ""))
+    match = re.search(r"^## 已確立的數值設定", graph_text, re.MULTILINE)
+    if not match:
+        return 0
 
-        if not setting:
+    rest = graph_text[match.end():]
+    next_heading = re.search(r"^## ", rest, re.MULTILINE)
+    section = rest[:next_heading.start()] if next_heading else rest
+
+    count = 0
+    for line in section.strip().split("\n"):
+        if not line.startswith("|") or line.startswith("|-"):
+            continue
+        cells = [c.strip() for c in line.split("|")]
+        if len(cells) < 4:
+            continue
+        setting = cells[1]
+        value = cells[2]
+        note = cells[3] if len(cells) > 3 else ""
+
+        if not setting or setting == "設定":  # skip header
             continue
 
+        # Extract chapter number from note if present
+        ch_nums = parse_chapter_nums(note)
         ch_id = ch_nums[0] if ch_nums else 0
-        note = row.get("備註", "").strip()
         desc = f"{setting} = {value}" + (f"（{note}）" if note else "")
 
         db.conn.execute(
@@ -159,12 +197,9 @@ def main():
     foreshadow_rows = parse_md_table(graph_text, "## 伏筆追蹤")
     stats["foreshadows"] = sync_foreshadows(db, foreshadow_rows)
 
-    # 因果鏈 has duplicate column name "章節" — parse manually
-    causal_rows = parse_md_table(graph_text, "## 因果鏈")
-    stats["causal_links"] = sync_causal_chains(db, causal_rows)
-
-    numerical_rows = parse_md_table(graph_text, "## 已確立的數值設定")
-    stats["numerical_settings"] = sync_numerical_settings(db, numerical_rows)
+    # 因果鏈 and 數值設定 parse directly (duplicate columns / warning lines)
+    stats["causal_links"] = sync_causal_chains(db, graph_text)
+    stats["numerical_settings"] = sync_numerical_settings(db, graph_text)
 
     db.close()
 
