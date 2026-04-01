@@ -57,6 +57,7 @@ Synthesize into Story Brief:
 - **世界觀基調**: [what makes this world special]
 - **情感核心**: [what readers should feel]
 - **規模**: [volumes × chapters]
+- **章節字數**: [target word count per chapter, e.g. 5,000-8,000 字]
 - **參考作品**: [similar works]
 - **特別要求**: [include or avoid]
 ```
@@ -144,6 +145,10 @@ Launch ONE sub-agent with this EXACT prompt:
 
 Wait for completion. Store the returned context package.
 
+The assembly step curates 5-10KB of high-density context from potentially
+100KB+ of source documents. This focused package is critical — dumping all
+raw documents into the chapter generator dilutes important information.
+
 ---
 
 **STEP 2 — Chapter Generation**
@@ -166,7 +171,7 @@ Wait for completion. If NEW_CHARACTERS reported, append to character_cast.md.
 ---
 
 **STEP 3 — Update Progress (main agent, no sub-agent)**
-Read the generated chapter's first and last paragraphs. Append to story_log.md:
+Read the generated chapter. Append to story_log.md:
 
 ```
 ## 第{N}章：{title}
@@ -197,6 +202,22 @@ Wait for completion.
 
 ---
 
+**STEP 3.5 — Index Chapter (background, after Step 3)**
+Run in Bash (non-blocking, do not wait):
+```
+python scripts/index_chapter.py --story-dir {STORY_DIR} --chapter-num {N} --chapter-file {STORY_DIR}/outputs/chapter_{NNN}.md
+```
+Syncs the chapter summary into SQLite + ChromaDB for semantic search.
+
+**STEP 4.5 — Sync Graph (background, after Step 4)**
+Run in Bash (non-blocking, do not wait):
+```
+python scripts/sync_graph.py --story-dir {STORY_DIR}
+```
+Syncs story_graph.md structure into SQLite for queries.
+
+---
+
 **COMPLETION GATE — Do NOT proceed until ALL 4 steps are done:**
 - [ ] Step 1 (context) completed
 - [ ] Step 2 (chapter) completed and saved to file
@@ -208,7 +229,7 @@ Only after all 4 checkmarks → proceed to next chapter with {N+1}.
 
 Quality control is at the ARC level via `/novel-style-audit`, not per-chapter.
 
-Report: "第{N}章完成（{score}/10）：{summary}"
+Report: "第{N}章完成：{summary}"
 Every 5 chapters: "前5章寫完了，要檢查再繼續嗎？"
 Every 10 chapters: check revision_notes.md — if it has 3+ entries, ask:
   "累積了一些設定修訂建議，要暫停來更新世界觀/角色設定嗎？"

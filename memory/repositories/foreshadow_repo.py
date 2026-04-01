@@ -80,3 +80,11 @@ class ForeshadowRepository:
             "SELECT * FROM foreshadows WHERE status != 'resolved' ORDER BY plant_chapter"
         ).fetchall()
         return [dict(r) for r in rows]
+
+    def sync_all(self, foreshadows: list[Foreshadow]) -> None:
+        """Full replace: delete all existing rows and insert new ones.
+
+        Used by sync_graph.py where the markdown file is the source of truth.
+        """
+        self.db.conn.execute("DELETE FROM foreshadows")
+        self.save_plan(foreshadows)

@@ -16,15 +16,26 @@ class SemanticRetriever:
     and retrieves the most relevant ones based on query + filters.
     """
 
-    def __init__(self, chroma_dir: Path, collection_name: str = "chapter_summaries"):
+    def __init__(
+        self,
+        chroma_dir: Path,
+        collection_name: str = "chapter_summaries",
+        embedding_model: str = "BAAI/bge-small-zh-v1.5",
+    ):
         import chromadb
+        from chromadb.utils.embedding_functions import SentenceTransformerEmbeddingFunction
 
+        ef = SentenceTransformerEmbeddingFunction(model_name=embedding_model)
         self._client = chromadb.PersistentClient(path=str(chroma_dir))
         self._collection = self._client.get_or_create_collection(
             name=collection_name,
             metadata={"hnsw:space": "cosine"},
+            embedding_function=ef,
         )
-        logger.info("ChromaDB initialized at %s (collection: %s)", chroma_dir, collection_name)
+        logger.info(
+            "ChromaDB initialized at %s (collection: %s, model: %s)",
+            chroma_dir, collection_name, embedding_model,
+        )
 
     def add_chapter(
         self,

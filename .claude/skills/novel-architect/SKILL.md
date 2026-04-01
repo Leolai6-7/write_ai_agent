@@ -4,7 +4,7 @@ description: Design the structural architecture of a novel - volume breakdown, s
 argument-hint: "[story premise and target scale]"
 ---
 
-Design the structural architecture for a long-form novel (100+ chapters).
+Design the structural architecture for a long-form novel.
 
 ## Input
 
@@ -15,51 +15,70 @@ From $ARGUMENTS or conversation, gather:
 - **Character cast** (optional): protagonist + key characters
 - **World setting** (optional): key locations, power systems
 
+---
+
+## Core Philosophy (always apply)
+
+### 1. Characters drive structure, not the other way around
+
+Every protagonist must make at least one ACTIVE choice per arc — driven by internal desire, not external pressure. "Being forced to" is not a choice. "Choosing to despite the cost" is. If a protagonist spends an entire arc only reacting, the structure has failed.
+
+### 2. Elements cast shadows before they arrive
+
+Characters, organizations, technologies, locations, concepts — anything important should be felt before it's seen. Mentioned in passing dialogue, visible in the background, encountered through indirect effects. An element that appears fully formed with no prior shadow feels artificial.
+
+Mark each major element's "first shadow" and "first full appearance" separately.
+
+### 3. World-building serves story, never replaces it
+
+Chapters that establish setting must still advance plot. World details are best revealed through character need, not narrator exposition. Pure "tour guide" chapters lose readers.
+
+### 4. Rhythm is felt, not counted
+
+Tension and release should alternate naturally based on the story's emotional logic. Sustained tension without relief exhausts the reader. Sustained calm without stakes bores them. The rhythm should feel like breathing — the story itself tells you when it needs a pause.
+
+When designing multi-line narratives: each line must have its OWN momentum, not just serve as contrast. Both lines need active protagonists. The lines should create dramatic irony — the reader knows things from line A that make line B more tense.
+
+---
+
 ## Process
 
 ### Step 1: Volume Architecture
 
 Design each volume with:
 - **卷名**: evocative title reflecting the volume's theme
-- **主題**: one sentence capturing the emotional/narrative core
+- **主題**: one sentence — the emotional/narrative core
 - **章節範圍**: start-end chapter numbers
-- **核心情節轉折**: 3-5 major plot turns that define this volume
-- **主角成長**: how the protagonist transforms in this volume
-
-Volume design principles:
-- Volume 1: establish world, characters, stakes. End with a revelation that reframes everything
-- Middle volumes: escalate stakes, deepen relationships, introduce moral complexity
-- Final volume: convergence of all threads, climax, resolution
+- **核心情節轉折**: 3-5 major plot turns
+- **主角成長**: how the protagonist transforms
 
 ### Step 2: Arc Decomposition
 
-For each volume, break into 3-5 **story arcs** (弧線), each 20-40 chapters:
-
-For each arc:
+For each volume, break into 3-5 story arcs (弧線):
 - **弧線名稱**
 - **章節範圍**
 - **核心衝突**: the central tension driving this arc
-- **結尾轉折**: how this arc ends and hooks into the next
-
-Arc pacing pattern:
-```
-Arc 1: Setup → Rising tension → First major confrontation
-Arc 2: Aftermath → New challenges → Deepening relationships
-Arc 3: Crisis → All seems lost → Unexpected ally/revelation
-Arc 4: Final push → Climax → Volume resolution + cliffhanger
-```
+- **結尾轉折**: how it ends and hooks into the next
 
 ### Step 3: Chapter Beat Sheet (optional, for first arc)
 
-If the user wants more detail, outline the first arc's chapters:
-- Chapter title + one-line objective
+If the user wants more detail, outline chapters with:
+- Title + one-line objective
 - Key events (2-3 per chapter)
-- Emotional tone (緊張/溫馨/悲壯/輕鬆/etc.)
+- Emotional tone
 
-Rhythm rules:
-- No more than 3 consecutive chapters of the same tone
-- Every 5-7 chapters needs a "breather" after tension
-- End every chapter with a hook (question, threat, revelation)
+Include **retrieval tag columns** that tell the RAG system what context each chapter needs. Choose tags that make sense for THIS story:
+
+| Tag | Purpose | Example |
+|-----|---------|---------|
+| 角色 | who appears → retrieves character profiles | 沈逸, 林昭明 |
+| 地點 | where it happens → retrieves location descriptions | 深潛研究所 |
+| 伏筆 | active threads → retrieves foreshadowing designs | ①plant |
+| 概念 | key ideas/tech → retrieves world_bible sections | NeuLink |
+
+Not every story needs all tags. Add what's useful, skip what isn't.
+
+---
 
 ## Output Format
 
@@ -69,70 +88,24 @@ Rhythm rules:
 ## 分卷架構
 ### 第一卷：[卷名]
 - 主題：...
-- 章節：第1-120章
-- 核心轉折：
-  1. ...
-  2. ...
+- 章節：第1-N章
+- 核心轉折：1. ... 2. ...
 - 主角成長：從A到B
 
-## 弧線分解（第一卷）
-### 弧線一：[名稱]（第1-30章）
+## 弧線分解
+### 弧線一：[名稱]（第1-N章）
 - 核心衝突：...
 - 結尾轉折：...
 
-## 章節節拍（可選）
-
-The beat sheet should include retrieval tags — columns that tell the
-RAG system what context each chapter needs. Choose tags that make
-sense for THIS story. Common useful tags include:
-
-- **角色**: who appears → retrieves character profiles
-- **地點**: where it happens → retrieves location descriptions
-- **伏筆**: active threads → retrieves foreshadowing designs
-- **概念**: key ideas/tech → retrieves world_bible sections
-
-Not every story needs all of these. A story without foreshadowing
-doesn't need a 伏筆 column. A story set in one location doesn't
-need a 地點 column. Add what's useful, skip what isn't.
-
-Example:
-```
+## 章節節拍
 | 章 | 標題 | 目標 | 角色 | 地點 | 情感 |
 |----|------|------|------|------|------|
-| 1  | ... | ... | A,B | 辦公室 | 期待 |
 ```
 
-These tags serve as retrieval KEYS. When the context assembler
-asks "what does chapter N need?", it looks up row N and immediately
-knows which sections to retrieve from the source documents.
-
-## Structural Philosophy
-
-### On Protagonist Agency
-- Every protagonist must make at least one ACTIVE choice per arc — something driven by internal desire, not external pressure
-- "Being forced to" is not a choice. "Choosing to despite the cost" is.
-- If a protagonist spends an entire arc only reacting, the structure has failed
-
-### On Multi-Line Narratives
-- If the story has dual/multiple narrative lines, each line must have its OWN momentum — not just serve as contrast to the other
-- Both lines need active protagonists who drive events, not just one active + one passive
-- The lines should create dramatic irony: the reader knows things from line A that make line B more tense, and vice versa
-
-### On Introducing Story Elements
-This applies to characters, organizations, technologies, locations, and concepts equally:
-- Important elements should cast a SHADOW before they appear — mentioned in dialogue, visible in the background, felt through indirect effects
-- Mark each major element's "first shadow" and "first full appearance" chapter separately
-- Example: before an organization becomes a plot force, characters should argue about it in passing; before a technology drives a scene, a character should encounter its everyday consequences
-- An element that appears fully formed with no setup feels artificial
-
-### On World-Building Chapters
-- Chapters that establish setting/world should still advance plot. Pure "tour guide" chapters lose readers.
-- World details are best revealed through character need, not narrator exposition
-
-## Quality Criteria
-- [ ] 每卷有明確且不同的主題
-- [ ] 弧線之間有因果關係
-- [ ] 章節節奏有起伏，不單調
-- [ ] 主角在每卷有可見的成長變化
-- [ ] 每條敘事線的主角都有主動行為推進
-- [ ] 重要角色在正式登場前已被提及或側寫
+## Quality Checklist
+- [ ] Every protagonist makes active choices, not just reacts
+- [ ] Important elements cast shadows before full appearance
+- [ ] Each volume has a distinct theme
+- [ ] Arcs have causal connections (not just chronological)
+- [ ] Rhythm has natural variation
+- [ ] Multi-line narratives each have independent momentum

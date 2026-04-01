@@ -84,3 +84,8 @@ data/novel.db
 data/chroma/
 data/outputs/
 data/planning/
+# Per-story runtime data
+**/novel.db
+**/chroma/
+# Hook runtime markers
+.claude/hooks/.chapter_pending

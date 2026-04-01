@@ -20,11 +20,9 @@
 | `/novel-characters` | 角色群像設計 |
 | `/novel-architect` | 分卷/弧線結構 |
 | `/novel-foreshadowing` | 伏筆規劃 |
-| `/novel-pacing` | 節奏分析 |
-| `/novel-chapter` | 章節生成 |
-| `/novel-judge` | 品質評審 |
-| `/novel-rewrite` | 章節改寫 |
-| `/novel-style-audit` | 文風審查 |
+| `/novel-context` | 上下文組裝（章節生成前的 RAG） |
+| `/novel-chapter` | 章節生成（含改寫模式） |
+| `/novel-style-audit` | 文風審查（弧線級） |
 
 ## 多故事管理
 
