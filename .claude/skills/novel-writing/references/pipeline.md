@@ -159,12 +159,15 @@ Store the output as the CHAPTER CONTEXT PACKAGE.
 Launch ONE sub-agent with this EXACT prompt:
 
 > Read .claude/skills/novel-chapter/SKILL.md and follow.
+> Read {STORY_DIR}/planning/story_brief.md for style and length target.
 >
 > {paste the CHAPTER CONTEXT PACKAGE from Step 1 here}
 >
 > Save to: {STORY_DIR}/outputs/chapter_{NNN}.md
-> Do NOT update story_log.md.
-> Do NOT read any planning or world files.
+>
+> IMPORTANT: The context package above contains ALL the information you need.
+> Do NOT read any other files. Do NOT search for planning, world, or runtime files.
+> Do NOT update story_log.md. Only read SKILL.md and story_brief.md, then write.
 >
 > If you introduce NEW characters, report at the end:
 > NEW_CHARACTERS:
