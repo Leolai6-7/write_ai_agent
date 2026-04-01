@@ -55,9 +55,19 @@ ALL characters respond to the SAME scenario in 2-3 lines. Choose a scenario rele
 
 This is the KEY validation — if you can't tell who is speaking without the name tag, the design failed.
 
+## Naming and Searchability
+
+The character file is read by an automated context assembly system that uses Grep to find character profiles. To ensure characters can be found:
+
+- **Heading format**: `## 角色N：{name}` or `## 配角：{name}` — the heading MUST contain the name used in the beat sheet
+- **Aliases**: If a character has multiple names (e.g., real name + code name), include all names in the heading: `## 角色N：{name_A} / {name_B}`
+- **Every character in the beat sheet gets a profile** — even minor characters. A minor character's profile can be short (gender, role, speaking style — 3-5 lines), but it must exist as its own `## ` section
+- **Gender must be explicit** in 基本資料
+
 ## Quality Criteria
 - Each character identifiable by dialogue alone
 - Every character has a clear, understandable motivation
 - Relationship map contains genuine conflict/tension
 - No two characters serve the same narrative function
 - Speaking styles are specific enough to maintain across 100+ chapters
+- Every character in the beat sheet has a heading-searchable profile

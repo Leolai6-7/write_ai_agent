@@ -41,9 +41,13 @@ Use the retrieval tags from the beat sheet row as lookup keys.
 Launch ALL of these simultaneously:
 
 4. **Character profiles** — For each character name in the 角色 column:
-   Grep `{STORY_DIR}/world/character_cast.md` for `## .*{角色名}`
-   to find the heading line number. Then Read from that line to
-   the next `## ` heading (typically ~25 lines per character).
+   First try: Grep `{STORY_DIR}/world/character_cast.md` for `^## .*{角色名}`
+   to find the heading line number.
+   If no match: Grep the full file for `{角色名}` (not just headings),
+   then find the nearest `^## ` heading above that line to get the section start.
+   If still no match: include a warning in the context package:
+   `⚠ {角色名} not found in character_cast.md — profile missing`
+   When found: Read from the heading to the next `## ` heading.
    Include FULL profiles, not summaries.
 
 5. **Location descriptions** — For each location in the 地點 column:

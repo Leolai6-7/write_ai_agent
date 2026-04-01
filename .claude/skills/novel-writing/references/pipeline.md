@@ -112,6 +112,14 @@ Output in 繁體中文.
 ```
 → Volume/arc overview. "結構設計完成，滿意嗎？"
 
+### 1.3.5: Validate Structure (automatic)
+After structure is complete, run:
+```
+python scripts/validate_structure.py --story-dir {STORY_DIR}
+```
+If any characters are missing from character_cast.md, add them before proceeding.
+If any characters are "not_in_heading", fix their headings.
+
 ### 1.4: Foreshadowing
 ```
 Agent prompt:
