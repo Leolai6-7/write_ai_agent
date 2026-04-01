@@ -199,10 +199,15 @@ Launch ONE sub-agent with this EXACT prompt:
 > Read {STORY_DIR}/runtime/story_graph.md (the current graph).
 > Read {STORY_DIR}/runtime/world_additions.md (world setting additions).
 >
-> Update the graph:
+> Here is the CHAPTER CONTEXT PACKAGE used to generate this chapter
+> (contains character profiles, foreshadowing designs, setting details):
+>
+> {paste the same CHAPTER CONTEXT PACKAGE from Step 1 here}
+>
+> Using the chapter text and context package, update the graph:
 > - 角色出場表: add/update character appearances
 > - 地點使用表: add/update locations
-> - 伏筆追蹤: update thread status
+> - 伏筆追蹤: update thread status (use foreshadowing section in context package to determine plant/hint/resolve)
 > - 因果鏈: add new causal links
 > - 數值設定: add any new established values
 >
@@ -214,6 +219,9 @@ Launch ONE sub-agent with this EXACT prompt:
 >
 > Save updated graph to: {STORY_DIR}/runtime/story_graph.md
 > Save updated additions to: {STORY_DIR}/runtime/world_additions.md
+>
+> All information you need is in the files above and the context package.
+> Do NOT read any other files.
 
 Run in FOREGROUND so hooks can track the graph update.
 
