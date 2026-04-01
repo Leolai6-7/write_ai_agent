@@ -55,10 +55,9 @@ Launch ALL of these simultaneously:
    Include FULL profiles, not summaries.
 
 5. **Location descriptions** — For each location in the 地點 column:
-   Search TWO files for `### .*{地點名}`:
-   - `{STORY_DIR}/world/world_bible.md` (original design)
-   - `{STORY_DIR}/runtime/world_additions.md` (details added during writing)
-   Combine results from both. If found in both, include both sections.
+   Grep `{STORY_DIR}/world/world_bible.md` for `### .*{地點名}`
+   to find the heading line number. Then Read from that line to
+   the next `### ` heading.
 
 6. **Foreshadowing threads** — For each thread tagged in the 伏筆 column
    (e.g., ①plant → search for 伏筆一):

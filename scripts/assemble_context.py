@@ -196,7 +196,6 @@ def main():
     # Source files for structured search
     world_files = [
         story_dir / "world" / "world_bible.md",
-        story_dir / "runtime" / "world_additions.md",
     ]
     char_file = story_dir / "world" / "character_cast.md"
     foreshadow_file = story_dir / "planning" / "foreshadowing.md"

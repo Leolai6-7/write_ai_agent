@@ -41,8 +41,7 @@ data/
         │   └── foreshadowing.md
         ├── runtime/            → 運行時文檔（每章更新）
         │   ├── story_log.md
-        │   ├── story_graph.md
-        │   └── world_additions.md  → 寫作中產生的世界設定增量
+        │   └── story_graph.md
         ├── outputs/
         │   └── chapter_NNN.md
         └── chroma/               → ChromaDB（per-story）

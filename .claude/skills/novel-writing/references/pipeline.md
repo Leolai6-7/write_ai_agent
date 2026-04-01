@@ -197,7 +197,6 @@ Launch ONE sub-agent with this EXACT prompt:
 
 > Read {STORY_DIR}/outputs/chapter_{NNN}.md (the chapter just written).
 > Read {STORY_DIR}/runtime/story_graph.md (the current graph).
-> Read {STORY_DIR}/runtime/world_additions.md (world setting additions).
 >
 > Here is the CHAPTER CONTEXT PACKAGE used to generate this chapter
 > (contains character profiles, foreshadowing designs, setting details):
@@ -211,16 +210,9 @@ Launch ONE sub-agent with this EXACT prompt:
 > - 因果鏈: add new causal links
 > - 數值設定: add any new established values
 >
-> Also update world_additions.md with new settings established in this chapter:
-> - New location details (physical layout, spatial descriptions)
-> - New character behaviors or habits observed for the first time
-> - New world rules or facts mentioned
-> Format: use ### headings matching world_bible.md style for Grep compatibility
->
 > Save updated graph to: {STORY_DIR}/runtime/story_graph.md
-> Save updated additions to: {STORY_DIR}/runtime/world_additions.md
 >
-> All information you need is in the files above and the context package.
+> All information you need is in the chapter, graph, and context package.
 > Do NOT read any other files.
 
 Run in FOREGROUND so hooks can track the graph update.
@@ -257,9 +249,7 @@ Quality control is at the ARC level via `/novel-style-audit`, not per-chapter.
 Report: "第{N}章完成：{summary}"
 Every 5 chapters: "前5章寫完了，要檢查再繼續嗎？"
 Every 10 chapters (arc boundary):
-  - Check world_additions.md — if it has accumulated entries, ask:
-    "world_additions.md 累積了新設定，要合併進 world_bible 嗎？"
-    If yes → review and merge, then clear world_additions.md
+  - Ask: "弧線完成。要回顧這 10 章中出現的新設定，把重要的加入 world_bible 嗎？"
   - Check revision_notes.md — if it has 3+ entries, ask:
     "累積了一些設定修訂建議，要暫停來更新世界觀/角色設定嗎？"
     If yes → re-run worldbuilding/character sub-agents with revision notes as input
