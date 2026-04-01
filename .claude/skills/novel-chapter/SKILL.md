@@ -20,37 +20,132 @@ From $ARGUMENTS or conversation, gather:
 
 ## Writing Craft
 
-### Opening
-Start with ACTION or DIALOGUE. Avoid:
-- Long scenic descriptions before the reader has a reason to care
-- Internal monologue without context
-- Backstory dumps
+### Opening — Best Practices
 
-Ground the reader in a moment — who is doing what, and why does it matter?
+Start with ACTION or DIALOGUE that grounds the reader in a moment.
+
+```
+❌ Weak opening (scenic dump):
+   清晨的陽光透過窗簾灑進房間，金色的光線在地板上畫出長長的影子。
+   鳥鳴聲從遠處傳來，空氣中瀰漫著早餐的香氣...
+   （讀者還不知道為什麼要在意這個房間）
+
+✅ Strong opening (action):
+   「又失敗了。」林昭明的聲音從主控台後面傳來。
+   （一句話建立人物、情境、張力）
+
+✅ Strong opening (sensory hook):
+   他把手伸進水裡。攝氏二十三度。
+   （具體感官，帶出疑問）
+```
 
 ### Structure
-Every chapter needs forward motion. The reader should know more, feel more, or worry more by the end than they did at the start. How this is achieved depends on the genre:
-- Tension-driven genres: obstacle → struggle → reversal → release
-- Character-driven genres: question → exploration → shift in understanding
-- Atmospheric genres: immersion → disruption → new equilibrium
 
-Not every chapter needs all beats. A quiet conversation can be the most important chapter if it changes the reader's understanding.
+Every chapter needs forward motion — the reader should know more, feel more, or worry more by the end.
 
-### Ending
-Most chapters should end in a way that makes the reader want to continue. This doesn't always mean a cliffhanger — it can be:
-- An unanswered question
-- A revelation that reframes what came before
-- An emotional moment that lingers
-- A sudden shift in situation
-- Or sometimes, deliberate stillness that lets the reader sit with what just happened
+```
+❌ No forward motion:
+   角色走路 → 角色吃飯 → 角色想事情 → 角色睡覺
+   （一天流水帳，什麼都沒改變）
 
-Vary your endings. If the last three chapters all ended with dramatic reveals, this one should end differently.
+✅ Forward motion through revelation:
+   角色例行工作 → 發現一個數字不對 → 追查 → 發現更大的問題
+   （每一步推動下一步，結束時世界觀已改變）
 
-### Prose Philosophy
-- **Metaphors serve understanding, not decoration.** If removing a metaphor loses nothing, it shouldn't be there. Never stack similar metaphors in consecutive paragraphs.
-- **Show, then trust.** After demonstrating a character's state through action and dialogue, don't add narration explaining what was just shown. The reader is smart.
-- **Repetition is a choice, not a habit.** Recurring environment details (lighting, temperature, sounds) should appear once per chapter to establish, not repeatedly as filler. Physical gestures should vary scene to scene.
-- **Punctuation serves rhythm.** Dashes, ellipses, and short paragraphs are powerful when used intentionally. When used reflexively, they become invisible clutter.
+✅ Forward motion through relationship:
+   兩人見面 → 對話中某句話改變了彼此的理解 → 離開時已不是同一種關係
+   （安靜的章節也能有巨大的推進）
+```
+
+### Ending — Best Practices
+
+Vary your endings. Not every chapter needs a dramatic cliffhanger.
+
+```
+✅ Unanswered question:
+   「但那個聲音......到底是誰的？」
+
+✅ Action suspended:
+   他伸出手，碰了一下牆壁。
+   （讓讀者自己感受那個溫度）
+
+✅ Abrupt cut (after a revelation):
+   林昭明關掉螢幕。走出房間。沒有回頭。
+   （短句收束，不解釋情緒）
+
+❌ Over-explained ending:
+   他站在那裡，感到一種前所未有的恐懼。這個發現改變了一切，
+   他知道從此以後什麼都不一樣了。
+   （告訴讀者該怎麼感受，而不是讓他們自己感受）
+```
+
+### Show Don't Tell — Best Practices
+
+```
+❌ Tell then show (redundant):
+   他非常緊張。手指在鍵盤上方懸著，指尖微微發白。
+   （「非常緊張」是多餘的——動作已經說明了）
+
+✅ Show only:
+   他的手指在鍵盤上方懸著，指尖微微發白。
+   （讀者從動作中感受到緊張）
+
+❌ Show then explain (worse):
+   她把杯子重重放在桌上，轉身走開。她很生氣，因為他又一次
+   忽略了她的意見，這讓她想起上次的爭吵...
+   （動作已經足夠，解釋削弱了衝擊力）
+
+✅ Show, then silence:
+   她把杯子重重放在桌上，轉身走開。
+   （讓讀者自己推理原因——他們會比你寫得更好）
+```
+
+### Metaphor — Best Practices
+
+```
+❌ Decorative metaphor (removable without loss):
+   他走在空蕩的走廊上，腳步聲像一隻孤獨的鳥在空曠的天空中飛翔。
+   （刪掉比喻，意思完全不變）
+
+✅ Functional metaphor (aids understanding):
+   散熱液在管路中流動，從脈搏般的節奏漸漸變成穩定的河流。
+   （幫助讀者理解機器的運轉狀態變化）
+
+❌ Stacked metaphors (audience fatigue):
+   他像一台過載的機器，像一隻被困住的獸，像一個溺水的人。
+   （選一個最好的，刪掉其他）
+
+✅ One precise metaphor:
+   他像一台過載的機器在拼命散熱。
+   （一個就夠了）
+```
+
+### Dialogue — Best Practices
+
+```
+❌ All characters sound the same:
+   「我覺得我們應該考慮一下這個問題。」A說。
+   「我同意，這個問題確實值得我們深入思考。」B說。
+
+✅ Distinct voices:
+   「啟動。」（沈逸——一個字，無商量）
+   「不是——我是說，如果你看第三象限的偏移量......好吧也許我
+   過度解讀了，不過......」（林昭明——自我修正，括號式思維）
+
+❌ Said-bookism (over-decorating dialogue tags):
+   「不行，」他厲聲呵斥道。「我說了不行，」他堅定地重複道。
+
+✅ Minimal tags:
+   「不行。」
+   （語境已經說明了語氣，不需要 tag）
+```
+
+### Prose Principles
+
+- **Metaphors serve understanding, not decoration.** If removing it loses nothing, delete it.
+- **Show, then trust.** Don't explain what was just demonstrated.
+- **Repetition is a choice, not a habit.** Environment details once per chapter. Gestures vary per scene.
+- **Punctuation serves rhythm.** Dashes and ellipses are powerful when intentional, invisible when habitual.
 
 ### Character Voice in Narration
 - Each character's INNER THOUGHTS should sound different, not just their dialogue
