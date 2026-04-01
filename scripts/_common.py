@@ -89,3 +89,49 @@ def parse_md_table(text: str, section_heading: str) -> list[dict]:
             rows.append(dict(zip(headers, cells[:len(headers)])))
 
     return rows
+
+
+def extract_section(text: str, name: str, heading_level: str = "## ") -> str:
+    """Extract a full section from markdown by searching for a name in headings.
+
+    Searches for a heading containing `name`, then returns everything from
+    that heading to the next heading of the same level.
+
+    Args:
+        text: Full markdown file content
+        name: Name to search for in headings
+        heading_level: "## " or "### "
+
+    Returns:
+        The full section text, or empty string if not found.
+    """
+    level_pattern = re.escape(heading_level.strip())
+    # Find heading containing the name
+    pattern = rf"^({level_pattern}\s+.*{re.escape(name)}.*?)$"
+    match = re.search(pattern, text, re.MULTILINE)
+    if not match:
+        return ""
+
+    start = match.start()
+    # Find next heading of same or higher level
+    rest = text[match.end():]
+    next_match = re.search(rf"^{level_pattern}\s", rest, re.MULTILINE)
+    if next_match:
+        end = match.end() + next_match.start()
+    else:
+        end = len(text)
+
+    return text[start:end].strip()
+
+
+def extract_sections_from_files(files: list[Path], name: str, heading_level: str = "## ") -> str:
+    """Search multiple files for sections matching a name, combine results."""
+    results = []
+    for f in files:
+        if not f.exists():
+            continue
+        text = f.read_text(encoding="utf-8")
+        section = extract_section(text, name, heading_level)
+        if section:
+            results.append(section)
+    return "\n\n".join(results)

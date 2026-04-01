@@ -141,18 +141,17 @@ Copy the prompts below and fill in {N} and {STORY_DIR}. One sub-agent per step.
 ---
 
 **STEP 1 — Context Assembly**
-Launch ONE sub-agent with this EXACT prompt:
+Run the assembly tool (no sub-agent needed):
+```
+python scripts/assemble_context.py --story-dir {STORY_DIR} --chapter {N}
+```
 
-> Read .claude/skills/novel-context/SKILL.md and follow.
-> Chapter: {N}
-> Story directory: {STORY_DIR}
-> Return a CHAPTER CONTEXT PACKAGE. No file save.
+This performs three-path recall in < 10 seconds:
+1. Structured lookup (beat sheet tags + keyword extraction → source files)
+2. Graph traversal (causal chains, absent characters, numerical values)
+3. Semantic search (ChromaDB vector similarity)
 
-Wait for completion. Store the returned context package.
-
-The assembly step curates 5-10KB of high-density context from potentially
-100KB+ of source documents. This focused package is critical — dumping all
-raw documents into the chapter generator dilutes important information.
+Store the output as the CHAPTER CONTEXT PACKAGE.
 
 ---
 
