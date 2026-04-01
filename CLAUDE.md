@@ -1,14 +1,13 @@
 # AI 小說寫作系統 (write_ai_agent)
 
 ## 專案概述
-一個基於 LangGraph + AWS Bedrock 的多 Agent 長篇小說自動生成系統。支援多故事管理和 300+ 章的分卷式小說創作。
+一個基於 Claude Code Skills 的多 Agent 長篇小說自動生成系統。支援多故事管理和分卷式小說創作。Python 基礎設施（LangGraph + SQLite + ChromaDB）透過 CLI 腳本橋接到 skill pipeline。
 
-## 技術棧
-- **Agent 框架**: LangGraph (StateGraph)
-- **LLM**: AWS Bedrock (Claude Sonnet/Haiku), 支援 OpenAI 和 Anthropic 直連
-- **記憶**: SQLite + ChromaDB (4 層記憶 + 語義檢索)
-- **結構化輸出**: Pydantic + JSON mode
-- **CLI**: Typer + Rich
+## 架構
+
+兩層系統：
+- **Skill Pipeline**（生產用）：Claude Code sub-agents 讀寫 markdown 檔案，透過 skills 定義工作流
+- **Python Infrastructure**（資料層）：SQLite + ChromaDB 提供結構化查詢和語義檢索，透過 `scripts/` CLI 腳本橋接
 
 ## 小說寫作 Skills
 
@@ -32,21 +31,20 @@
 data/
 ├── active_story.txt              → 當前故事名稱
 └── stories/
-    ├── star-ring-tower/          # 星環之塔（奇幻冒險）
-    │   ├── world/
-    │   ├── planning/
-    │   └── outputs/
-    └── civilization-disease/     # 文明病（哲思科幻）
+    └── {story-name}/
         ├── world/
-        │   └── world_bible.md
+        │   ├── world_bible.md
+        │   └── character_cast.md
         ├── planning/
         │   ├── story_brief.md
         │   ├── structure.md
         │   ├── foreshadowing.md
-        │   └── story_log.md
-        └── outputs/
-            ├── chapter_001.md
-            └── novel_complete.md
+        │   ├── story_log.md
+        │   └── story_graph.md
+        ├── outputs/
+        │   └── chapter_NNN.md
+        ├── novel.db              → SQLite（per-story）
+        └── chroma/               → ChromaDB（per-story）
 ```
 
 ## 路徑規則
@@ -55,13 +53,6 @@ data/
 
 ```
 STORY_DIR = data/stories/{active_story}/
-- world bible  → {STORY_DIR}/world/world_bible.md
-- characters   → {STORY_DIR}/world/character_cast.md
-- story brief  → {STORY_DIR}/planning/story_brief.md
-- structure    → {STORY_DIR}/planning/structure.md
-- foreshadow   → {STORY_DIR}/planning/foreshadowing.md
-- story log    → {STORY_DIR}/planning/story_log.md
-- chapters     → {STORY_DIR}/outputs/chapter_NNN.md
 ```
 
 ## 當前進度載入
@@ -73,12 +64,6 @@ STORY_DIR = data/stories/{active_story}/
 4. 如果這些檔案存在，告訴用戶當前進度並詢問要繼續還是開新故事
 5. 如果不存在，從 `/novel-writing` 開始
 
-## 切換故事
-
-如果用戶想切換到另一個故事：
-1. 更新 `data/active_story.txt`
-2. 載入該故事的進度檔案
-
 ## 章節生成規則（不可違反）
 
 每章必須完成 4 步才算完成，缺一不可：
@@ -87,11 +72,25 @@ STORY_DIR = data/stories/{active_story}/
 3. Update story_log（主 agent）
 4. Update story_graph（sub-agent）
 
+完成後自動觸發（非阻塞）：
+- `scripts/index_chapter.py` → SQLite + ChromaDB 索引
+- `scripts/sync_graph.py` → story_graph → SQLite 同步
+
 **不可合併 sub-agent。不可跳過步驟。不可平行多章。**
+
+Hooks（`.claude/hooks/`）會自動追蹤完成狀態，阻止在未完成所有步驟時停止回應。
+
+## 橋接腳本
+
+| 腳本 | 用途 | 時機 |
+|------|------|------|
+| `scripts/index_chapter.py` | 章節摘要 → SQLite + ChromaDB | Step 3 後 |
+| `scripts/sync_graph.py` | story_graph.md → SQLite | Step 4 後 |
+| `scripts/semantic_search.py` | ChromaDB 語義查詢 | Step 1（context assembly）中 |
 
 ## 開發須知
 
 - **測試**: `uv run pytest tests/ -v`
-- **AWS 認證過期**: 用 `/refresh-aws` 刷新
-- **Prompt 迭代**: 先改 `.claude/skills/*/SKILL.md` 驗證，確認後同步到 `prompts/*.yaml`
-- **新增 Agent**: 建 `agents/xxx.py` + `prompts/xxx.yaml` + `pipeline/nodes/xxx.py`
+- **Skill 迭代**: 改 `.claude/skills/*/SKILL.md`，用 git commit 做版本管理
+- **A/B 測試**: workspace 在 `.claude/skills/novel-chapter-workspace/`，每個 iteration 有 skill-snapshot
+- **Embedding model**: ChromaDB 使用 `BAAI/bge-small-zh-v1.5`（中文專用）
