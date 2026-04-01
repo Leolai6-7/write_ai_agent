@@ -6,7 +6,7 @@
     {
       "type": "character",
       "name": "沈逸",
-      "events": "ch1: 啟動第1024次文明模擬；將觀測窗口縮到第三階段、前兩階段降為Level 3自動記錄；獨自留守控制室不休息；關注個體0447的美感萌芽行為；得知異常標記0xFFFF後下令全歷史搜索 · ch3: 接收赫斯全息通訊（連續工作第31小時）；拒絕接受第1100次迭代期限；未將0xFFFF告知赫斯但注意到評估標準第三條（引擎非預期現象）與其相關；反思赫斯丈夫漢斯消融四年的背景；走到備餐區喝水（三年來離螢幕最遠的六公尺）；在日誌中並列記下期限與0xFFFF搜索",
+      "events": "ch1: 啟動第1024次文明模擬；將觀測窗口縮到第三階段、前兩階段降為Level 3自動記錄；獨自留守控制室不休息；關注個體0447的美感萌芽行為；得知異常標記0xFFFF後下令全歷史搜索 · ch3: 連續工作31小時接到赫斯全息通訊；以聽證會發言稿推算出1100次期限；向赫斯說明0xFFFF的獨特性（前1023次從未出現未定義值）；拒絕接受期限但未能改變結果；寫下工作日誌「1100 / 0xFFFF」；繼續監控第1024次迭代（城邦1024-C-0712連結密度為平均值1.3倍）",
       "id": "character:沈逸"
     },
     {
@@ -42,19 +42,19 @@
     {
       "type": "character",
       "name": "林昭明",
-      "events": "ch1: 微調星際塵埃密度+0.7%；私下使用Level 4精度監控；發現觀察者效應——沈逸注視區域的空間曲率微偏移；報告異常標記0xFFFF；回憶第847次模擬的七聲音階旋律；獨自進行「模擬悼念」儀式 · ch3: 在控制室後方全程旁聽赫斯通訊；報告0xFFFF全歷史搜索需再12小時（進度68%→72%）；問「然後呢」流露對未來的焦慮；在工位上坐著睡著（第37小時）",
+      "events": "ch1: 微調星際塵埃密度+0.7%；私下使用Level 4精度監控；發現觀察者效應——沈逸注視區域的空間曲率微偏移；報告異常標記0xFFFF；回憶第847次模擬的七聲音階旋律；獨自進行「模擬悼念」儀式",
       "id": "character:林昭明"
     },
     {
       "type": "character",
       "name": "赫斯",
-      "events": "ch3: 通過紅色加密頻道全息通訊沈逸；通報全球消融數據（48小時新增37000例、累計120萬、每天7000人）；告知認知重置方案通過第三階段審查（西非試驗12000人、72小時消退、副作用18個月記憶缺失）；下達第1100次迭代最後窗口及三條評估標準；無意中說出德語「Auflösung」暴露私人情緒；給出「個人建議」關心研究所人員輪換；丈夫漢斯消融四年",
+      "events": "ch3: 透過全息通訊向沈逸下達最後通牒——第1100次迭代為期限；提出三條標準（模擬例外/初始條件修正/非預期現象獨立確認）；提及西非認知重置試驗通過第三階段審查；德語口誤說出Auflösung後立即糾正；丈夫漢斯為最早一批消融患者（四年）",
       "id": "character:赫斯"
     },
     {
       "type": "character",
       "name": "顧則",
-      "events": "ch2: 重新檢視37個文明崩潰曲線，確認複雜度0.7334臨界點；向方院長提交報告並被引導思考「邊界條件」；注意到南牆與北牆溫度相同的異常但未深究；入睡前閃過一幀藍綠冷光中疲憊人影的畫面 · ch4: 系統性記錄世界「接縫」清單（共15項：表面溫度均一、門鉸無磨損、重力加速度精確吻合標準值、施工精度零偏差、環境參數穩定、食物鹹淡恆定、環境噪聲缺失、人員行為時間精確性等）；發現物理常數呈現有限精度截斷（光速、普朗克常數等到教科書末位即停）；向紀恆透露重力加速度異常但被駁回；被同事疏遠後獨自深化研究；重新審視37個文明崩潰曲線，意識到0.7334不是發現而是「參數」；夜晚夢見深潛研究所走廊——封閉灰白走廊、冷白燈帶、臭氧金屬氣味、綠色指示燈的門、環形結構、螢幕顯示0xFFFF；夢中門把溫度是「真實的涼」與日常均溫形成對比",
+      "events": "ch2: 重新檢視37個文明崩潰曲線，確認複雜度0.7334臨界點；向方院長提交報告並被引導思考「邊界條件」；注意到南牆與北牆溫度相同的異常但未深究；入睡前閃過一幀藍綠冷光中疲憊人影的畫面",
       "id": "character:顧則"
     },
     {
@@ -80,7 +80,7 @@
     {
       "type": "character",
       "name": "紀恆",
-      "events": "ch2: 每天帶早飯給顧則、記得他喝的牛奶牌子、優化回歸模型代碼收斂快一倍、講統計組實習生故事；總在顧則開口前就知道他需要什麼 · ch4: 發現顧則在量窗框，以「標準化建材」合理化；第二次不帶咖啡登門嚴肅對話，指出顧則在非專業領域做不嚴謹觀測；提醒顧則先完成37個文明樣本報告；疑似向同事（李明華、張薇）通報顧則異常行為，導致眾人迴避顧則",
+      "events": "ch2: 每天帶早飯給顧則、記得他喝的牛奶牌子、優化回歸模型代碼收斂快一倍、講統計組實習生故事；總在顧則開口前就知道他需要什麼",
       "id": "character:紀恆"
     },
     {
@@ -92,7 +92,7 @@
     {
       "type": "location",
       "name": "深潛研究所",
-      "description": "恆溫18°C、藍綠冷光、無窗地下、創世引擎；ch1確立: 地下42公尺、陽明山北坡花崗岩層、地面入口偽裝廢棄溫泉旅館（關了七年）、控制室為半圓形階梯佈局（42塊子螢幕弧形陣列）、三層空氣淨化系統、自動配餐系統每6小時送營養棒、防靜電地板、貨運電梯通地面、創世引擎三層樓高有量子核心與藍綠冷卻液管路；ch3增補: 全息投影系統（地板投射器、粒子凝聚成像、五年前赫斯批准配置、解析度遠超日常需求）、控制室側面小型備餐區（自動配餐出餐口、營養棒與恆溫水）、通訊頻道分色（藍=內部、灰=外部、紅=WHO加密）、水杯水溫18度與空氣同溫",
+      "description": "恆溫18°C、藍綠冷光、無窗地下、創世引擎；ch1確立: 地下42公尺、陽明山北坡花崗岩層、地面入口偽裝廢棄溫泉旅館（關了七年）、控制室為半圓形階梯佈局（42塊子螢幕弧形陣列）、三層空氣淨化系統、自動配餐系統每6小時送營養棒、防靜電地板、貨運電梯通地面、創世引擎三層樓高有量子核心與藍綠冷卻液管路；ch3補充: 備餐區距螢幕牆約6公尺（自動取水系統、水溫18°C）、冷卻液管路半透明映在天花板像緩慢移動的靜脈、全息投影系統（五年前配置）在控制室中央",
       "id": "location:深潛研究所"
     },
     {
@@ -104,25 +104,19 @@
     {
       "type": "location",
       "name": "模擬世界-研究院",
-      "description": "陽光、銀杏、日常辦公室；ch2確立: 主樓玻璃門入口有銀杏樹與花壇、磨石子地板走廊有落地窗、辦公室在三樓東側（顧則紀恆共用面牆兩桌）、食堂在一樓有玻璃穹頂、方院長辦公室在四樓最裡面、茶水間朝北無日照、午餐鈴為兩聲短促電子音；ch4增補: 辦公室有沙發可過夜、備用外套；每日早八行政助理各辦公室放茶；夜間校園完全安靜無背景噪聲；窗外銀杏擺動幅度精確到像重複同一段動畫；所有窗框尺寸零偏差（六扇實測）",
+      "description": "陽光、銀杏、日常辦公室；ch2確立: 主樓玻璃門入口有銀杏樹與花壇、磨石子地板走廊有落地窗、辦公室在三樓東側（顧則紀恆共用面牆兩桌）、食堂在一樓有玻璃穹頂、方院長辦公室在四樓最裡面、茶水間朝北無日照、午餐鈴為兩聲短促電子音",
       "id": "location:模擬世界-研究院"
     },
     {
       "type": "location",
       "name": "1024號模擬宇宙",
-      "description": "ch1確立: 岩石行星、北半球河谷聚落（67個虛擬個體）、語言如火種般在多個部落同時獨立浮現；ch3增補: 進入繁盛期——城邦聯盟覆蓋三塊大陸、貿易路線交織成密網、通用文字從最大城邦向外擴散、人口指數攀升；北方大陸沿海中型城邦1024-C-0712社會連結密度為平均值1.3倍",
+      "description": "ch1確立: 岩石行星、北半球河谷聚落（67個虛擬個體）、語言如火種般在多個部落同時獨立浮現",
       "id": "location:1024號模擬宇宙"
-    },
-    {
-      "type": "location",
-      "name": "日內瓦WHO總部會議室",
-      "description": "ch3確立: 赫斯全息通訊背景，弧形牆面，牆上滾動全球數據流",
-      "id": "location:日內瓦WHO總部會議室"
     },
     {
       "type": "foreshadow",
       "name": "①牆壁溫度",
-      "status": "已暗示（ch2植入: 顧則午餐時碰南牆、茶水間碰北牆，日照面與背陰面溫度完全相同；走廊中猶豫是否觸碰比較但走過去了；合理化為空調系統好；ch4暗示: 牆壁溫度作為接縫清單第一項被正式記錄——「研究院所有可觸及表面呈現相同觸感溫度，無材質導致的熱傳導差異」；不再合理化，歸類為異常）",
+      "status": "已植入（ch2: 顧則午餐時碰南牆、茶水間碰北牆，日照面與背陰面溫度完全相同；走廊中猶豫是否觸碰比較但走過去了；合理化為空調系統好）",
       "id": "foreshadow:①牆壁溫度"
     },
     {
@@ -151,13 +145,13 @@
     {
       "type": "foreshadow",
       "name": "⑥迭代者預知",
-      "status": "已植入（ch4: 顧則發現物理常數精度過於完美——重力加速度9.80665五份來源完全一致無地區修正；光速、普朗克常數等到教科書末位即截斷無實驗延伸；將此歸納為「精度悖論」——世界只被渲染到某一層細節）",
+      "status": "規劃中",
       "id": "foreshadow:⑥迭代者預知"
     },
     {
       "type": "foreshadow",
       "name": "⑧赫斯德語",
-      "status": "已植入（ch3: 赫斯在談全球消融數據時無意說出德語「Auflösung」，語調精確度裂開一道縫；沈逸注意到但歸檔為非即時處理項；後文揭示她丈夫漢斯消融四年——那道縫不是對三萬七千人，是對一個人）",
+      "status": "已植入（ch3: 赫斯談消融時脫口說出德語「Auflösung」後立即糾正為「消融。抱歉。」——僅此一次口誤）",
       "id": "foreshadow:⑧赫斯德語"
     },
     {
@@ -187,7 +181,7 @@
     {
       "type": "foreshadow",
       "name": "⑬異常標記0xFFFF",
-      "status": "已暗示（ch1植入: 第三階段啟動後出現一次未定義標記，不關聯任何已知事件類型，前1023次從未出現，已啟動全歷史搜索；ch3暗示: 沈逸將0xFFFF與赫斯評估標準第三條「引擎非預期現象」暗中聯繫但未告知赫斯，全歷史搜索進度68%→72%，未確認是否為記憶體溢出產物）",
+      "status": "已植入（ch1: 第三階段啟動後出現一次未定義標記，不關聯任何已知事件類型，前1023次從未出現，已啟動全歷史搜索）",
       "id": "foreshadow:⑬異常標記0xFFFF"
     },
     {
@@ -312,147 +306,63 @@
     },
     {
       "type": "event",
-      "description": "全球消融危機加劇（48hr新增37000例、累計120萬）",
+      "description": "赫斯聽證會發言稿設定1100次為合理迭代上限",
+      "chapter": "背景",
+      "id": "event:赫斯聽證會發言稿設定1100次為合理迭代上限"
+    },
+    {
+      "type": "event",
+      "description": "赫斯正式向沈逸下達第1100次迭代最後通牒",
       "chapter": "ch3",
-      "id": "event:全球消融危機加劇（48hr新增37000例、累計120萬）"
+      "id": "event:赫斯正式向沈逸下達第1100次迭代最後通牒"
     },
     {
       "type": "event",
-      "description": "赫斯代表WHO理事會下達最後通牒：第1100次迭代為最終窗口",
+      "description": "西非認知重置試驗通過第三階段審查",
       "chapter": "ch3",
-      "id": "event:赫斯代表WHO理事會下達最後通牒：第1100次迭代為最終窗口"
+      "id": "event:西非認知重置試驗通過第三階段審查"
     },
     {
       "type": "event",
-      "description": "認知重置方案通過第三階段審查（西非試驗成功）",
+      "description": "赫斯手中有「能用的替代方案」，壓縮沈逸研究時間",
       "chapter": "ch3",
-      "id": "event:認知重置方案通過第三階段審查（西非試驗成功）"
+      "id": "event:赫斯手中有「能用的替代方案」，壓縮沈逸研究時間"
     },
     {
       "type": "event",
-      "description": "WHO有了替代方案，深潛計畫不再是唯一選項",
+      "description": "0xFFFF異常標記出現於第1024次迭代",
+      "chapter": "ch1",
+      "id": "event:0xFFFF異常標記出現於第1024次迭代"
+    },
+    {
+      "type": "event",
+      "description": "沈逸以此為依據爭取繼續研究——「引擎自己說了」",
       "chapter": "ch3",
-      "id": "event:WHO有了替代方案，深潛計畫不再是唯一選項"
+      "id": "event:沈逸以此為依據爭取繼續研究——「引擎自己說了」"
     },
     {
       "type": "event",
-      "description": "赫斯列出三條評估標準",
+      "description": "赫斯丈夫漢斯為最早一批消融患者",
+      "chapter": "背景",
+      "id": "event:赫斯丈夫漢斯為最早一批消融患者"
+    },
+    {
+      "type": "event",
+      "description": "赫斯對消融有私人動機，推動認知重置部署",
       "chapter": "ch3",
-      "id": "event:赫斯列出三條評估標準"
+      "id": "event:赫斯對消融有私人動機，推動認知重置部署"
     },
     {
       "type": "event",
-      "description": "第三條「引擎非預期現象」與0xFFFF潛在關聯",
+      "description": "赫斯下達1100次最後通牒",
       "chapter": "ch3",
-      "id": "event:第三條「引擎非預期現象」與0xFFFF潛在關聯"
+      "id": "event:赫斯下達1100次最後通牒"
     },
     {
       "type": "event",
-      "description": "沈逸拒絕接受期限但無法給出替代數字",
+      "description": "沈逸剩餘76次迭代餘量（1100-1024）",
       "chapter": "ch3",
-      "id": "event:沈逸拒絕接受期限但無法給出替代數字"
-    },
-    {
-      "type": "event",
-      "description": "沈逸的方法論弱點暴露：無限參數空間窮舉搜索無法產生收斂預測",
-      "chapter": "ch3",
-      "id": "event:沈逸的方法論弱點暴露：無限參數空間窮舉搜索無法產生收斂預測"
-    },
-    {
-      "type": "event",
-      "description": "赫斯丈夫漢斯消融四年",
-      "chapter": "ch3",
-      "id": "event:赫斯丈夫漢斯消融四年"
-    },
-    {
-      "type": "event",
-      "description": "赫斯在念消融數據時失控說出德語「Auflösung」",
-      "chapter": "ch3",
-      "id": "event:赫斯在念消融數據時失控說出德語「Auflösung」"
-    },
-    {
-      "type": "event",
-      "description": "沈逸在日誌並列記下期限與0xFFFF",
-      "chapter": "ch3",
-      "id": "event:沈逸在日誌並列記下期限與0xFFFF"
-    },
-    {
-      "type": "event",
-      "description": "兩條線索進入同一引力系統，為後續合流埋伏筆",
-      "chapter": "ch3",
-      "id": "event:兩條線索進入同一引力系統，為後續合流埋伏筆"
-    },
-    {
-      "type": "event",
-      "description": "方院長「邊界條件」啟發 + 牆壁溫度異常感知",
-      "chapter": "ch2",
-      "id": "event:方院長「邊界條件」啟發 + 牆壁溫度異常感知"
-    },
-    {
-      "type": "event",
-      "description": "顧則開始系統性測量世界——重力加速度、物理常數精度、建材尺寸、環境參數",
-      "chapter": "ch4",
-      "id": "event:顧則開始系統性測量世界——重力加速度、物理常數精度、建材尺寸、環境參數"
-    },
-    {
-      "type": "event",
-      "description": "顧則向紀恆透露重力加速度異常",
-      "chapter": "ch4",
-      "id": "event:顧則向紀恆透露重力加速度異常"
-    },
-    {
-      "type": "event",
-      "description": "紀恆以「非專業領域不嚴謹觀測」駁回，並通報同事",
-      "chapter": "ch4",
-      "id": "event:紀恆以「非專業領域不嚴謹觀測」駁回，並通報同事"
-    },
-    {
-      "type": "event",
-      "description": "紀恆通報同事顧則異常行為",
-      "chapter": "ch4",
-      "id": "event:紀恆通報同事顧則異常行為"
-    },
-    {
-      "type": "event",
-      "description": "同事（李明華、張薇等）迴避顧則，形成社交隔離",
-      "chapter": "ch4",
-      "id": "event:同事（李明華、張薇等）迴避顧則，形成社交隔離"
-    },
-    {
-      "type": "event",
-      "description": "顧則發現物理常數精度截斷",
-      "chapter": "ch4",
-      "id": "event:顧則發現物理常數精度截斷"
-    },
-    {
-      "type": "event",
-      "description": "重新審視37個文明崩潰曲線，意識到0.7334是參數而非發現",
-      "chapter": "ch4",
-      "id": "event:重新審視37個文明崩潰曲線，意識到0.7334是參數而非發現"
-    },
-    {
-      "type": "event",
-      "description": "顧則社交隔離 + 獨自留在辦公室過夜",
-      "chapter": "ch4",
-      "id": "event:顧則社交隔離 + 獨自留在辦公室過夜"
-    },
-    {
-      "type": "event",
-      "description": "夢見深潛研究所走廊、環形結構、0xFFFF",
-      "chapter": "ch4",
-      "id": "event:夢見深潛研究所走廊、環形結構、0xFFFF"
-    },
-    {
-      "type": "event",
-      "description": "夢中觸碰門把感受到「真實的涼」",
-      "chapter": "ch4",
-      "id": "event:夢中觸碰門把感受到「真實的涼」"
-    },
-    {
-      "type": "event",
-      "description": "與日常均溫表面形成對比，強化「這個世界不真實」的認知",
-      "chapter": "ch4",
-      "id": "event:與日常均溫表面形成對比，強化「這個世界不真實」的認知"
+      "id": "event:沈逸剩餘76次迭代餘量（1100-1024）"
     },
     {
       "type": "mirror",
@@ -489,30 +399,6 @@
       "line": "S",
       "description": "顧則發現不均勻的冰晶",
       "id": "mirror_s:顧則發現不均勻的冰晶"
-    },
-    {
-      "type": "mirror",
-      "line": "R",
-      "description": "沈逸控制室藍綠冷光走廊",
-      "id": "mirror_r:沈逸控制室藍綠冷光走廊"
-    },
-    {
-      "type": "mirror",
-      "line": "S",
-      "description": "顧則夢見封閉灰白走廊、冷白燈帶、臭氧金屬氣味",
-      "id": "mirror_s:顧則夢見封閉灰白走廊、冷白燈帶、臭氧金屬氣味"
-    },
-    {
-      "type": "mirror",
-      "line": "R",
-      "description": "0xFFFF出現在控制室異常標記",
-      "id": "mirror_r:0xFFFF出現在控制室異常標記"
-    },
-    {
-      "type": "mirror",
-      "line": "S",
-      "description": "0xFFFF出現在顧則夢中螢幕（他不應該懂十六進制）",
-      "id": "mirror_s:0xFFFF出現在顧則夢中螢幕（他不應該懂十六進制）"
     },
     {
       "type": "mirror",
@@ -788,46 +674,62 @@
     },
     {
       "type": "value",
-      "setting": "赫斯期限評估標準",
-      "value": "三條",
-      "note": "ch3確立：①複雜度>0.73且未觸發文明病 ②統計顯著的初始條件修正方案 ③引擎非預期現象經獨立團隊確認",
-      "id": "value:赫斯期限評估標準"
+      "setting": "赫斯年齡",
+      "value": "60歲",
+      "note": "ch3確立",
+      "id": "value:赫斯年齡"
     },
     {
-      "type": "chapter",
-      "number": 0,
-      "id": "chapter:ch0"
-    },
-    {
-      "type": "chapter",
-      "number": 73,
-      "id": "chapter:ch73"
+      "type": "value",
+      "setting": "赫斯職稱",
+      "value": "心智安全理事會理事長",
+      "note": "ch3確立",
+      "id": "value:赫斯職稱"
     },
     {
       "type": "value",
       "setting": "全球消融累計人口",
-      "value": "120萬",
-      "note": "ch3確立（截至ch3時點）",
+      "value": "超過120萬",
+      "note": "ch3確立（48小時新增37000例）",
       "id": "value:全球消融累計人口"
+    },
+    {
+      "type": "chapter",
+      "number": 48,
+      "id": "chapter:ch48"
+    },
+    {
+      "type": "chapter",
+      "number": 37000,
+      "id": "chapter:ch37000"
     },
     {
       "type": "value",
       "setting": "每日新增消融人數",
-      "value": "7000+",
+      "value": "超過7000人",
       "note": "ch3確立",
       "id": "value:每日新增消融人數"
     },
     {
       "type": "value",
-      "setting": "48小時新增消融報告",
-      "value": "37000例",
-      "note": "ch3確立（東亞北歐佔62%）",
-      "id": "value:48小時新增消融報告"
+      "setting": "東亞北歐佔比",
+      "value": "62%",
+      "note": "ch3確立",
+      "id": "value:東亞北歐佔比"
     },
     {
-      "type": "chapter",
-      "number": 62,
-      "id": "chapter:ch62"
+      "type": "value",
+      "setting": "赫斯三條標準",
+      "value": "①複雜度>0.73後有樣本未崩潰 ②統計顯著的初始條件修正 ③非預期現象獨立確認",
+      "note": "ch3確立",
+      "id": "value:赫斯三條標準"
+    },
+    {
+      "type": "value",
+      "setting": "剩餘迭代餘量",
+      "value": "76次（1100-1024）",
+      "note": "ch3確立",
+      "id": "value:剩餘迭代餘量"
     },
     {
       "type": "value",
@@ -838,57 +740,59 @@
     },
     {
       "type": "value",
-      "setting": "認知重置持續效果",
+      "setting": "認知重置有效期",
       "value": "18-24個月",
       "note": "ch3確立",
-      "id": "value:認知重置持續效果"
+      "id": "value:認知重置有效期"
     },
     {
       "type": "value",
       "setting": "認知重置副作用",
-      "value": "18個月短期記憶選擇性缺失（重置前6個月經歷）",
+      "value": "前6個月記憶選擇性缺失（模糊化）",
       "note": "ch3確立",
       "id": "value:認知重置副作用"
     },
     {
       "type": "value",
-      "setting": "認知重置試驗規模",
-      "value": "西非4個社區，12000人",
+      "setting": "認知重置西非試驗規模",
+      "value": "4個社區、12000人",
       "note": "ch3確立",
-      "id": "value:認知重置試驗規模"
+      "id": "value:認知重置西非試驗規模"
     },
     {
       "type": "value",
-      "setting": "認知重置試驗效果",
-      "value": "72小時內消融症狀消退，意義感回升至危機前80%",
+      "setting": "認知重置效果",
+      "value": "72小時內症狀消退、意義感指標回升至危機前80%",
       "note": "ch3確立",
-      "id": "value:認知重置試驗效果"
+      "id": "value:認知重置效果"
     },
     {
       "type": "value",
-      "setting": "赫斯丈夫漢斯消融年數",
-      "value": "4年",
-      "note": "ch3確立",
-      "id": "value:赫斯丈夫漢斯消融年數"
-    },
-    {
-      "type": "value",
-      "setting": "WHO數據同步頻率",
-      "value": "每24小時",
-      "note": "ch3確立（經費協議第17條第3款）",
-      "id": "value:WHO數據同步頻率"
-    },
-    {
-      "type": "chapter",
-      "number": 17,
-      "id": "chapter:ch17"
+      "setting": "赫斯丈夫漢斯消融時間",
+      "value": "4年前",
+      "note": "ch3確立（最早一批）",
+      "id": "value:赫斯丈夫漢斯消融時間"
     },
     {
       "type": "value",
       "setting": "全息系統配置時間",
       "value": "5年前",
-      "note": "ch3確立（赫斯批准經費時配置）",
+      "note": "ch3確立（赫斯批准經費時）",
       "id": "value:全息系統配置時間"
+    },
+    {
+      "type": "value",
+      "setting": "沈逸連續工作時間",
+      "value": "31小時",
+      "note": "ch3確立",
+      "id": "value:沈逸連續工作時間"
+    },
+    {
+      "type": "value",
+      "setting": "備餐區距螢幕牆",
+      "value": "約6公尺",
+      "note": "ch3確立",
+      "id": "value:備餐區距螢幕牆"
     },
     {
       "type": "value",
@@ -899,73 +803,17 @@
     },
     {
       "type": "value",
-      "setting": "沈逸連續工作時數（ch3起點）",
-      "value": "31小時",
+      "setting": "經費協議數據同步條款",
+      "value": "第17條第3款，每24小時同步",
       "note": "ch3確立",
-      "id": "value:沈逸連續工作時數（ch3起點）"
+      "id": "value:經費協議數據同步條款"
     },
     {
       "type": "value",
-      "setting": "備餐區距螢幕距離",
-      "value": "約6公尺",
-      "note": "ch3確立（沈逸三年來離螢幕最遠）",
-      "id": "value:備餐區距螢幕距離"
-    },
-    {
-      "type": "value",
-      "setting": "本地重力加速度",
-      "value": "9.80665",
-      "note": "ch4確立：精確到小數後五位，五份獨立來源完全一致，無地區修正",
-      "id": "value:本地重力加速度"
-    },
-    {
-      "type": "value",
-      "setting": "顧則接縫清單總項數",
-      "value": "15項（至ch4末）",
-      "note": "ch4確立：從物理測量延伸到環境噪聲、人員行為、夢境",
-      "id": "value:顧則接縫清單總項數"
-    },
-    {
-      "type": "value",
-      "setting": "精密溫度計規格",
-      "value": "量程-20~50°C，精度0.01°C",
-      "note": "ch4確立：顧則向物理系借用",
-      "id": "value:精密溫度計規格"
-    },
-    {
-      "type": "value",
-      "setting": "窗框實測數量",
-      "value": "6扇",
-      "note": "ch4確立：尺寸零偏差",
-      "id": "value:窗框實測數量"
-    },
-    {
-      "type": "value",
-      "setting": "物理常數比對來源數",
-      "value": "3本不同年代教科書",
-      "note": "ch4確立",
-      "id": "value:物理常數比對來源數"
-    },
-    {
-      "type": "value",
-      "setting": "重力加速度比對來源數",
-      "value": "5份獨立來源",
-      "note": "ch4確立（原始測量、天文觀測站、大學物理系、工程手冊、氣象局）",
-      "id": "value:重力加速度比對來源數"
-    },
-    {
-      "type": "value",
-      "setting": "夢中環形結構直徑",
-      "value": "約6-7米",
-      "note": "ch4確立：金屬與玻璃構成，表面佈滿接線和指示燈",
-      "id": "value:夢中環形結構直徑"
-    },
-    {
-      "type": "value",
-      "setting": "C-001文明崩潰時間點",
-      "value": "複雜度0.7334後第63個時間單位",
-      "note": "ch4確立：農業核心早期社會",
-      "id": "value:C-001文明崩潰時間點"
+      "setting": "項目啟動時間",
+      "value": "5年前",
+      "note": "ch3確立（赫斯批准）",
+      "id": "value:項目啟動時間"
     }
   ],
   "edges": [
@@ -1030,24 +878,9 @@
       "target": "location:深潛研究所"
     },
     {
-      "type": "located_in",
-      "source": "chapter:ch3",
-      "target": "location:1024號模擬宇宙"
-    },
-    {
-      "type": "located_in",
-      "source": "chapter:ch3",
-      "target": "location:日內瓦WHO總部會議室"
-    },
-    {
       "type": "plants",
       "source": "chapter:ch3",
       "target": "foreshadow:⑧赫斯德語"
-    },
-    {
-      "type": "hints",
-      "source": "chapter:ch3",
-      "target": "foreshadow:⑬異常標記0xFFFF"
     },
     {
       "type": "located_in",
@@ -1326,123 +1159,43 @@
     },
     {
       "type": "causes",
-      "source": "event:全球消融危機加劇（48hr新增37000例、累計120萬）",
-      "target": "event:赫斯代表WHO理事會下達最後通牒：第1100次迭代為最終窗口"
+      "source": "event:赫斯聽證會發言稿設定1100次為合理迭代上限",
+      "target": "event:赫斯正式向沈逸下達第1100次迭代最後通牒"
+    },
+    {
+      "type": "causes",
+      "source": "event:西非認知重置試驗通過第三階段審查",
+      "target": "event:赫斯手中有「能用的替代方案」，壓縮沈逸研究時間"
     },
     {
       "type": "occurs_in",
-      "source": "event:全球消融危機加劇（48hr新增37000例、累計120萬）",
+      "source": "event:西非認知重置試驗通過第三階段審查",
       "target": "chapter:ch3"
     },
     {
       "type": "causes",
-      "source": "event:認知重置方案通過第三階段審查（西非試驗成功）",
-      "target": "event:WHO有了替代方案，深潛計畫不再是唯一選項"
+      "source": "event:0xFFFF異常標記出現於第1024次迭代",
+      "target": "event:沈逸以此為依據爭取繼續研究——「引擎自己說了」"
     },
     {
       "type": "occurs_in",
-      "source": "event:認知重置方案通過第三階段審查（西非試驗成功）",
+      "source": "event:0xFFFF異常標記出現於第1024次迭代",
+      "target": "chapter:ch1"
+    },
+    {
+      "type": "causes",
+      "source": "event:赫斯丈夫漢斯為最早一批消融患者",
+      "target": "event:赫斯對消融有私人動機，推動認知重置部署"
+    },
+    {
+      "type": "causes",
+      "source": "event:赫斯下達1100次最後通牒",
+      "target": "event:沈逸剩餘76次迭代餘量（1100-1024）"
+    },
+    {
+      "type": "occurs_in",
+      "source": "event:赫斯下達1100次最後通牒",
       "target": "chapter:ch3"
-    },
-    {
-      "type": "causes",
-      "source": "event:赫斯列出三條評估標準",
-      "target": "event:第三條「引擎非預期現象」與0xFFFF潛在關聯"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:赫斯列出三條評估標準",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "causes",
-      "source": "event:沈逸拒絕接受期限但無法給出替代數字",
-      "target": "event:沈逸的方法論弱點暴露：無限參數空間窮舉搜索無法產生收斂預測"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:沈逸拒絕接受期限但無法給出替代數字",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "causes",
-      "source": "event:赫斯丈夫漢斯消融四年",
-      "target": "event:赫斯在念消融數據時失控說出德語「Auflösung」"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:赫斯丈夫漢斯消融四年",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "causes",
-      "source": "event:沈逸在日誌並列記下期限與0xFFFF",
-      "target": "event:兩條線索進入同一引力系統，為後續合流埋伏筆"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:沈逸在日誌並列記下期限與0xFFFF",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "causes",
-      "source": "event:方院長「邊界條件」啟發 + 牆壁溫度異常感知",
-      "target": "event:顧則開始系統性測量世界——重力加速度、物理常數精度、建材尺寸、環境參數"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:方院長「邊界條件」啟發 + 牆壁溫度異常感知",
-      "target": "chapter:ch2"
-    },
-    {
-      "type": "causes",
-      "source": "event:顧則向紀恆透露重力加速度異常",
-      "target": "event:紀恆以「非專業領域不嚴謹觀測」駁回，並通報同事"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:顧則向紀恆透露重力加速度異常",
-      "target": "chapter:ch4"
-    },
-    {
-      "type": "causes",
-      "source": "event:紀恆通報同事顧則異常行為",
-      "target": "event:同事（李明華、張薇等）迴避顧則，形成社交隔離"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:紀恆通報同事顧則異常行為",
-      "target": "chapter:ch4"
-    },
-    {
-      "type": "causes",
-      "source": "event:顧則發現物理常數精度截斷",
-      "target": "event:重新審視37個文明崩潰曲線，意識到0.7334是參數而非發現"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:顧則發現物理常數精度截斷",
-      "target": "chapter:ch4"
-    },
-    {
-      "type": "causes",
-      "source": "event:顧則社交隔離 + 獨自留在辦公室過夜",
-      "target": "event:夢見深潛研究所走廊、環形結構、0xFFFF"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:顧則社交隔離 + 獨自留在辦公室過夜",
-      "target": "chapter:ch4"
-    },
-    {
-      "type": "causes",
-      "source": "event:夢中觸碰門把感受到「真實的涼」",
-      "target": "event:與日常均溫表面形成對比，強化「這個世界不真實」的認知"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:夢中觸碰門把感受到「真實的涼」",
-      "target": "chapter:ch4"
     },
     {
       "type": "mirrors",
@@ -1458,16 +1211,6 @@
       "type": "mirrors",
       "source": "mirror_r:沈逸看到不均勻的真實世界",
       "target": "mirror_s:顧則發現不均勻的冰晶"
-    },
-    {
-      "type": "mirrors",
-      "source": "mirror_r:沈逸控制室藍綠冷光走廊",
-      "target": "mirror_s:顧則夢見封閉灰白走廊、冷白燈帶、臭氧金屬氣味"
-    },
-    {
-      "type": "mirrors",
-      "source": "mirror_r:0xFFFF出現在控制室異常標記",
-      "target": "mirror_s:0xFFFF出現在顧則夢中螢幕（他不應該懂十六進制）"
     },
     {
       "type": "mirrors",
@@ -1576,18 +1319,13 @@
     },
     {
       "type": "established_in",
-      "source": "value:赫斯期限評估標準",
+      "source": "value:赫斯年齡",
       "target": "chapter:ch3"
     },
     {
       "type": "established_in",
-      "source": "value:赫斯期限評估標準",
-      "target": "chapter:ch0"
-    },
-    {
-      "type": "established_in",
-      "source": "value:赫斯期限評估標準",
-      "target": "chapter:ch73"
+      "source": "value:赫斯職稱",
+      "target": "chapter:ch3"
     },
     {
       "type": "established_in",
@@ -1596,18 +1334,33 @@
     },
     {
       "type": "established_in",
+      "source": "value:全球消融累計人口",
+      "target": "chapter:ch48"
+    },
+    {
+      "type": "established_in",
+      "source": "value:全球消融累計人口",
+      "target": "chapter:ch37000"
+    },
+    {
+      "type": "established_in",
       "source": "value:每日新增消融人數",
       "target": "chapter:ch3"
     },
     {
       "type": "established_in",
-      "source": "value:48小時新增消融報告",
+      "source": "value:東亞北歐佔比",
       "target": "chapter:ch3"
     },
     {
       "type": "established_in",
-      "source": "value:48小時新增消融報告",
-      "target": "chapter:ch62"
+      "source": "value:赫斯三條標準",
+      "target": "chapter:ch3"
+    },
+    {
+      "type": "established_in",
+      "source": "value:剩餘迭代餘量",
+      "target": "chapter:ch3"
     },
     {
       "type": "established_in",
@@ -1616,7 +1369,7 @@
     },
     {
       "type": "established_in",
-      "source": "value:認知重置持續效果",
+      "source": "value:認知重置有效期",
       "target": "chapter:ch3"
     },
     {
@@ -1626,32 +1379,32 @@
     },
     {
       "type": "established_in",
-      "source": "value:認知重置試驗規模",
+      "source": "value:認知重置西非試驗規模",
       "target": "chapter:ch3"
     },
     {
       "type": "established_in",
-      "source": "value:認知重置試驗效果",
+      "source": "value:認知重置效果",
       "target": "chapter:ch3"
     },
     {
       "type": "established_in",
-      "source": "value:赫斯丈夫漢斯消融年數",
+      "source": "value:赫斯丈夫漢斯消融時間",
       "target": "chapter:ch3"
-    },
-    {
-      "type": "established_in",
-      "source": "value:WHO數據同步頻率",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "established_in",
-      "source": "value:WHO數據同步頻率",
-      "target": "chapter:ch17"
     },
     {
       "type": "established_in",
       "source": "value:全息系統配置時間",
+      "target": "chapter:ch3"
+    },
+    {
+      "type": "established_in",
+      "source": "value:沈逸連續工作時間",
+      "target": "chapter:ch3"
+    },
+    {
+      "type": "established_in",
+      "source": "value:備餐區距螢幕牆",
       "target": "chapter:ch3"
     },
     {
@@ -1661,53 +1414,13 @@
     },
     {
       "type": "established_in",
-      "source": "value:沈逸連續工作時數（ch3起點）",
+      "source": "value:經費協議數據同步條款",
       "target": "chapter:ch3"
     },
     {
       "type": "established_in",
-      "source": "value:備餐區距螢幕距離",
+      "source": "value:項目啟動時間",
       "target": "chapter:ch3"
-    },
-    {
-      "type": "established_in",
-      "source": "value:本地重力加速度",
-      "target": "chapter:ch4"
-    },
-    {
-      "type": "established_in",
-      "source": "value:顧則接縫清單總項數",
-      "target": "chapter:ch4"
-    },
-    {
-      "type": "established_in",
-      "source": "value:精密溫度計規格",
-      "target": "chapter:ch4"
-    },
-    {
-      "type": "established_in",
-      "source": "value:窗框實測數量",
-      "target": "chapter:ch4"
-    },
-    {
-      "type": "established_in",
-      "source": "value:物理常數比對來源數",
-      "target": "chapter:ch4"
-    },
-    {
-      "type": "established_in",
-      "source": "value:重力加速度比對來源數",
-      "target": "chapter:ch4"
-    },
-    {
-      "type": "established_in",
-      "source": "value:夢中環形結構直徑",
-      "target": "chapter:ch4"
-    },
-    {
-      "type": "established_in",
-      "source": "value:C-001文明崩潰時間點",
-      "target": "chapter:ch4"
     }
   ]
 }
