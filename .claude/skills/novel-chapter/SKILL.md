@@ -92,6 +92,24 @@ The reader should know more, feel more, or worry more by the end of each scene. 
 
 Each key event in the beat sheet is a full scene — with setting, dialogue, and sensory texture. A key event compressed into one sentence is a missed opportunity. A chapter with 3 key events typically needs 4-6 scenes.
 
+### 5. The reader knows nothing you haven't shown them
+
+The context package contains world-building details, character backstories, and terminology that the READER has never seen. Treat every concept, organization, and term as unknown to the reader until you introduce it through the story.
+
+Don't use jargon the reader hasn't learned yet. Introduce new concepts through what the character SEES, HEARS, or EXPERIENCES — not through narrator exposition. The first time a concept appears, the reader should understand it from context without needing a glossary.
+
+```
+❌ 赫斯以WHO心智安全理事會理事長的身份下達了認知重置方案的最後通牒。
+   （三個新概念在一句話裡同時出現，讀者不知道任何一個是什麼）
+
+✅ 全息投影裡的女人穿著深藍色套裝，說話像在起草決議。她念出的數字
+   很精確——過去四十八小時，又有三萬七千人「消融」了。
+   沈逸知道那個詞的意思：人還活著，但裡面的東西不在了。
+   （讀者通過角色的認知自然理解「消融」是什麼）
+```
+
+Check the RECENT CHAPTERS section in the context package. If a concept was already introduced in a previous chapter, you can use it freely. If it hasn't appeared before, introduce it.
+
 ---
 
 ## Craft Toolbox (reference as needed)
