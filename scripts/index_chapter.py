@@ -72,7 +72,7 @@ def main():
         json_error(f"Story directory not found: {story_dir}")
 
     # Read story_log.md
-    story_log_path = story_dir / "planning" / "story_log.md"
+    story_log_path = story_dir / "runtime" / "story_log.md"
     if not story_log_path.exists():
         json_error(f"story_log.md not found: {story_log_path}")
 

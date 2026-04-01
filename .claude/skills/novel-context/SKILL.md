@@ -4,6 +4,10 @@ description: Assemble the complete context package for a chapter. Uses beat shee
 argument-hint: "[chapter number]"
 ---
 
+> **⚠ 此 skill 的邏輯已由 `scripts/assemble_context.py` 實作。**
+> Pipeline Step 1 直接呼叫腳本，不再啟動 sub-agent。
+> 以下內容保留作為設計文檔，描述三路召回的邏輯和 output 格式。
+
 Assemble a CHAPTER CONTEXT PACKAGE for chapter generation.
 
 ## Input

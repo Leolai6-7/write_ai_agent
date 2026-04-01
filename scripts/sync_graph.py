@@ -143,7 +143,7 @@ def main():
     args = get_args()
     story_dir = Path(args.story_dir)
 
-    graph_path = story_dir / "planning" / "story_graph.md"
+    graph_path = story_dir / "runtime" / "story_graph.md"
     if not graph_path.exists():
         json_error(f"story_graph.md not found: {graph_path}")
 
