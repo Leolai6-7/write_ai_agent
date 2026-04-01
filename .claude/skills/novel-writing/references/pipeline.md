@@ -112,13 +112,10 @@ Output in 繁體中文.
 ```
 → Volume/arc overview. "結構設計完成，滿意嗎？"
 
-### 1.3.5: Validate Structure (automatic)
-After structure is complete, run:
-```
-python scripts/validate_structure.py --story-dir {STORY_DIR}
-```
-If any characters are missing from character_cast.md, add them before proceeding.
-If any characters are "not_in_heading", fix their headings.
+### 1.3.5: Validate Structure (optional debug tool)
+If needed, run `python scripts/validate_structure.py --story-dir {STORY_DIR}`
+to check that all beat sheet characters exist in character_cast.md.
+This should not be necessary if novel-characters SKILL.md naming rules are followed.
 
 ### 1.4: Foreshadowing
 ```
@@ -166,7 +163,7 @@ Launch ONE sub-agent with this EXACT prompt:
 >
 > {paste the CHAPTER CONTEXT PACKAGE from Step 1 here}
 >
-> Save to: {STORY_DIR}/outputs/chapter_{NNN}.md
+> Do NOT save any file. Return the chapter text directly.
 > Do NOT update story_log.md.
 > Do NOT read any planning or world files.
 >
@@ -174,7 +171,9 @@ Launch ONE sub-agent with this EXACT prompt:
 > NEW_CHARACTERS:
 > - {name}：{role}，{speaking style}
 
-Wait for completion. If NEW_CHARACTERS reported, append to character_cast.md.
+Wait for completion. Main agent saves the returned text to
+`{STORY_DIR}/outputs/chapter_{NNN}.md`.
+If NEW_CHARACTERS reported, append to character_cast.md.
 
 ---
 
@@ -204,9 +203,10 @@ Launch ONE sub-agent with this EXACT prompt:
 > - 因果鏈: add new causal links
 > - 數值設定: add any new established values
 >
-> Save updated graph to: {STORY_DIR}/planning/story_graph.md
+> Do NOT save any file. Return the updated graph text directly.
 
-Wait for completion.
+Wait for completion. Main agent saves the returned text to
+`{STORY_DIR}/planning/story_graph.md`.
 
 ---
 
