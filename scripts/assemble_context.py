@@ -144,6 +144,33 @@ def check_graph_conditions(story_dir: Path, characters: list[str], chapter_num: 
     return result
 
 
+def get_concept_tracking(story_dir: Path) -> str:
+    """Read concept introduction tracking table from story_graph."""
+    graph_path = story_dir / "runtime" / "story_graph.md"
+    if not graph_path.exists():
+        return "N/A"
+    text = graph_path.read_text(encoding="utf-8")
+    section = extract_section(text, "概念引入追蹤", "## ")
+    if not section:
+        return "N/A"
+
+    # Extract just the not-yet-introduced concepts
+    lines = ["Concepts NOT yet introduced to the reader (introduce naturally when first used):"]
+    found_any = False
+    for line in section.split("\n"):
+        if not line.strip().startswith("|"):
+            continue
+        if ("❌" in line or "⚠" in line) and "概念" not in line:
+            cells = [c.strip() for c in line.split("|") if c.strip()]
+            if len(cells) >= 2:
+                lines.append(f"  ⚠ {cells[0]}")
+                found_any = True
+
+    if not found_any:
+        return "All concepts have been introduced to the reader."
+    return "\n".join(lines)
+
+
 def do_semantic_search(story_dir: Path, query: str) -> str:
     """Run semantic search if ChromaDB has indexed chapters."""
     chroma_dir = story_dir / "chroma"
@@ -246,6 +273,9 @@ def main():
     query = f"{beat['objective']} {beat['key_events']}"
     semantic_results = do_semantic_search(story_dir, query)
 
+    # === Concept introduction tracking ===
+    concept_tracking = get_concept_tracking(story_dir)
+
     # === Dual-line awareness ===
     dual_line = get_dual_line_info(story_dir, beat["line"])
 
@@ -289,6 +319,9 @@ Note: Characters may not know exact numbers — use sensory descriptions instead
 
 --- KEYWORD SUPPLEMENTS ---
 {chr(10).join(keyword_supplements) if keyword_supplements else '(none)'}
+
+--- CONCEPT INTRODUCTION STATUS ---
+{concept_tracking}
 
 --- DUAL-LINE AWARENESS ---
 {dual_line}
