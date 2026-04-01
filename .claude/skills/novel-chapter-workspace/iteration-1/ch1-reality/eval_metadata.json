@@ -1,0 +1,13 @@
+{
+  "eval_id": 2,
+  "eval_name": "ch1-reality-cold-underground",
+  "prompt": "Generate chapter 1 (R-line, underground facility) with compressed cold prose",
+  "assertions": [
+    {"name": "word-count-in-range", "check": "Chinese character count between 5000 and 8000"},
+    {"name": "no-meta-narrative", "check": "Does not contain 主角, 第一章, 讀者, protagonist, chapter one, reader"},
+    {"name": "opens-with-action-or-dialogue", "check": "First 3 non-empty lines contain dialogue or action, not pure scenic description"},
+    {"name": "has-reality-tag", "check": "Contains 【現實】"},
+    {"name": "observer-effect-planted", "check": "Contains reference to observer effect, 觀察者效應, or data fluctuation when protagonist watches"},
+    {"name": "temperature-18c", "check": "Contains 18°C or 十八度 reference for the facility"}
+  ]
+}

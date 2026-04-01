@@ -1,0 +1,29 @@
+{
+  "expectations": [
+    {
+      "text": "word-count-in-range",
+      "passed": true,
+      "evidence": "chars=8899"
+    },
+    {
+      "text": "no-meta-narrative",
+      "passed": false,
+      "evidence": ""
+    },
+    {
+      "text": "has-reality-tag",
+      "passed": true,
+      "evidence": ""
+    },
+    {
+      "text": "observer-effect-planted",
+      "passed": false,
+      "evidence": ""
+    },
+    {
+      "text": "temperature-18c",
+      "passed": true,
+      "evidence": ""
+    }
+  ]
+}

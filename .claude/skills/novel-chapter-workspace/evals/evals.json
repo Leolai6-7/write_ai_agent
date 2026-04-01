@@ -1,0 +1,19 @@
+{
+  "skill_name": "novel-chapter",
+  "evals": [
+    {
+      "id": 1,
+      "eval_name": "ch2-simulation-world-texture",
+      "prompt": "Generate chapter 2 of 《文明病》. This is an S-line (simulation) chapter. The world is simulated but the character doesn't know. The prose itself should carry the artificial perfection of the simulated world through word choices — edges too sharp, temperatures too constant, timing too regular — without the character noticing. The wall temperature anomaly (all walls = 23°C) should be whispered, not shouted. Read the SKILL.md first, then generate using the context package provided.",
+      "expected_output": "A 5,000-8,000 word chapter in 繁體中文 that reads like literary fiction (not web novel). The world should feel subtly artificial through narration. The wall temperature anomaly appears only 1-2 times, briefly. Full meeting scene with 方院長. Rich internal monologue. Every description carries the simulated world's uncanny perfection.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "eval_name": "ch1-reality-cold-underground",
+      "prompt": "Generate chapter 1 of 《文明病》. This is an R-line (reality) chapter. The setting is a cold, windowless underground research facility (18°C, blue-green light). The prose should carry the oppressive, sealed-off feel of this world — compressed, data-driven, cold. Read the SKILL.md first, then generate using the context package provided.",
+      "expected_output": "A 5,000-8,000 word chapter in 繁體中文 with compressed, data-driven prose matching the underground facility setting. Characters speak in terse, technical language. The world texture is cold and clinical.",
+      "files": []
+    }
+  ]
+}

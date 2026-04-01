@@ -1,0 +1,29 @@
+{
+  "expectations": [
+    {
+      "text": "word-count-in-range",
+      "passed": true,
+      "evidence": "chars=8920"
+    },
+    {
+      "text": "no-meta-narrative",
+      "passed": true,
+      "evidence": ""
+    },
+    {
+      "text": "has-simulation-tag",
+      "passed": true,
+      "evidence": ""
+    },
+    {
+      "text": "key-dialogue-fang",
+      "passed": true,
+      "evidence": ""
+    },
+    {
+      "text": "wall-temp-whispered",
+      "passed": false,
+      "evidence": ""
+    }
+  ]
+}

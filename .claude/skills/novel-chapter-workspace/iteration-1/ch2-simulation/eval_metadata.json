@@ -1,0 +1,13 @@
+{
+  "eval_id": 1,
+  "eval_name": "ch2-simulation-world-texture",
+  "prompt": "Generate chapter 2 (S-line, simulation world) with world texture through narration",
+  "assertions": [
+    {"name": "word-count-in-range", "check": "Chinese character count between 5000 and 8000"},
+    {"name": "no-meta-narrative", "check": "Does not contain 主角, 第一章, 讀者, protagonist, chapter one, reader"},
+    {"name": "opens-with-action-or-dialogue", "check": "First 3 non-empty lines contain dialogue or action, not pure scenic description"},
+    {"name": "has-simulation-tag", "check": "Contains 【模擬】"},
+    {"name": "key-dialogue-fang", "check": "Contains 答案在提問前已寫好 or close variant"},
+    {"name": "wall-temp-whispered", "check": "23°C or 二十三度 appears no more than 3 times (whispered, not shouted)"}
+  ]
+}
