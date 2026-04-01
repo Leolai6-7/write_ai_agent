@@ -118,9 +118,12 @@ PACING: {recommendation + reasoning in 2-3 lines}
 --- CAUSAL CONTEXT ---
 {from story_graph if read, otherwise: "N/A — no cross-arc references"}
 
---- NUMERICAL VALUES ---
+--- NUMERICAL VALUES (metadata — not all values should appear in prose) ---
 {from story_graph if read, otherwise: "Check story_graph if referencing
 previously established numbers"}
+Note: some values are for consistency checking only (e.g., wall temperature).
+Characters may not know exact numbers — use sensory descriptions instead
+of stating precise values unless the character has measuring instruments.
 
 --- SEMANTIC RECALL ---
 {results from semantic_search.py, or "N/A — no indexed chapters yet"}
