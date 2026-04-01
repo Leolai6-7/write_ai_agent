@@ -163,7 +163,7 @@ Launch ONE sub-agent with this EXACT prompt:
 >
 > {paste the CHAPTER CONTEXT PACKAGE from Step 1 here}
 >
-> Do NOT save any file. Return the chapter text directly.
+> Save to: {STORY_DIR}/outputs/chapter_{NNN}.md
 > Do NOT update story_log.md.
 > Do NOT read any planning or world files.
 >
@@ -171,8 +171,8 @@ Launch ONE sub-agent with this EXACT prompt:
 > NEW_CHARACTERS:
 > - {name}：{role}，{speaking style}
 
-Wait for completion. Main agent saves the returned text to
-`{STORY_DIR}/outputs/chapter_{NNN}.md`.
+Run in FOREGROUND (not background) so the user can approve Write permission.
+Hooks will automatically track that chapter file was written.
 If NEW_CHARACTERS reported, append to character_cast.md.
 
 ---
@@ -203,10 +203,9 @@ Launch ONE sub-agent with this EXACT prompt:
 > - 因果鏈: add new causal links
 > - 數值設定: add any new established values
 >
-> Do NOT save any file. Return the updated graph text directly.
+> Save updated graph to: {STORY_DIR}/planning/story_graph.md
 
-Wait for completion. Main agent saves the returned text to
-`{STORY_DIR}/planning/story_graph.md`.
+Run in FOREGROUND so hooks can track the graph update.
 
 ---
 
