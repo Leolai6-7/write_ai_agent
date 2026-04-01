@@ -80,21 +80,31 @@ Rhythm rules:
 - 核心衝突：...
 - 結尾轉折：...
 
-## 章節節拍（弧線一，可選）
-| 章 | 標題 | 線 | 目標 | 角色 | 地點 | 伏筆 | 概念 | 情感 |
-|----|------|----|------|------|------|------|------|------|
-| 1  | ... | R | ... | 沈逸,林昭明 | 深潛研究所 | ⑨觀察者效應 | 模擬啟動 | 期待 |
+## 章節節拍（可選）
+
+The beat sheet should include retrieval tags — columns that tell the
+RAG system what context each chapter needs. Choose tags that make
+sense for THIS story. Common useful tags include:
+
+- **角色**: who appears → retrieves character profiles
+- **地點**: where it happens → retrieves location descriptions
+- **伏筆**: active threads → retrieves foreshadowing designs
+- **概念**: key ideas/tech → retrieves world_bible sections
+
+Not every story needs all of these. A story without foreshadowing
+doesn't need a 伏筆 column. A story set in one location doesn't
+need a 地點 column. Add what's useful, skip what isn't.
+
+Example:
+```
+| 章 | 標題 | 目標 | 角色 | 地點 | 情感 |
+|----|------|------|------|------|------|
+| 1  | ... | ... | A,B | 辦公室 | 期待 |
 ```
 
-The beat sheet columns serve as a pre-built retrieval index:
-- **角色**: which character profiles to retrieve from character_cast
-- **地點**: which location descriptions to retrieve from world_bible
-- **伏筆**: which foreshadowing threads to retrieve (plant/hint/resolve)
-- **概念**: key concepts/technologies that need world_bible context
-
-These tags are the KEYS for the RAG system. When the context assembler
-queries "what does chapter 15 need?", it looks up row 15 in this table
-and immediately knows which sections to retrieve — no inference needed.
+These tags serve as retrieval KEYS. When the context assembler
+asks "what does chapter N need?", it looks up row N and immediately
+knows which sections to retrieve from the source documents.
 
 ## Structural Philosophy
 
