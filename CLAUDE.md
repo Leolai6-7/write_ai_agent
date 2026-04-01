@@ -81,6 +81,16 @@ STORY_DIR = data/stories/{active_story}/
 1. 更新 `data/active_story.txt`
 2. 載入該故事的進度檔案
 
+## 章節生成規則（不可違反）
+
+每章必須完成 4 步才算完成，缺一不可：
+1. Context assembly（sub-agent）
+2. Chapter generation（獨立 sub-agent）
+3. Update story_log（主 agent）
+4. Update story_graph（sub-agent）
+
+**不可合併 sub-agent。不可跳過步驟。不可平行多章。**
+
 ## 開發須知
 
 - **測試**: `uv run pytest tests/ -v`

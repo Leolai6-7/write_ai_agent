@@ -197,7 +197,14 @@ Wait for completion.
 
 ---
 
-**THEN** proceed to the next chapter. Start from Step 1 again with {N+1}.
+**COMPLETION GATE — Do NOT proceed until ALL 4 steps are done:**
+- [ ] Step 1 (context) completed
+- [ ] Step 2 (chapter) completed and saved to file
+- [ ] Step 3 (story_log) updated by main agent
+- [ ] Step 4 (story_graph) updated by sub-agent
+
+If ANY step is missing, the chapter is NOT complete.
+Only after all 4 checkmarks → proceed to next chapter with {N+1}.
 
 Quality control is at the ARC level via `/novel-style-audit`, not per-chapter.
 
