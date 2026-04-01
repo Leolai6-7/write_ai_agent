@@ -137,73 +137,36 @@ Output in 繁體中文.
 
 Per chapter, in sequence:
 
-### 2.0: Context Assembly (sub-agent, NOT main agent)
+### 2.0: Context Assembly — 3-Layer RAG (sub-agents, NOT main agent)
 
-The main agent must NOT read large planning/world files directly.
-Instead, launch a sub-agent to retrieve the relevant context.
+The main agent must NOT read large files directly. Instead, use
+the 3-layer RAG system to assemble context.
 
-**Key principle: selective ≠ summarized.** Select WHICH sections to
-include based on the chapter plan, but include them IN FULL. Do not
-compress or paraphrase — the writing quality depends on having rich,
-textured source material.
+**Key principle: selective ≠ summarized.** The RAG system selects
+WHICH sections to include, but includes them IN FULL.
 
+**Layer 1: Graph Query** (Sub-agent A)
 ```
 Agent prompt:
-You are a context assembler. Your job is to use the STORY GRAPH
-to identify what chapter {N} needs, then retrieve the relevant
-source material IN FULL.
+Read .claude/skills/novel-graph-query/SKILL.md and follow.
+Chapter: {N}
+Story directory: {STORY_DIR}
+Return a RETRIEVAL PLAN. No file save.
+```
 
-Step 1: Read {STORY_DIR}/planning/story_graph.md
-  This is the narrative relationship graph. It tells you:
-  - Which characters appear in which chapters
-  - Which locations are used where
-  - Which foreshadowing threads are active
-  - Causal chains between events
-  - Dual-line mirror relationships
-  - Established numerical values
+**Layer 2: Full Section Retrieval** (Sub-agent B)
+```
+Agent prompt:
+Read .claude/skills/novel-context-retrieve/SKILL.md and follow.
+Use this retrieval plan: {output from Layer 1}
+Story directory: {STORY_DIR}
+Return a CHAPTER CONTEXT PACKAGE. No file save.
+```
 
-Step 2: Read {STORY_DIR}/planning/structure.md
-  → Find chapter {N}'s row (title, line, objective, events, characters, tone)
-
-Step 3: Using the chapter plan + graph, identify what to retrieve:
-  - CHARACTERS: look up involved characters in the graph → find their
-    previous appearance chapters → retrieve FULL profiles from
-    {STORY_DIR}/world/character_cast.md
-  - LOCATIONS: look up the chapter's setting → retrieve FULL description
-    from {STORY_DIR}/world/world_bible.md
-  - FORESHADOWING: look up active threads for this chapter → retrieve
-    FULL thread designs from {STORY_DIR}/planning/foreshadowing.md
-  - CAUSAL CONTEXT: trace back causal chains in the graph to find
-    source chapters → retrieve their summaries from story_log
-  - NUMERICAL VALUES: list all established values that might be
-    referenced (temperatures, distances, percentages)
-
-Step 4: Also retrieve:
-  - {STORY_DIR}/planning/story_log.md → last 5 entries PLUS any
-    earlier entries that the graph's causal chains point to
-  - {STORY_DIR}/planning/story_brief.md → genre, language, style
-
-Output format — CHAPTER CONTEXT PACKAGE:
-
-=== Chapter {N}: {title} ===
-Line: {R/S/R+S}
-Objective: {objective}
-Key events: {events}
-Emotional tone: {tone}
-Genre/Style: {from story_brief}
-
---- CHARACTER PROFILES (full, for this chapter's cast) ---
-{paste full profiles of involved characters}
-
---- SETTING (full, for this chapter's locations) ---
-{paste full location descriptions from world_bible}
-
---- FORESHADOWING (full thread details) ---
-{paste full foreshadowing thread designs for this chapter}
-
---- RECENT CHAPTERS ---
-{last 5 story_log entries}
-===
+**Layer 3: Semantic Fallback** (Optional, for 50+ chapter stories)
+If ChromaDB is available, query with the chapter objective to find
+semantically related chapters not connected in the graph.
+Append any relevant findings to the context package.
 
 Do NOT summarize or compress any section. The writer needs the
 texture and specificity of the original material.
