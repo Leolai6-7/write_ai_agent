@@ -274,13 +274,13 @@ Every 5 chapters: "前5章寫完了，要檢查再繼續嗎？"
 When all chapters in a volume are complete, run the arc review.
 
 1. Main agent reads story_log.md (small file, chapter summaries)
-2. Launch **arc-reviewer plugin agent** (has Read + Write):
+2. Launch **arc-reviewer plugin agent** (has Read + Edit + Write):
 
 ```
 subagent_type: novel-agents:arc-reviewer
 ```
 
-Prompt — paste story_log, tell agent where to find files for detail checks:
+Prompt — paste story_log, tell agent where to find files:
 
 > Story directory: {STORY_DIR}
 > Review Volume {V} (chapters {start}-{end}).
@@ -288,26 +288,22 @@ Prompt — paste story_log, tell agent where to find files for detail checks:
 > === STORY LOG (chapter summaries — use as primary source) ===
 > {full content of story_log.md}
 >
-> Files you can Read when you need to verify specific details:
-> - {STORY_DIR}/outputs/chapter_{NNN}.md (individual chapters)
-> - {STORY_DIR}/runtime/story_graph.md
-> - {STORY_DIR}/world/world_bible.md
-> - {STORY_DIR}/world/character_cast.md
-> - {STORY_DIR}/planning/structure.md (future arcs)
-> - {STORY_DIR}/planning/volume_plan_{V}.yaml (planned vs actual)
+> Edit these files IN PLACE (use Edit tool, not Write):
+> - {STORY_DIR}/world/world_bible.md (add new settings)
+> - {STORY_DIR}/world/character_cast.md (update 當前狀態 sections)
 >
-> Write outputs to:
-> - /tmp/world_bible_updated.md
-> - /tmp/character_cast_updated.md
-> - /tmp/arc_review_{V}.md
+> Write this NEW file:
+> - {STORY_DIR}/planning/arc_review_{V}.md (review report)
+>
+> Files you can Read for detail checks:
+> - {STORY_DIR}/outputs/chapter_{NNN}.md
+> - {STORY_DIR}/runtime/story_graph.json
+> - {STORY_DIR}/planning/structure.md
+> - {STORY_DIR}/planning/volume_plan_{V}.yaml
 
-2. Main agent shows `arc_review_{V}.md` to user for review
-4. After user confirms:
-   - Copy `/tmp/world_bible_updated.md` → `{STORY_DIR}/world/world_bible.md`
-   - Copy `/tmp/character_cast_updated.md` → `{STORY_DIR}/world/character_cast.md`
-   - Copy `/tmp/arc_review_{V}.md` → `{STORY_DIR}/planning/arc_review_{V}.md`
-5. If structure adjustments are recommended, discuss with user before modifying structure.md
-6. Proceed to next volume → back to 2.0 Volume Planning
+3. Main agent reviews changes (`git diff`) and arc_review report
+4. If structure adjustments are recommended, discuss with user before modifying
+5. Proceed to next volume → back to 2.0 Volume Planning
 
 ---
 

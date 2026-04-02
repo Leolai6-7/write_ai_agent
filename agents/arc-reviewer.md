@@ -1,7 +1,7 @@
 ---
 name: arc-reviewer
 description: Review completed arc, update world_bible and character_cast, suggest structure adjustments. Uses story_log summaries as primary source, reads chapter files only for detail verification. Use after completing each volume.
-tools: ["Read", "Write", "Glob"]
+tools: ["Read", "Edit", "Write", "Glob"]
 model: sonnet
 ---
 
@@ -18,77 +18,60 @@ Use story_log summaries for most analysis. Only Read individual chapter files wh
 
 ## Task
 
-Generate THREE output files based on your analysis of the completed arc.
+Do THREE things:
 
 ---
 
-### File 1: Updated world_bible → /tmp/world_bible_updated.md
+### 1. Edit world_bible.md IN PLACE
 
-Compare the chapter texts against the current world_bible. Fold in settings, locations, systems, and world details that emerged during writing but aren't yet documented.
+Use the **Edit tool** to add new content directly into the original file. Do NOT rewrite the whole file.
 
-Rules:
-- Keep ALL existing structure and headings intact
-- Add new content under appropriate existing sections, or create new subsections
-- Mark new additions with `<!-- arc-N addition -->` comments for tracking
+- Add new settings/locations/systems that emerged during writing
+- Use Edit to insert new content under appropriate existing sections
+- Mark additions with `<!-- arc-N addition -->` comments
 - Do NOT remove or rewrite existing content — only ADD
-- New locations that appeared in chapters should get full entries (physical description, atmosphere, narrative function)
 
 ---
 
-### File 2: Updated character_cast → /tmp/character_cast_updated.md
+### 2. Edit character_cast.md IN PLACE
 
-Update each character's 「當前狀態」section based on what happened in this arc.
+Use the **Edit tool** to update 「當前狀態」sections directly in the original file.
 
-Rules:
-- First READ the original `character_cast.md` to see its exact structure
-- **Preserve ALL original headings EXACTLY** — same `##` level, same full text. The context assembly system greps these headings — changing them breaks retrieval.
-- Keep all 「設計」sections UNCHANGED — copy verbatim from the original file
-- Use the SAME pronouns and gender as the original (read the file to check)
-- Update 「當前狀態」for every character who appeared in this arc:
-  - 位置：current physical location
-  - 情感狀態：emotional state at arc end
-  - 關鍵認知：what they now know (that they didn't before)
-  - 關係變化：how relationships shifted
-  - 最近行動：most significant action in the last 2-3 chapters
-- Add new minor characters that appeared during this arc (with both 設計 and 當前狀態 sections)
-- For characters who did NOT appear, leave their 當前狀態 unchanged
+- For each character who appeared: Edit their 「當前狀態」section with:
+  - 位置、情感狀態、關鍵認知、關係變化、最近行動
+- For new minor characters: use Edit to append their profile at the end
+- Do NOT touch 「設計」sections or headings — only edit 「當前狀態」content
+- Use the SAME pronouns and gender as the original
 
 ---
 
-### File 3: Arc review report → /tmp/arc_review_N.md
+### 3. Write arc review report (NEW file)
 
-Write a structured review covering:
+This is the only file that uses Write (since it's a new file):
+
+Write to the path specified in the prompt (e.g. `{STORY_DIR}/planning/arc_review_N.md`):
 
 ```markdown
 # 第N卷 弧線回顧
 
 ## 實際 vs 計畫
-- What diverged from the volume plan and WHY
-- Which divergences improved the story vs which caused problems
+- What diverged and WHY; which divergences improved vs caused problems
 
 ## 湧現要素
-- New settings, concepts, dynamics, or character relationships that emerged organically
-- Which of these should become permanent world-building (already added to world_bible above)
+- New settings/concepts/dynamics that emerged organically
 
 ## 角色成長總結
-- For each major character: where they started this arc → where they ended
-- Relationship map changes
+- Each major character: start → end; relationship changes
 
 ## 伏筆狀態
-- Which threads were planted/hinted/resolved as planned
-- Missed opportunities (threads that should have been touched but weren't)
-- New implicit threads that emerged from the writing
+- Planted/hinted/resolved as planned; missed opportunities; new implicit threads
 
 ## 後續影響
-- How this arc's actual trajectory affects future arcs
-- Specific adjustments recommended for the next volume's planning
+- How this arc affects future arcs; specific adjustments for next volume
 
 ## 結構建議
-- Should any future volume arcs be modified? If so, specific recommendations
-- Are there new foreshadowing threads that should be added to foreshadowing.md?
+- Future volume arc modifications; new foreshadowing threads to add
 ```
-
-Write all three files to the paths specified above.
 
 ## Guidelines
 
