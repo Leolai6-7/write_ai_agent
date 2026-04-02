@@ -208,11 +208,8 @@ Read the generated chapter, then update BOTH story_log and story_graph:
 - 因果鏈：從章節內容提取新的因果關係
 - 數值設定：從章節內容提取新確立的數字
 
-**3c. 後處理腳本（非阻塞）：**
-```
-python scripts/index_chapter.py --story-dir {STORY_DIR} --chapter-num {N} --chapter-file {STORY_DIR}/outputs/chapter_{NNN}.md
-python scripts/sync_graph.py --story-dir {STORY_DIR}
-```
+Post-processing (index_chapter + sync_graph) is automatically triggered by the
+PostToolUse hook when story_log.md is edited. No manual action needed.
 
 ---
 

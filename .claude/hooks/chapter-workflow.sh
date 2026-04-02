@@ -1,10 +1,7 @@
 #!/bin/bash
 # Chapter Workflow Enforcement Hook
 # Triggered on PostToolUse for Write/Edit operations
-# Tracks the 3-step chapter generation workflow:
-#   Step 1: Context assembly (Python script) — not tracked
-#   Step 2: Chapter generation → chapter_NNN.md written
-#   Step 3: Update story_log.md + story_graph.md (main agent)
+# Tracks the 3-step pipeline and auto-triggers post-processing.
 
 PENDING_FILE="$CLAUDE_PROJECT_DIR/.claude/hooks/.chapter_pending"
 
@@ -29,17 +26,33 @@ if [[ "$FILENAME" =~ ^chapter_[0-9]+\.md$ ]]; then
     exit 0
 fi
 
-# Case 2: story_log.md edited → mark done (graph update is part of same step)
+# Case 2: story_log.md edited → workflow complete + auto post-processing
 if [[ "$FILENAME" == "story_log.md" ]] && [[ -f "$PENDING_FILE" ]]; then
-    RESULT=$(python3 -c "
+    CHAPTER_NUM=$(python3 -c "
 import json
 with open('$PENDING_FILE') as f:
-    d = json.load(f)
-d['log_done'] = True
-print(d['chapter'])
+    print(json.load(f)['chapter'])
 " 2>/dev/null)
     rm -f "$PENDING_FILE"
-    echo "WORKFLOW COMPLETE: Chapter $RESULT done." >&2
+
+    # Auto-trigger post-processing in background
+    STORY_DIR=$(python3 -c "
+import pathlib
+p = pathlib.Path('$FILE_PATH')
+# story_log.md is in runtime/, go up two levels to get story dir
+print(p.parent.parent)
+" 2>/dev/null)
+
+    if [[ -n "$STORY_DIR" ]] && [[ -d "$STORY_DIR" ]]; then
+        CHAPTER_FILE="$STORY_DIR/outputs/chapter_$(printf '%03d' $CHAPTER_NUM).md"
+        # Index chapter to ChromaDB
+        cd "$CLAUDE_PROJECT_DIR" && python3 scripts/index_chapter.py --story-dir "$STORY_DIR" --chapter-num "$CHAPTER_NUM" --chapter-file "$CHAPTER_FILE" > /dev/null 2>&1 &
+        # Sync graph to NetworkX JSON
+        cd "$CLAUDE_PROJECT_DIR" && python3 scripts/sync_graph.py --story-dir "$STORY_DIR" > /dev/null 2>&1 &
+        echo "WORKFLOW COMPLETE: Chapter $CHAPTER_NUM done. Post-processing triggered." >&2
+    else
+        echo "WORKFLOW COMPLETE: Chapter $CHAPTER_NUM done. (post-processing skipped: story dir not found)" >&2
+    fi
     exit 0
 fi
 
