@@ -50,6 +50,9 @@ chapters:
         action: plant
 ```
 
+**IMPORTANT**: Output MUST be valid YAML, NOT a markdown table. Do NOT use markdown `|` table syntax.
+The downstream parser uses `yaml.safe_load()` — markdown tables will cause a parse error.
+
 Write this YAML file to the path specified in the prompt.
 
 ## Core Philosophy
