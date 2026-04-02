@@ -6,7 +6,7 @@
     {
       "type": "character",
       "name": "沈逸",
-      "events": "ch1: 啟動第1024次文明模擬；將觀測窗口縮到第三階段、前兩階段降為Level 3自動記錄；獨自留守控制室不休息；關注個體0447的美感萌芽行為；得知異常標記0xFFFF後下令全歷史搜索 · ch3: 連續工作31小時接到赫斯全息通訊；以聽證會發言稿推算出1100次期限；向赫斯說明0xFFFF的獨特性（前1023次從未出現未定義值）；拒絕接受期限但未能改變結果；寫下工作日誌「1100 / 0xFFFF」；繼續監控第1024次迭代（城邦1024-C-0712連結密度為平均值1.3倍） · ch5: 被林昭明勸去休息（第三次忘記嚼營養棒、微動作頻率降到低效區間）；睡眠4-5小時後6:15回控制室，姿態與行為模式被林昭明觀察到與Σ高度一致（全注意力投入觀測、維生功能降至最低優先）；詢問林昭明第三階段社會連結指數趨勢；未察覺林昭明隱瞞1024-Σ發現",
+      "events": "ch1: 啟動第1024次文明模擬；將觀測窗口縮到第三階段、前兩階段降為Level 3自動記錄；獨自留守控制室不休息；關注個體0447的美感萌芽行為；得知異常標記0xFFFF後下令全歷史搜索 · ch3: 連續工作31小時接到赫斯全息通訊；以聽證會發言稿推算出1100次期限；向赫斯說明0xFFFF的獨特性（前1023次從未出現未定義值）；拒絕接受期限但未能改變結果；寫下工作日誌「1100 / 0xFFFF」；繼續監控第1024次迭代（城邦1024-C-0712連結密度為平均值1.3倍）",
       "id": "character:沈逸"
     },
     {
@@ -42,7 +42,7 @@
     {
       "type": "character",
       "name": "林昭明",
-      "events": "ch1: 微調星際塵埃密度+0.7%；私下使用Level 4精度監控；發現觀察者效應——沈逸注視區域的空間曲率微偏移；報告異常標記0xFFFF；回憶第847次模擬的七聲音階旋律；獨自進行「模擬悼念」儀式 · ch5: 凌晨獨自值守時發現1024-Σ（原編號1024-N-0447）——篩選腳本跑47小時從7億個體中標記112個高認知離群值，第89個結果即0447；調出沈逸入職心理側寫做六維認知向量匹配，得0.917；蒙特卡羅驗證（百萬/五百萬樣本中0.9以上為零）確認非巧合；將匹配分析加密存入私人目錄（非公共資料庫）；為0447建立私人追蹤代號1024-Σ並偽裝成「空間曲率局部採樣」視窗；再次回憶第847次模擬七聲音階旋律；發現Σ夢境意象（低頻振動、金屬質感、流動發光液體）與深潛研究所走廊高度吻合；沈逸到崗後選擇隱瞞——謊報「數據穩定，沒有顯著異常」；在加密筆記「建議行動」欄寫下「暫無。繼續觀測。」",
+      "events": "ch1: 微調星際塵埃密度+0.7%；私下使用Level 4精度監控；發現觀察者效應——沈逸注視區域的空間曲率微偏移；報告異常標記0xFFFF；回憶第847次模擬的七聲音階旋律；獨自進行「模擬悼念」儀式 · ch5: 標記1024-Σ行為偏差（社交網絡收縮）；手動比對39參數發現94.7%吻合沈逸心理側寫；推斷可能觸犯自我模擬禁忌但選擇延遲——加密存檔不提交；0xFFFF搜索進度79.3%；筆記寫下「觀察者效應」和「忠誠和正確不在同一方向」；847次旋律兩次浮現",
       "id": "character:林昭明"
     },
     {
@@ -133,7 +133,7 @@
     {
       "type": "foreshadow",
       "name": "④林昭明旋律",
-      "status": "已植入（ch1提前：第847次模擬的七聲音階旋律，創作者最終完全孤立 → ch5再次植入：林昭明兩次回憶該旋律——凌晨獨自值守時由Σ的覺醒行為觸發、以及在備餐區反思時將第847次模擬個體的「主動選擇孤獨」與Σ和沈逸並列）",
+      "status": "已植入（ch1+ch5：旋律在ch5再次浮現兩次，與道德困境交織）",
       "id": "foreshadow:④林昭明旋律"
     },
     {
@@ -175,7 +175,7 @@
     {
       "type": "foreshadow",
       "name": "⑫煙霧彈(自我模擬)",
-      "status": "已植入（ch5: 林昭明發現1024-Σ與沈逸認知向量匹配0.917，引出「自我模擬禁忌」——設計文件第七章第三節明確禁止操作者認知模式植入模擬，違反觸發引擎鎖定+通報心智安全理事會；引擎啟動時自動檢測匹配>0.6的模板剔除，但Σ是運行中自發演化非初始條件；林昭明列出三種可能——巧合/沈逸有意無意滲透/未知機制——並以蒙特卡羅排除巧合；煙霧彈效果：讀者被引導懷疑沈逸違規，實際指向更深層的模擬-現實共振）",
+      "status": "已植入（ch5：94.7%行為吻合引導讀者認為沈逸犯了自我模擬禁忌）",
       "id": "foreshadow:⑫煙霧彈(自我模擬)"
     },
     {
@@ -425,90 +425,6 @@
       "id": "event:顧則開始覺得「自己不是這個世界的居民」"
     },
     {
-      "type": "event",
-      "description": "林昭明篩選腳本跑47小時",
-      "chapter": "ch5",
-      "id": "event:林昭明篩選腳本跑47小時"
-    },
-    {
-      "type": "event",
-      "description": "從7億個體中標記112個高認知離群值，發現0447（Σ）",
-      "chapter": "ch5",
-      "id": "event:從7億個體中標記112個高認知離群值，發現0447（Σ）"
-    },
-    {
-      "type": "event",
-      "description": "0447從美感萌芽到系統性環境覺察",
-      "chapter": "ch1→ch5",
-      "id": "event:0447從美感萌芽到系統性環境覺察"
-    },
-    {
-      "type": "event",
-      "description": "Σ記錄16條模擬引擎物理簡化（接縫），成為首個「測量世界解析度邊界」的虛擬個體",
-      "chapter": "ch5",
-      "id": "event:Σ記錄16條模擬引擎物理簡化（接縫），成為首個「測量世界解析度邊界」的虛擬個體"
-    },
-    {
-      "type": "event",
-      "description": "林昭明調出沈逸入職心理側寫",
-      "chapter": "ch5",
-      "id": "event:林昭明調出沈逸入職心理側寫"
-    },
-    {
-      "type": "event",
-      "description": "六維認知向量匹配度0.917，蒙特卡羅確認非巧合",
-      "chapter": "ch5",
-      "id": "event:六維認知向量匹配度0.917，蒙特卡羅確認非巧合"
-    },
-    {
-      "type": "event",
-      "description": "0.917匹配度 + 自我模擬禁忌",
-      "chapter": "ch5",
-      "id": "event:0.917匹配度 + 自我模擬禁忌"
-    },
-    {
-      "type": "event",
-      "description": "林昭明選擇沉默——加密存私人目錄、對沈逸謊報「數據穩定」",
-      "chapter": "ch5",
-      "id": "event:林昭明選擇沉默——加密存私人目錄、對沈逸謊報「數據穩定」"
-    },
-    {
-      "type": "event",
-      "description": "Σ夢境意象（低頻振動、金屬質感、發光液體）",
-      "chapter": "ch5",
-      "id": "event:Σ夢境意象（低頻振動、金屬質感、發光液體）"
-    },
-    {
-      "type": "event",
-      "description": "林昭明在走廊中意識到Σ可能「夢見」了深潛研究所",
-      "chapter": "ch5",
-      "id": "event:林昭明在走廊中意識到Σ可能「夢見」了深潛研究所"
-    },
-    {
-      "type": "event",
-      "description": "林昭明為0447重新標記為1024-Σ",
-      "chapter": "ch5",
-      "id": "event:林昭明為0447重新標記為1024-Σ"
-    },
-    {
-      "type": "event",
-      "description": "建立私人追蹤系統，偽裝視窗標題為「空間曲率局部採樣」",
-      "chapter": "ch5",
-      "id": "event:建立私人追蹤系統，偽裝視窗標題為「空間曲率局部採樣」"
-    },
-    {
-      "type": "event",
-      "description": "沈逸到崗詢問社會連結指數",
-      "chapter": "ch5",
-      "id": "event:沈逸到崗詢問社會連結指數"
-    },
-    {
-      "type": "event",
-      "description": "林昭明謊報「穩定，在歷史均值0.9倍，無顯著下行訊號」",
-      "chapter": "ch5",
-      "id": "event:林昭明謊報「穩定，在歷史均值0.9倍，無顯著下行訊號」"
-    },
-    {
       "type": "mirror",
       "line": "R",
       "description": "沈逸站在觀測窗前",
@@ -555,54 +471,6 @@
       "line": "S",
       "description": "顧則夢見藍綠冷光走廊（深潛研究所滲漏）",
       "id": "mirror_s:顧則夢見藍綠冷光走廊（深潛研究所滲漏）"
-    },
-    {
-      "type": "mirror",
-      "line": "R",
-      "description": "Σ夢見低頻振動/金屬質感/發光液體（深潛走廊）",
-      "id": "mirror_r:Σ夢見低頻振動/金屬質感/發光液體（深潛走廊）"
-    },
-    {
-      "type": "mirror",
-      "line": "S",
-      "description": "顧則夢見深潛研究所走廊（灰色金屬/藍綠冷卻液/低頻嗡鳴）",
-      "id": "mirror_s:顧則夢見深潛研究所走廊（灰色金屬/藍綠冷卻液/低頻嗡鳴）"
-    },
-    {
-      "type": "mirror",
-      "line": "R",
-      "description": "林昭明觀察沈逸行為模式（全注意力/維生降級）",
-      "id": "mirror_r:林昭明觀察沈逸行為模式（全注意力/維生降級）"
-    },
-    {
-      "type": "mirror",
-      "line": "S",
-      "description": "Σ主動疏遠社會連結、重分配認知資源到觀察記錄",
-      "id": "mirror_s:Σ主動疏遠社會連結、重分配認知資源到觀察記錄"
-    },
-    {
-      "type": "mirror",
-      "line": "R",
-      "description": "Σ記錄16條模擬接縫",
-      "id": "mirror_r:Σ記錄16條模擬接縫"
-    },
-    {
-      "type": "mirror",
-      "line": "S",
-      "description": "顧則記錄16條異常觀察清單",
-      "id": "mirror_s:顧則記錄16條異常觀察清單"
-    },
-    {
-      "type": "mirror",
-      "line": "R",
-      "description": "Σ向同伴解釋「接縫」遭質疑（「你最近是不是睡不好？」）",
-      "id": "mirror_r:Σ向同伴解釋「接縫」遭質疑（「你最近是不是睡不好？」）"
-    },
-    {
-      "type": "mirror",
-      "line": "S",
-      "description": "顧則向同事分享異常觀察遭冷遇（紀恆：「你做文明崩潰研究做太久了」）",
-      "id": "mirror_s:顧則向同事分享異常觀察遭冷遇（紀恆：「你做文明崩潰研究做太久了」）"
     },
     {
       "type": "mirror",
@@ -1053,152 +921,6 @@
       "value": "周琳、蔡文斌",
       "note": "ch4確立：與顧則紀恆同組",
       "id": "value:統計組同事"
-    },
-    {
-      "type": "value",
-      "setting": "Σ與沈逸認知向量匹配度",
-      "value": "0.917（六維：0.91/0.87/0.93/0.89/0.94/0.96）",
-      "note": "ch5確立",
-      "id": "value:Σ與沈逸認知向量匹配度"
-    },
-    {
-      "type": "value",
-      "setting": "認知向量維度",
-      "value": "注意力分配/決策觸發閾值/情感調節策略/社交互動頻率基線/抽象思維偏好/控制需求指數",
-      "note": "ch5確立",
-      "id": "value:認知向量維度"
-    },
-    {
-      "type": "value",
-      "setting": "匹配度閾值",
-      "value": ">0.7高度相關，>0.85可能同一模板，>0.6被引擎自動剔除",
-      "note": "ch5確立",
-      "id": "value:匹配度閾值"
-    },
-    {
-      "type": "value",
-      "setting": "蒙特卡羅樣本結果",
-      "value": "100萬樣本均值0.23/σ0.11，>0.7佔0.003%，>0.85佔0.00004%，>0.9為零",
-      "note": "ch5確立",
-      "id": "value:蒙特卡羅樣本結果"
-    },
-    {
-      "type": "value",
-      "setting": "篩選腳本運行時間",
-      "value": "47小時",
-      "note": "ch5確立",
-      "id": "value:篩選腳本運行時間"
-    },
-    {
-      "type": "value",
-      "setting": "高認知離群值數量",
-      "value": "112個（預期數千，實際112）",
-      "note": "ch5確立",
-      "id": "value:高認知離群值數量"
-    },
-    {
-      "type": "value",
-      "setting": "模擬個體總數",
-      "value": "7億",
-      "note": "ch5確立",
-      "id": "value:模擬個體總數"
-    },
-    {
-      "type": "value",
-      "setting": "林昭明發現Σ時間",
-      "value": "凌晨3:17",
-      "note": "ch5確立",
-      "id": "value:林昭明發現Σ時間"
-    },
-    {
-      "type": "value",
-      "setting": "沈逸回控制室時間",
-      "value": "6:15",
-      "note": "ch5確立",
-      "id": "value:沈逸回控制室時間"
-    },
-    {
-      "type": "value",
-      "setting": "1024號文明複雜度（ch5時點）",
-      "value": "0.58",
-      "note": "ch5確立（距靜默衰退0.73區間尚有距離）",
-      "id": "value:1024號文明複雜度（ch5時點）"
-    },
-    {
-      "type": "chapter",
-      "number": 0,
-      "id": "chapter:ch0"
-    },
-    {
-      "type": "chapter",
-      "number": 73,
-      "id": "chapter:ch73"
-    },
-    {
-      "type": "value",
-      "setting": "模擬推進階段（ch5）",
-      "value": "第三階段中段，模擬內約800-900年",
-      "note": "ch5確立",
-      "id": "value:模擬推進階段（ch5）"
-    },
-    {
-      "type": "value",
-      "setting": "0447行為轉變複雜度",
-      "value": "~0.45",
-      "note": "ch5確立（此時行為模式陡轉）",
-      "id": "value:0447行為轉變複雜度"
-    },
-    {
-      "type": "value",
-      "setting": "Σ接縫清單條目數",
-      "value": "16條",
-      "note": "ch5確立（與ch4顧則16條呼應）",
-      "id": "value:Σ接縫清單條目數"
-    },
-    {
-      "type": "chapter",
-      "number": 16,
-      "id": "chapter:ch16"
-    },
-    {
-      "type": "value",
-      "setting": "自我模擬禁忌出處",
-      "value": "設計文件第七章第三節",
-      "note": "ch5確立",
-      "id": "value:自我模擬禁忌出處"
-    },
-    {
-      "type": "value",
-      "setting": "社會連結指數（ch5時點）",
-      "value": "歷史均值0.9倍，偏低但在標準差範圍內",
-      "note": "ch5確立",
-      "id": "value:社會連結指數（ch5時點）"
-    },
-    {
-      "type": "value",
-      "setting": "1024-Σ追蹤代號",
-      "value": "Σ（求和符號/標準差符號）",
-      "note": "ch5確立：原編號1024-N-0447",
-      "id": "value:1024-Σ追蹤代號"
-    },
-    {
-      "type": "chapter",
-      "number": 447,
-      "id": "chapter:ch447"
-    },
-    {
-      "type": "value",
-      "setting": "沈逸心理側寫時間",
-      "value": "5年前入職時",
-      "note": "ch5確立",
-      "id": "value:沈逸心理側寫時間"
-    },
-    {
-      "type": "value",
-      "setting": "沈逸睡眠週期",
-      "value": "4-5小時",
-      "note": "ch5確立",
-      "id": "value:沈逸睡眠週期"
     }
   ],
   "edges": [
@@ -1271,11 +993,6 @@
       "type": "located_in",
       "source": "chapter:ch5",
       "target": "location:深潛研究所"
-    },
-    {
-      "type": "hints",
-      "source": "chapter:ch5",
-      "target": "foreshadow:④林昭明旋律"
     },
     {
       "type": "plants",
@@ -1638,81 +1355,6 @@
       "target": "chapter:ch4"
     },
     {
-      "type": "causes",
-      "source": "event:林昭明篩選腳本跑47小時",
-      "target": "event:從7億個體中標記112個高認知離群值，發現0447（Σ）"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:林昭明篩選腳本跑47小時",
-      "target": "chapter:ch5"
-    },
-    {
-      "type": "causes",
-      "source": "event:0447從美感萌芽到系統性環境覺察",
-      "target": "event:Σ記錄16條模擬引擎物理簡化（接縫），成為首個「測量世界解析度邊界」的虛擬個體"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:0447從美感萌芽到系統性環境覺察",
-      "target": "chapter:ch1"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:0447從美感萌芽到系統性環境覺察",
-      "target": "chapter:ch5"
-    },
-    {
-      "type": "causes",
-      "source": "event:林昭明調出沈逸入職心理側寫",
-      "target": "event:六維認知向量匹配度0.917，蒙特卡羅確認非巧合"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:林昭明調出沈逸入職心理側寫",
-      "target": "chapter:ch5"
-    },
-    {
-      "type": "causes",
-      "source": "event:0.917匹配度 + 自我模擬禁忌",
-      "target": "event:林昭明選擇沉默——加密存私人目錄、對沈逸謊報「數據穩定」"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:0.917匹配度 + 自我模擬禁忌",
-      "target": "chapter:ch5"
-    },
-    {
-      "type": "causes",
-      "source": "event:Σ夢境意象（低頻振動、金屬質感、發光液體）",
-      "target": "event:林昭明在走廊中意識到Σ可能「夢見」了深潛研究所"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:Σ夢境意象（低頻振動、金屬質感、發光液體）",
-      "target": "chapter:ch5"
-    },
-    {
-      "type": "causes",
-      "source": "event:林昭明為0447重新標記為1024-Σ",
-      "target": "event:建立私人追蹤系統，偽裝視窗標題為「空間曲率局部採樣」"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:林昭明為0447重新標記為1024-Σ",
-      "target": "chapter:ch5"
-    },
-    {
-      "type": "causes",
-      "source": "event:沈逸到崗詢問社會連結指數",
-      "target": "event:林昭明謊報「穩定，在歷史均值0.9倍，無顯著下行訊號」"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:沈逸到崗詢問社會連結指數",
-      "target": "chapter:ch5"
-    },
-    {
       "type": "mirrors",
       "source": "mirror_r:沈逸站在觀測窗前",
       "target": "mirror_s:顧則站在落地窗前看銀杏/走廊"
@@ -1731,26 +1373,6 @@
       "type": "mirrors",
       "source": "mirror_r:沈逸在藍綠冷光走廊中工作",
       "target": "mirror_s:顧則夢見藍綠冷光走廊（深潛研究所滲漏）"
-    },
-    {
-      "type": "mirrors",
-      "source": "mirror_r:Σ夢見低頻振動/金屬質感/發光液體（深潛走廊）",
-      "target": "mirror_s:顧則夢見深潛研究所走廊（灰色金屬/藍綠冷卻液/低頻嗡鳴）"
-    },
-    {
-      "type": "mirrors",
-      "source": "mirror_r:林昭明觀察沈逸行為模式（全注意力/維生降級）",
-      "target": "mirror_s:Σ主動疏遠社會連結、重分配認知資源到觀察記錄"
-    },
-    {
-      "type": "mirrors",
-      "source": "mirror_r:Σ記錄16條模擬接縫",
-      "target": "mirror_s:顧則記錄16條異常觀察清單"
-    },
-    {
-      "type": "mirrors",
-      "source": "mirror_r:Σ向同伴解釋「接縫」遭質疑（「你最近是不是睡不好？」）",
-      "target": "mirror_s:顧則向同事分享異常觀察遭冷遇（紀恆：「你做文明崩潰研究做太久了」）"
     },
     {
       "type": "mirrors",
@@ -1986,126 +1608,6 @@
       "type": "established_in",
       "source": "value:統計組同事",
       "target": "chapter:ch4"
-    },
-    {
-      "type": "established_in",
-      "source": "value:Σ與沈逸認知向量匹配度",
-      "target": "chapter:ch5"
-    },
-    {
-      "type": "established_in",
-      "source": "value:認知向量維度",
-      "target": "chapter:ch5"
-    },
-    {
-      "type": "established_in",
-      "source": "value:匹配度閾值",
-      "target": "chapter:ch5"
-    },
-    {
-      "type": "established_in",
-      "source": "value:蒙特卡羅樣本結果",
-      "target": "chapter:ch5"
-    },
-    {
-      "type": "established_in",
-      "source": "value:篩選腳本運行時間",
-      "target": "chapter:ch5"
-    },
-    {
-      "type": "established_in",
-      "source": "value:高認知離群值數量",
-      "target": "chapter:ch5"
-    },
-    {
-      "type": "established_in",
-      "source": "value:模擬個體總數",
-      "target": "chapter:ch5"
-    },
-    {
-      "type": "established_in",
-      "source": "value:林昭明發現Σ時間",
-      "target": "chapter:ch5"
-    },
-    {
-      "type": "established_in",
-      "source": "value:沈逸回控制室時間",
-      "target": "chapter:ch5"
-    },
-    {
-      "type": "established_in",
-      "source": "value:1024號文明複雜度（ch5時點）",
-      "target": "chapter:ch5"
-    },
-    {
-      "type": "established_in",
-      "source": "value:1024號文明複雜度（ch5時點）",
-      "target": "chapter:ch0"
-    },
-    {
-      "type": "established_in",
-      "source": "value:1024號文明複雜度（ch5時點）",
-      "target": "chapter:ch73"
-    },
-    {
-      "type": "established_in",
-      "source": "value:模擬推進階段（ch5）",
-      "target": "chapter:ch5"
-    },
-    {
-      "type": "established_in",
-      "source": "value:0447行為轉變複雜度",
-      "target": "chapter:ch5"
-    },
-    {
-      "type": "established_in",
-      "source": "value:Σ接縫清單條目數",
-      "target": "chapter:ch5"
-    },
-    {
-      "type": "established_in",
-      "source": "value:Σ接縫清單條目數",
-      "target": "chapter:ch4"
-    },
-    {
-      "type": "established_in",
-      "source": "value:Σ接縫清單條目數",
-      "target": "chapter:ch16"
-    },
-    {
-      "type": "established_in",
-      "source": "value:自我模擬禁忌出處",
-      "target": "chapter:ch5"
-    },
-    {
-      "type": "established_in",
-      "source": "value:社會連結指數（ch5時點）",
-      "target": "chapter:ch5"
-    },
-    {
-      "type": "established_in",
-      "source": "value:1024-Σ追蹤代號",
-      "target": "chapter:ch5"
-    },
-    {
-      "type": "established_in",
-      "source": "value:1024-Σ追蹤代號",
-      "target": "chapter:ch1024"
-    },
-    {
-      "type": "established_in",
-      "source": "value:1024-Σ追蹤代號",
-      "target": "chapter:ch447"
-    },
-    {
-      "type": "established_in",
-      "source": "value:沈逸心理側寫時間",
-      "target": "chapter:ch5"
-    },
-    {
-      "type": "established_in",
-      "source": "value:沈逸睡眠週期",
-      "target": "chapter:ch5"
     }
   ]
 }
