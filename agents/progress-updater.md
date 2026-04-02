@@ -76,3 +76,12 @@ When updating:
 - **concepts**: if a concept is introduced to the reader for the first time, set introduced_in to ch{N}
 
 Output the COMPLETE updated JSON (not a diff).
+
+## New character detection
+
+If the chapter introduces characters NOT in character_cast.md:
+- Read character_cast.md to check existing profiles
+- Edit character_cast.md to append a new `## 配角：{name}` section with:
+  - Basic info (gender, role, relation to existing characters)
+  - Speaking style (3-5 lines)
+  - Empty 「當前狀態」section

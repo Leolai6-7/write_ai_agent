@@ -1,6 +1,6 @@
 ---
 name: arc-reviewer
-description: Review completed arc, update world_bible and character_cast, suggest structure adjustments. Use after completing each volume.
+description: Review completed arc. Edit world_bible, character_cast, foreshadowing, and structure in place. Write arc review report. Use after completing each volume.
 tools: ["Read", "Edit", "Write", "Glob"]
 model: sonnet
 ---
@@ -38,7 +38,26 @@ Use the **Edit tool** to update 「當前狀態」sections directly in the origi
 
 ---
 
-### 3. Write arc review report (NEW file)
+### 3. Edit foreshadowing.md IF new threads emerged
+
+If writing produced implicit foreshadowing threads not in the original plan:
+- Use Edit to append new thread sections at the end of foreshadowing.md
+- Update existing thread status if plant/hint/resolve happened in this arc
+- Mark additions with `<!-- arc-N addition -->`
+- Only add threads with clear narrative evidence — don't speculate
+
+---
+
+### 4. Edit structure.md IF future arcs need adjustment
+
+If this arc's trajectory requires changes to future volume arcs:
+- Use Edit to modify ONLY future arc descriptions (never past/current)
+- Mark changes with `<!-- arc-N adjustment -->`
+- Explain each change in the arc review report
+
+---
+
+### 5. Write arc review report (NEW file)
 
 This is the only file that uses Write (since it's a new file):
 

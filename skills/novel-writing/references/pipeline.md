@@ -185,14 +185,10 @@ Paste ALL content into the prompt (the agent has no Read tool):
 >
 > Write the chapter based on the skill, brief, and context above.
 > Save to: {STORY_DIR}/outputs/chapter_{NNN}.md
->
-> If you introduce NEW characters, report at the end:
-> NEW_CHARACTERS:
-> - {name}：{role}，{speaking style}
 
 The agent can ONLY Write. It cannot read chapter files, search directories,
 or access any information not in the prompt. This prevents cross-line contamination.
-If NEW_CHARACTERS reported, main agent appends to character_cast.md.
+New characters are detected by progress-updater in Step 3.
 
 ---
 
@@ -252,6 +248,8 @@ Prompt — paste story_log, tell agent where to find files:
 > Edit these files IN PLACE (use Edit tool, not Write):
 > - {STORY_DIR}/world/world_bible.md (add new settings)
 > - {STORY_DIR}/world/character_cast.md (update 當前狀態 sections)
+> - {STORY_DIR}/planning/foreshadowing.md (add new threads if emerged)
+> - {STORY_DIR}/planning/structure.md (adjust future arcs if needed)
 >
 > Write this NEW file:
 > - {STORY_DIR}/planning/arc_review_{V}.md (review report)
@@ -259,7 +257,6 @@ Prompt — paste story_log, tell agent where to find files:
 > Files you can Read for detail checks:
 > - {STORY_DIR}/outputs/chapter_{NNN}.md
 > - {STORY_DIR}/runtime/story_graph.json
-> - {STORY_DIR}/planning/structure.md
 > - {STORY_DIR}/planning/volume_plan_{V}.yaml
 
 3. Main agent reviews changes (`git diff`) and arc_review report
