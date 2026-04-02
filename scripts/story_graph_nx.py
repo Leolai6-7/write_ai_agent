@@ -198,6 +198,13 @@ class StoryGraph:
                     "note": data.get("note", ""),
                 }
 
+        # Concepts
+        for node_id, data in self.G.nodes(data=True):
+            if data.get("type") == "concept":
+                flat["concepts"][data.get("name", "")] = {
+                    "introduced_in": data.get("introduced_in"),
+                }
+
         # Causal chains
         for u, v, ed in self.G.edges(data=True):
             if ed.get("type") == "causes":
