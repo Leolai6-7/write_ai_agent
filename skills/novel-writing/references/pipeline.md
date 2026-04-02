@@ -188,9 +188,11 @@ If NEW_CHARACTERS reported, main agent appends to character_cast.md.
 
 ---
 
-**STEP 3 — Update Progress (main agent, no sub-agent)**
-Read the generated chapter. Append to story_log.md:
+**STEP 3 — Update Progress + Graph (main agent, no sub-agent)**
 
+Read the generated chapter, then update BOTH story_log and story_graph:
+
+**3a. Append to `{STORY_DIR}/runtime/story_log.md`:**
 ```
 ## 第{N}章：{title}
 - 摘要：{one-line, under 80 chars}
@@ -199,58 +201,25 @@ Read the generated chapter. Append to story_log.md:
 - 情感基調：{tone}
 ```
 
----
+**3b. Edit `{STORY_DIR}/runtime/story_graph.md`:**
+- 角色出場表：從角色變化欄位提取，加入 ch{N} 事件
+- 伏筆追蹤：從伏筆進展欄位提取，更新狀態（規劃中→已植入→已暗示）
+- 概念引入追蹤：如果本章引入了新概念，從 ❌ 改為 ch{N} ✅
+- 因果鏈：從章節內容提取新的因果關係
+- 數值設定：從章節內容提取新確立的數字
 
-**STEP 4 — Update Story Graph**
-
-Launch the **graph-updater plugin agent** (Read+Write only, cannot Grep/Bash):
-
-```
-subagent_type: novel-agents:graph-updater
-```
-
-> Read {STORY_DIR}/outputs/chapter_{NNN}.md (the chapter just written).
-> Read {STORY_DIR}/runtime/story_graph.md (the current graph).
->
-> Here is the CHAPTER CONTEXT PACKAGE used to generate this chapter:
->
-> {paste the same CHAPTER CONTEXT PACKAGE from Step 1 here}
->
-> Using the chapter text and context package, update the graph:
-> - 角色出場表: add/update character appearances
-> - 地點使用表: add/update locations
-> - 伏筆追蹤: update thread status
-> - 因果鏈: add new causal links
-> - 數值設定: add any new established values
-> - 概念引入追蹤: update concepts introduced in this chapter
->
-> Save updated graph to: {STORY_DIR}/runtime/story_graph.md
-
-The agent can Read specified files and Write, but cannot Grep/Bash/search.
-
----
-
-**STEP 3.5 — Index Chapter (background, after Step 3)**
-Run in Bash (non-blocking, do not wait):
+**3c. 後處理腳本（非阻塞）：**
 ```
 python scripts/index_chapter.py --story-dir {STORY_DIR} --chapter-num {N} --chapter-file {STORY_DIR}/outputs/chapter_{NNN}.md
-```
-Syncs the chapter summary into SQLite + ChromaDB for semantic search.
-
-**STEP 4.5 — Sync Graph (background, after Step 4)**
-Run in Bash (non-blocking, do not wait):
-```
 python scripts/sync_graph.py --story-dir {STORY_DIR}
 ```
-Syncs story_graph.md structure into SQLite for queries.
 
 ---
 
-**COMPLETION GATE — Do NOT proceed until ALL 4 steps are done:**
+**COMPLETION GATE — Do NOT proceed until ALL 3 steps are done:**
 - [ ] Step 1 (context) completed
 - [ ] Step 2 (chapter) completed and saved to file
-- [ ] Step 3 (story_log) updated by main agent
-- [ ] Step 4 (story_graph) updated by sub-agent
+- [ ] Step 3 (story_log + story_graph) updated by main agent
 
 If ANY step is missing, the chapter is NOT complete.
 Only after all 4 checkmarks → proceed to next chapter with {N+1}.

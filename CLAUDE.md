@@ -11,8 +11,7 @@
 write_ai_agent/                    ← plugin 本體
 ├── .claude-plugin/plugin.json     ← plugin 定義
 ├── agents/                        ← 工具限制的 sub-agents（自動發現）
-│   ├── chapter-writer.md          → Write only（不能讀檔，防止跨線汙染）
-│   └── graph-updater.md           → Read + Write only
+│   └── chapter-writer.md          → Write only（不能讀檔，防止跨線汙染）
 ├── skills/                        ← 主 agent 的工作流 skills
 │   ├── novel-writing/             → 入口 + pipeline
 │   ├── novel-chapter/             → 寫作哲學
@@ -54,11 +53,10 @@ data/
 
 ## 章節生成規則（不可違反）
 
-每章必須完成 4 步才算完成，缺一不可：
+每章必須完成 3 步才算完成，缺一不可：
 1. **Context assembly** — `scripts/assemble_context.py`（主 agent 呼叫，9 秒）
 2. **Chapter generation** — `novel-agents:chapter-writer`（Write only，不能讀其他檔案）
-3. **Update story_log** — 主 agent 直接編輯
-4. **Update story_graph** — `novel-agents:graph-updater`（Read + Write only）
+3. **Update story_log + story_graph** — 主 agent 讀章節後同時更新兩個文檔
 
 完成後自動觸發（非阻塞）：
 - `scripts/index_chapter.py` → ChromaDB 索引
