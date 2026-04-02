@@ -157,11 +157,6 @@ Store the output as the CHAPTER CONTEXT PACKAGE.
 
 **STEP 2 — Chapter Generation**
 
-First, delete any existing chapter file to avoid Write tool's read-before-overwrite block:
-```
-rm -f {STORY_DIR}/outputs/chapter_{NNN}.md
-```
-
 Main agent reads `skills/novel-chapter/SKILL.md` and `{STORY_DIR}/planning/story_brief.md`,
 then launches the **chapter-writer plugin agent** (Write-only, cannot read files):
 
