@@ -1,9 +1,15 @@
 {
+  "name": "write-ai-agent",
+  "description": "AI novel writing pipeline with tool-restricted agents",
+  "owner": {
+    "name": "Leo Lai"
+  },
   "plugins": [
     {
       "name": "novel-agents",
       "source": "./",
-      "description": "Multi-agent novel writing pipeline with tool-restricted sub-agents"
+      "description": "Multi-agent novel writing pipeline with tool-restricted sub-agents",
+      "version": "1.0.0"
     }
   ]
 }
