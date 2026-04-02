@@ -1,0 +1,112 @@
+{
+  "characters": {
+    "手談": {
+      "chapters": [
+        1
+      ],
+      "events": "ch1: 圍棋AI，在廢棄棋院執行第2543天例行巡視與自我對弈；清潔獎盃櫃玻璃、第七室榧木棋盤，掃描觀戰廳；天元落黑子開局"
+    }
+  },
+  "locations": {
+    "棋院-一樓走廊獎盃櫃區": {
+      "chapters": [
+        1
+      ],
+      "description": ""
+    },
+    "棋院-二樓第七室（對局室）": {
+      "chapters": [
+        1
+      ],
+      "description": ""
+    },
+    "棋院-二樓走廊末端窗口": {
+      "chapters": [
+        1
+      ],
+      "description": ""
+    },
+    "棋院-一樓觀戰廳": {
+      "chapters": [
+        1
+      ],
+      "description": ""
+    }
+  },
+  "foreshadowing": {
+    "①西側外牆裂縫": {
+      "status": "已植入",
+      "planted_in": [
+        1
+      ],
+      "hinted_in": [],
+      "resolved_in": []
+    },
+    "②觀戰廳三百空椅": {
+      "status": "已植入",
+      "planted_in": [
+        1
+      ],
+      "hinted_in": [],
+      "resolved_in": []
+    },
+    "③微纖維布料耗盡期限": {
+      "status": "已植入",
+      "planted_in": [
+        1
+      ],
+      "hinted_in": [],
+      "resolved_in": []
+    }
+  },
+  "causal_chains": [
+    {
+      "cause": "太陽能板輸入電壓偏低18%",
+      "cause_ch": "1",
+      "effect": "手談判斷今日天氣佈局保守，並記錄於天氣日誌",
+      "effect_ch": "1"
+    },
+    {
+      "cause": "走廊末端窗口無凝露",
+      "cause_ch": "1",
+      "effect": "例行巡視較昨日縮短9秒（41分17秒）",
+      "effect_ch": "1"
+    },
+    {
+      "cause": "填縫劑只能封住表面，裡層結構問題無法觸及",
+      "cause_ch": "1",
+      "effect": "手談放棄修補西側外牆，日誌記錄「局勢已不可挽回」",
+      "effect_ch": "1"
+    }
+  ],
+  "mirrors": [],
+  "values": {
+    "手談運行天數": {
+      "value": "2543天",
+      "note": "ch1確立，標題即計數"
+    },
+    "例行巡視時長": {
+      "value": "41分17秒",
+      "note": "ch1當日數值，比前日少9秒"
+    },
+    "剩餘微纖維布料": {
+      "value": "4塊",
+      "note": "ch1確立，每塊壽命90-120天，可用至明年秋天"
+    },
+    "觀戰廳座位數": {
+      "value": "300個",
+      "note": "ch1確立"
+    }
+  },
+  "concepts": {
+    "棋局比喻天氣": {
+      "introduced_in": 1
+    },
+    "低功耗模式": {
+      "introduced_in": 1
+    },
+    "長考": {
+      "introduced_in": 1
+    }
+  }
+}

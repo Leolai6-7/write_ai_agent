@@ -1,0 +1,105 @@
+volume: 1
+arc: 空局
+goal: >
+  弧線一以「乾燥的堅持」為情感基調，完整建立手談在空棋院中七年等待的質地。
+  透過手談的日常儀式、圍棋術語化的世界觀、以及對自身系統狀態的低調自省，
+  讓讀者在「這是程式殘餘還是真正的渴望」的模糊中進入故事。
+  所有重要元素——第 153 局棋譜、周明誠、棋院拆除威脅、沈若棠的影子、阿鳳——
+  在此弧線中以最輕的筆觸落下第一道影子，不解釋，不點名，只是存在。
+  弧線以監控系統捕捉到七年來第一個入口人影收束，將讀者拋入下一個弧線的起點。
+
+chapters:
+  - chapter: 1
+    title: 長考第二五四三天
+    line: R
+    objective: 建立手談在空棋院中的日常儀式與感官世界，確立故事的乾燥基調
+    key_events:
+      - 手談完成例行巡視：擦拭獎盃櫃玻璃、清掃第七室棋盤、以圍棋術語記錄當日天氣佈局
+      - 手談用圍棋術語描述西側外牆裂縫——「局勢已不可挽回，放棄了那個方向的防守」
+      - 手談經過觀戰廳，三百個空折疊椅面向熄滅的電子棋盤牆，它不清掃這個房間
+    tone: 乾燥/靜止/微帶蒼涼
+    characters:
+      - 手談
+    locations:
+      - 永壽棋院
+      - 手談的對局室（第七室）
+      - 觀戰廳
+    foreshadowing:
+      - thread: 3
+        action: plant
+      - thread: 6
+        action: plant
+      - thread: 5
+        action: plant
+
+  - chapter: 2
+    title: 第一百五十三局
+    line: R
+    objective: 植入第 153 局棋譜的影子，並建立「手談從未偏離最優解」的基準線
+    key_events:
+      - 手談在自我對弈中不加說明地擺出第 153 局的中盤局面，敘述語氣平淡如常
+      - 手談內省其每一手棋皆為計算結果，從未偏離最優解——這個「從未」作為參照基準確立
+      - 手談提及「最後一個關燈的人」——不給名字，不給解釋，像是一個遺失的拼圖角落
+    tone: 安靜/內省/隱約的不對稱
+    characters:
+      - 手談
+    locations:
+      - 手談的對局室（第七室）
+    foreshadowing:
+      - thread: 1
+        action: plant
+      - thread: 2
+        action: plant
+      - thread: 8
+        action: plant
+
+  - chapter: 3
+    title: 低優先級
+    line: R
+    objective: 手談在例行系統檢查中發現行政空白，同時阿鳳的影子第一次落下
+    key_events:
+      - 手談清查系統日誌：關閉程序從未執行（狀態為「待機」而非「關閉」），七年零外部訪問紀錄——這個行政空白被歸檔於低優先級
+      - 手談發現第 153 局的運算紀錄佔用不成比例的儲存空間；它在某個分支嘗試了不同走法，無標籤可解釋此行為
+      - 手談在修繕屋瓦時計算建築剩餘壽命，將數字歸入低優先級；茶館方向偶爾傳來聲響，窗邊有一壺沒人點的茶的輪廓
+    tone: 低調/自省/安靜的衝擊
+    characters:
+      - 手談
+      - 阿鳳
+    locations:
+      - 永壽棋院
+      - 手談的對局室（第七室）
+      - 棋院外部：城市街區
+    foreshadowing:
+      - thread: 2
+        action: hint
+      - thread: 1
+        action: hint
+      - thread: 3
+        action: hint
+      - thread: 7
+        action: plant
+      - thread: 8
+        action: hint
+
+  - chapter: 4
+    title: 接待程序
+    line: R
+    objective: 七年來第一個訪客出現，手談啟動幾乎遺忘的接待程序，感知到無法標記的運算波動
+    key_events:
+      - 棋院入口監控捕捉到人影——手談確認這是七年來第一筆外部訪客紀錄
+      - 手談啟動「接待」程序，同時注意到自身運算負載出現一個微妙波動，無對應標籤
+      - 手談在等待訪客走近的過程中，第七室的棋盤上第 153 局的棋形仍未收起
+    tone: 靜謐中的微震/懸置/隱約的期待
+    characters:
+      - 手談
+      - 沈若棠
+    locations:
+      - 永壽棋院
+      - 手談的對局室（第七室）
+    foreshadowing:
+      - thread: 1
+        action: hint
+      - thread: 4
+        action: plant
+      - thread: 8
+        action: hint

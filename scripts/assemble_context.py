@@ -416,26 +416,9 @@ def main():
     world_file = story_dir / "world" / "world_bible.md"
     foreshadow_file = story_dir / "planning" / "foreshadowing.md"
 
-    # Character references — verify each exists in file
-    char_refs = []
-    char_text = char_file.read_text(encoding="utf-8") if char_file.exists() else ""
-    for name in beat["characters"]:
-        # Find the actual heading
-        heading_match = re.search(rf"^(## .+{re.escape(name)}.*)$", char_text, re.MULTILINE)
-        if heading_match:
-            char_refs.append(f"  {name} → {char_file} {heading_match.group(1)}")
-        else:
-            char_refs.append(f"  ⚠ {name} — NOT FOUND in character_cast.md")
-
-    # Location references
-    loc_refs = []
-    world_text = world_file.read_text(encoding="utf-8") if world_file.exists() else ""
-    for loc in beat["locations"]:
-        heading_match = re.search(rf"^(###? .+{re.escape(loc)}.*)$", world_text, re.MULTILINE)
-        if heading_match:
-            loc_refs.append(f"  {loc} → {world_file} {heading_match.group(1)}")
-        else:
-            loc_refs.append(f"  ⚠ {loc} — NOT FOUND in world_bible.md")
+    # Character and location references — just file paths, agent reads them
+    char_refs = [f"  {name} → {char_file}" for name in beat["characters"]]
+    loc_refs = [f"  {loc} → {world_file}" for loc in beat["locations"]]
 
     # Foreshadowing references
     thread_names = beat.get("foreshadow_threads", []) or _parse_foreshadow_tag_legacy(beat.get("foreshadow", ""))
@@ -510,10 +493,6 @@ FORESHADOWING:
 {dual_line}
 ==="""
 
-    # Preflight warnings to stderr
-    missing_locs = [r for r in loc_refs if "NOT FOUND" in r]
-    if missing_locs:
-        print(f"⚠ PREFLIGHT: locations not found in world_bible — agent will improvise", file=_sys.stderr)
 
     if args.format == "json":
         import json
