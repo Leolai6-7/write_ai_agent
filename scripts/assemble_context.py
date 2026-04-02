@@ -92,15 +92,15 @@ def get_dual_line_info(story_dir: Path, current_line: str) -> str:
     return entries[-1]
 
 
-def check_graph_conditions(story_dir: Path, characters: list[str], chapter_num: int) -> dict:
-    """Query the NetworkX story graph for context."""
+def check_graph_conditions(story_dir: Path, characters: list[str], chapter_num: int,
+                           foreshadow_names: list[str] = None) -> dict:
+    """Query the NetworkX story graph for structured context."""
     from story_graph_nx import StoryGraph
 
     json_path = story_dir / "runtime" / "story_graph.json"
-    result = {"needed": False, "numerical_values": "", "causal_context": ""}
+    result = {"needed": False, "numerical_values": "", "graph_context": ""}
 
     if not json_path.exists():
-        # Fallback: try to build from markdown
         md_path = story_dir / "runtime" / "story_graph.md"
         if md_path.exists():
             graph = StoryGraph(json_path)
@@ -112,33 +112,70 @@ def check_graph_conditions(story_dir: Path, characters: list[str], chapter_num: 
     graph = StoryGraph(json_path)
     graph.load()
 
-    # Always get numerical values
-    values_text = graph.get_all_values()
-    if values_text:
-        result["numerical_values"] = values_text
-        result["needed"] = True
+    sections = []
 
-    # Check for absent characters
+    # 1. Active foreshadows (planted but not resolved)
+    active = graph.get_active_foreshadows()
+    if active:
+        lines = ["Active foreshadows (planted but not resolved):"]
+        for f in active:
+            chain = f"planted ch{','.join(map(str, f['planted_in']))}" if f['planted_in'] else ""
+            hint = f", hinted ch{','.join(map(str, f['hinted_in']))}" if f['hinted_in'] else ""
+            lines.append(f"  {f['name']} — {f['status']} ({chain}{hint})")
+        sections.append("\n".join(lines))
+
+    # 2. This chapter's foreshadow chains
+    if foreshadow_names:
+        chains = []
+        for name in foreshadow_names:
+            chain = graph.get_foreshadow_chain(name)
+            if chain:
+                parts = []
+                if chain['planted_in']:
+                    parts.append(f"planted ch{','.join(map(str, chain['planted_in']))}")
+                if chain['hinted_in']:
+                    parts.append(f"hinted ch{','.join(map(str, chain['hinted_in']))}")
+                if chain['resolved_in']:
+                    parts.append(f"resolved ch{','.join(map(str, chain['resolved_in']))}")
+                chains.append(f"  {chain['name']} — {' → '.join(parts)} [{chain['status']}]")
+        if chains:
+            sections.append("This chapter's foreshadow chains:\n" + "\n".join(chains))
+
+    # 3. Causal context — trace back from characters' recent events
+    causal_lines = []
     for char in characters:
         history = graph.get_character_history(char)
+        if history.get("found") and history["events"]:
+            # Extract keywords from events for causal tracing
+            events_text = history["events"]
+            for keyword in re.findall(r'[\u4e00-\u9fff]{2,6}', events_text):
+                causes = graph.trace_causation(keyword, depth=2)
+                if causes:
+                    for c in causes:
+                        if c not in causal_lines:
+                            causal_lines.append(c)
+        # Also flag absent characters
         if history.get("found") and history["chapters"]:
             last_ch = max(history["chapters"])
             if chapter_num - last_ch > 5:
-                result["causal_context"] += f"\n{char} 最後出場在 ch{last_ch}：{history['events']}"
-                result["needed"] = True
+                causal_lines.append(f"⚠ {char} 最後出場在 ch{last_ch}")
 
-    # Get causal context for this chapter
-    ch_context = graph.get_chapter_context(chapter_num)
-    if ch_context.get("found"):
-        if ch_context["events"]:
-            result["causal_context"] += "\n相關事件：" + "；".join(ch_context["events"])
-            result["needed"] = True
+    if causal_lines:
+        sections.append("Causal context:\n" + "\n".join(f"  {c}" for c in causal_lines[:10]))
 
-    # Get all causal chains (for general context)
+    # 4. Dual-line mirrors
     mirrors = graph.get_mirrors()
     if mirrors:
-        mirror_lines = [f"R: {m['r_line']} ↔ S: {m['s_line']}" for m in mirrors]
-        result["causal_context"] += "\n\n雙線鏡像：\n" + "\n".join(mirror_lines)
+        mirror_lines = [f"  R: {m['r_line']} ↔ S: {m['s_line']}" for m in mirrors]
+        sections.append("Dual-line mirrors:\n" + "\n".join(mirror_lines))
+
+    # 5. Numerical values (always)
+    values_text = graph.get_all_values()
+    if values_text:
+        result["numerical_values"] = values_text
+
+    if sections:
+        result["graph_context"] = "\n\n".join(sections)
         result["needed"] = True
 
     return result
@@ -267,7 +304,14 @@ def main():
                     keyword_supplements.append(section)
 
     # === Path 2: Graph traversal ===
-    graph_data = check_graph_conditions(story_dir, beat["characters"], chapter_num)
+    # Parse foreshadow names from beat sheet for chain lookup
+    foreshadow_names_for_graph = []
+    num_map = {"①": "一", "②": "二", "③": "三", "④": "四", "⑤": "五",
+               "⑥": "六", "⑦": "七", "⑧": "八", "⑨": "九", "⑩": "十"}
+    for symbol, chinese in num_map.items():
+        if symbol in beat.get("foreshadow", ""):
+            foreshadow_names_for_graph.append(chinese)
+    graph_data = check_graph_conditions(story_dir, beat["characters"], chapter_num, foreshadow_names_for_graph)
 
     # === Path 3: Semantic search ===
     query = f"{beat['objective']} {beat['key_events']}"
@@ -307,8 +351,8 @@ EMOTIONAL TONE: {beat['tone']}
 --- RECENT CHAPTERS ---
 {recent_log}
 
---- CAUSAL CONTEXT ---
-{graph_data['causal_context'] if graph_data['causal_context'] else 'N/A — no cross-arc references'}
+--- GRAPH CONTEXT ---
+{graph_data['graph_context'] if graph_data.get('graph_context') else 'N/A'}
 
 --- NUMERICAL VALUES (metadata — not all values should appear in prose) ---
 {graph_data['numerical_values'] if graph_data['numerical_values'] else 'Check story_graph if referencing previously established numbers.'}

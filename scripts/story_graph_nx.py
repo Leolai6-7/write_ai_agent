@@ -278,11 +278,46 @@ class StoryGraph:
             if data.get("type") == "foreshadow":
                 status = data.get("status", "")
                 if "已收束" not in status and "resolved" not in status.lower():
+                    # Find which chapters plant/hint/resolve this thread
+                    plants, hints, resolves = [], [], []
+                    for source, _, edge_data in self.G.in_edges(node_id, data=True):
+                        ch_num = self.G.nodes[source].get("number", 0)
+                        if edge_data.get("type") == "plants":
+                            plants.append(ch_num)
+                        elif edge_data.get("type") == "hints":
+                            hints.append(ch_num)
+                        elif edge_data.get("type") == "resolves":
+                            resolves.append(ch_num)
                     results.append({
                         "name": data.get("name", node_id),
                         "status": status,
+                        "planted_in": sorted(plants),
+                        "hinted_in": sorted(hints),
+                        "resolved_in": sorted(resolves),
                     })
         return results
+
+    def get_foreshadow_chain(self, name_fragment: str) -> dict | None:
+        """Get the full chain of a specific foreshadowing thread by name fragment."""
+        for node_id, data in self.G.nodes(data=True):
+            if data.get("type") == "foreshadow" and name_fragment in data.get("name", ""):
+                plants, hints, resolves = [], [], []
+                for source, _, edge_data in self.G.in_edges(node_id, data=True):
+                    ch_num = self.G.nodes[source].get("number", 0)
+                    if edge_data.get("type") == "plants":
+                        plants.append(ch_num)
+                    elif edge_data.get("type") == "hints":
+                        hints.append(ch_num)
+                    elif edge_data.get("type") == "resolves":
+                        resolves.append(ch_num)
+                return {
+                    "name": data.get("name", node_id),
+                    "status": data.get("status", ""),
+                    "planted_in": sorted(plants),
+                    "hinted_in": sorted(hints),
+                    "resolved_in": sorted(resolves),
+                }
+        return None
 
     def get_chapter_context(self, chapter_num: int) -> dict:
         """Get all nodes related to a chapter."""
