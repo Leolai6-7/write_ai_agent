@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Multi-agent novel writing pipeline with tool-restricted sub-agents for chapter generation and story graph maintenance",
   "agents": [
-    "./agents/chapter-writer.md"
+    "./agents/chapter-writer.md",
+    "./agents/progress-updater.md"
   ],
   "skills": [
     "./skills/"

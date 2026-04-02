@@ -188,30 +188,36 @@ If NEW_CHARACTERS reported, main agent appends to character_cast.md.
 
 ---
 
-**STEP 3 — Update Progress + Graph (main agent, no sub-agent)**
+**STEP 3 — Update Progress + Graph**
 
-Read the generated chapter, then update BOTH story_log and story_graph:
+Main agent reads chapter + current log + current graph, then launches
+**progress-updater plugin agent** (Write only):
 
-**3a. Append to `{STORY_DIR}/runtime/story_log.md`:**
 ```
-## 第{N}章：{title}
-- 摘要：{one-line, under 80 chars}
-- 角色變化：{who appeared, what changed}
-- 伏筆進展：{planted/hinted/resolved}
-- 情感基調：{tone}
+subagent_type: novel-agents:progress-updater
 ```
 
-**3b. Edit `{STORY_DIR}/runtime/story_graph.md`:**
-- 角色出場表：從角色變化欄位提取，加入 ch{N} 事件
-- 伏筆追蹤：從伏筆進展欄位提取，更新狀態（規劃中→已植入→已暗示）
-- 概念引入追蹤：如果本章引入了新概念，從 ❌ 改為 ch{N} ✅
-- 因果鏈：從章節內容提取新的因果關係
-- 數值設定：從章節內容提取新確立的數字
-- **新場景/設定捕獲**：如果章節創造了新的地點細節、角色習慣、或世界規則，
-  加入地點使用表或數值設定表。這確保後續章節不會矛盾。
+Paste ALL content into the prompt:
 
-Post-processing (index_chapter + sync_graph) is automatically triggered by the
-PostToolUse hook when story_log.md is edited. No manual action needed.
+> === CHAPTER TEXT ===
+> {full content of chapter_{NNN}.md}
+>
+> === CURRENT STORY LOG ===
+> {full content of runtime/story_log.md}
+>
+> === CURRENT STORY GRAPH ===
+> {full content of runtime/story_graph.md}
+>
+> Chapter {N}: {title}
+> Update both files based on what happened in the chapter.
+>
+> Write updated story_log to: /tmp/story_log_updated.md
+> Write updated story_graph to: /tmp/story_graph_updated.md
+
+After agent completes, main agent:
+1. Copies /tmp/story_log_updated.md → {STORY_DIR}/runtime/story_log.md
+2. Copies /tmp/story_graph_updated.md → {STORY_DIR}/runtime/story_graph.md
+3. Hook auto-triggers post-processing (index + sync)
 
 ---
 
