@@ -1,0 +1,9 @@
+{
+  "plugins": [
+    {
+      "name": "novel-agents",
+      "source": "./",
+      "description": "Multi-agent novel writing pipeline with tool-restricted sub-agents"
+    }
+  ]
+}
