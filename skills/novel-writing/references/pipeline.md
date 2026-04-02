@@ -207,6 +207,8 @@ Read the generated chapter, then update BOTH story_log and story_graph:
 - 概念引入追蹤：如果本章引入了新概念，從 ❌ 改為 ch{N} ✅
 - 因果鏈：從章節內容提取新的因果關係
 - 數值設定：從章節內容提取新確立的數字
+- **新場景/設定捕獲**：如果章節創造了新的地點細節、角色習慣、或世界規則，
+  加入地點使用表或數值設定表。這確保後續章節不會矛盾。
 
 Post-processing (index_chapter + sync_graph) is automatically triggered by the
 PostToolUse hook when story_log.md is edited. No manual action needed.

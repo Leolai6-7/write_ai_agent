@@ -78,6 +78,22 @@ def get_recent_log_entries(story_dir: Path, n: int = 5) -> str:
     return "\n\n".join(recent) if recent else "（尚無記錄）"
 
 
+def get_previous_chapter_ending(story_dir: Path, chapter_num: int, chars: int = 500) -> str:
+    """Read the last N characters of the previous chapter for tone continuity."""
+    if chapter_num <= 1:
+        return "N/A — this is the first chapter"
+    prev_num = chapter_num - 1
+    # For S-line chapters, find the last S-line chapter; for R-line, find last R-line
+    # But simpler: just get the immediately previous chapter regardless of line
+    prev_file = story_dir / "outputs" / f"chapter_{prev_num:03d}.md"
+    if not prev_file.exists():
+        return f"N/A — chapter_{prev_num:03d}.md not found"
+    text = prev_file.read_text(encoding="utf-8")
+    if len(text) <= chars:
+        return text
+    return "..." + text[-chars:]
+
+
 def get_dual_line_info(story_dir: Path, current_line: str) -> str:
     """Get info about the other narrative line from story_log."""
     log_path = story_dir / "runtime" / "story_log.md"
@@ -317,6 +333,9 @@ def main():
     query = f"{beat['objective']} {beat['key_events']}"
     semantic_results = do_semantic_search(story_dir, query)
 
+    # === Previous chapter ending ===
+    prev_ending = get_previous_chapter_ending(story_dir, chapter_num)
+
     # === Concept introduction tracking ===
     concept_tracking = get_concept_tracking(story_dir)
 
@@ -343,10 +362,13 @@ EMOTIONAL TONE: {beat['tone']}
 {chr(10).join(character_profiles) if character_profiles else '(none)'}
 
 --- SETTING ---
-{chr(10).join(location_descriptions) if location_descriptions else '(no location descriptions found)'}
+{chr(10).join(location_descriptions) if location_descriptions else '⚠ No location descriptions found in world_bible for: ' + ', '.join(beat['locations']) + '. Generator will invent — consider adding settings first.'}
 
 --- FORESHADOWING ---
 {chr(10).join(foreshadow_threads) if foreshadow_threads else '(none for this chapter)'}
+
+--- PREVIOUS CHAPTER ENDING (for tone continuity) ---
+{prev_ending}
 
 --- RECENT CHAPTERS ---
 {recent_log}
