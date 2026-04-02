@@ -115,9 +115,25 @@ Output in 繁體中文.
 
 ## Stage 2: Creation (創作)
 
-### 2.0: Arc Planning (每弧線開始前)
+### 2.0a: World Expansion (每弧線開始前，如需要)
 
-Before writing ANY chapter in a new arc, generate the chapter-level beat sheet for that arc.
+Before planning chapters, check if the next arc needs new settings:
+
+1. Read structure.md → what's the next arc's core conflict?
+2. Does it introduce new locations, factions, characters, or world systems?
+3. If yes, expand design docs:
+   - Re-run `novel-worldbuilding` skill with new requirements → Edit world_bible.md
+   - Re-run `novel-characters` skill for new major characters → Edit character_cast.md
+   - Or: conversational expansion with the user → main agent Edits directly
+4. If no new settings needed → skip to 2.0b
+
+For the FIRST arc of a story, this step is skipped (Stage 1 covers it).
+
+---
+
+### 2.0b: Arc Planning (每弧線開始前)
+
+After world expansion is complete, generate the chapter-level beat sheet.
 
 structure.md 把每卷分成 2-3 個弧線（例如弧線一 ch1-5、弧線二 ch6-10）。**按弧線規劃，不是按卷。**
 

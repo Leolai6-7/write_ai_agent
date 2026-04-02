@@ -13,7 +13,7 @@ write_ai_agent/                    ← plugin 本體
 ├── agents/                        ← sub-agents（工具限制各異）
 │   ├── chapter-writer.md          → Read + Write（讀設計文件 + 前章，寫新章節）
 │   ├── progress-updater.md        → Read + Edit + Write（讀章節，Edit story_log，Write story_graph）
-│   ├── volume-planner.md          → Read + Edit + Write + Glob（規劃弧線 + 擴展設定）
+│   ├── volume-planner.md          → Read + Write + Glob（規劃弧線章級 beat sheet）
 │   └── arc-reviewer.md            → Read + Edit + Write + Glob（Edit 原檔 + Write 報告）
 ├── skills/                        ← 主 agent 的工作流 skills
 │   ├── novel-writing/             → 入口 + pipeline
@@ -60,10 +60,11 @@ data/
 Stage 1 構思 → structure.md（卷級弧線，不含章級 beat sheet）
                 ↓
 Stage 2 創作（每弧線循環）：
-  2.0 Arc Planning → volume-planner agent → arc_plan_N.yaml（規劃 + 擴展設定）
+  2.0a World Expansion（如需要）→ 擴展 world_bible / character_cast
+  2.0b Arc Planning → volume-planner agent → arc_plan_N.yaml
   2.1 章節循環（3 步 × M 章）
   2.9 Arc Review → arc-reviewer agent → 更新所有設計文件
-  → 回到 2.0 規劃下一弧線
+  → 回到 2.0a
                 ↓
 Stage 3 編輯 → style audit
 Stage 4 組裝 → 完整小說
@@ -83,7 +84,7 @@ Stage 4 組裝 → 完整小說
 
 ## 卷級規則
 
-- **每弧線開始前**必須先跑 `volume-planner`，生成 `arc_plan_N.yaml`（同時擴展 world_bible）
+- **每弧線開始前**：先做 World Expansion（如需要），再跑 `volume-planner` 生成 `arc_plan_N.yaml`
 - **每弧線結束後**必須跑 `arc-reviewer`，更新所有設計文件
 - `assemble_context.py` 優先從 `arc_plan_N.yaml` 讀 beat sheet，fallback 到 markdown
 - `structure.md` 只含卷級弧線 + 弧線分解，不含章級 beat sheet
