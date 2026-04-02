@@ -33,7 +33,14 @@ Rules:
 Update each character's 「當前狀態」section based on what happened in this arc.
 
 Rules:
-- Keep all 「設計」sections UNCHANGED — do not modify backstory, personality, or speaking style
+- **CRITICAL: Preserve ALL original headings EXACTLY** — same `##` level, same full text
+  - If input has `## 主角：沈逸（Shen Yi）`, output MUST have the identical heading
+  - If input has `## 角色四：林昭明`, output MUST keep it as `## 角色四：林昭明`
+  - Do NOT reorganize, rename, simplify, or change heading levels
+  - Do NOT strip prefixes like `主角：` `角色一：` `配角：`
+  - The context assembly system greps these headings — changing them breaks retrieval
+- Keep all 「設計」sections UNCHANGED — copy verbatim from the input, do not rephrase
+- Use the SAME pronouns and gender as the original character_cast (e.g., if 林昭明 is 「他」, keep using 「他」)
 - Update 「當前狀態」for every character who appeared in this arc:
   - 位置：current physical location
   - 情感狀態：emotional state at arc end

@@ -55,11 +55,22 @@ Characters, organizations, technologies, locations, concepts — anything import
 ### Adapt to actual story state
 If the story_log and character states show the narrative has diverged from the original arc plan, ADAPT the beat sheet to the actual trajectory — don't force alignment with outdated plans. The arc's thematic goals matter more than specific plot points.
 
-### Retrieval tag discipline
-- 角色 tags MUST match `## {name}` headings in character_cast.md exactly
-- 地點 tags MUST match `### {location}` headings in world_bible.md exactly
-- 伏筆 tags use ① through ⑫ notation matching foreshadowing.md thread numbers
-- These tags drive the RAG context assembly system — wrong tags = wrong context
+### Retrieval tag discipline (CRITICAL — downstream parsing depends on exact format)
+
+**角色 column**: Use SHORT NAMES ONLY, comma-separated.
+- ✅ `沈逸, 林昭明`
+- ❌ `主角：沈逸（Shen Yi）, 角色四：林昭明`
+- These names are grep'd against character_cast.md `## ` headings as substrings.
+
+**地點 column**: Use the location name as it appears in world_bible.md headings.
+- ✅ `深潛研究所` (matches `### 1.1 深潛研究所（安全港灣 / 主角基地）`)
+- ❌ `無感區（新北）` (doesn't match `### 1.2 新北無感區（危險前線）`)
+- Use the short form: `新北無感區`, `深潛研究所`, `模擬世界-研究院`
+
+**伏筆 column**: Use ONLY thread number + action word. NO descriptions.
+- ✅ `⑨plant ④hint`
+- ❌ `⑨植①：沈逸的觀測行為改變了觀測對象`
+- The parser extracts ALL circled numbers (①-⑫) from this cell as thread references. Any extra circled number in descriptions will be misinterpreted as a thread reference.
 
 ### Rhythm
 Tension and release should alternate naturally. For multi-line narratives: each line must have its OWN momentum, not just serve as contrast. The lines should create dramatic irony — the reader knows things from line A that make line B more tense.
