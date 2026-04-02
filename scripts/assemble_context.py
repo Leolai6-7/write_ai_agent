@@ -44,7 +44,7 @@ def load_beat(story_dir: Path, chapter_num: int) -> dict | None:
     planning_dir = story_dir / "planning"
 
     # Try YAML first
-    for plan_file in sorted(planning_dir.glob("volume_plan_*.yaml")):
+    for plan_file in sorted(planning_dir.glob("arc_plan_*.yaml")):
         data = yaml.safe_load(plan_file.read_text(encoding="utf-8"))
         if not data or "chapters" not in data:
             continue
@@ -79,7 +79,7 @@ def load_beat(story_dir: Path, chapter_num: int) -> dict | None:
                     "foreshadow_threads": threads,
                 }
 
-    # Fallback: try markdown (structure.md or volume_plan_*.md)
+    # Fallback: try markdown (structure.md or arc_plan_*.md)
     beat = _load_beat_markdown(planning_dir, chapter_num)
     if beat:
         beat["foreshadow_threads"] = _parse_foreshadow_tag_legacy(beat.get("foreshadow", ""))
@@ -88,8 +88,8 @@ def load_beat(story_dir: Path, chapter_num: int) -> dict | None:
 
 def _load_beat_markdown(planning_dir: Path, chapter_num: int) -> dict | None:
     """Legacy: parse beat sheet from markdown table."""
-    # Try volume_plan_*.md first, then structure.md
-    candidates = sorted(planning_dir.glob("volume_plan_*.md"))
+    # Try arc_plan_*.md first, then structure.md
+    candidates = sorted(planning_dir.glob("arc_plan_*.md"))
     structure = planning_dir / "structure.md"
     if structure.exists():
         candidates.append(structure)
@@ -402,7 +402,7 @@ def main():
     structure_path = story_dir / "planning" / "structure.md"
     if structure_path.exists():
         all_beat_text = structure_path.read_text(encoding="utf-8")
-    for plan_file in sorted((story_dir / "planning").glob("volume_plan_*.md")):
+    for plan_file in sorted((story_dir / "planning").glob("arc_plan_*.md")):
         all_beat_text += "\n" + plan_file.read_text(encoding="utf-8")
 
     # Read always-needed files

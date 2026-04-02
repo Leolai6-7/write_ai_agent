@@ -115,35 +115,28 @@ Output in 繁體中文.
 
 ## Stage 2: Creation (創作)
 
-### 2.0: Volume Planning (每卷開始前)
+### 2.0: Arc Planning (每弧線開始前)
 
-Before writing ANY chapter in a new volume, generate the chapter-level beat sheet for that volume.
+Before writing ANY chapter in a new arc, generate the chapter-level beat sheet for that arc.
 
-1. Determine which volume is next (read structure.md for volume ranges)
-2. Launch **volume-planner plugin agent** (has Read + Write):
+structure.md 把每卷分成 2-3 個弧線（例如弧線一 ch1-5、弧線二 ch6-10）。**按弧線規劃，不是按卷。**
+
+1. Determine which arc is next (read structure.md for arc ranges)
+2. Launch **volume-planner plugin agent**:
 
 ```
 subagent_type: novel-agents:volume-planner
 ```
 
-Prompt (agent reads files itself):
-
 > Story directory: {STORY_DIR}
-> Generate the chapter beat sheet for Volume {V} (弧線：{arc_name}).
+> Generate the chapter beat sheet for Arc {A}: {arc_name} (chapters {start}-{end}).
 >
-> Read these files:
-> - {STORY_DIR}/planning/structure.md (this volume's arc)
-> - {STORY_DIR}/planning/story_brief.md
-> - {STORY_DIR}/planning/foreshadowing.md
-> - {STORY_DIR}/world/world_bible.md
-> - {STORY_DIR}/world/character_cast.md
-> - {STORY_DIR}/runtime/story_log.md (if exists)
-> - {STORY_DIR}/runtime/story_graph.json (if exists)
+> Read design files in {STORY_DIR}/ (structure, story_brief, foreshadowing, world_bible, character_cast, story_log, story_graph.json).
 >
-> Write to: /tmp/volume_plan_{V}.yaml
+> Write to: /tmp/arc_plan_{A}.yaml
 
-3. Main agent copies `/tmp/volume_plan_{V}.yaml` → `{STORY_DIR}/planning/volume_plan_{V}.yaml`
-4. Show beat sheet summary to user: "第{V}卷章節規劃完成，要看詳情或調整嗎？"
+3. Main agent copies to `{STORY_DIR}/planning/arc_plan_{A}.yaml`
+4. Show summary: "弧線{A}章節規劃完成，要看詳情或調整嗎？"
 5. After user confirms → proceed to chapter writing loop
 
 ---
@@ -221,42 +214,31 @@ Every 5 chapters: "前5章寫完了，要檢查再繼續嗎？"
 
 ---
 
-### 2.9: Arc Review (每卷結束後)
+### 2.9: Arc Review (每弧線結束後)
 
-When all chapters in a volume are complete, run the arc review.
+When all chapters in an arc are complete, run the arc review **before planning the next arc**.
 
-1. Main agent reads story_log.md (small file, chapter summaries)
-2. Launch **arc-reviewer plugin agent** (has Read + Edit + Write):
+This ensures expanded settings, updated characters, and new foreshadowing are incorporated into the next arc's planning.
+
+1. Main agent reads story_log.md (chapter summaries)
+2. Launch **arc-reviewer plugin agent**:
 
 ```
 subagent_type: novel-agents:arc-reviewer
 ```
 
-Prompt — paste story_log, tell agent where to find files:
-
 > Story directory: {STORY_DIR}
-> Review Volume {V} (chapters {start}-{end}).
+> Review Arc {A} (chapters {start}-{end}).
 >
-> === STORY LOG (chapter summaries — use as primary source) ===
+> === STORY LOG ===
 > {full content of story_log.md}
 >
-> Edit these files IN PLACE (use Edit tool, not Write):
-> - {STORY_DIR}/world/world_bible.md (add new settings)
-> - {STORY_DIR}/world/character_cast.md (update 當前狀態 sections)
-> - {STORY_DIR}/planning/foreshadowing.md (add new threads if emerged)
-> - {STORY_DIR}/planning/structure.md (adjust future arcs if needed)
->
-> Write this NEW file:
-> - {STORY_DIR}/planning/arc_review_{V}.md (review report)
->
-> Files you can Read for detail checks:
-> - {STORY_DIR}/outputs/chapter_{NNN}.md
-> - {STORY_DIR}/runtime/story_graph.json
-> - {STORY_DIR}/planning/volume_plan_{V}.yaml
+> Edit IN PLACE: world_bible.md, character_cast.md, foreshadowing.md, structure.md
+> Write NEW: {STORY_DIR}/planning/arc_review_{A}.md
+> Read for details: chapter files, story_graph.json, arc_plan_{A}.yaml
 
 3. Main agent reviews changes (`git diff`) and arc_review report
-4. If structure adjustments are recommended, discuss with user before modifying
-5. Proceed to next volume → back to 2.0 Volume Planning
+4. Proceed to next arc → back to 2.0 Arc Planning
 
 ---
 
