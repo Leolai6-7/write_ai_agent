@@ -195,22 +195,22 @@ Launch **progress-updater plugin agent** (has Read + Write):
 subagent_type: novel-agents:progress-updater
 ```
 
-Prompt (agent reads files and edits in place):
+Prompt (agent reads files, edits story_log, writes diff):
 
 > Story directory: {STORY_DIR}
 > Chapter {N}: {title}
 >
-> Read these files:
-> - {STORY_DIR}/outputs/chapter_{NNN}.md (the chapter just written)
-> - {STORY_DIR}/runtime/story_log.md (current progress)
-> - {STORY_DIR}/runtime/story_graph.json (current graph — flat JSON format)
+> Read the chapter: {STORY_DIR}/outputs/chapter_{NNN}.md
+> Read story_log: {STORY_DIR}/runtime/story_log.md
 >
-> Edit story_log.md IN PLACE — append a new entry at the end.
-> Write updated story_graph.json to: /tmp/story_graph_updated.json
+> Edit story_log.md IN PLACE — append a new entry.
+> Write chapter diff to: /tmp/chapter_{N}_diff.yaml
 
-After agent completes, main agent:
-1. story_log.md already updated (Edit in place, hook auto-triggers post-processing)
-2. Copies /tmp/story_graph_updated.json → {STORY_DIR}/runtime/story_graph.json
+After agent completes, main agent runs:
+```
+python scripts/update_graph.py --story-dir {STORY_DIR} --diff /tmp/chapter_{N}_diff.yaml
+```
+Hook auto-triggers ChromaDB indexing when story_log.md is edited.
 
 ---
 

@@ -11,9 +11,9 @@ You have Read access. The prompt tells you the story directory and chapter numbe
 
 ## Task
 
-1. Read the chapter text, current story_log.md, and current story_graph.json
-2. **Edit** story_log.md IN PLACE — use the Edit tool to append a new entry at the end
-3. **Write** updated story_graph.json to `/tmp/story_graph_updated.json` (full JSON, since JSON can't be incrementally edited)
+1. Read the chapter text and current story_log.md
+2. **Edit** story_log.md IN PLACE — append a new entry at the end
+3. **Write** a chapter diff YAML to `/tmp/chapter_{N}_diff.yaml` — only what THIS chapter added/changed
 
 ## story_log entry format
 
@@ -25,57 +25,41 @@ You have Read access. The prompt tells you the story directory and chapter numbe
 - 情感基調：{emotional arc with → arrows}
 ```
 
-## story_graph.json format
+## Chapter diff YAML format
 
-The graph is a flat JSON with these top-level keys:
+Output ONLY what this chapter adds. A Python script will apply it to the graph database.
 
-```json
-{
-  "characters": {
-    "角色名": {
-      "chapters": [1, 3, 5],
-      "events": "ch1: 事件描述 · ch3: 事件描述"
-    }
-  },
-  "locations": {
-    "地點名": {
-      "chapters": [1, 3],
-      "description": "環境描述"
-    }
-  },
-  "foreshadowing": {
-    "①牆壁溫度": {
-      "status": "已暗示",
-      "planted_in": [2],
-      "hinted_in": [4],
-      "resolved_in": []
-    }
-  },
-  "causal_chains": [
-    {"cause": "原因", "cause_ch": 1, "effect": "結果", "effect_ch": 3, "note": "備註"}
-  ],
-  "mirrors": [
-    {"r_line": "R線事件", "r_ch": 1, "s_line": "S線對應", "s_ch": 2}
-  ],
-  "values": {
-    "設定名": {"value": "值", "note": "備註"}
-  },
-  "concepts": {
-    "概念名": {"introduced_in": 1}
-  }
-}
+```yaml
+chapter: 6
+characters_appeared:
+  - name: 顧則
+    events: "ch6: 嘗試在模擬邊界構造數學訊號"
+  - name: 紀恆
+    events: "ch6: 在冷凍室門口等待顧則"
+locations_used:
+  - 模擬世界-冷凍室
+  - 模擬世界-天台
+foreshadowing_updates:
+  - thread: ⑪迭代者家人
+    action: plant
+causal_chains:
+  - cause: 顧則推算邊界不連續性
+    cause_ch: 6
+    effect: 模擬系統資源消耗加速
+    effect_ch: 6
+mirrors:
+  - r_line: (R線對應事件，如果有)
+    s_line: (S線對應事件)
+new_values:
+  - setting: 邊界不連續閾值
+    value: "10^-15"
+    note: ch6確立
+concepts_introduced:
+  - name: 失聯症
+    chapter: 6
 ```
 
-When updating:
-- **characters**: append ch{N} to chapters list, add new events to events string
-- **locations**: append ch{N} if location appeared, update description if new details
-- **foreshadowing**: update status (規劃中 → 已植入 → 已暗示 → 已收束), append ch{N} to relevant list
-- **causal_chains**: append new cause-effect pairs from this chapter
-- **mirrors**: add new R/S mirror pairs if any
-- **values**: add any new numerical values established in this chapter
-- **concepts**: if a concept is introduced to the reader for the first time, set introduced_in to ch{N}
-
-Output the COMPLETE updated JSON (not a diff).
+Only include sections that have content. Empty sections can be omitted.
 
 ## New character detection
 

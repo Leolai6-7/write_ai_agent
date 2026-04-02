@@ -218,6 +218,129 @@ class StoryGraph:
 
         return flat
 
+    def save_flat(self) -> None:
+        """Save graph as flat JSON format."""
+        flat = self.to_flat()
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        with open(self.path, "w", encoding="utf-8") as f:
+            json.dump(flat, f, ensure_ascii=False, indent=2)
+
+    def apply_chapter_diff(self, diff: dict) -> dict:
+        """Apply one chapter's incremental changes to the graph. Returns stats."""
+        stats = {"nodes_added": 0, "edges_added": 0}
+        ch_num = diff.get("chapter")
+        if not ch_num:
+            return stats
+
+        ch_id = f"chapter:ch{ch_num}"
+        if not self.G.has_node(ch_id):
+            self.G.add_node(ch_id, type="chapter", number=ch_num)
+            stats["nodes_added"] += 1
+
+        # Characters appeared
+        for char in diff.get("characters_appeared") or []:
+            name = char.get("name", "")
+            if not name:
+                continue
+            char_id = f"character:{name}"
+            if not self.G.has_node(char_id):
+                self.G.add_node(char_id, type="character", name=name, events="")
+                stats["nodes_added"] += 1
+            # Append events
+            old_events = self.G.nodes[char_id].get("events", "")
+            new_events = char.get("events", "")
+            if new_events:
+                self.G.nodes[char_id]["events"] = (
+                    f"{old_events} · {new_events}" if old_events else new_events
+                )
+            # Add edge if not exists
+            if not self.G.has_edge(char_id, ch_id):
+                self.G.add_edge(char_id, ch_id, type="appears_in")
+                stats["edges_added"] += 1
+
+        # Locations used
+        for loc_name in diff.get("locations_used") or []:
+            if isinstance(loc_name, dict):
+                loc_name = loc_name.get("name", "")
+            loc_id = f"location:{loc_name}"
+            if not self.G.has_node(loc_id):
+                self.G.add_node(loc_id, type="location", name=loc_name, description="")
+                stats["nodes_added"] += 1
+            if not self.G.has_edge(ch_id, loc_id):
+                self.G.add_edge(ch_id, loc_id, type="located_in")
+                stats["edges_added"] += 1
+
+        # Foreshadowing updates
+        for fs in diff.get("foreshadowing_updates") or []:
+            thread = fs.get("thread", "")
+            action = fs.get("action", "")
+            fs_id = f"foreshadow:{thread}"
+            if not self.G.has_node(fs_id):
+                self.G.add_node(fs_id, type="foreshadow", name=thread, status="")
+                stats["nodes_added"] += 1
+            # Update status
+            action_to_status = {"plant": "已植入", "hint": "已暗示", "resolve": "已收束"}
+            if action in action_to_status:
+                self.G.nodes[fs_id]["status"] = action_to_status[action]
+            # Add edge
+            edge_type = {"plant": "plants", "hint": "hints", "resolve": "resolves"}.get(action)
+            if edge_type and not self.G.has_edge(ch_id, fs_id):
+                self.G.add_edge(ch_id, fs_id, type=edge_type)
+                stats["edges_added"] += 1
+
+        # Causal chains
+        for chain in diff.get("causal_chains") or []:
+            cause = chain.get("cause", "")
+            effect = chain.get("effect", "")
+            cause_id = f"event:{cause}"
+            effect_id = f"event:{effect}"
+            if not self.G.has_node(cause_id):
+                self.G.add_node(cause_id, type="event", description=cause,
+                               chapter=str(chain.get("cause_ch", "")))
+                stats["nodes_added"] += 1
+            if not self.G.has_node(effect_id):
+                self.G.add_node(effect_id, type="event", description=effect,
+                               chapter=str(chain.get("effect_ch", "")))
+                stats["nodes_added"] += 1
+            if not self.G.has_edge(cause_id, effect_id):
+                self.G.add_edge(cause_id, effect_id, type="causes")
+                stats["edges_added"] += 1
+
+        # Mirrors
+        for m in diff.get("mirrors") or []:
+            r_desc = m.get("r_line", "")
+            s_desc = m.get("s_line", "")
+            r_id = f"mirror_r:{r_desc}"
+            s_id = f"mirror_s:{s_desc}"
+            if not self.G.has_node(r_id):
+                self.G.add_node(r_id, type="mirror", line="R", description=r_desc)
+                stats["nodes_added"] += 1
+            if not self.G.has_node(s_id):
+                self.G.add_node(s_id, type="mirror", line="S", description=s_desc)
+                stats["nodes_added"] += 1
+            if not self.G.has_edge(r_id, s_id):
+                self.G.add_edge(r_id, s_id, type="mirrors")
+                stats["edges_added"] += 1
+
+        # New values
+        for val in diff.get("new_values") or []:
+            setting = val.get("setting", "")
+            val_id = f"value:{setting}"
+            self.G.add_node(val_id, type="value", setting=setting,
+                           value=val.get("value", ""), note=val.get("note", ""))
+            stats["nodes_added"] += 1
+
+        # Concepts introduced
+        for concept in diff.get("concepts_introduced") or []:
+            name = concept.get("name", "")
+            # Store as a simple attribute on a concept node
+            concept_id = f"concept:{name}"
+            self.G.add_node(concept_id, type="concept", name=name,
+                           introduced_in=concept.get("chapter", ch_num))
+            stats["nodes_added"] += 1
+
+        return stats
+
     def sync_from_markdown(self, md_path: Path) -> dict:
         """Build graph from story_graph.md. Returns stats."""
         text = md_path.read_text(encoding="utf-8")
