@@ -165,29 +165,24 @@ Store the output as the CHAPTER CONTEXT PACKAGE.
 
 **STEP 2 — Chapter Generation**
 
-Main agent reads `skills/novel-chapter/SKILL.md` and `{STORY_DIR}/planning/story_brief.md`,
-then launches the **chapter-writer plugin agent** (Write-only, cannot read files):
+Launch **chapter-writer plugin agent** (has Read + Write):
 
 ```
 subagent_type: novel-agents:chapter-writer
 ```
 
-Paste ALL content into the prompt (the agent has no Read tool):
+Prompt — agent reads files itself, context package is navigation only:
 
-> === WRITING SKILL ===
-> {full content of novel-chapter/SKILL.md}
+> Story directory: {STORY_DIR}
+> Chapter {N}: {title}
 >
-> === STORY BRIEF ===
-> {full content of story_brief.md}
+> Read skills/novel-chapter/SKILL.md for writing guidelines.
+> Read {STORY_DIR}/planning/story_brief.md for story overview.
 >
-> === CHAPTER CONTEXT PACKAGE ===
-> {CHAPTER CONTEXT PACKAGE from Step 1}
+> {CHAPTER CONTEXT PACKAGE from Step 1 — navigation references + graph warnings}
 >
-> Write the chapter based on the skill, brief, and context above.
-> Save to: {STORY_DIR}/outputs/chapter_{NNN}.md
+> Write chapter to: {STORY_DIR}/outputs/chapter_{NNN}.md
 
-The agent can ONLY Write. It cannot read chapter files, search directories,
-or access any information not in the prompt. This prevents cross-line contamination.
 New characters are detected by progress-updater in Step 3.
 
 ---

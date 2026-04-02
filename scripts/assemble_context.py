@@ -411,51 +411,37 @@ def main():
 
     recent_log = get_recent_log_entries(story_dir)
 
-    # Source files for structured search
-    world_files = [
-        story_dir / "world" / "world_bible.md",
-    ]
+    # Build navigation references (agent reads files itself)
     char_file = story_dir / "world" / "character_cast.md"
+    world_file = story_dir / "world" / "world_bible.md"
     foreshadow_file = story_dir / "planning" / "foreshadowing.md"
 
-    # Extract character profiles
-    character_profiles = []
+    # Character references — verify each exists in file
+    char_refs = []
+    char_text = char_file.read_text(encoding="utf-8") if char_file.exists() else ""
     for name in beat["characters"]:
-        section = extract_sections_from_files([char_file], name, "## ")
-        if section:
-            character_profiles.append(section)
+        # Find the actual heading
+        heading_match = re.search(rf"^(## .+{re.escape(name)}.*)$", char_text, re.MULTILINE)
+        if heading_match:
+            char_refs.append(f"  {name} → {char_file} {heading_match.group(1)}")
         else:
-            character_profiles.append(f"⚠ {name} not found in character_cast.md — profile missing")
+            char_refs.append(f"  ⚠ {name} — NOT FOUND in character_cast.md")
 
-    # Extract location descriptions
-    location_descriptions = []
+    # Location references
+    loc_refs = []
+    world_text = world_file.read_text(encoding="utf-8") if world_file.exists() else ""
     for loc in beat["locations"]:
-        section = extract_sections_from_files(world_files, loc, "### ")
-        if not section:
-            # Try ## level
-            section = extract_sections_from_files(world_files, loc, "## ")
-        if section:
-            location_descriptions.append(section)
+        heading_match = re.search(rf"^(###? .+{re.escape(loc)}.*)$", world_text, re.MULTILINE)
+        if heading_match:
+            loc_refs.append(f"  {loc} → {world_file} {heading_match.group(1)}")
+        else:
+            loc_refs.append(f"  ⚠ {loc} — NOT FOUND in world_bible.md")
 
-    # Extract foreshadowing threads
-    foreshadow_threads = []
+    # Foreshadowing references
     thread_names = beat.get("foreshadow_threads", []) or _parse_foreshadow_tag_legacy(beat.get("foreshadow", ""))
+    foreshadow_refs = []
     for thread_name in thread_names:
-        if foreshadow_file.exists():
-            text = foreshadow_file.read_text(encoding="utf-8")
-            section = extract_section(text, thread_name, "### ")
-            if section:
-                foreshadow_threads.append(section)
-
-    # Keyword-based supplementary search
-    keywords = extract_keywords(beat["key_events"])
-    keyword_supplements = []
-    for kw in keywords:
-        if kw not in beat["characters"] and kw not in beat["locations"]:
-            for f in world_files + [char_file]:
-                section = extract_sections_from_files([f], kw, "### ")
-                if section and section not in keyword_supplements:
-                    keyword_supplements.append(section)
+        foreshadow_refs.append(f"  {thread_name} → {foreshadow_file} ### {thread_name}")
 
     # === Path 2: Graph traversal ===
     # Extract foreshadow thread names for graph chain lookup
@@ -489,40 +475,33 @@ def main():
     # === Format output ===
     package = f"""=== CHAPTER CONTEXT PACKAGE — Chapter {chapter_num}: {beat['title']} ===
 
-STORY: {prose_style if prose_style else '(see story_brief.md)'}
 LINE: {beat['line']}
 TARGET LENGTH: 5,000-8,000 字
 OBJECTIVE: {beat['objective']}
 KEY EVENTS: {beat['key_events']}
 EMOTIONAL TONE: {beat['tone']}
 
---- CHARACTER PROFILES ---
-{chr(10).join(character_profiles) if character_profiles else '(none)'}
+--- READ THESE (character profiles, settings, foreshadowing) ---
+CHARACTERS:
+{chr(10).join(char_refs)}
 
---- SETTING ---
-{chr(10).join(location_descriptions) if location_descriptions else '(no location descriptions found)'}
+LOCATIONS:
+{chr(10).join(loc_refs)}
 
---- FORESHADOWING ---
-{chr(10).join(foreshadow_threads) if foreshadow_threads else '(none for this chapter)'}
+FORESHADOWING:
+{chr(10).join(foreshadow_refs) if foreshadow_refs else '  (none for this chapter)'}
 
 --- PREVIOUS CHAPTER ENDING (for tone continuity) ---
 {prev_ending}
 
---- RECENT CHAPTERS ---
+--- RECENT CHAPTERS (story_log) ---
 {recent_log}
 
---- GRAPH CONTEXT ---
+--- GRAPH WARNINGS ---
 {graph_data['graph_context'] if graph_data.get('graph_context') else 'N/A'}
 
---- NUMERICAL VALUES (metadata — not all values should appear in prose) ---
-{graph_data['numerical_values'] if graph_data['numerical_values'] else 'Check story_graph if referencing previously established numbers.'}
-Note: Characters may not know exact numbers — use sensory descriptions instead of stating precise values unless the character has measuring instruments.
-
---- SEMANTIC RECALL ---
-{semantic_results}
-
---- KEYWORD SUPPLEMENTS ---
-{chr(10).join(keyword_supplements) if keyword_supplements else '(none)'}
+--- NUMERICAL VALUES (use sensory descriptions, not exact numbers unless character has instruments) ---
+{graph_data['numerical_values'] if graph_data['numerical_values'] else 'N/A'}
 
 --- CONCEPT INTRODUCTION STATUS ---
 {concept_tracking}
@@ -531,11 +510,10 @@ Note: Characters may not know exact numbers — use sensory descriptions instead
 {dual_line}
 ==="""
 
-    # Preflight warnings to stderr (not in context package)
-    missing_locs = [loc for loc in beat["locations"] if not any(loc in d for d in location_descriptions)]
+    # Preflight warnings to stderr
+    missing_locs = [r for r in loc_refs if "NOT FOUND" in r]
     if missing_locs:
-        import sys as _sys
-        print(f"⚠ PREFLIGHT: {', '.join(missing_locs)} 無 world_bible 設定——generator 將自行發明", file=_sys.stderr)
+        print(f"⚠ PREFLIGHT: locations not found in world_bible — agent will improvise", file=_sys.stderr)
 
     if args.format == "json":
         import json
