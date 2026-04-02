@@ -1,98 +1,76 @@
 # AI 小說寫作系統 (write_ai_agent)
 
 ## 專案概述
-一個基於 Claude Code Skills 的多 Agent 長篇小說自動生成系統。支援多故事管理和分卷式小說創作。Python 基礎設施（LangGraph + SQLite + ChromaDB）透過 CLI 腳本橋接到 skill pipeline。
+一個基於 Claude Code Plugin 的多 Agent 長篇小說自動生成系統。支援多故事管理和分卷式小說創作。
 
 ## 架構
 
-兩層系統：
-- **Skill Pipeline**（生產用）：Claude Code sub-agents 讀寫 markdown 檔案，透過 skills 定義工作流
-- **Python Infrastructure**（資料層）：NetworkX（圖查詢）+ ChromaDB（語義檢索），透過 `scripts/` CLI 腳本橋接
+統一的 plugin（`novel-agents`）管理所有組件：
 
-## 小說寫作 Skills
-
-完整工作流入口：`/novel-writing`
-
-| Skill | 用途 |
-|-------|------|
-| `/novel-worldbuilding` | 世界觀構建 |
-| `/novel-characters` | 角色群像設計 |
-| `/novel-architect` | 分卷/弧線結構 |
-| `/novel-foreshadowing` | 伏筆規劃 |
-| `/novel-context` | 上下文組裝（章節生成前的 RAG） |
-| `/novel-chapter` | 章節生成（含改寫模式） |
-| `/novel-style-audit` | 文風審查（弧線級） |
+```
+write_ai_agent/                    ← plugin 本體
+├── .claude-plugin/plugin.json     ← plugin 定義
+├── agents/                        ← 工具限制的 sub-agents（自動發現）
+│   ├── chapter-writer.md          → Write only（不能讀檔，防止跨線汙染）
+│   └── graph-updater.md           → Read + Write only
+├── skills/                        ← 主 agent 的工作流 skills
+│   ├── novel-writing/             → 入口 + pipeline
+│   ├── novel-chapter/             → 寫作哲學
+│   ├── novel-worldbuilding/
+│   ├── novel-characters/
+│   ├── novel-architect/
+│   ├── novel-foreshadowing/
+│   ├── novel-context/             → 設計文檔（已被 assemble_context.py 取代）
+│   └── novel-style-audit/
+└── scripts/                       ← Python 工具
+    ├── assemble_context.py        → 三路召回（結構化 + 圖譜 + 語義）
+    ├── index_chapter.py           → 章節 → ChromaDB 索引
+    ├── sync_graph.py              → story_graph.md → NetworkX JSON
+    ├── story_graph_nx.py          → NetworkX 圖結構 + 查詢 API
+    └── semantic_search.py         → ChromaDB 語義查詢
+```
 
 ## 多故事管理
 
-每個故事有獨立的子目錄。`data/active_story.txt` 記錄當前正在寫的故事。
-
 ```
 data/
-├── active_story.txt              → 當前故事名稱
+├── active_story.txt
 └── stories/
     └── {story-name}/
-        ├── world/
+        ├── world/                 → 設計文檔
         │   ├── world_bible.md
         │   └── character_cast.md
-        ├── planning/           → 設計文檔（寫章前定好，不隨章節更新）
+        ├── planning/              → 設計文檔（不隨章節更新）
         │   ├── story_brief.md
         │   ├── structure.md
         │   └── foreshadowing.md
-        ├── runtime/            → 運行時文檔（每章更新）
+        ├── runtime/               → 運行時文檔（每章更新）
         │   ├── story_log.md
         │   └── story_graph.md
         ├── outputs/
         │   └── chapter_NNN.md
-        └── chroma/               → ChromaDB（per-story）
+        └── chroma/                → ChromaDB（per-story）
 ```
-
-## 路徑規則
-
-所有 sub-agent 的檔案路徑必須使用 active story 的目錄：
-
-```
-STORY_DIR = data/stories/{active_story}/
-```
-
-## 當前進度載入
-
-每次新對話，如果用戶提到寫小說：
-1. 讀取 `data/active_story.txt` 確認當前故事
-2. 讀取 `{STORY_DIR}/runtime/story_log.md` — 上次寫到哪裡
-3. 讀取 `{STORY_DIR}/planning/story_brief.md` — 故事概要
-4. 如果這些檔案存在，告訴用戶當前進度並詢問要繼續還是開新故事
-5. 如果不存在，從 `/novel-writing` 開始
 
 ## 章節生成規則（不可違反）
 
 每章必須完成 4 步才算完成，缺一不可：
-1. Context assembly（`scripts/assemble_context.py`，主 agent 呼叫）
-2. Chapter generation（獨立 sub-agent，前景執行）
-3. Update story_log（主 agent）
-4. Update story_graph + world_additions（sub-agent，前景執行）
+1. **Context assembly** — `scripts/assemble_context.py`（主 agent 呼叫，9 秒）
+2. **Chapter generation** — `novel-agents:chapter-writer`（Write only，不能讀其他檔案）
+3. **Update story_log** — 主 agent 直接編輯
+4. **Update story_graph** — `novel-agents:graph-updater`（Read + Write only）
 
 完成後自動觸發（非阻塞）：
-- `scripts/index_chapter.py` → SQLite + ChromaDB 索引
-- `scripts/sync_graph.py` → story_graph → SQLite 同步
+- `scripts/index_chapter.py` → ChromaDB 索引
+- `scripts/sync_graph.py` → story_graph → NetworkX JSON
 
 **不可合併 sub-agent。不可跳過步驟。不可平行多章。**
-
-Hooks（`.claude/hooks/`）會自動追蹤完成狀態，阻止在未完成所有步驟時停止回應。
-
-## 橋接腳本
-
-| 腳本 | 用途 | 時機 |
-|------|------|------|
-| `scripts/assemble_context.py` | 三路召回 → context package | Step 1 |
-| `scripts/index_chapter.py` | 章節摘要 → SQLite + ChromaDB | Step 3 後 |
-| `scripts/sync_graph.py` | story_graph.md → NetworkX JSON | Step 4 後 |
-| `scripts/semantic_search.py` | ChromaDB 語義查詢 | assemble_context 內部使用 |
 
 ## 開發須知
 
 - **測試**: `uv run pytest tests/ -v`
-- **Skill 迭代**: 改 `skills/*/SKILL.md`，用 git commit 做版本管理
-- **Plugin agents**: `agents/*.md`（chapter-writer: Write only, graph-updater: Read+Write）
-- **A/B 測試**: workspace 在 `.claude/skills/novel-chapter-workspace/`
+- **修改 skills/agents**: 改本地檔案 → `/reload-plugins` → 即時生效
+  - plugin 快取已 symlink 到本地 repo，不需要 push/reinstall
+- **發佈更新**: `git push` → 其他機器用 `/plugins update novel-agents`
 - **Embedding model**: ChromaDB 使用 `BAAI/bge-small-zh-v1.5`（中文專用）
+- **圖資料庫**: NetworkX（`runtime/story_graph.json`），從 `story_graph.md` 同步
