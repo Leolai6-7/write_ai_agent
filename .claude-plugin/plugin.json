@@ -4,7 +4,9 @@
   "description": "Multi-agent novel writing pipeline with tool-restricted sub-agents for chapter generation and story graph maintenance",
   "agents": [
     "./agents/chapter-writer.md",
-    "./agents/progress-updater.md"
+    "./agents/progress-updater.md",
+    "./agents/volume-planner.md",
+    "./agents/arc-reviewer.md"
   ],
   "skills": [
     "./skills/"

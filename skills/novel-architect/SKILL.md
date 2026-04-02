@@ -60,23 +60,17 @@ For each volume, break into 3-5 story arcs (弧線):
 - **核心衝突**: the central tension driving this arc
 - **結尾轉折**: how it ends and hooks into the next
 
-### Step 3: Chapter Beat Sheet (optional, for first arc)
+### Step 3: R/S Line Rhythm (for multi-line narratives)
 
-If the user wants more detail, outline chapters with:
-- Title + one-line objective
-- Key events (2-3 per chapter)
-- Emotional tone
+If the story uses dual or multi-line narrative (e.g., R-line and S-line), define the line alternation pattern for each volume:
 
-Include **retrieval tag columns** that tell the RAG system what context each chapter needs. Choose tags that make sense for THIS story:
+```
+R/S 節奏：R-S-R-S-R-S-R-S-R-RS
+```
 
-| Tag | Purpose | Example |
-|-----|---------|---------|
-| 角色 | who appears → retrieves character profiles | 沈逸, 林昭明 |
-| 地點 | where it happens → retrieves location descriptions | 深潛研究所 |
-| 伏筆 | active threads → retrieves foreshadowing designs | ①plant |
-| 概念 | key ideas/tech → retrieves world_bible sections | NeuLink |
+This gives the volume-planner agent the constraint it needs to assign narrative lines to chapters.
 
-Not every story needs all tags. Add what's useful, skip what isn't.
+**Note**: Chapter-level beat sheets are NOT generated here. They are created by the `volume-planner` agent just before each volume begins writing, using the volume arcs and current story state as input. This allows the beat sheet to adapt to actual story progression rather than being locked at planning time.
 
 ---
 
@@ -86,21 +80,28 @@ Not every story needs all tags. Add what's useful, skip what isn't.
 # [小說標題] — 結構設計
 
 ## 分卷架構
-### 第一卷：[卷名]
+### 第一卷：[卷名]（第1-N章）
 - 主題：...
-- 章節：第1-N章
-- 核心轉折：1. ... 2. ...
+- 核心轉折：1. ... 2. ... 3. ...
 - 主角成長：從A到B
+- R/S 節奏：R-S-R-S-R-S-R-S-R-RS（if multi-line）
+
+### 第二卷：[卷名]（第N+1-M章）
+- 主題：...
+（以此類推）
 
 ## 弧線分解
 ### 弧線一：[名稱]（第1-N章）
 - 核心衝突：...
 - 結尾轉折：...
 
-## 章節節拍
-| 章 | 標題 | 目標 | 角色 | 地點 | 情感 |
-|----|------|------|------|------|------|
+### 弧線二：[名稱]（第N+1-M章）
+- 核心衝突：...
+- 結尾轉折：...
+（以此類推）
 ```
+
+**Note**: No chapter-level beat sheet here. Chapter beats are generated per-volume by the `volume-planner` agent.
 
 ## Quality Checklist
 - [ ] Every protagonist makes active choices, not just reacts

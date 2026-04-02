@@ -10,9 +10,11 @@
 ```
 write_ai_agent/                    ← plugin 本體
 ├── .claude-plugin/plugin.json     ← plugin 定義
-├── agents/                        ← 工具限制的 sub-agents（自動發現）
-│   ├── chapter-writer.md          → Write only（不能讀檔，防止跨線汙染）
-│   └── progress-updater.md        → Write only（更新 story_log + story_graph）
+├── agents/                        ← 工具限制的 sub-agents（全部 Write only）
+│   ├── chapter-writer.md          → 章節生成（不能讀檔，防止跨線汙染）
+│   ├── progress-updater.md        → 更新 story_log + story_graph
+│   ├── volume-planner.md          → 每卷開始前生成章級 beat sheet
+│   └── arc-reviewer.md            → 每卷結束後回顧 + 更新設計文件
 ├── skills/                        ← 主 agent 的工作流 skills
 │   ├── novel-writing/             → 入口 + pipeline
 │   ├── novel-chapter/             → 寫作哲學
@@ -37,19 +39,35 @@ data/
 ├── active_story.txt
 └── stories/
     └── {story-name}/
-        ├── world/                 → 設計文檔
+        ├── world/                 → 活文件（Arc Review 時更新）
         │   ├── world_bible.md
-        │   └── character_cast.md
-        ├── planning/              → 設計文檔（不隨章節更新）
-        │   ├── story_brief.md
-        │   ├── structure.md
-        │   └── foreshadowing.md
+        │   └── character_cast.md  → 含「設計」+「當前狀態」兩區塊
+        ├── planning/              → 結構文檔
+        │   ├── story_brief.md     → 全書級（不變）
+        │   ├── structure.md       → 卷級弧線（少變）
+        │   ├── foreshadowing.md   → 跨卷伏筆（少變）
+        │   ├── volume_plan_N.md   → 章級 beat sheet（每卷開始前生成）
+        │   └── arc_review_N.md    → 弧線回顧報告（每卷結束後生成）
         ├── runtime/               → 運行時文檔（每章更新）
         │   ├── story_log.md
         │   └── story_graph.md
         ├── outputs/
         │   └── chapter_NNN.md
         └── chroma/                → ChromaDB（per-story）
+```
+
+## 生命週期（卷循環）
+
+```
+Stage 1 構思 → structure.md（卷級弧線，不含章級 beat sheet）
+                ↓
+Stage 2 創作（每卷循環）：
+  2.0 Volume Planning → volume-planner agent → volume_plan_N.md
+  2.1 章節循環（3 步 × M 章）
+  2.9 Arc Review → arc-reviewer agent → 更新 world_bible + character_cast
+                ↓
+Stage 3 編輯 → style audit
+Stage 4 組裝 → 完整小說
 ```
 
 ## 章節生成規則（不可違反）
@@ -64,6 +82,13 @@ data/
 - `scripts/sync_graph.py` → story_graph → NetworkX JSON
 
 **不可合併 sub-agent。不可跳過步驟。不可平行多章。**
+
+## 卷級規則
+
+- **每卷開始前**必須先跑 `volume-planner`，生成 `volume_plan_N.md`
+- **每卷結束後**必須跑 `arc-reviewer`，更新 world_bible + character_cast
+- `assemble_context.py` 從 `volume_plan_N.md` 讀 beat sheet（非 structure.md）
+- `structure.md` 只含卷級弧線 + 弧線分解，不含章級 beat sheet
 
 ## 開發須知
 

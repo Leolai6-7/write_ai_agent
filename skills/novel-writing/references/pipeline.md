@@ -100,7 +100,7 @@ Output in 繁體中文.
 ```
 → 3-line summary. "角色設計完成，要看詳情或調整嗎？"
 
-### 1.3: Structure
+### 1.3: Structure (卷級弧線，不含章級 beat sheet)
 ```
 Agent prompt:
 Read skills/novel-architect/SKILL.md and follow completely.
@@ -109,6 +109,10 @@ Read world bible from: {STORY_DIR}/world/world_bible.md
 Read character cast from: {STORY_DIR}/world/character_cast.md
 Save output to: {STORY_DIR}/planning/structure.md
 Output in 繁體中文.
+
+IMPORTANT: Only output volume architecture and arc decomposition.
+Do NOT generate chapter-level beat sheets — those are created per-volume
+by the volume-planner agent just before writing begins.
 ```
 → Volume/arc overview. "結構設計完成，滿意嗎？"
 
@@ -133,7 +137,58 @@ Output in 繁體中文.
 
 ## Stage 2: Creation (創作)
 
-### Execution Protocol
+### 2.0: Volume Planning (每卷開始前)
+
+Before writing ANY chapter in a new volume, generate the chapter-level beat sheet for that volume.
+
+1. Determine which volume is next (read structure.md for volume ranges)
+2. Main agent reads ALL of these files:
+   - `{STORY_DIR}/planning/structure.md` (extract THIS volume's arc description)
+   - `{STORY_DIR}/planning/story_brief.md`
+   - `{STORY_DIR}/planning/foreshadowing.md`
+   - `{STORY_DIR}/world/world_bible.md`
+   - `{STORY_DIR}/world/character_cast.md`
+   - `{STORY_DIR}/runtime/story_log.md` (if exists — empty for volume 1)
+   - `{STORY_DIR}/runtime/story_graph.md` (if exists)
+3. Launch **volume-planner plugin agent** (Write-only):
+
+```
+subagent_type: novel-agents:volume-planner
+```
+
+Paste ALL content into the prompt (the agent has no Read tool):
+
+> === STORY BRIEF ===
+> {full content of story_brief.md}
+>
+> === VOLUME ARC (from structure.md) ===
+> {extract: this volume's 分卷架構 + 弧線分解 sections}
+>
+> === FORESHADOWING PLAN ===
+> {full content of foreshadowing.md}
+>
+> === WORLD BIBLE ===
+> {full content of world_bible.md}
+>
+> === CHARACTER CAST ===
+> {full content of character_cast.md}
+>
+> === STORY PROGRESS SO FAR ===
+> {full content of story_log.md, or "This is Volume 1 — no prior chapters"}
+>
+> === STORY GRAPH ===
+> {full content of story_graph.md, or "No graph yet"}
+>
+> Generate the chapter beat sheet for Volume {V}.
+> Write to: /tmp/volume_plan_{V}.md
+
+4. Main agent copies `/tmp/volume_plan_{V}.md` → `{STORY_DIR}/planning/volume_plan_{V}.md`
+5. Show beat sheet summary to user: "第{V}卷章節規劃完成，要看詳情或調整嗎？"
+6. After user confirms → proceed to chapter writing loop
+
+---
+
+### Chapter Writing Loop
 
 For each chapter, follow these steps EXACTLY. Do not combine, skip, or reorder.
 Copy the prompts below and fill in {N} and {STORY_DIR}. One sub-agent per step.
@@ -233,11 +288,63 @@ Quality control is at the ARC level via `/novel-style-audit`, not per-chapter.
 
 Report: "第{N}章完成：{summary}"
 Every 5 chapters: "前5章寫完了，要檢查再繼續嗎？"
-Every 10 chapters (arc boundary):
-  - Ask: "弧線完成。要回顧這 10 章中出現的新設定，把重要的加入 world_bible 嗎？"
-  - Check revision_notes.md — if it has 3+ entries, ask:
-    "累積了一些設定修訂建議，要暫停來更新世界觀/角色設定嗎？"
-    If yes → re-run worldbuilding/character sub-agents with revision notes as input
+
+---
+
+### 2.9: Arc Review (每卷結束後)
+
+When all chapters in a volume are complete, run the arc review.
+
+1. Main agent reads ALL of these:
+   - All chapter files for this volume: `{STORY_DIR}/outputs/chapter_*.md`
+   - `{STORY_DIR}/runtime/story_log.md`
+   - `{STORY_DIR}/runtime/story_graph.md`
+   - `{STORY_DIR}/world/world_bible.md`
+   - `{STORY_DIR}/world/character_cast.md`
+   - `{STORY_DIR}/planning/structure.md` (future volume arcs)
+   - `{STORY_DIR}/planning/volume_plan_{V}.md` (this volume's plan, for comparison)
+
+2. Launch **arc-reviewer plugin agent** (Write-only):
+
+```
+subagent_type: novel-agents:arc-reviewer
+```
+
+Paste ALL content into the prompt:
+
+> === CHAPTER TEXTS (Volume {V}) ===
+> {full content of all chapters in this volume}
+>
+> === STORY LOG ===
+> {full content of story_log.md}
+>
+> === STORY GRAPH ===
+> {full content of story_graph.md}
+>
+> === CURRENT WORLD BIBLE ===
+> {full content of world_bible.md}
+>
+> === CURRENT CHARACTER CAST ===
+> {full content of character_cast.md}
+>
+> === VOLUME PLAN ===
+> {full content of volume_plan_{V}.md}
+>
+> === FUTURE STRUCTURE ===
+> {future volume arcs from structure.md}
+>
+> This is Volume {V}. Review and generate the three output files.
+> Write updated world_bible to: /tmp/world_bible_updated.md
+> Write updated character_cast to: /tmp/character_cast_updated.md
+> Write arc review to: /tmp/arc_review_{V}.md
+
+3. Main agent shows `arc_review_{V}.md` to user for review
+4. After user confirms:
+   - Copy `/tmp/world_bible_updated.md` → `{STORY_DIR}/world/world_bible.md`
+   - Copy `/tmp/character_cast_updated.md` → `{STORY_DIR}/world/character_cast.md`
+   - Copy `/tmp/arc_review_{V}.md` → `{STORY_DIR}/planning/arc_review_{V}.md`
+5. If structure adjustments are recommended, discuss with user before modifying structure.md
+6. Proceed to next volume → back to 2.0 Volume Planning
 
 ---
 

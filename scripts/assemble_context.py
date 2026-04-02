@@ -20,6 +20,25 @@ from _common import (
 )
 
 
+def find_volume_plan(story_dir: Path, chapter_num: int) -> Path:
+    """Find the volume_plan file that contains this chapter's beat sheet row."""
+    planning_dir = story_dir / "planning"
+    for plan_file in sorted(planning_dir.glob("volume_plan_*.md")):
+        text = plan_file.read_text(encoding="utf-8")
+        if re.search(rf"^\|\s*{chapter_num}\s*\|", text, re.MULTILINE):
+            return plan_file
+    # Fallback: try structure.md for backwards compatibility
+    structure_path = planning_dir / "structure.md"
+    if structure_path.exists():
+        text = structure_path.read_text(encoding="utf-8")
+        if re.search(rf"^\|\s*{chapter_num}\s*\|", text, re.MULTILINE):
+            return structure_path
+    raise FileNotFoundError(
+        f"No volume plan contains chapter {chapter_num}. "
+        f"Run volume-planner agent first, or check planning/ directory."
+    )
+
+
 def parse_beat_sheet_row(structure_text: str, chapter_num: int) -> dict:
     """Parse a single row from the beat sheet table."""
     pattern = rf"^\|\s*{chapter_num}\s*\|"
@@ -269,17 +288,27 @@ def main():
 
     # === Path 1: Structured lookup ===
 
-    # Parse beat sheet
-    structure_path = story_dir / "planning" / "structure.md"
-    if not structure_path.exists():
-        print(f"ERROR: structure.md not found at {structure_path}", file=__import__('sys').stderr)
-        __import__('sys').exit(1)
+    # Find and parse beat sheet (from volume_plan_N.md or fallback to structure.md)
+    import sys as _sys
+    try:
+        beat_source = find_volume_plan(story_dir, chapter_num)
+    except FileNotFoundError as e:
+        print(f"ERROR: {e}", file=_sys.stderr)
+        _sys.exit(1)
 
-    structure_text = structure_path.read_text(encoding="utf-8")
+    structure_text = beat_source.read_text(encoding="utf-8")
     beat = parse_beat_sheet_row(structure_text, chapter_num)
     if not beat:
-        print(f"ERROR: chapter {chapter_num} not found in beat sheet", file=__import__('sys').stderr)
-        __import__('sys').exit(1)
+        print(f"ERROR: chapter {chapter_num} not found in beat sheet ({beat_source.name})", file=_sys.stderr)
+        _sys.exit(1)
+
+    # Also read structure.md for same-line chapter lookup (needs full beat sheet across volumes)
+    structure_path = story_dir / "planning" / "structure.md"
+    # For same-line lookup, we need all volume plans concatenated
+    all_beat_text = structure_text
+    for plan_file in sorted((story_dir / "planning").glob("volume_plan_*.md")):
+        if plan_file != beat_source:
+            all_beat_text += "\n" + plan_file.read_text(encoding="utf-8")
 
     # Read always-needed files
     brief_path = story_dir / "planning" / "story_brief.md"
@@ -348,7 +377,7 @@ def main():
     semantic_results = do_semantic_search(story_dir, query)
 
     # === Previous chapter ending ===
-    prev_ending = get_previous_chapter_ending(story_dir, chapter_num, beat["line"], structure_text)
+    prev_ending = get_previous_chapter_ending(story_dir, chapter_num, beat["line"], all_beat_text)
 
     # === Concept introduction tracking ===
     concept_tracking = get_concept_tracking(story_dir)

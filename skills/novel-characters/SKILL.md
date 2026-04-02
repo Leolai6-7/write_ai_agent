@@ -32,7 +32,9 @@ Don't start from role labels. Start from story needs.
 
 ### Step 2: Design Each Character
 
-For each character:
+For each character, create TWO sections:
+
+#### 設計（static — set at creation, rarely changes）
 
 **Identity**: Name, age, background — grounded in the world setting
 
@@ -43,6 +45,25 @@ For each character:
 - Speaking style — MUST be specific and unique. Not "speaks politely" but "uses botanical metaphors, pauses mid-sentence as if weighing each word, slips into dialect under stress"
 
 **Arc**: Where they start → what changes them → where they end up
+
+#### 當前狀態（evolving — updated by arc-reviewer after each volume）
+
+Initialize as empty at creation. After each volume, the arc-reviewer agent updates this section:
+- **位置**：current physical location
+- **情感狀態**：emotional state
+- **關鍵認知**：what they currently know
+- **關係變化**：how relationships have shifted
+- **最近行動**：most significant recent action
+
+Example:
+```markdown
+### 當前狀態
+- 位置：（故事開始後更新）
+- 情感狀態：（故事開始後更新）
+- 關鍵認知：（故事開始後更新）
+- 關係變化：（故事開始後更新）
+- 最近行動：（故事開始後更新）
+```
 
 ### Step 3: Relationship Map
 Show how characters relate to EACH OTHER, not just to the protagonist:
