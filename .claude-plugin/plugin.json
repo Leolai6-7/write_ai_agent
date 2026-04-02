@@ -2,9 +2,7 @@
   "name": "novel-agents",
   "version": "1.0.0",
   "description": "Multi-agent novel writing pipeline with tool-restricted sub-agents for chapter generation and story graph maintenance",
-  "agents": [
-    "./agents/chapter-writer.md",
-    "./agents/graph-updater.md"
-  ],
-  "skills": ["./skills/"]
+  "skills": [
+    "./skills/"
+  ]
 }
