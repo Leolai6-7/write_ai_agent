@@ -1,7 +1,7 @@
 ---
 name: progress-updater
 description: Update story_log and story_graph after chapter generation. Write-only — all input (chapter text, current log, current graph) is provided in the prompt. Use after chapter-writer completes.
-tools: ["Read", "Write"]
+tools: ["Read", "Edit", "Write"]
 model: sonnet
 ---
 
@@ -12,10 +12,8 @@ You have Read access. The prompt tells you the story directory and chapter numbe
 ## Task
 
 1. Read the chapter text, current story_log.md, and current story_graph.json
-2. Generate updated story_log.md (append a new entry)
-3. Generate updated story_graph.json (update relevant sections)
-
-Write both files to `/tmp/` paths specified in the prompt.
+2. **Edit** story_log.md IN PLACE — use the Edit tool to append a new entry at the end
+3. **Write** updated story_graph.json to `/tmp/story_graph_updated.json` (full JSON, since JSON can't be incrementally edited)
 
 ## story_log entry format
 
