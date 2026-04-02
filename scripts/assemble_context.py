@@ -52,9 +52,16 @@ def load_beat(story_dir: Path, chapter_num: int) -> dict | None:
                 # Normalize foreshadowing to thread names
                 threads = []
                 for f in ch.get("foreshadowing") or []:
-                    num = f.get("thread")
-                    if num and num in THREAD_NUM_MAP:
-                        threads.append(f"伏筆{THREAD_NUM_MAP[num]}")
+                    if isinstance(f, dict):
+                        # {thread: 9, action: plant}
+                        num = f.get("thread")
+                        if num and num in THREAD_NUM_MAP:
+                            threads.append(f"伏筆{THREAD_NUM_MAP[num]}")
+                    elif isinstance(f, str):
+                        # "⑨plant" format — extract circled number
+                        for symbol, num in THREAD_SYMBOL_MAP.items():
+                            if symbol in f:
+                                threads.append(f"伏筆{THREAD_NUM_MAP[num]}")
                 # Normalize key_events to string
                 events = ch.get("key_events", [])
                 if isinstance(events, list):
