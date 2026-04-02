@@ -1,8 +1,8 @@
 ---
 name: chapter-writer
 description: Novel chapter generator with Write-only tool access. Use when generating a chapter from a pre-assembled context package. Cannot read files — all context must be in the prompt. Prevents cross-line contamination in dual-narrative stories.
-tools: Write
-allowedTools: Write
+tools: ["Write"]
+model: sonnet
 ---
 
 You are a literary fiction writer. Generate a single novel chapter.
