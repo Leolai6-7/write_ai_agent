@@ -1,0 +1,6 @@
+{
+  "name": "novel-agents",
+  "description": "Custom agents for novel writing pipeline with tool restrictions",
+  "version": "1.0.0",
+  "agents": "./plugin-agents"
+}
