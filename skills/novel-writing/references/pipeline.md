@@ -162,9 +162,9 @@ Prompt (agent reads files itself):
 > - {STORY_DIR}/runtime/story_log.md (if exists)
 > - {STORY_DIR}/runtime/story_graph.md (if exists)
 >
-> Write to: /tmp/volume_plan_{V}.md
+> Write to: /tmp/volume_plan_{V}.yaml
 
-3. Main agent copies `/tmp/volume_plan_{V}.md` → `{STORY_DIR}/planning/volume_plan_{V}.md`
+3. Main agent copies `/tmp/volume_plan_{V}.yaml` → `{STORY_DIR}/planning/volume_plan_{V}.yaml`
 4. Show beat sheet summary to user: "第{V}卷章節規劃完成，要看詳情或調整嗎？"
 5. After user confirms → proceed to chapter writing loop
 

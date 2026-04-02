@@ -11,38 +11,46 @@ You have Read access to the story directory. The prompt tells you WHICH files to
 
 ## Task
 
-Create a beat sheet table for this volume's chapters. Output as a markdown file with:
+Create a beat sheet for this volume's chapters. Output as a **YAML file** (not markdown).
 
-1. A volume header with the volume name and theme
-2. A beat sheet table where each row includes:
-
-| Column | Description |
-|--------|-------------|
-| 章 | Chapter number |
-| 標題 | Evocative title reflecting the chapter's core |
-| 線 | Narrative line: R, S, R+S, or 融合 |
-| 目標 | One-line chapter objective |
-| 關鍵事件 | 2-3 key events with ① ② ③ notation |
-| 情感 | Emotional tone |
-| 角色 | Characters appearing — MUST match headings in character_cast.md |
-| 地點 | Locations — MUST match headings in world_bible.md |
-| 伏筆 | Foreshadowing tags — ①plant ②hint ③resolve notation |
+Each chapter entry must include:
+- `chapter`: chapter number (integer)
+- `title`: evocative title
+- `line`: narrative line (R, S, R+S, or 融合)
+- `objective`: one-line chapter objective
+- `key_events`: list of 2-3 key events
+- `tone`: emotional tone
+- `characters`: list of character short names (read character_cast.md for names)
+- `locations`: list of location names (read world_bible.md for names)
+- `foreshadowing`: list of `{thread: N, action: plant|hint|resolve}` (read foreshadowing.md for thread numbers)
 
 ## Output Format
 
-```markdown
-# 第N卷：{卷名} — 章節節拍
-
-## 卷級目標
-{One paragraph: what this volume accomplishes narratively and emotionally}
-
-## 章節節拍
-| 章 | 標題 | 線 | 目標 | 關鍵事件 | 情感 | 角色 | 地點 | 伏筆 |
-|----|------|-----|------|----------|------|------|------|------|
-| ... | ... | ... | ... | ... | ... | ... | ... | ... |
+```yaml
+volume: 1
+arc: 覺醒
+goal: >
+  One paragraph describing what this volume accomplishes narratively and emotionally.
+chapters:
+  - chapter: 1
+    title: 第一千零二十四次
+    line: R
+    objective: 建立主角的世界：偏執、孤立、沉浸在模擬中
+    key_events:
+      - 沈逸啟動第1024次模擬，林昭明監控數據
+      - 模擬啟動後，系統首次出現未定義異常標記
+    tone: 緊張/期待
+    characters:
+      - 沈逸
+      - 林昭明
+    locations:
+      - 深潛研究所
+    foreshadowing:
+      - thread: 9
+        action: plant
 ```
 
-Write this file to the path specified in the prompt.
+Write this YAML file to the path specified in the prompt.
 
 ## Core Philosophy
 
@@ -55,13 +63,13 @@ Characters, organizations, technologies, locations, concepts — anything import
 ### Adapt to actual story state
 If the story_log and character states show the narrative has diverged from the original arc plan, ADAPT the beat sheet to the actual trajectory — don't force alignment with outdated plans. The arc's thematic goals matter more than specific plot points.
 
-### Retrieval tag discipline
+### Retrieval tag accuracy
 
-Before writing the beat sheet, READ the actual files to learn the correct tag format:
+Before writing the beat sheet, READ the actual files to use correct names:
 
-1. **角色 tags**: Read `character_cast.md` → use the character's short name as it appears after `## ` in headings (e.g., if heading is `## 主角：沈逸（Shen Yi）`, grep key is `沈逸`)
-2. **地點 tags**: Read `world_bible.md` → use the location name from `### ` headings (e.g., `深潛研究所`, `新北無感區`)
-3. **伏筆 tags**: Read `foreshadowing.md` → use thread number + action: `⑨plant` `③hint` `①resolve`. NO descriptions in this column — the parser extracts ALL circled numbers (①-⑫) as thread references
+1. **characters**: Read `character_cast.md` → use the short name from `## ` headings (e.g., `沈逸` not `主角：沈逸（Shen Yi）`)
+2. **locations**: Read `world_bible.md` → use the location name from `### ` headings (e.g., `深潛研究所`)
+3. **foreshadowing**: Read `foreshadowing.md` → use thread numbers matching `### 伏筆{N}` headings
 
 ### Rhythm
 Tension and release should alternate naturally. For multi-line narratives: each line must have its OWN momentum, not just serve as contrast. The lines should create dramatic irony — the reader knows things from line A that make line B more tense.

@@ -14,74 +14,145 @@ Usage:
 import re
 from pathlib import Path
 
+import yaml
+
 from _common import (
     get_args, get_retriever, extract_section, extract_sections_from_files,
     parse_md_table, PROJECT_ROOT,
 )
 
+# --- Thread number mapping (shared by YAML and legacy markdown) ---
+THREAD_NUM_MAP = {
+    1: "一", 2: "二", 3: "三", 4: "四", 5: "五",
+    6: "六", 7: "七", 8: "八", 9: "九", 10: "十",
+    11: "十一", 12: "十二",
+}
+THREAD_SYMBOL_MAP = {"①": 1, "②": 2, "③": 3, "④": 4, "⑤": 5,
+                     "⑥": 6, "⑦": 7, "⑧": 8, "⑨": 9, "⑩": 10,
+                     "⑪": 11, "⑫": 12}
 
-def find_volume_plan(story_dir: Path, chapter_num: int) -> Path:
-    """Find the volume_plan file that contains this chapter's beat sheet row."""
+
+def load_beat(story_dir: Path, chapter_num: int) -> dict | None:
+    """Load a chapter's beat data from YAML volume plan, with markdown fallback.
+
+    Returns a normalized dict with keys:
+        title, line, objective, key_events (str), tone,
+        characters (list[str]), locations (list[str]),
+        foreshadow_threads (list[str] like ['伏筆九'])
+    """
     planning_dir = story_dir / "planning"
-    for plan_file in sorted(planning_dir.glob("volume_plan_*.md")):
-        text = plan_file.read_text(encoding="utf-8")
-        if re.search(rf"^\|\s*{chapter_num}\s*\|", text, re.MULTILINE):
-            return plan_file
-    # Fallback: try structure.md for backwards compatibility
-    structure_path = planning_dir / "structure.md"
-    if structure_path.exists():
-        text = structure_path.read_text(encoding="utf-8")
-        if re.search(rf"^\|\s*{chapter_num}\s*\|", text, re.MULTILINE):
-            return structure_path
-    raise FileNotFoundError(
-        f"No volume plan contains chapter {chapter_num}. "
-        f"Run volume-planner agent first, or check planning/ directory."
-    )
 
-
-def parse_beat_sheet_row(structure_text: str, chapter_num: int) -> dict:
-    """Parse a single row from the beat sheet table."""
-    pattern = rf"^\|\s*{chapter_num}\s*\|"
-    for line in structure_text.split("\n"):
-        if re.match(pattern, line):
-            cells = [c.strip() for c in line.split("|")]
-            # cells: ['', num, title, line, objective, events, tone, characters, location, foreshadow, '']
-            if len(cells) >= 10:
+    # Try YAML first
+    for plan_file in sorted(planning_dir.glob("volume_plan_*.yaml")):
+        data = yaml.safe_load(plan_file.read_text(encoding="utf-8"))
+        if not data or "chapters" not in data:
+            continue
+        for ch in data["chapters"]:
+            if ch.get("chapter") == chapter_num:
+                # Normalize foreshadowing to thread names
+                threads = []
+                for f in ch.get("foreshadowing") or []:
+                    num = f.get("thread")
+                    if num and num in THREAD_NUM_MAP:
+                        threads.append(f"伏筆{THREAD_NUM_MAP[num]}")
+                # Normalize key_events to string
+                events = ch.get("key_events", [])
+                if isinstance(events, list):
+                    events = "；".join(events)
                 return {
-                    "title": cells[2],
-                    "line": cells[3],
-                    "objective": cells[4],
-                    "key_events": cells[5],
-                    "tone": cells[6],
-                    "characters": [c.strip() for c in cells[7].split(",") if c.strip()],
-                    "locations": [c.strip() for c in cells[8].split(",") if c.strip()],
-                    "foreshadow": cells[9],
+                    "title": ch.get("title", ""),
+                    "line": ch.get("line", ""),
+                    "objective": ch.get("objective", ""),
+                    "key_events": events,
+                    "tone": ch.get("tone", ""),
+                    "characters": ch.get("characters", []),
+                    "locations": ch.get("locations", []),
+                    "foreshadow": "",  # raw tag (empty for YAML)
+                    "foreshadow_threads": threads,
                 }
-    return {}
+
+    # Fallback: try markdown (structure.md or volume_plan_*.md)
+    beat = _load_beat_markdown(planning_dir, chapter_num)
+    if beat:
+        beat["foreshadow_threads"] = _parse_foreshadow_tag_legacy(beat.get("foreshadow", ""))
+    return beat
+
+
+def _load_beat_markdown(planning_dir: Path, chapter_num: int) -> dict | None:
+    """Legacy: parse beat sheet from markdown table."""
+    # Try volume_plan_*.md first, then structure.md
+    candidates = sorted(planning_dir.glob("volume_plan_*.md"))
+    structure = planning_dir / "structure.md"
+    if structure.exists():
+        candidates.append(structure)
+
+    pattern = rf"^\|\s*{chapter_num}\s*\|"
+    for plan_file in candidates:
+        text = plan_file.read_text(encoding="utf-8")
+        for line in text.split("\n"):
+            if re.match(pattern, line):
+                cells = [c.strip() for c in line.split("|")]
+                if len(cells) >= 10:
+                    # Split characters on both , and 、
+                    chars = re.split(r"[,、]", cells[7])
+                    chars = [c.strip() for c in chars if c.strip()]
+                    locs = re.split(r"[,、]", cells[8])
+                    locs = [c.strip() for c in locs if c.strip()]
+                    return {
+                        "title": cells[2],
+                        "line": cells[3],
+                        "objective": cells[4],
+                        "key_events": cells[5],
+                        "tone": cells[6],
+                        "characters": chars,
+                        "locations": locs,
+                        "foreshadow": cells[9],
+                    }
+    return None
+
+
+def _parse_foreshadow_tag_legacy(tag: str) -> list[str]:
+    """Legacy: convert markdown foreshadow tags like '⑨plant' to thread names."""
+    threads = []
+    for symbol, num in THREAD_SYMBOL_MAP.items():
+        if symbol in tag:
+            threads.append(f"伏筆{THREAD_NUM_MAP[num]}")
+    return threads
 
 
 def extract_keywords(key_events: str) -> list[str]:
     """Extract Chinese names/nouns from key events text."""
-    # Remove numbering like ① ② etc
     text = re.sub(r"[①②③④⑤⑥⑦⑧⑨⑩⑪⑫]", "", key_events)
-    # Find Chinese name-like tokens (2-4 chars between punctuation/spaces)
     names = re.findall(r"[\u4e00-\u9fff]{2,4}", text)
-    # Filter out common non-name words
     stopwords = {"模擬", "文明", "世界", "研究", "日常", "第一", "注意", "微小", "異常", "所有",
                  "完全", "相同", "產生", "懷疑", "完美", "崩潰", "規律", "學者"}
     return list(set(n for n in names if n not in stopwords))
 
 
+# Legacy compat alias (unused but kept for any external callers)
 def parse_foreshadow_tag(tag: str) -> list[str]:
-    """Convert foreshadow tags like '①plant ⑨hint' to thread names."""
-    num_map = {"①": "一", "②": "二", "③": "三", "④": "四", "⑤": "五",
-               "⑥": "六", "⑦": "七", "⑧": "八", "⑨": "九", "⑩": "十",
-               "⑪": "十一", "⑫": "十二"}
-    threads = []
-    for symbol, chinese in num_map.items():
-        if symbol in tag:
-            threads.append(f"伏筆{chinese}")
-    return threads
+    return _parse_foreshadow_tag_legacy(tag)
+
+
+# Legacy compat alias
+def parse_beat_sheet_row(structure_text: str, chapter_num: int) -> dict:
+    """Legacy wrapper — prefer load_beat()."""
+    pattern = rf"^\|\s*{chapter_num}\s*\|"
+    for line in structure_text.split("\n"):
+        if re.match(pattern, line):
+            cells = [c.strip() for c in line.split("|")]
+            if len(cells) >= 10:
+                chars = re.split(r"[,、]", cells[7])
+                chars = [c.strip() for c in chars if c.strip()]
+                locs = re.split(r"[,、]", cells[8])
+                locs = [c.strip() for c in locs if c.strip()]
+                return {
+                    "title": cells[2], "line": cells[3],
+                    "objective": cells[4], "key_events": cells[5],
+                    "tone": cells[6], "characters": chars,
+                    "locations": locs, "foreshadow": cells[9],
+                }
+    return {}
 
 
 def get_recent_log_entries(story_dir: Path, n: int = 5) -> str:
@@ -286,29 +357,24 @@ def main():
     story_dir = Path(args.story_dir)
     chapter_num = args.chapter
 
+    import sys as _sys
+
     # === Path 1: Structured lookup ===
 
-    # Find and parse beat sheet (from volume_plan_N.md or fallback to structure.md)
-    import sys as _sys
-    try:
-        beat_source = find_volume_plan(story_dir, chapter_num)
-    except FileNotFoundError as e:
-        print(f"ERROR: {e}", file=_sys.stderr)
-        _sys.exit(1)
-
-    structure_text = beat_source.read_text(encoding="utf-8")
-    beat = parse_beat_sheet_row(structure_text, chapter_num)
+    # Load beat data (YAML first, markdown fallback)
+    beat = load_beat(story_dir, chapter_num)
     if not beat:
-        print(f"ERROR: chapter {chapter_num} not found in beat sheet ({beat_source.name})", file=_sys.stderr)
+        print(f"ERROR: chapter {chapter_num} not found in any volume plan or structure.md", file=_sys.stderr)
         _sys.exit(1)
 
-    # Also read structure.md for same-line chapter lookup (needs full beat sheet across volumes)
+    # For same-line chapter lookup, we need all beat sheets (markdown format)
+    # concatenated so get_previous_chapter_ending can scan backwards
+    all_beat_text = ""
     structure_path = story_dir / "planning" / "structure.md"
-    # For same-line lookup, we need all volume plans concatenated
-    all_beat_text = structure_text
+    if structure_path.exists():
+        all_beat_text = structure_path.read_text(encoding="utf-8")
     for plan_file in sorted((story_dir / "planning").glob("volume_plan_*.md")):
-        if plan_file != beat_source:
-            all_beat_text += "\n" + plan_file.read_text(encoding="utf-8")
+        all_beat_text += "\n" + plan_file.read_text(encoding="utf-8")
 
     # Read always-needed files
     brief_path = story_dir / "planning" / "story_brief.md"
@@ -344,7 +410,7 @@ def main():
 
     # Extract foreshadowing threads
     foreshadow_threads = []
-    thread_names = parse_foreshadow_tag(beat["foreshadow"])
+    thread_names = beat.get("foreshadow_threads", []) or _parse_foreshadow_tag_legacy(beat.get("foreshadow", ""))
     for thread_name in thread_names:
         if foreshadow_file.exists():
             text = foreshadow_file.read_text(encoding="utf-8")
@@ -363,13 +429,13 @@ def main():
                     keyword_supplements.append(section)
 
     # === Path 2: Graph traversal ===
-    # Parse foreshadow names from beat sheet for chain lookup
+    # Extract foreshadow thread names for graph chain lookup
     foreshadow_names_for_graph = []
-    num_map = {"①": "一", "②": "二", "③": "三", "④": "四", "⑤": "五",
-               "⑥": "六", "⑦": "七", "⑧": "八", "⑨": "九", "⑩": "十"}
-    for symbol, chinese in num_map.items():
-        if symbol in beat.get("foreshadow", ""):
-            foreshadow_names_for_graph.append(chinese)
+    for t in thread_names:
+        # thread_names are like "伏筆九" — extract the Chinese numeral part
+        name = t.replace("伏筆", "")
+        if name:
+            foreshadow_names_for_graph.append(name)
     graph_data = check_graph_conditions(story_dir, beat["characters"], chapter_num, foreshadow_names_for_graph)
 
     # === Path 3: Semantic search ===

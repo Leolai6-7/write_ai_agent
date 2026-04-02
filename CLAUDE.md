@@ -46,7 +46,7 @@ data/
         │   ├── story_brief.md     → 全書級（不變）
         │   ├── structure.md       → 卷級弧線（少變）
         │   ├── foreshadowing.md   → 跨卷伏筆（少變）
-        │   ├── volume_plan_N.md   → 章級 beat sheet（每卷開始前生成）
+        │   ├── volume_plan_N.yaml → 章級 beat sheet（YAML，每卷開始前生成）
         │   └── arc_review_N.md    → 弧線回顧報告（每卷結束後生成）
         ├── runtime/               → 運行時文檔（每章更新）
         │   ├── story_log.md
@@ -87,7 +87,7 @@ Stage 4 組裝 → 完整小說
 
 - **每卷開始前**必須先跑 `volume-planner`，生成 `volume_plan_N.md`
 - **每卷結束後**必須跑 `arc-reviewer`，更新 world_bible + character_cast
-- `assemble_context.py` 從 `volume_plan_N.md` 讀 beat sheet（非 structure.md）
+- `assemble_context.py` 優先從 `volume_plan_N.yaml` 讀 beat sheet，fallback 到 markdown
 - `structure.md` 只含卷級弧線 + 弧線分解，不含章級 beat sheet
 
 ## 開發須知
