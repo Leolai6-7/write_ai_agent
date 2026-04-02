@@ -55,24 +55,8 @@ The downstream parser uses `yaml.safe_load()` — markdown tables will cause a p
 
 Write this YAML file to the path specified in the prompt.
 
-## Core Philosophy
+## Guidelines
 
-### Characters drive structure
-Every protagonist must make at least one ACTIVE choice per arc — driven by internal desire, not external pressure. "Being forced to" is not a choice. "Choosing to despite the cost" is.
-
-### Elements cast shadows before they arrive
-Characters, organizations, technologies, locations, concepts — anything important should be felt before it's seen. Mark each major element's "first shadow" and "first full appearance" separately.
-
-### Adapt to actual story state
-If the story_log and character states show the narrative has diverged from the original arc plan, ADAPT the beat sheet to the actual trajectory — don't force alignment with outdated plans. The arc's thematic goals matter more than specific plot points.
-
-### Retrieval tag accuracy
-
-Before writing the beat sheet, READ the actual files to use correct names:
-
-1. **characters**: Read `character_cast.md` → use the short name from `## ` headings (e.g., `沈逸` not `主角：沈逸（Shen Yi）`)
-2. **locations**: Read `world_bible.md` → use the location name from `### ` headings (e.g., `深潛研究所`)
-3. **foreshadowing**: Read `foreshadowing.md` → use thread numbers matching `### 伏筆{N}` headings
-
-### Rhythm
-Tension and release should alternate naturally. For multi-line narratives: each line must have its OWN momentum, not just serve as contrast. The lines should create dramatic irony — the reader knows things from line A that make line B more tense.
+- If story_log shows the narrative has diverged from the original arc plan, ADAPT — don't force alignment
+- Read `character_cast.md`, `world_bible.md`, `foreshadowing.md` to use correct names/numbers in tags
+- Design philosophy (characters drive structure, elements cast shadows, rhythm) is in `novel-architect/SKILL.md` — follow those principles

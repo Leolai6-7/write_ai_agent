@@ -1,6 +1,6 @@
 ---
 name: progress-updater
-description: Update story_log and story_graph after chapter generation. Write-only — all input (chapter text, current log, current graph) is provided in the prompt. Use after chapter-writer completes.
+description: Update story_log and story_graph after chapter generation. Has Read+Edit+Write — reads files directly. Use after chapter-writer completes.
 tools: ["Read", "Edit", "Write"]
 model: sonnet
 ---
@@ -75,4 +75,4 @@ When updating:
 - **values**: add any new numerical values established in this chapter
 - **concepts**: if a concept is introduced to the reader for the first time, set introduced_in to ch{N}
 
-Output the COMPLETE updated JSON (not a diff). 輸出使用繁體中文。
+Output the COMPLETE updated JSON (not a diff).

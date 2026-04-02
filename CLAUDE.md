@@ -12,9 +12,9 @@ write_ai_agent/                    ← plugin 本體
 ├── .claude-plugin/plugin.json     ← plugin 定義
 ├── agents/                        ← sub-agents（工具限制各異）
 │   ├── chapter-writer.md          → Write only（不能讀檔，防止跨線汙染）
-│   ├── progress-updater.md        → Read + Write（讀章節 + story_graph.json）
+│   ├── progress-updater.md        → Read + Edit + Write（讀章節，Edit story_log，Write story_graph）
 │   ├── volume-planner.md          → Read + Write + Glob（讀設計文件，輸出 YAML）
-│   └── arc-reviewer.md            → Read + Write + Glob（弧線回顧 + 更新設計文件）
+│   └── arc-reviewer.md            → Read + Edit + Write + Glob（Edit 原檔 + Write 報告）
 ├── skills/                        ← 主 agent 的工作流 skills
 │   ├── novel-writing/             → 入口 + pipeline
 │   ├── novel-chapter/             → 寫作哲學
@@ -22,7 +22,6 @@ write_ai_agent/                    ← plugin 本體
 │   ├── novel-characters/
 │   ├── novel-architect/
 │   ├── novel-foreshadowing/
-│   ├── novel-context/             → 設計文檔（已被 assemble_context.py 取代）
 │   └── novel-style-audit/
 └── scripts/                       ← Python 工具
     ├── assemble_context.py        → 三路召回（結構化 + 圖譜 + 語義）
@@ -49,7 +48,7 @@ data/
         │   └── arc_review_N.md    → 弧線回顧報告（每卷結束後生成）
         ├── runtime/               → 運行時文檔（每章更新）
         │   ├── story_log.md
-        │   └── story_graph.md
+        │   └── story_graph.json   → 扁平 JSON 格式
         ├── outputs/
         │   └── chapter_NNN.md
         └── chroma/                → ChromaDB（per-story）
@@ -74,17 +73,16 @@ Stage 4 組裝 → 完整小說
 每章必須完成 3 步才算完成，缺一不可：
 1. **Context assembly** — `scripts/assemble_context.py`（主 agent 呼叫，9 秒）
 2. **Chapter generation** — `novel-agents:chapter-writer`（Write only，不能讀其他檔案）
-3. **Update progress** — `novel-agents:progress-updater`（Write only，更新 story_log + story_graph）
+3. **Update progress** — `novel-agents:progress-updater`（Read+Edit+Write，Edit story_log + Write story_graph.json）
 
 完成後自動觸發（非阻塞）：
 - `scripts/index_chapter.py` → ChromaDB 索引
-- `scripts/sync_graph.py` → story_graph → NetworkX JSON
 
 **不可合併 sub-agent。不可跳過步驟。不可平行多章。**
 
 ## 卷級規則
 
-- **每卷開始前**必須先跑 `volume-planner`，生成 `volume_plan_N.md`
+- **每卷開始前**必須先跑 `volume-planner`，生成 `volume_plan_N.yaml`
 - **每卷結束後**必須跑 `arc-reviewer`，更新 world_bible + character_cast
 - `assemble_context.py` 優先從 `volume_plan_N.yaml` 讀 beat sheet，fallback 到 markdown
 - `structure.md` 只含卷級弧線 + 弧線分解，不含章級 beat sheet
@@ -97,3 +95,4 @@ Stage 4 組裝 → 完整小說
 - **發佈更新**: `git push` → 其他機器用 `/plugins update novel-agents`
 - **Embedding model**: ChromaDB 使用 `BAAI/bge-small-zh-v1.5`（中文專用）
 - **圖資料庫**: NetworkX（`runtime/story_graph.json`，扁平 JSON 格式，由 progress-updater 直接更新）
+- **語言**: 所有 agent 輸出使用繁體中文
