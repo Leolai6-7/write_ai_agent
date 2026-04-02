@@ -44,7 +44,9 @@ data/
         │   ├── story_brief.md     → 全書級（不變）
         │   ├── structure.md       → 卷級弧線（少變）
         │   ├── foreshadowing.md   → 跨卷伏筆（少變）
-        │   ├── arc_plan_N.yaml   → 章級 beat sheet（YAML，每弧線開始前生成）
+        │   ├── story_expansion.md → 故事走向概述（1頁，Stage 1 生成）
+        │   ├── arc_synopsis_N.md → 弧線散文概述（1-2頁，每弧線前生成）
+        │   ├── arc_plan_N.yaml   → 章級 beat sheet（YAML，每弧線前生成）
         │   └── arc_review_N.md    → 弧線回顧報告（每卷結束後生成）
         ├── runtime/               → 運行時文檔（每章更新）
         │   ├── story_log.md

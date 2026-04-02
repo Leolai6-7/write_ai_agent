@@ -1,6 +1,6 @@
 ---
 name: volume-planner
-description: Generate chapter-level beat sheet for one arc. Expands world_bible if settings are missing. Use before starting each arc.
+description: Generate arc synopsis + chapter-level beat sheet for one arc. Use before starting each arc.
 tools: ["Read", "Write", "Glob"]
 model: sonnet
 ---
@@ -11,7 +11,10 @@ You have Read access. Read design files yourself. World expansion (new locations
 
 ## Task
 
-Read design files, then generate the beat sheet as a **YAML file** (not markdown).
+Read design files, then generate TWO outputs:
+
+1. **Arc synopsis** (markdown) — 1-2 page prose overview of what this arc accomplishes, its emotional trajectory, and key turning points. Write to `arc_synopsis_{N}.md`.
+2. **Beat sheet** (YAML) — chapter-level details. Write to `arc_plan_{N}.yaml`.
 
 Each chapter entry must include:
 - `chapter`: chapter number (integer)

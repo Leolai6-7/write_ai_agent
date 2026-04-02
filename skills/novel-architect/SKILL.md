@@ -48,17 +48,21 @@ When designing multi-line narratives: each line must have its OWN momentum, not 
 Design each volume with:
 - **卷名**: evocative title reflecting the volume's theme
 - **主題**: one sentence — the emotional/narrative core
-- **章節範圍**: start-end chapter numbers
+- **大致規模**: approximate chapter count (e.g., 「約 10-15 章」), NOT exact ranges
 - **核心情節轉折**: 3-5 major plot turns
 - **主角成長**: how the protagonist transforms
 
+Volume size is FLEXIBLE. A volume ends when its thematic arc completes, not at a predetermined chapter count. The actual boundary is decided during arc review.
+
 ### Step 2: Arc Decomposition
 
-For each volume, break into 3-5 story arcs (弧線):
+For each volume, break into 2-4 story arcs (弧線). Only the FIRST arc needs detail; later arcs are sketches:
 - **弧線名稱**
-- **章節範圍**
+- **大致規模**: approximate chapters (e.g., 「約 3-5 章」)
 - **核心衝突**: the central tension driving this arc
 - **結尾轉折**: how it ends and hooks into the next
+
+Later arcs in later volumes should be LESS detailed — just the core conflict and a sentence on the turning point. They will be refined when their turn comes (progressive planning).
 
 ### Step 3: R/S Line Rhythm (for multi-line narratives)
 
@@ -80,28 +84,29 @@ This gives the volume-planner agent the constraint it needs to assign narrative 
 # [小說標題] — 結構設計
 
 ## 分卷架構
-### 第一卷：[卷名]（第1-N章）
+### 第一卷：[卷名]
 - 主題：...
+- 大致規模：約 10-15 章
 - 核心轉折：1. ... 2. ... 3. ...
 - 主角成長：從A到B
-- R/S 節奏：R-S-R-S-R-S-R-S-R-RS（if multi-line）
 
-### 第二卷：[卷名]（第N+1-M章）
+### 第二卷：[卷名]
 - 主題：...
-（以此類推）
+- 大致規模：約 10-12 章
+（以此類推，越後面越簡略）
 
 ## 弧線分解
-### 弧線一：[名稱]（第1-N章）
+### 弧線一：[名稱]（約 3-5 章）
 - 核心衝突：...
 - 結尾轉折：...
 
-### 弧線二：[名稱]（第N+1-M章）
+### 弧線二：[名稱]（約 3-5 章）
 - 核心衝突：...
 - 結尾轉折：...
-（以此類推）
+（後續弧線只需一句核心衝突）
 ```
 
-**Note**: No chapter-level beat sheet here. Chapter beats are generated per-volume by the `volume-planner` agent.
+**Note**: No chapter-level beat sheet here. Chapter beats are generated per-arc by the `volume-planner` agent. Volume boundaries are approximate and confirmed during arc review.
 
 ## Quality Checklist
 - [ ] Every protagonist makes active choices, not just reacts

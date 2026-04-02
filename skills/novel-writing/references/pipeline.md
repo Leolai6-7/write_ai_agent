@@ -83,7 +83,19 @@ Output in 繁體中文.
 ```
 → 3-line summary. "角色設計完成，要看詳情或調整嗎？"
 
-### 1.3: Structure (卷級弧線，不含章級 beat sheet)
+### 1.2.5: Story Expansion
+
+Expand the one-line premise into a one-page story overview:
+- 3-5 major turning points across the full story
+- Character arc directions (where each major character starts → ends)
+- Emotional trajectory of the overall narrative
+
+This is a conversation with the user, not a sub-agent task. Main agent writes the result.
+Save to: `{STORY_DIR}/planning/story_expansion.md`
+
+"故事走向概述完成，這些轉折點對嗎？"
+
+### 1.3: Structure (彈性卷級弧線，不含章級 beat sheet)
 ```
 Agent prompt:
 Read skills/novel-architect/SKILL.md and follow completely.
