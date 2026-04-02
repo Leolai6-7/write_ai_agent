@@ -50,6 +50,7 @@ print(p.parent.parent)
         # Sync graph to NetworkX JSON
         cd "$CLAUDE_PROJECT_DIR" && python3 scripts/sync_graph.py --story-dir "$STORY_DIR" > /dev/null 2>&1 &
         echo "WORKFLOW COMPLETE: Chapter $CHAPTER_NUM done. Post-processing triggered." >&2
+        echo "REMINDER: If this chapter introduced new locations or settings, update story_graph.md 地點使用表/數值設定表." >&2
     else
         echo "WORKFLOW COMPLETE: Chapter $CHAPTER_NUM done. (post-processing skipped: story dir not found)" >&2
     fi

@@ -78,20 +78,34 @@ def get_recent_log_entries(story_dir: Path, n: int = 5) -> str:
     return "\n\n".join(recent) if recent else "（尚無記錄）"
 
 
-def get_previous_chapter_ending(story_dir: Path, chapter_num: int, chars: int = 500) -> str:
-    """Read the last N characters of the previous chapter for tone continuity."""
+def get_previous_chapter_ending(story_dir: Path, chapter_num: int, current_line: str,
+                                 structure_text: str, chars: int = 500) -> str:
+    """Read the last N chars of the previous SAME-LINE chapter for tone continuity.
+
+    For dual-narrative stories: ch6(S) continues from ch4(S), not ch5(R).
+    For single-line stories: same as reading ch N-1.
+    """
     if chapter_num <= 1:
         return "N/A — this is the first chapter"
-    prev_num = chapter_num - 1
-    # For S-line chapters, find the last S-line chapter; for R-line, find last R-line
-    # But simpler: just get the immediately previous chapter regardless of line
-    prev_file = story_dir / "outputs" / f"chapter_{prev_num:03d}.md"
-    if not prev_file.exists():
-        return f"N/A — chapter_{prev_num:03d}.md not found"
-    text = prev_file.read_text(encoding="utf-8")
-    if len(text) <= chars:
-        return text
-    return "..." + text[-chars:]
+
+    # Scan backwards through beat sheet to find the most recent same-line chapter
+    for prev in range(chapter_num - 1, 0, -1):
+        prev_row = parse_beat_sheet_row(structure_text, prev)
+        if not prev_row:
+            continue
+        # Match line (R, S, R+S, 融合 etc.)
+        # For R+S or 融合, treat as matching both lines
+        prev_line = prev_row.get("line", "").strip()
+        if current_line in prev_line or prev_line in current_line or prev_line == current_line:
+            prev_file = story_dir / "outputs" / f"chapter_{prev:03d}.md"
+            if prev_file.exists():
+                text = prev_file.read_text(encoding="utf-8")
+                label = f"(from ch{prev}, same line '{current_line}')"
+                if len(text) <= chars:
+                    return f"{label}\n{text}"
+                return f"{label}\n...{text[-chars:]}"
+
+    return f"N/A — no previous '{current_line}' chapter found"
 
 
 def get_dual_line_info(story_dir: Path, current_line: str) -> str:
@@ -334,7 +348,7 @@ def main():
     semantic_results = do_semantic_search(story_dir, query)
 
     # === Previous chapter ending ===
-    prev_ending = get_previous_chapter_ending(story_dir, chapter_num)
+    prev_ending = get_previous_chapter_ending(story_dir, chapter_num, beat["line"], structure_text)
 
     # === Concept introduction tracking ===
     concept_tracking = get_concept_tracking(story_dir)
@@ -362,7 +376,7 @@ EMOTIONAL TONE: {beat['tone']}
 {chr(10).join(character_profiles) if character_profiles else '(none)'}
 
 --- SETTING ---
-{chr(10).join(location_descriptions) if location_descriptions else '⚠ No location descriptions found in world_bible for: ' + ', '.join(beat['locations']) + '. Generator will invent — consider adding settings first.'}
+{chr(10).join(location_descriptions) if location_descriptions else '(no location descriptions found)'}
 
 --- FORESHADOWING ---
 {chr(10).join(foreshadow_threads) if foreshadow_threads else '(none for this chapter)'}
@@ -392,6 +406,12 @@ Note: Characters may not know exact numbers — use sensory descriptions instead
 --- DUAL-LINE AWARENESS ---
 {dual_line}
 ==="""
+
+    # Preflight warnings to stderr (not in context package)
+    missing_locs = [loc for loc in beat["locations"] if not any(loc in d for d in location_descriptions)]
+    if missing_locs:
+        import sys as _sys
+        print(f"⚠ PREFLIGHT: {', '.join(missing_locs)} 無 world_bible 設定——generator 將自行發明", file=_sys.stderr)
 
     if args.format == "json":
         import json
