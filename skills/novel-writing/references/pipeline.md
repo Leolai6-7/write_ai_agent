@@ -277,25 +277,28 @@ Every 5 chapters: "前5章寫完了，要檢查再繼續嗎？"
 
 When all chapters in a volume are complete, run the arc review.
 
-1. Launch **arc-reviewer plugin agent** (has Read + Write):
+1. Main agent reads story_log.md (small file, chapter summaries)
+2. Launch **arc-reviewer plugin agent** (has Read + Write):
 
 ```
 subagent_type: novel-agents:arc-reviewer
 ```
 
-Prompt (agent reads files itself):
+Prompt — paste story_log, tell agent where to find files for detail checks:
 
 > Story directory: {STORY_DIR}
 > Review Volume {V} (chapters {start}-{end}).
 >
-> Read these files:
-> - {STORY_DIR}/outputs/chapter_{start..end}.md (all chapters in this volume)
-> - {STORY_DIR}/runtime/story_log.md
+> === STORY LOG (chapter summaries — use as primary source) ===
+> {full content of story_log.md}
+>
+> Files you can Read when you need to verify specific details:
+> - {STORY_DIR}/outputs/chapter_{NNN}.md (individual chapters)
 > - {STORY_DIR}/runtime/story_graph.md
 > - {STORY_DIR}/world/world_bible.md
 > - {STORY_DIR}/world/character_cast.md
 > - {STORY_DIR}/planning/structure.md (future arcs)
-> - {STORY_DIR}/planning/volume_plan_{V}.md (planned vs actual)
+> - {STORY_DIR}/planning/volume_plan_{V}.yaml (planned vs actual)
 >
 > Write outputs to:
 > - /tmp/world_bible_updated.md
