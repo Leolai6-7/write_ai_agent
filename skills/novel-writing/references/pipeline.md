@@ -82,7 +82,7 @@ Each step via Agent tool. Show BRIEF summary after each, confirm before next.
 ### 1.1: World Building
 ```
 Agent prompt:
-Read .claude/skills/novel-worldbuilding/SKILL.md and follow completely.
+Read skills/novel-worldbuilding/SKILL.md and follow completely.
 Read story brief from: {STORY_DIR}/planning/story_brief.md
 Save output to: {STORY_DIR}/world/world_bible.md
 Output in 繁體中文.
@@ -92,7 +92,7 @@ Output in 繁體中文.
 ### 1.2: Character Design
 ```
 Agent prompt:
-Read .claude/skills/novel-characters/SKILL.md and follow completely.
+Read skills/novel-characters/SKILL.md and follow completely.
 Read story brief from: {STORY_DIR}/planning/story_brief.md
 Read world bible from: {STORY_DIR}/world/world_bible.md
 Save output to: {STORY_DIR}/world/character_cast.md
@@ -103,7 +103,7 @@ Output in 繁體中文.
 ### 1.3: Structure
 ```
 Agent prompt:
-Read .claude/skills/novel-architect/SKILL.md and follow completely.
+Read skills/novel-architect/SKILL.md and follow completely.
 Read story brief from: {STORY_DIR}/planning/story_brief.md
 Read world bible from: {STORY_DIR}/world/world_bible.md
 Read character cast from: {STORY_DIR}/world/character_cast.md
@@ -120,7 +120,7 @@ This should not be necessary if novel-characters SKILL.md naming rules are follo
 ### 1.4: Foreshadowing
 ```
 Agent prompt:
-Read .claude/skills/novel-foreshadowing/SKILL.md and follow completely.
+Read skills/novel-foreshadowing/SKILL.md and follow completely.
 Read structure from: {STORY_DIR}/planning/structure.md
 Read character cast from: {STORY_DIR}/world/character_cast.md
 Read world bible from: {STORY_DIR}/world/world_bible.md
@@ -157,21 +157,23 @@ Store the output as the CHAPTER CONTEXT PACKAGE.
 
 **STEP 2 — Chapter Generation**
 
-Main agent first reads these two files:
-- `.claude/skills/novel-chapter/SKILL.md`
-- `{STORY_DIR}/planning/story_brief.md`
+Main agent reads `skills/novel-chapter/SKILL.md` and `{STORY_DIR}/planning/story_brief.md`,
+then launches the **chapter-writer plugin agent** (Write-only, cannot read files):
 
-Then launch ONE sub-agent with ALL content pasted directly into the prompt
-(so the sub-agent needs NO file reads — only Write):
+```
+subagent_type: novel-agents:chapter-writer
+```
+
+Paste ALL content into the prompt (the agent has no Read tool):
 
 > === WRITING SKILL ===
-> {paste the full content of novel-chapter/SKILL.md here}
+> {full content of novel-chapter/SKILL.md}
 >
 > === STORY BRIEF ===
-> {paste the full content of story_brief.md here}
+> {full content of story_brief.md}
 >
 > === CHAPTER CONTEXT PACKAGE ===
-> {paste the CHAPTER CONTEXT PACKAGE from Step 1 here}
+> {CHAPTER CONTEXT PACKAGE from Step 1}
 >
 > Write the chapter based on the skill, brief, and context above.
 > Save to: {STORY_DIR}/outputs/chapter_{NNN}.md
@@ -180,8 +182,9 @@ Then launch ONE sub-agent with ALL content pasted directly into the prompt
 > NEW_CHARACTERS:
 > - {name}：{role}，{speaking style}
 
-Run in FOREGROUND. Sub-agent should only need 1 tool call (Write).
-If NEW_CHARACTERS reported, append to character_cast.md.
+The agent can ONLY Write. It cannot read chapter files, search directories,
+or access any information not in the prompt. This prevents cross-line contamination.
+If NEW_CHARACTERS reported, main agent appends to character_cast.md.
 
 ---
 
@@ -199,29 +202,31 @@ Read the generated chapter. Append to story_log.md:
 ---
 
 **STEP 4 — Update Story Graph**
-Launch ONE sub-agent with this EXACT prompt:
+
+Launch the **graph-updater plugin agent** (Read+Write only, cannot Grep/Bash):
+
+```
+subagent_type: novel-agents:graph-updater
+```
 
 > Read {STORY_DIR}/outputs/chapter_{NNN}.md (the chapter just written).
 > Read {STORY_DIR}/runtime/story_graph.md (the current graph).
 >
-> Here is the CHAPTER CONTEXT PACKAGE used to generate this chapter
-> (contains character profiles, foreshadowing designs, setting details):
+> Here is the CHAPTER CONTEXT PACKAGE used to generate this chapter:
 >
 > {paste the same CHAPTER CONTEXT PACKAGE from Step 1 here}
 >
 > Using the chapter text and context package, update the graph:
 > - 角色出場表: add/update character appearances
 > - 地點使用表: add/update locations
-> - 伏筆追蹤: update thread status (use foreshadowing section in context package to determine plant/hint/resolve)
+> - 伏筆追蹤: update thread status
 > - 因果鏈: add new causal links
 > - 數值設定: add any new established values
+> - 概念引入追蹤: update concepts introduced in this chapter
 >
 > Save updated graph to: {STORY_DIR}/runtime/story_graph.md
->
-> All information you need is in the chapter, graph, and context package.
-> Do NOT read any other files.
 
-Run in FOREGROUND so hooks can track the graph update.
+The agent can Read specified files and Write, but cannot Grep/Bash/search.
 
 ---
 
@@ -265,7 +270,7 @@ Every 10 chapters (arc boundary):
 ## Stage 3: Editing
 ```
 Agent prompt:
-Read .claude/skills/novel-style-audit/SKILL.md and follow.
+Read skills/novel-style-audit/SKILL.md and follow.
 Read all chapters from: {STORY_DIR}/outputs/
 Read character voices from: {STORY_DIR}/world/character_cast.md
 Save report to: {STORY_DIR}/planning/style_report.md

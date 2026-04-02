@@ -8,4 +8,4 @@ Start a brainstorming conversation with the user about their novel idea. Ask thi
 
 "你想寫一個什麼樣的故事？可以是一句話、一個畫面、一個角色、甚至只是一種感覺。"
 
-Then follow the complete pipeline defined in `.claude/skills/novel-writing/references/pipeline.md`. Read that file now for the full workflow.
+Then follow the complete pipeline defined in `skills/novel-writing/references/pipeline.md`. Read that file now for the full workflow.
