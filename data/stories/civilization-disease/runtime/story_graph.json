@@ -1,1613 +1,642 @@
 {
-  "directed": true,
-  "multigraph": false,
-  "graph": {},
-  "nodes": [
-    {
-      "type": "character",
-      "name": "沈逸",
-      "events": "ch1: 啟動第1024次文明模擬；將觀測窗口縮到第三階段、前兩階段降為Level 3自動記錄；獨自留守控制室不休息；關注個體0447的美感萌芽行為；得知異常標記0xFFFF後下令全歷史搜索 · ch3: 連續工作31小時接到赫斯全息通訊；以聽證會發言稿推算出1100次期限；向赫斯說明0xFFFF的獨特性（前1023次從未出現未定義值）；拒絕接受期限但未能改變結果；寫下工作日誌「1100 / 0xFFFF」；繼續監控第1024次迭代（城邦1024-C-0712連結密度為平均值1.3倍）",
-      "id": "character:沈逸"
+  "characters": {
+    "沈逸": {
+      "chapters": [
+        1,
+        3,
+        5,
+        7,
+        9,
+        10
+      ],
+      "events": "ch1: 啟動第1024次文明模擬；將觀測窗口縮到第三階段、前兩階段降為Level 3自動記錄；獨自留守控制室不休息；關注個體0447的美感萌芽行為；得知異常標記0xFFFF後下令全歷史搜索 · ch3: 連續工作31小時接到赫斯全息通訊；以聽證會發言稿推算出1100次期限；向赫斯說明0xFFFF的獨特性（前1023次從未出現未定義值）；拒絕接受期限但未能改變結果；寫下工作日誌「1100 / 0xFFFF」；繼續監控第1024次迭代（城邦1024-C-0712連結密度為平均值1.3倍）"
     },
-    {
-      "type": "chapter",
-      "number": 1,
-      "id": "chapter:ch1"
+    "林昭明": {
+      "chapters": [
+        1,
+        3,
+        5,
+        10
+      ],
+      "events": "ch1: 微調星際塵埃密度+0.7%；私下使用Level 4精度監控；發現觀察者效應——沈逸注視區域的空間曲率微偏移；報告異常標記0xFFFF；回憶第847次模擬的七聲音階旋律；獨自進行「模擬悼念」儀式 · ch5: 標記1024-Σ行為偏差（社交網絡收縮）；手動比對39參數發現94.7%吻合沈逸心理側寫；推斷可能觸犯自我模擬禁忌但選擇延遲——加密存檔不提交；0xFFFF搜索進度79.3%；筆記寫下「觀察者效應」和「忠誠和正確不在同一方向」；847次旋律兩次浮現"
     },
-    {
-      "type": "chapter",
-      "number": 3,
-      "id": "chapter:ch3"
+    "赫斯": {
+      "chapters": [
+        3
+      ],
+      "events": "ch3: 透過全息通訊向沈逸下達最後通牒——第1100次迭代為期限；提出三條標準（模擬例外/初始條件修正/非預期現象獨立確認）；提及西非認知重置試驗通過第三階段審查；德語口誤說出Auflösung後立即糾正；丈夫漢斯為最早一批消融患者（四年）"
     },
-    {
-      "type": "chapter",
-      "number": 5,
-      "id": "chapter:ch5"
+    "顧則": {
+      "chapters": [
+        2,
+        4,
+        6,
+        8,
+        10
+      ],
+      "events": "ch2: 重新檢視37個文明崩潰曲線，確認複雜度0.7334臨界點；向方院長提交報告並被引導思考「邊界條件」；注意到南牆與北牆溫度相同的異常但未深究；入睡前閃過一幀藍綠冷光中疲憊人影的畫面 · ch4: 用紙質筆記本記錄16條「異常觀察清單」（接縫目錄）——牆壁溫度、門軸無聲、地磚無磨損、食堂鹹淡恆定、銀杏同步變色、走廊照度不變、體溫21次36.5°C零標準差、紙割傷痛感線性衰減等；在例會後向紀恆、周琳、蔡文斌分享部分觀察遭冷遇（紀恆：「你做文明崩潰研究做太久了」）；同事開始微妙疏遠；夢見深潛研究所走廊——灰色金屬牆壁、藍綠色冷卻液管路、低頻嗡鳴、門上無法辨識的標記；醒後指尖殘涼；意識到夢中走廊溫度不均勻，與現實世界的「太完美」形成對照；提出「接縫」概念——噪聲缺失之處即拼合痕跡"
     },
-    {
-      "type": "chapter",
-      "number": 7,
-      "id": "chapter:ch7"
+    "紀恆": {
+      "chapters": [
+        2,
+        4,
+        6
+      ],
+      "events": "ch2: 每天帶早飯給顧則、記得他喝的牛奶牌子、優化回歸模型代碼收斂快一倍、講統計組實習生故事；總在顧則開口前就知道他需要什麼 · ch4: 端茶放在顧則桌角（永遠左邊不擋滑鼠線）；例會後聽顧則分享異常觀察，回應「你做文明崩潰研究做太久了」；離開時說「你別再量自己的體溫了」（語帶擔心但方向錯——擔心精神狀態而非考慮內容）；之後不再主動問顧則去食堂而是默默帶飯回來；走前幫洗茶杯；被問及「不屬於這裡的夢」時肩膀微繃、以大學考試夢帶過並關閉話題；鍵盤敲擊間隔幾乎相等"
     },
-    {
-      "type": "chapter",
-      "number": 9,
-      "id": "chapter:ch9"
+    "方院長": {
+      "chapters": [
+        2
+      ],
+      "events": "ch2: 評價顧則報告方法與數據無問題但迴避了「為什麼」；引入「邊界條件」概念暗示崩潰模式源於系統外部約束；說出「答案在提問前已寫好」；行為極度靜止如校準好的儀器"
+    }
+  },
+  "locations": {
+    "深潛研究所": {
+      "chapters": [
+        1,
+        3,
+        5,
+        7,
+        10
+      ],
+      "description": "恆溫18°C、藍綠冷光、無窗地下、創世引擎；ch1確立: 地下42公尺、陽明山北坡花崗岩層、地面入口偽裝廢棄溫泉旅館（關了七年）、控制室為半圓形階梯佈局（42塊子螢幕弧形陣列）、三層空氣淨化系統、自動配餐系統每6小時送營養棒、防靜電地板、貨運電梯通地面、創世引擎三層樓高有量子核心與藍綠冷卻液管路；ch3補充: 備餐區距螢幕牆約6公尺（自動取水系統、水溫18°C）、冷卻液管路半透明映在天花板像緩慢移動的靜脈、全息投影系統（五年前配置）在控制室中央"
     },
-    {
-      "type": "chapter",
-      "number": 10,
-      "id": "chapter:ch10"
+    "無感區（新北）": {
+      "chapters": [
+        7,
+        9
+      ],
+      "description": "空蕩街道、自動販賣機冷光"
     },
-    {
-      "type": "character",
-      "name": "林昭明",
-      "events": "ch1: 微調星際塵埃密度+0.7%；私下使用Level 4精度監控；發現觀察者效應——沈逸注視區域的空間曲率微偏移；報告異常標記0xFFFF；回憶第847次模擬的七聲音階旋律；獨自進行「模擬悼念」儀式 · ch5: 標記1024-Σ行為偏差（社交網絡收縮）；手動比對39參數發現94.7%吻合沈逸心理側寫；推斷可能觸犯自我模擬禁忌但選擇延遲——加密存檔不提交；0xFFFF搜索進度79.3%；筆記寫下「觀察者效應」和「忠誠和正確不在同一方向」；847次旋律兩次浮現",
-      "id": "character:林昭明"
+    "模擬世界-研究院": {
+      "chapters": [
+        2,
+        4
+      ],
+      "description": "陽光、銀杏、日常辦公室；ch2確立: 主樓玻璃門入口有銀杏樹與花壇、磨石子地板走廊有落地窗、辦公室在三樓東側（顧則紀恆共用面牆兩桌）、食堂在一樓有玻璃穹頂、方院長辦公室在四樓最裡面、茶水間朝北無日照、午餐鈴為兩聲短促電子音；ch4補充: 地下室檔案室有老舊鐵門（表面鏽跡但門軸無聲）、銀杏大道深秋葉片金黃同步無例外、宿舍窗外銀杏投影邊緣異常清晰如剪紙"
     },
-    {
-      "type": "character",
-      "name": "赫斯",
-      "events": "ch3: 透過全息通訊向沈逸下達最後通牒——第1100次迭代為期限；提出三條標準（模擬例外/初始條件修正/非預期現象獨立確認）；提及西非認知重置試驗通過第三階段審查；德語口誤說出Auflösung後立即糾正；丈夫漢斯為最早一批消融患者（四年）",
-      "id": "character:赫斯"
-    },
-    {
-      "type": "character",
-      "name": "顧則",
-      "events": "ch2: 重新檢視37個文明崩潰曲線，確認複雜度0.7334臨界點；向方院長提交報告並被引導思考「邊界條件」；注意到南牆與北牆溫度相同的異常但未深究；入睡前閃過一幀藍綠冷光中疲憊人影的畫面 · ch4: 用紙質筆記本記錄16條「異常觀察清單」（接縫目錄）——牆壁溫度、門軸無聲、地磚無磨損、食堂鹹淡恆定、銀杏同步變色、走廊照度不變、體溫21次36.5°C零標準差、紙割傷痛感線性衰減等；在例會後向紀恆、周琳、蔡文斌分享部分觀察遭冷遇（紀恆：「你做文明崩潰研究做太久了」）；同事開始微妙疏遠；夢見深潛研究所走廊——灰色金屬牆壁、藍綠色冷卻液管路、低頻嗡鳴、門上無法辨識的標記；醒後指尖殘涼；意識到夢中走廊溫度不均勻，與現實世界的「太完美」形成對照；提出「接縫」概念——噪聲缺失之處即拼合痕跡",
-      "id": "character:顧則"
-    },
-    {
-      "type": "chapter",
-      "number": 2,
-      "id": "chapter:ch2"
-    },
-    {
-      "type": "chapter",
-      "number": 4,
-      "id": "chapter:ch4"
-    },
-    {
-      "type": "chapter",
-      "number": 6,
-      "id": "chapter:ch6"
-    },
-    {
-      "type": "chapter",
-      "number": 8,
-      "id": "chapter:ch8"
-    },
-    {
-      "type": "character",
-      "name": "紀恆",
-      "events": "ch2: 每天帶早飯給顧則、記得他喝的牛奶牌子、優化回歸模型代碼收斂快一倍、講統計組實習生故事；總在顧則開口前就知道他需要什麼 · ch4: 端茶放在顧則桌角（永遠左邊不擋滑鼠線）；例會後聽顧則分享異常觀察，回應「你做文明崩潰研究做太久了」；離開時說「你別再量自己的體溫了」（語帶擔心但方向錯——擔心精神狀態而非考慮內容）；之後不再主動問顧則去食堂而是默默帶飯回來；走前幫洗茶杯；被問及「不屬於這裡的夢」時肩膀微繃、以大學考試夢帶過並關閉話題；鍵盤敲擊間隔幾乎相等",
-      "id": "character:紀恆"
-    },
-    {
-      "type": "character",
-      "name": "方院長",
-      "events": "ch2: 評價顧則報告方法與數據無問題但迴避了「為什麼」；引入「邊界條件」概念暗示崩潰模式源於系統外部約束；說出「答案在提問前已寫好」；行為極度靜止如校準好的儀器",
-      "id": "character:方院長"
-    },
-    {
-      "type": "location",
-      "name": "深潛研究所",
-      "description": "恆溫18°C、藍綠冷光、無窗地下、創世引擎；ch1確立: 地下42公尺、陽明山北坡花崗岩層、地面入口偽裝廢棄溫泉旅館（關了七年）、控制室為半圓形階梯佈局（42塊子螢幕弧形陣列）、三層空氣淨化系統、自動配餐系統每6小時送營養棒、防靜電地板、貨運電梯通地面、創世引擎三層樓高有量子核心與藍綠冷卻液管路；ch3補充: 備餐區距螢幕牆約6公尺（自動取水系統、水溫18°C）、冷卻液管路半透明映在天花板像緩慢移動的靜脈、全息投影系統（五年前配置）在控制室中央",
-      "id": "location:深潛研究所"
-    },
-    {
-      "type": "location",
-      "name": "無感區（新北）",
-      "description": "空蕩街道、自動販賣機冷光",
-      "id": "location:無感區（新北）"
-    },
-    {
-      "type": "location",
-      "name": "模擬世界-研究院",
-      "description": "陽光、銀杏、日常辦公室；ch2確立: 主樓玻璃門入口有銀杏樹與花壇、磨石子地板走廊有落地窗、辦公室在三樓東側（顧則紀恆共用面牆兩桌）、食堂在一樓有玻璃穹頂、方院長辦公室在四樓最裡面、茶水間朝北無日照、午餐鈴為兩聲短促電子音；ch4補充: 地下室檔案室有老舊鐵門（表面鏽跡但門軸無聲）、銀杏大道深秋葉片金黃同步無例外、宿舍窗外銀杏投影邊緣異常清晰如剪紙",
-      "id": "location:模擬世界-研究院"
-    },
-    {
-      "type": "location",
-      "name": "1024號模擬宇宙",
-      "description": "ch1確立: 岩石行星、北半球河谷聚落（67個虛擬個體）、語言如火種般在多個部落同時獨立浮現",
-      "id": "location:1024號模擬宇宙"
-    },
-    {
-      "type": "foreshadow",
-      "name": "①牆壁溫度",
+    "1024號模擬宇宙": {
+      "chapters": [
+        1
+      ],
+      "description": "ch1確立: 岩石行星、北半球河谷聚落（67個虛擬個體）、語言如火種般在多個部落同時獨立浮現"
+    }
+  },
+  "foreshadowing": {
+    "①牆壁溫度": {
       "status": "已暗示（ch2植入: 顧則午餐時碰南牆、茶水間碰北牆，日照面與背陰面溫度完全相同；走廊中猶豫是否觸碰比較但走過去了；合理化為空調系統好 → ch4暗示: 牆壁溫度列為異常清單第1條，明確記錄「朝南牆面與朝北牆面觸感溫度無差異，整棟建築皆然」；不再合理化，引用方院長「邊界條件被簡化」觀點；夢中走廊溫度不均勻形成對照；醒後觸碰牆壁再次確認「永遠的那個溫度」）",
-      "id": "foreshadow:①牆壁溫度"
+      "planted_in": [
+        2
+      ],
+      "hinted_in": [
+        4,
+        6
+      ],
+      "resolved_in": [
+        40
+      ]
     },
-    {
-      "type": "chapter",
-      "number": 40,
-      "id": "chapter:ch40"
-    },
-    {
-      "type": "foreshadow",
-      "name": "②粉筆樹",
+    "②粉筆樹": {
       "status": "規劃中",
-      "id": "foreshadow:②粉筆樹"
+      "planted_in": [
+        7
+      ],
+      "hinted_in": [
+        9
+      ],
+      "resolved_in": []
     },
-    {
-      "type": "foreshadow",
-      "name": "④林昭明旋律",
+    "④林昭明旋律": {
       "status": "已植入（ch1+ch5：旋律在ch5再次浮現兩次，與道德困境交織）",
-      "id": "foreshadow:④林昭明旋律"
+      "planted_in": [
+        1
+      ],
+      "hinted_in": [],
+      "resolved_in": []
     },
-    {
-      "type": "foreshadow",
-      "name": "⑤何守一NeuLink",
+    "⑤何守一NeuLink": {
       "status": "規劃中",
-      "id": "foreshadow:⑤何守一NeuLink"
+      "planted_in": [
+        7
+      ],
+      "hinted_in": [
+        10
+      ],
+      "resolved_in": []
     },
-    {
-      "type": "foreshadow",
-      "name": "⑥迭代者預知",
+    "⑥迭代者預知": {
       "status": "已植入（ch4: 顧則夢見深潛研究所走廊——灰色金屬牆壁、藍綠色冷卻液管路半透明、低頻嗡鳴有層次、門上暗紅標記無法辨識；醒後指尖殘留金屬涼意；夢中細節與R線研究所高度吻合但顧則從未去過；潛意識給出「對照組」——一個有噪聲、溫度不均勻的世界）",
-      "id": "foreshadow:⑥迭代者預知"
+      "planted_in": [
+        4
+      ],
+      "hinted_in": [
+        6,
+        8
+      ],
+      "resolved_in": []
     },
-    {
-      "type": "foreshadow",
-      "name": "⑧赫斯德語",
+    "⑧赫斯德語": {
       "status": "已植入（ch3: 赫斯談消融時脫口說出德語「Auflösung」後立即糾正為「消融。抱歉。」——僅此一次口誤）",
-      "id": "foreshadow:⑧赫斯德語"
+      "planted_in": [
+        3
+      ],
+      "hinted_in": [],
+      "resolved_in": []
     },
-    {
-      "type": "foreshadow",
-      "name": "⑨觀察者效應",
+    "⑨觀察者效應": {
       "status": "已植入（ch1: 林昭明發現沈逸注視區域的空間曲率出現零點幾個標準差的微偏移，備註「觀察者效應——量子噪聲？」）",
-      "id": "foreshadow:⑨觀察者效應"
+      "planted_in": [
+        1
+      ],
+      "hinted_in": [
+        10
+      ],
+      "resolved_in": []
     },
-    {
-      "type": "foreshadow",
-      "name": "⑩阮月河模擬親和力",
+    "⑩阮月河模擬親和力": {
       "status": "規劃中",
-      "id": "foreshadow:⑩阮月河模擬親和力"
+      "planted_in": [
+        9
+      ],
+      "hinted_in": [],
+      "resolved_in": []
     },
-    {
-      "type": "foreshadow",
-      "name": "⑪迭代者家人",
+    "⑪迭代者家人": {
       "status": "規劃中",
-      "id": "foreshadow:⑪迭代者家人"
+      "planted_in": [
+        6
+      ],
+      "hinted_in": [],
+      "resolved_in": []
     },
-    {
-      "type": "foreshadow",
-      "name": "⑫煙霧彈(自我模擬)",
+    "⑫煙霧彈(自我模擬)": {
       "status": "已植入（ch5：94.7%行為吻合引導讀者認為沈逸犯了自我模擬禁忌）",
-      "id": "foreshadow:⑫煙霧彈(自我模擬)"
+      "planted_in": [
+        5
+      ],
+      "hinted_in": [
+        10
+      ],
+      "resolved_in": []
     },
-    {
-      "type": "foreshadow",
-      "name": "⑬異常標記0xFFFF",
+    "⑬異常標記0xFFFF": {
       "status": "已植入（ch1: 第三階段啟動後出現一次未定義標記，不關聯任何已知事件類型，前1023次從未出現，已啟動全歷史搜索）",
-      "id": "foreshadow:⑬異常標記0xFFFF"
-    },
-    {
-      "type": "event",
-      "description": "1023次模擬皆出現文明病（技術越發展→個體越孤立→意義感崩塌）",
-      "chapter": "背景",
-      "id": "event:1023次模擬皆出現文明病（技術越發展→個體越孤立→意義感崩塌）"
-    },
-    {
-      "type": "event",
-      "description": "沈逸放棄前兩階段即時監控，算力集中第三階段",
-      "chapter": "ch1",
-      "id": "event:沈逸放棄前兩階段即時監控，算力集中第三階段"
-    },
-    {
-      "type": "event",
-      "description": "林昭明微調塵埃密度+0.7%",
-      "chapter": "ch1",
-      "id": "event:林昭明微調塵埃密度+0.7%"
-    },
-    {
-      "type": "event",
-      "description": "第三階段提前11個模擬年啟動",
-      "chapter": "ch1",
-      "id": "event:第三階段提前11個模擬年啟動"
-    },
-    {
-      "type": "event",
-      "description": "林昭明私開Level 4精度",
-      "chapter": "ch1",
-      "id": "event:林昭明私開Level 4精度"
-    },
-    {
-      "type": "event",
-      "description": "發現觀察者效應微偏移（Level 3不可見）",
-      "chapter": "ch1",
-      "id": "event:發現觀察者效應微偏移（Level 3不可見）"
-    },
-    {
-      "type": "event",
-      "description": "第1024次模擬第三階段啟動",
-      "chapter": "ch1",
-      "id": "event:第1024次模擬第三階段啟動"
-    },
-    {
-      "type": "event",
-      "description": "異常標記0xFFFF出現",
-      "chapter": "ch1",
-      "id": "event:異常標記0xFFFF出現"
-    },
-    {
-      "type": "event",
-      "description": "沈逸三年未離開地下",
-      "chapter": "ch1",
-      "id": "event:沈逸三年未離開地下"
-    },
-    {
-      "type": "event",
-      "description": "對陽光的生理反應是刺痛而非舒適",
-      "chapter": "ch1",
-      "id": "event:對陽光的生理反應是刺痛而非舒適"
-    },
-    {
-      "type": "event",
-      "description": "顧則四年研究37個文明崩潰模式",
-      "chapter": "背景",
-      "id": "event:顧則四年研究37個文明崩潰模式"
-    },
-    {
-      "type": "event",
-      "description": "發現複雜度0.7334臨界點——所有文明在此處開始靜默衰退",
-      "chapter": "ch2",
-      "id": "event:發現複雜度0.7334臨界點——所有文明在此處開始靜默衰退"
-    },
-    {
-      "type": "event",
-      "description": "顧則提交崩潰報告",
-      "chapter": "ch2",
-      "id": "event:顧則提交崩潰報告"
-    },
-    {
-      "type": "event",
-      "description": "方院長引入「邊界條件」詮釋——崩潰模式可能源於系統外部約束",
-      "chapter": "ch2",
-      "id": "event:方院長引入「邊界條件」詮釋——崩潰模式可能源於系統外部約束"
-    },
-    {
-      "type": "event",
-      "description": "方院長說「答案在提問前已寫好」",
-      "chapter": "ch2",
-      "id": "event:方院長說「答案在提問前已寫好」"
-    },
-    {
-      "type": "event",
-      "description": "顧則開始隱約感到世界的「恰到好處」不自然",
-      "chapter": "ch2",
-      "id": "event:顧則開始隱約感到世界的「恰到好處」不自然"
-    },
-    {
-      "type": "event",
-      "description": "顧則觸碰南牆與北牆溫度相同",
-      "chapter": "ch2",
-      "id": "event:顧則觸碰南牆與北牆溫度相同"
-    },
-    {
-      "type": "event",
-      "description": "模擬世界物理缺陷的第一次感知（但被合理化）",
-      "chapter": "ch2",
-      "id": "event:模擬世界物理缺陷的第一次感知（但被合理化）"
-    },
-    {
-      "type": "event",
-      "description": "顧則入睡前閃過藍綠冷光中疲憊人影",
-      "chapter": "ch2",
-      "id": "event:顧則入睡前閃過藍綠冷光中疲憊人影"
-    },
-    {
-      "type": "event",
-      "description": "R線沈逸的形象滲漏進S線",
-      "chapter": "ch2",
-      "id": "event:R線沈逸的形象滲漏進S線"
-    },
-    {
-      "type": "event",
-      "description": "赫斯聽證會發言稿設定1100次為合理迭代上限",
-      "chapter": "背景",
-      "id": "event:赫斯聽證會發言稿設定1100次為合理迭代上限"
-    },
-    {
-      "type": "event",
-      "description": "赫斯正式向沈逸下達第1100次迭代最後通牒",
-      "chapter": "ch3",
-      "id": "event:赫斯正式向沈逸下達第1100次迭代最後通牒"
-    },
-    {
-      "type": "event",
-      "description": "西非認知重置試驗通過第三階段審查",
-      "chapter": "ch3",
-      "id": "event:西非認知重置試驗通過第三階段審查"
-    },
-    {
-      "type": "event",
-      "description": "赫斯手中有「能用的替代方案」，壓縮沈逸研究時間",
-      "chapter": "ch3",
-      "id": "event:赫斯手中有「能用的替代方案」，壓縮沈逸研究時間"
-    },
-    {
-      "type": "event",
-      "description": "0xFFFF異常標記出現於第1024次迭代",
-      "chapter": "ch1",
-      "id": "event:0xFFFF異常標記出現於第1024次迭代"
-    },
-    {
-      "type": "event",
-      "description": "沈逸以此為依據爭取繼續研究——「引擎自己說了」",
-      "chapter": "ch3",
-      "id": "event:沈逸以此為依據爭取繼續研究——「引擎自己說了」"
-    },
-    {
-      "type": "event",
-      "description": "赫斯丈夫漢斯為最早一批消融患者",
-      "chapter": "背景",
-      "id": "event:赫斯丈夫漢斯為最早一批消融患者"
-    },
-    {
-      "type": "event",
-      "description": "赫斯對消融有私人動機，推動認知重置部署",
-      "chapter": "ch3",
-      "id": "event:赫斯對消融有私人動機，推動認知重置部署"
-    },
-    {
-      "type": "event",
-      "description": "赫斯下達1100次最後通牒",
-      "chapter": "ch3",
-      "id": "event:赫斯下達1100次最後通牒"
-    },
-    {
-      "type": "event",
-      "description": "沈逸剩餘76次迭代餘量（1100-1024）",
-      "chapter": "ch3",
-      "id": "event:沈逸剩餘76次迭代餘量（1100-1024）"
-    },
-    {
-      "type": "event",
-      "description": "方院長引入「邊界條件」概念 + 顧則牆壁溫度觀察",
-      "chapter": "ch2",
-      "id": "event:方院長引入「邊界條件」概念 + 顧則牆壁溫度觀察"
-    },
-    {
-      "type": "event",
-      "description": "顧則系統性記錄16條「異常觀察清單」，從被動注意轉為主動蒐證",
-      "chapter": "ch4",
-      "id": "event:顧則系統性記錄16條「異常觀察清單」，從被動注意轉為主動蒐證"
-    },
-    {
-      "type": "event",
-      "description": "顧則向同事分享異常觀察",
-      "chapter": "ch4",
-      "id": "event:顧則向同事分享異常觀察"
-    },
-    {
-      "type": "event",
-      "description": "同事微妙疏遠——紀恆不再主動邀午飯、周琳腳步不放慢、蔡文斌延遲還資料",
-      "chapter": "ch4",
-      "id": "event:同事微妙疏遠——紀恆不再主動邀午飯、周琳腳步不放慢、蔡文斌延遲還資料"
-    },
-    {
-      "type": "event",
-      "description": "顧則記錄16條接縫 + 夜間認知積累",
-      "chapter": "ch4",
-      "id": "event:顧則記錄16條接縫 + 夜間認知積累"
-    },
-    {
-      "type": "event",
-      "description": "夢見深潛研究所走廊（R線場景滲入S線）",
-      "chapter": "ch4",
-      "id": "event:夢見深潛研究所走廊（R線場景滲入S線）"
-    },
-    {
-      "type": "event",
-      "description": "夢中走廊溫度不均勻",
-      "chapter": "ch4",
-      "id": "event:夢中走廊溫度不均勻"
-    },
-    {
-      "type": "event",
-      "description": "顧則意識到「那條走廊比這裡真實」",
-      "chapter": "ch4",
-      "id": "event:顧則意識到「那條走廊比這裡真實」"
-    },
-    {
-      "type": "event",
-      "description": "同事疏遠 + 夢境經歷",
-      "chapter": "ch4",
-      "id": "event:同事疏遠 + 夢境經歷"
-    },
-    {
-      "type": "event",
-      "description": "顧則開始覺得「自己不是這個世界的居民」",
-      "chapter": "ch4",
-      "id": "event:顧則開始覺得「自己不是這個世界的居民」"
-    },
-    {
-      "type": "mirror",
-      "line": "R",
-      "description": "沈逸站在觀測窗前",
-      "id": "mirror_r:沈逸站在觀測窗前"
-    },
-    {
-      "type": "mirror",
-      "line": "S",
-      "description": "顧則站在落地窗前看銀杏/走廊",
-      "id": "mirror_s:顧則站在落地窗前看銀杏/走廊"
-    },
-    {
-      "type": "mirror",
-      "line": "R",
-      "description": "赫斯最後通牒",
-      "id": "mirror_r:赫斯最後通牒"
-    },
-    {
-      "type": "mirror",
-      "line": "S",
-      "description": "顧則覺醒加速崩潰",
-      "id": "mirror_s:顧則覺醒加速崩潰"
-    },
-    {
-      "type": "mirror",
-      "line": "R",
-      "description": "沈逸看到不均勻的真實世界",
-      "id": "mirror_r:沈逸看到不均勻的真實世界"
-    },
-    {
-      "type": "mirror",
-      "line": "S",
-      "description": "顧則發現不均勻的冰晶",
-      "id": "mirror_s:顧則發現不均勻的冰晶"
-    },
-    {
-      "type": "mirror",
-      "line": "R",
-      "description": "沈逸在藍綠冷光走廊中工作",
-      "id": "mirror_r:沈逸在藍綠冷光走廊中工作"
-    },
-    {
-      "type": "mirror",
-      "line": "S",
-      "description": "顧則夢見藍綠冷光走廊（深潛研究所滲漏）",
-      "id": "mirror_s:顧則夢見藍綠冷光走廊（深潛研究所滲漏）"
-    },
-    {
-      "type": "mirror",
-      "line": "R",
-      "description": "「你聽得見我嗎」",
-      "id": "mirror_r:「你聽得見我嗎」"
-    },
-    {
-      "type": "mirror",
-      "line": "S",
-      "description": "「你聽得見我嗎」",
-      "id": "mirror_s:「你聽得見我嗎」"
-    },
-    {
-      "type": "value",
-      "setting": "研究所溫度",
-      "value": "18°C",
-      "note": "R線環境（敘述中用「涼」「冷」）",
-      "id": "value:研究所溫度"
-    },
-    {
-      "type": "value",
-      "setting": "研究所深度",
-      "value": "地下42公尺",
-      "note": "陽明山北坡花崗岩層",
-      "id": "value:研究所深度"
-    },
-    {
-      "type": "value",
-      "setting": "研究所地面偽裝",
-      "value": "廢棄溫泉旅館",
-      "note": "關了七年，招牌鏽蝕",
-      "id": "value:研究所地面偽裝"
-    },
-    {
-      "type": "value",
-      "setting": "控制室螢幕數",
-      "value": "42塊子螢幕",
-      "note": "弧形陣列，半圓階梯佈局",
-      "id": "value:控制室螢幕數"
-    },
-    {
-      "type": "value",
-      "setting": "創世引擎體積",
-      "value": "三層樓高",
-      "note": "量子核心，藍綠冷卻液管路",
-      "id": "value:創世引擎體積"
-    },
-    {
-      "type": "value",
-      "setting": "模擬世界牆壁溫度",
-      "value": "23°C",
-      "note": "S線異常（敘述中不說數字，用「一樣的涼」）",
-      "id": "value:模擬世界牆壁溫度"
-    },
-    {
-      "type": "value",
-      "setting": "模擬速度(初始)",
-      "value": "500年/小時",
-      "note": "",
-      "id": "value:模擬速度(初始)"
-    },
-    {
-      "type": "value",
-      "setting": "文明樣本數",
-      "value": "37個",
-      "note": "",
-      "id": "value:文明樣本數"
-    },
-    {
-      "type": "value",
-      "setting": "顧則年齡",
-      "value": "32歲",
-      "note": "",
-      "id": "value:顧則年齡"
-    },
-    {
-      "type": "value",
-      "setting": "林昭明年齡",
-      "value": "32歲",
-      "note": "ch1確立",
-      "id": "value:林昭明年齡"
-    },
-    {
-      "type": "value",
-      "setting": "研究所人數",
-      "value": "23人",
-      "note": "",
-      "id": "value:研究所人數"
-    },
-    {
-      "type": "value",
-      "setting": "赫斯期限",
-      "value": "第1100次迭代",
-      "note": "敘述中用「即將用盡」而非精確倒數",
-      "id": "value:赫斯期限"
-    },
-    {
-      "type": "value",
-      "setting": "當前迭代次數",
-      "value": "1024",
-      "note": "ch1確立",
-      "id": "value:當前迭代次數"
-    },
-    {
-      "type": "value",
-      "setting": "沈逸未離開地下時間",
-      "value": "3年",
-      "note": "ch1確立",
-      "id": "value:沈逸未離開地下時間"
-    },
-    {
-      "type": "value",
-      "setting": "林昭明入隊時間",
-      "value": "5年前",
-      "note": "ch1確立",
-      "id": "value:林昭明入隊時間"
-    },
-    {
-      "type": "value",
-      "setting": "配餐週期",
-      "value": "每6小時",
-      "note": "自動配餐系統，營養棒",
-      "id": "value:配餐週期"
-    },
-    {
-      "type": "value",
-      "setting": "空氣淨化層數",
-      "value": "3層",
-      "note": "",
-      "id": "value:空氣淨化層數"
-    },
-    {
-      "type": "value",
-      "setting": "自動記錄精度等級",
-      "value": "Level 3（指令）/ Level 4（林昭明實際）",
-      "note": "ch1確立的上下級張力",
-      "id": "value:自動記錄精度等級"
-    },
-    {
-      "type": "value",
-      "setting": "文明病臨界模式",
-      "value": "物質豐裕→連結斷裂→個體孤立→意義感崩塌",
-      "note": "1023次模擬的共同後半段走向",
-      "id": "value:文明病臨界模式"
-    },
-    {
-      "type": "chapter",
-      "number": 1023,
-      "id": "chapter:ch1023"
-    },
-    {
-      "type": "value",
-      "setting": "第三階段提前量",
-      "value": "11個模擬年",
-      "note": "1024號相對歷史均值",
-      "id": "value:第三階段提前量"
-    },
-    {
-      "type": "chapter",
-      "number": 1024,
-      "id": "chapter:ch1024"
-    },
-    {
-      "type": "value",
-      "setting": "異常標記ID",
-      "value": "0xFFFF",
-      "note": "十六進制全F，系統「未定義」值",
-      "id": "value:異常標記ID"
-    },
-    {
-      "type": "value",
-      "setting": "個體0447所在聚落",
-      "value": "北半球河谷，67個虛擬個體",
-      "note": "展現美感萌芽行為",
-      "id": "value:個體0447所在聚落"
-    },
-    {
-      "type": "value",
-      "setting": "第847次模擬音樂體系",
-      "value": "七聲音階",
-      "note": "創作個體最終完全孤立",
-      "id": "value:第847次模擬音樂體系"
-    },
-    {
-      "type": "value",
-      "setting": "複雜度臨界值",
-      "value": "0.7334 ± 0.02",
-      "note": "ch2確立：37個文明在此複雜度指數開始靜默衰退，無一例外",
-      "id": "value:複雜度臨界值"
-    },
-    {
-      "type": "chapter",
-      "number": 37,
-      "id": "chapter:ch37"
-    },
-    {
-      "type": "value",
-      "setting": "複雜度指數定義",
-      "value": "人口密度 × 資訊流量 × 技術迭代速度的複合指標",
-      "note": "ch2確立：顧則自定義指標",
-      "id": "value:複雜度指數定義"
-    },
-    {
-      "type": "value",
-      "setting": "顧則報告標題",
-      "value": "《文明崩潰的自相似結構：基於37個歷史樣本的數學分析》",
-      "note": "ch2確立",
-      "id": "value:顧則報告標題"
-    },
-    {
-      "type": "value",
-      "setting": "文明模型版本",
-      "value": "v7.3",
-      "note": "ch2確立：顧則桌面資料夾名稱",
-      "id": "value:文明模型版本"
-    },
-    {
-      "type": "value",
-      "setting": "顧則紀恆共事時間",
-      "value": "3年",
-      "note": "ch2確立：共用辦公室三年",
-      "id": "value:顧則紀恆共事時間"
-    },
-    {
-      "type": "value",
-      "setting": "回歸分析次數",
-      "value": "200多次",
-      "note": "ch2確立",
-      "id": "value:回歸分析次數"
-    },
-    {
-      "type": "value",
-      "setting": "第7號樣本",
-      "value": "河谷文明，灌溉技術驅動，存續1600年",
-      "note": "ch2確立",
-      "id": "value:第7號樣本"
-    },
-    {
-      "type": "value",
-      "setting": "第15號樣本",
-      "value": "島鏈貿易聯盟，去中心化海洋商業，存續900年",
-      "note": "ch2確立",
-      "id": "value:第15號樣本"
-    },
-    {
-      "type": "value",
-      "setting": "第23號樣本",
-      "value": "高原軍事君主制，存續不到400年，技術迭代最快",
-      "note": "ch2確立",
-      "id": "value:第23號樣本"
-    },
-    {
-      "type": "value",
-      "setting": "方院長外貌",
-      "value": "六十多歲，細框眼鏡，看起來比實際硬朗",
-      "note": "ch2確立",
-      "id": "value:方院長外貌"
-    },
-    {
-      "type": "value",
-      "setting": "研究院辦公室佈局",
-      "value": "顧則紀恆共用三樓東側，兩桌隔兩公尺面牆，紀恆靠窗",
-      "note": "ch2確立",
-      "id": "value:研究院辦公室佈局"
-    },
-    {
-      "type": "value",
-      "setting": "方院長辦公室位置",
-      "value": "四樓最裡面",
-      "note": "ch2確立",
-      "id": "value:方院長辦公室位置"
-    },
-    {
-      "type": "value",
-      "setting": "赫斯年齡",
-      "value": "60歲",
-      "note": "ch3確立",
-      "id": "value:赫斯年齡"
-    },
-    {
-      "type": "value",
-      "setting": "赫斯職稱",
-      "value": "心智安全理事會理事長",
-      "note": "ch3確立",
-      "id": "value:赫斯職稱"
-    },
-    {
-      "type": "value",
-      "setting": "全球消融累計人口",
-      "value": "超過120萬",
-      "note": "ch3確立（48小時新增37000例）",
-      "id": "value:全球消融累計人口"
-    },
-    {
-      "type": "chapter",
-      "number": 48,
-      "id": "chapter:ch48"
-    },
-    {
-      "type": "chapter",
-      "number": 37000,
-      "id": "chapter:ch37000"
-    },
-    {
-      "type": "value",
-      "setting": "每日新增消融人數",
-      "value": "超過7000人",
-      "note": "ch3確立",
-      "id": "value:每日新增消融人數"
-    },
+      "planted_in": [
+        1
+      ],
+      "hinted_in": [],
+      "resolved_in": []
+    }
+  },
+  "causal_chains": [
     {
-      "type": "value",
-      "setting": "東亞北歐佔比",
-      "value": "62%",
-      "note": "ch3確立",
-      "id": "value:東亞北歐佔比"
+      "cause": "1023次模擬皆出現文明病（技術越發展→個體越孤立→意義感崩塌）",
+      "cause_ch": "背景",
+      "effect": "沈逸放棄前兩階段即時監控，算力集中第三階段",
+      "effect_ch": "ch1"
     },
     {
-      "type": "value",
-      "setting": "赫斯三條標準",
-      "value": "①複雜度>0.73後有樣本未崩潰 ②統計顯著的初始條件修正 ③非預期現象獨立確認",
-      "note": "ch3確立",
-      "id": "value:赫斯三條標準"
+      "cause": "林昭明微調塵埃密度+0.7%",
+      "cause_ch": "ch1",
+      "effect": "第三階段提前11個模擬年啟動",
+      "effect_ch": "ch1"
     },
     {
-      "type": "value",
-      "setting": "剩餘迭代餘量",
-      "value": "76次（1100-1024）",
-      "note": "ch3確立",
-      "id": "value:剩餘迭代餘量"
+      "cause": "林昭明私開Level 4精度",
+      "cause_ch": "ch1",
+      "effect": "發現觀察者效應微偏移（Level 3不可見）",
+      "effect_ch": "ch1"
     },
     {
-      "type": "value",
-      "setting": "認知重置覆蓋半徑",
-      "value": "200公里",
-      "note": "ch3確立",
-      "id": "value:認知重置覆蓋半徑"
+      "cause": "第1024次模擬第三階段啟動",
+      "cause_ch": "ch1",
+      "effect": "異常標記0xFFFF出現",
+      "effect_ch": "ch1"
     },
     {
-      "type": "value",
-      "setting": "認知重置有效期",
-      "value": "18-24個月",
-      "note": "ch3確立",
-      "id": "value:認知重置有效期"
+      "cause": "沈逸三年未離開地下",
+      "cause_ch": "ch1",
+      "effect": "對陽光的生理反應是刺痛而非舒適",
+      "effect_ch": "ch1"
     },
     {
-      "type": "value",
-      "setting": "認知重置副作用",
-      "value": "前6個月記憶選擇性缺失（模糊化）",
-      "note": "ch3確立",
-      "id": "value:認知重置副作用"
+      "cause": "顧則四年研究37個文明崩潰模式",
+      "cause_ch": "背景",
+      "effect": "發現複雜度0.7334臨界點——所有文明在此處開始靜默衰退",
+      "effect_ch": "ch2"
     },
     {
-      "type": "value",
-      "setting": "認知重置西非試驗規模",
-      "value": "4個社區、12000人",
-      "note": "ch3確立",
-      "id": "value:認知重置西非試驗規模"
+      "cause": "顧則提交崩潰報告",
+      "cause_ch": "ch2",
+      "effect": "方院長引入「邊界條件」詮釋——崩潰模式可能源於系統外部約束",
+      "effect_ch": "ch2"
     },
     {
-      "type": "value",
-      "setting": "認知重置效果",
-      "value": "72小時內症狀消退、意義感指標回升至危機前80%",
-      "note": "ch3確立",
-      "id": "value:認知重置效果"
+      "cause": "方院長說「答案在提問前已寫好」",
+      "cause_ch": "ch2",
+      "effect": "顧則開始隱約感到世界的「恰到好處」不自然",
+      "effect_ch": "ch2"
     },
     {
-      "type": "value",
-      "setting": "赫斯丈夫漢斯消融時間",
-      "value": "4年前",
-      "note": "ch3確立（最早一批）",
-      "id": "value:赫斯丈夫漢斯消融時間"
+      "cause": "顧則觸碰南牆與北牆溫度相同",
+      "cause_ch": "ch2",
+      "effect": "模擬世界物理缺陷的第一次感知（但被合理化）",
+      "effect_ch": "ch2"
     },
     {
-      "type": "value",
-      "setting": "全息系統配置時間",
-      "value": "5年前",
-      "note": "ch3確立（赫斯批准經費時）",
-      "id": "value:全息系統配置時間"
+      "cause": "顧則入睡前閃過藍綠冷光中疲憊人影",
+      "cause_ch": "ch2",
+      "effect": "R線沈逸的形象滲漏進S線",
+      "effect_ch": "ch2"
     },
     {
-      "type": "value",
-      "setting": "沈逸連續工作時間",
-      "value": "31小時",
-      "note": "ch3確立",
-      "id": "value:沈逸連續工作時間"
+      "cause": "赫斯聽證會發言稿設定1100次為合理迭代上限",
+      "cause_ch": "背景",
+      "effect": "赫斯正式向沈逸下達第1100次迭代最後通牒",
+      "effect_ch": "ch3"
     },
     {
-      "type": "value",
-      "setting": "備餐區距螢幕牆",
-      "value": "約6公尺",
-      "note": "ch3確立",
-      "id": "value:備餐區距螢幕牆"
+      "cause": "西非認知重置試驗通過第三階段審查",
+      "cause_ch": "ch3",
+      "effect": "赫斯手中有「能用的替代方案」，壓縮沈逸研究時間",
+      "effect_ch": "ch3"
     },
     {
-      "type": "value",
-      "setting": "城邦1024-C-0712連結密度",
-      "value": "平均值1.3倍",
-      "note": "ch3確立（無統計顯著性）",
-      "id": "value:城邦1024-C-0712連結密度"
+      "cause": "0xFFFF異常標記出現於第1024次迭代",
+      "cause_ch": "ch1",
+      "effect": "沈逸以此為依據爭取繼續研究——「引擎自己說了」",
+      "effect_ch": "ch3"
     },
     {
-      "type": "value",
-      "setting": "經費協議數據同步條款",
-      "value": "第17條第3款，每24小時同步",
-      "note": "ch3確立",
-      "id": "value:經費協議數據同步條款"
+      "cause": "赫斯丈夫漢斯為最早一批消融患者",
+      "cause_ch": "背景",
+      "effect": "赫斯對消融有私人動機，推動認知重置部署",
+      "effect_ch": "ch3"
     },
     {
-      "type": "value",
-      "setting": "項目啟動時間",
-      "value": "5年前",
-      "note": "ch3確立（赫斯批准）",
-      "id": "value:項目啟動時間"
+      "cause": "赫斯下達1100次最後通牒",
+      "cause_ch": "ch3",
+      "effect": "沈逸剩餘76次迭代餘量（1100-1024）",
+      "effect_ch": "ch3"
     },
     {
-      "type": "value",
-      "setting": "顧則體溫",
-      "value": "36.5°C（21次測量，標準差為零）",
-      "note": "ch4確立：每天三次持續一週",
-      "id": "value:顧則體溫"
+      "cause": "方院長引入「邊界條件」概念 + 顧則牆壁溫度觀察",
+      "cause_ch": "ch2",
+      "effect": "顧則系統性記錄16條「異常觀察清單」，從被動注意轉為主動蒐證",
+      "effect_ch": "ch4"
     },
     {
-      "type": "value",
-      "setting": "顧則自然醒時間",
-      "value": "6:47",
-      "note": "ch4確立：連續至少三天同一分鐘",
-      "id": "value:顧則自然醒時間"
+      "cause": "顧則向同事分享異常觀察",
+      "cause_ch": "ch4",
+      "effect": "同事微妙疏遠——紀恆不再主動邀午飯、周琳腳步不放慢、蔡文斌延遲還資料",
+      "effect_ch": "ch4"
     },
     {
-      "type": "value",
-      "setting": "異常觀察清單條目數",
-      "value": "16條",
-      "note": "ch4確立：紙質筆記本記錄",
-      "id": "value:異常觀察清單條目數"
+      "cause": "顧則記錄16條接縫 + 夜間認知積累",
+      "cause_ch": "ch4",
+      "effect": "夢見深潛研究所走廊（R線場景滲入S線）",
+      "effect_ch": "ch4"
     },
     {
-      "type": "value",
-      "setting": "紙割傷痛感延遲",
-      "value": "0.5秒後開始，持續約4秒後線性衰減",
-      "note": "ch4確立",
-      "id": "value:紙割傷痛感延遲"
+      "cause": "夢中走廊溫度不均勻",
+      "cause_ch": "ch4",
+      "effect": "顧則意識到「那條走廊比這裡真實」",
+      "effect_ch": "ch4"
     },
     {
-      "type": "value",
-      "setting": "統計組同事",
-      "value": "周琳、蔡文斌",
-      "note": "ch4確立：與顧則紀恆同組",
-      "id": "value:統計組同事"
+      "cause": "同事疏遠 + 夢境經歷",
+      "cause_ch": "ch4",
+      "effect": "顧則開始覺得「自己不是這個世界的居民」",
+      "effect_ch": "ch4"
     }
   ],
-  "edges": [
+  "mirrors": [
     {
-      "type": "appears_in",
-      "source": "character:沈逸",
-      "target": "chapter:ch1"
+      "r_line": "沈逸站在觀測窗前",
+      "s_line": "顧則站在落地窗前看銀杏/走廊"
     },
     {
-      "type": "appears_in",
-      "source": "character:沈逸",
-      "target": "chapter:ch3"
+      "r_line": "赫斯最後通牒",
+      "s_line": "顧則覺醒加速崩潰"
     },
     {
-      "type": "appears_in",
-      "source": "character:沈逸",
-      "target": "chapter:ch5"
+      "r_line": "沈逸看到不均勻的真實世界",
+      "s_line": "顧則發現不均勻的冰晶"
     },
     {
-      "type": "appears_in",
-      "source": "character:沈逸",
-      "target": "chapter:ch7"
+      "r_line": "沈逸在藍綠冷光走廊中工作",
+      "s_line": "顧則夢見藍綠冷光走廊（深潛研究所滲漏）"
     },
     {
-      "type": "appears_in",
-      "source": "character:沈逸",
-      "target": "chapter:ch9"
-    },
-    {
-      "type": "appears_in",
-      "source": "character:沈逸",
-      "target": "chapter:ch10"
-    },
-    {
-      "type": "located_in",
-      "source": "chapter:ch1",
-      "target": "location:深潛研究所"
-    },
-    {
-      "type": "located_in",
-      "source": "chapter:ch1",
-      "target": "location:1024號模擬宇宙"
-    },
-    {
-      "type": "plants",
-      "source": "chapter:ch1",
-      "target": "foreshadow:④林昭明旋律"
-    },
-    {
-      "type": "plants",
-      "source": "chapter:ch1",
-      "target": "foreshadow:⑨觀察者效應"
-    },
-    {
-      "type": "plants",
-      "source": "chapter:ch1",
-      "target": "foreshadow:⑬異常標記0xFFFF"
-    },
-    {
-      "type": "located_in",
-      "source": "chapter:ch3",
-      "target": "location:深潛研究所"
-    },
-    {
-      "type": "plants",
-      "source": "chapter:ch3",
-      "target": "foreshadow:⑧赫斯德語"
-    },
-    {
-      "type": "located_in",
-      "source": "chapter:ch5",
-      "target": "location:深潛研究所"
-    },
-    {
-      "type": "plants",
-      "source": "chapter:ch5",
-      "target": "foreshadow:⑫煙霧彈(自我模擬)"
-    },
-    {
-      "type": "located_in",
-      "source": "chapter:ch7",
-      "target": "location:深潛研究所"
-    },
-    {
-      "type": "located_in",
-      "source": "chapter:ch7",
-      "target": "location:無感區（新北）"
-    },
-    {
-      "type": "plants",
-      "source": "chapter:ch7",
-      "target": "foreshadow:②粉筆樹"
-    },
-    {
-      "type": "plants",
-      "source": "chapter:ch7",
-      "target": "foreshadow:⑤何守一NeuLink"
-    },
-    {
-      "type": "located_in",
-      "source": "chapter:ch9",
-      "target": "location:無感區（新北）"
-    },
-    {
-      "type": "hints",
-      "source": "chapter:ch9",
-      "target": "foreshadow:②粉筆樹"
-    },
-    {
-      "type": "plants",
-      "source": "chapter:ch9",
-      "target": "foreshadow:⑩阮月河模擬親和力"
-    },
-    {
-      "type": "located_in",
-      "source": "chapter:ch10",
-      "target": "location:深潛研究所"
-    },
-    {
-      "type": "hints",
-      "source": "chapter:ch10",
-      "target": "foreshadow:⑤何守一NeuLink"
-    },
-    {
-      "type": "hints",
-      "source": "chapter:ch10",
-      "target": "foreshadow:⑨觀察者效應"
-    },
-    {
-      "type": "hints",
-      "source": "chapter:ch10",
-      "target": "foreshadow:⑫煙霧彈(自我模擬)"
-    },
-    {
-      "type": "appears_in",
-      "source": "character:林昭明",
-      "target": "chapter:ch1"
-    },
-    {
-      "type": "appears_in",
-      "source": "character:林昭明",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "appears_in",
-      "source": "character:林昭明",
-      "target": "chapter:ch5"
-    },
-    {
-      "type": "appears_in",
-      "source": "character:林昭明",
-      "target": "chapter:ch10"
-    },
-    {
-      "type": "appears_in",
-      "source": "character:赫斯",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "appears_in",
-      "source": "character:顧則",
-      "target": "chapter:ch2"
-    },
-    {
-      "type": "appears_in",
-      "source": "character:顧則",
-      "target": "chapter:ch4"
-    },
-    {
-      "type": "appears_in",
-      "source": "character:顧則",
-      "target": "chapter:ch6"
-    },
-    {
-      "type": "appears_in",
-      "source": "character:顧則",
-      "target": "chapter:ch8"
-    },
-    {
-      "type": "appears_in",
-      "source": "character:顧則",
-      "target": "chapter:ch10"
-    },
-    {
-      "type": "located_in",
-      "source": "chapter:ch2",
-      "target": "location:模擬世界-研究院"
-    },
-    {
-      "type": "plants",
-      "source": "chapter:ch2",
-      "target": "foreshadow:①牆壁溫度"
-    },
-    {
-      "type": "located_in",
-      "source": "chapter:ch4",
-      "target": "location:模擬世界-研究院"
-    },
-    {
-      "type": "hints",
-      "source": "chapter:ch4",
-      "target": "foreshadow:①牆壁溫度"
-    },
-    {
-      "type": "plants",
-      "source": "chapter:ch4",
-      "target": "foreshadow:⑥迭代者預知"
-    },
-    {
-      "type": "hints",
-      "source": "chapter:ch6",
-      "target": "foreshadow:①牆壁溫度"
-    },
-    {
-      "type": "hints",
-      "source": "chapter:ch6",
-      "target": "foreshadow:⑥迭代者預知"
-    },
-    {
-      "type": "plants",
-      "source": "chapter:ch6",
-      "target": "foreshadow:⑪迭代者家人"
-    },
-    {
-      "type": "hints",
-      "source": "chapter:ch8",
-      "target": "foreshadow:⑥迭代者預知"
-    },
-    {
-      "type": "appears_in",
-      "source": "character:紀恆",
-      "target": "chapter:ch2"
-    },
-    {
-      "type": "appears_in",
-      "source": "character:紀恆",
-      "target": "chapter:ch4"
-    },
-    {
-      "type": "appears_in",
-      "source": "character:紀恆",
-      "target": "chapter:ch6"
-    },
-    {
-      "type": "appears_in",
-      "source": "character:方院長",
-      "target": "chapter:ch2"
-    },
-    {
-      "type": "resolves",
-      "source": "chapter:ch40",
-      "target": "foreshadow:①牆壁溫度"
-    },
-    {
-      "type": "causes",
-      "source": "event:1023次模擬皆出現文明病（技術越發展→個體越孤立→意義感崩塌）",
-      "target": "event:沈逸放棄前兩階段即時監控，算力集中第三階段"
-    },
-    {
-      "type": "causes",
-      "source": "event:林昭明微調塵埃密度+0.7%",
-      "target": "event:第三階段提前11個模擬年啟動"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:林昭明微調塵埃密度+0.7%",
-      "target": "chapter:ch1"
-    },
-    {
-      "type": "causes",
-      "source": "event:林昭明私開Level 4精度",
-      "target": "event:發現觀察者效應微偏移（Level 3不可見）"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:林昭明私開Level 4精度",
-      "target": "chapter:ch1"
-    },
-    {
-      "type": "causes",
-      "source": "event:第1024次模擬第三階段啟動",
-      "target": "event:異常標記0xFFFF出現"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:第1024次模擬第三階段啟動",
-      "target": "chapter:ch1"
-    },
-    {
-      "type": "causes",
-      "source": "event:沈逸三年未離開地下",
-      "target": "event:對陽光的生理反應是刺痛而非舒適"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:沈逸三年未離開地下",
-      "target": "chapter:ch1"
-    },
-    {
-      "type": "causes",
-      "source": "event:顧則四年研究37個文明崩潰模式",
-      "target": "event:發現複雜度0.7334臨界點——所有文明在此處開始靜默衰退"
-    },
-    {
-      "type": "causes",
-      "source": "event:顧則提交崩潰報告",
-      "target": "event:方院長引入「邊界條件」詮釋——崩潰模式可能源於系統外部約束"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:顧則提交崩潰報告",
-      "target": "chapter:ch2"
-    },
-    {
-      "type": "causes",
-      "source": "event:方院長說「答案在提問前已寫好」",
-      "target": "event:顧則開始隱約感到世界的「恰到好處」不自然"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:方院長說「答案在提問前已寫好」",
-      "target": "chapter:ch2"
-    },
-    {
-      "type": "causes",
-      "source": "event:顧則觸碰南牆與北牆溫度相同",
-      "target": "event:模擬世界物理缺陷的第一次感知（但被合理化）"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:顧則觸碰南牆與北牆溫度相同",
-      "target": "chapter:ch2"
-    },
-    {
-      "type": "causes",
-      "source": "event:顧則入睡前閃過藍綠冷光中疲憊人影",
-      "target": "event:R線沈逸的形象滲漏進S線"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:顧則入睡前閃過藍綠冷光中疲憊人影",
-      "target": "chapter:ch2"
-    },
-    {
-      "type": "causes",
-      "source": "event:赫斯聽證會發言稿設定1100次為合理迭代上限",
-      "target": "event:赫斯正式向沈逸下達第1100次迭代最後通牒"
-    },
-    {
-      "type": "causes",
-      "source": "event:西非認知重置試驗通過第三階段審查",
-      "target": "event:赫斯手中有「能用的替代方案」，壓縮沈逸研究時間"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:西非認知重置試驗通過第三階段審查",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "causes",
-      "source": "event:0xFFFF異常標記出現於第1024次迭代",
-      "target": "event:沈逸以此為依據爭取繼續研究——「引擎自己說了」"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:0xFFFF異常標記出現於第1024次迭代",
-      "target": "chapter:ch1"
-    },
-    {
-      "type": "causes",
-      "source": "event:赫斯丈夫漢斯為最早一批消融患者",
-      "target": "event:赫斯對消融有私人動機，推動認知重置部署"
-    },
-    {
-      "type": "causes",
-      "source": "event:赫斯下達1100次最後通牒",
-      "target": "event:沈逸剩餘76次迭代餘量（1100-1024）"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:赫斯下達1100次最後通牒",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "causes",
-      "source": "event:方院長引入「邊界條件」概念 + 顧則牆壁溫度觀察",
-      "target": "event:顧則系統性記錄16條「異常觀察清單」，從被動注意轉為主動蒐證"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:方院長引入「邊界條件」概念 + 顧則牆壁溫度觀察",
-      "target": "chapter:ch2"
-    },
-    {
-      "type": "causes",
-      "source": "event:顧則向同事分享異常觀察",
-      "target": "event:同事微妙疏遠——紀恆不再主動邀午飯、周琳腳步不放慢、蔡文斌延遲還資料"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:顧則向同事分享異常觀察",
-      "target": "chapter:ch4"
-    },
-    {
-      "type": "causes",
-      "source": "event:顧則記錄16條接縫 + 夜間認知積累",
-      "target": "event:夢見深潛研究所走廊（R線場景滲入S線）"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:顧則記錄16條接縫 + 夜間認知積累",
-      "target": "chapter:ch4"
-    },
-    {
-      "type": "causes",
-      "source": "event:夢中走廊溫度不均勻",
-      "target": "event:顧則意識到「那條走廊比這裡真實」"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:夢中走廊溫度不均勻",
-      "target": "chapter:ch4"
-    },
-    {
-      "type": "causes",
-      "source": "event:同事疏遠 + 夢境經歷",
-      "target": "event:顧則開始覺得「自己不是這個世界的居民」"
-    },
-    {
-      "type": "occurs_in",
-      "source": "event:同事疏遠 + 夢境經歷",
-      "target": "chapter:ch4"
-    },
-    {
-      "type": "mirrors",
-      "source": "mirror_r:沈逸站在觀測窗前",
-      "target": "mirror_s:顧則站在落地窗前看銀杏/走廊"
-    },
-    {
-      "type": "mirrors",
-      "source": "mirror_r:赫斯最後通牒",
-      "target": "mirror_s:顧則覺醒加速崩潰"
-    },
-    {
-      "type": "mirrors",
-      "source": "mirror_r:沈逸看到不均勻的真實世界",
-      "target": "mirror_s:顧則發現不均勻的冰晶"
-    },
-    {
-      "type": "mirrors",
-      "source": "mirror_r:沈逸在藍綠冷光走廊中工作",
-      "target": "mirror_s:顧則夢見藍綠冷光走廊（深潛研究所滲漏）"
-    },
-    {
-      "type": "mirrors",
-      "source": "mirror_r:「你聽得見我嗎」",
-      "target": "mirror_s:「你聽得見我嗎」"
-    },
-    {
-      "type": "established_in",
-      "source": "value:林昭明年齡",
-      "target": "chapter:ch1"
-    },
-    {
-      "type": "established_in",
-      "source": "value:當前迭代次數",
-      "target": "chapter:ch1"
-    },
-    {
-      "type": "established_in",
-      "source": "value:沈逸未離開地下時間",
-      "target": "chapter:ch1"
-    },
-    {
-      "type": "established_in",
-      "source": "value:林昭明入隊時間",
-      "target": "chapter:ch1"
-    },
-    {
-      "type": "established_in",
-      "source": "value:自動記錄精度等級",
-      "target": "chapter:ch1"
-    },
-    {
-      "type": "established_in",
-      "source": "value:文明病臨界模式",
-      "target": "chapter:ch1023"
-    },
-    {
-      "type": "established_in",
-      "source": "value:第三階段提前量",
-      "target": "chapter:ch1024"
-    },
-    {
-      "type": "established_in",
-      "source": "value:複雜度臨界值",
-      "target": "chapter:ch2"
-    },
-    {
-      "type": "established_in",
-      "source": "value:複雜度臨界值",
-      "target": "chapter:ch37"
-    },
-    {
-      "type": "established_in",
-      "source": "value:複雜度指數定義",
-      "target": "chapter:ch2"
-    },
-    {
-      "type": "established_in",
-      "source": "value:顧則報告標題",
-      "target": "chapter:ch2"
-    },
-    {
-      "type": "established_in",
-      "source": "value:文明模型版本",
-      "target": "chapter:ch2"
-    },
-    {
-      "type": "established_in",
-      "source": "value:顧則紀恆共事時間",
-      "target": "chapter:ch2"
-    },
-    {
-      "type": "established_in",
-      "source": "value:回歸分析次數",
-      "target": "chapter:ch2"
-    },
-    {
-      "type": "established_in",
-      "source": "value:第7號樣本",
-      "target": "chapter:ch2"
-    },
-    {
-      "type": "established_in",
-      "source": "value:第15號樣本",
-      "target": "chapter:ch2"
-    },
-    {
-      "type": "established_in",
-      "source": "value:第23號樣本",
-      "target": "chapter:ch2"
-    },
-    {
-      "type": "established_in",
-      "source": "value:方院長外貌",
-      "target": "chapter:ch2"
-    },
-    {
-      "type": "established_in",
-      "source": "value:研究院辦公室佈局",
-      "target": "chapter:ch2"
-    },
-    {
-      "type": "established_in",
-      "source": "value:方院長辦公室位置",
-      "target": "chapter:ch2"
-    },
-    {
-      "type": "established_in",
-      "source": "value:赫斯年齡",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "established_in",
-      "source": "value:赫斯職稱",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "established_in",
-      "source": "value:全球消融累計人口",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "established_in",
-      "source": "value:全球消融累計人口",
-      "target": "chapter:ch48"
-    },
-    {
-      "type": "established_in",
-      "source": "value:全球消融累計人口",
-      "target": "chapter:ch37000"
-    },
-    {
-      "type": "established_in",
-      "source": "value:每日新增消融人數",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "established_in",
-      "source": "value:東亞北歐佔比",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "established_in",
-      "source": "value:赫斯三條標準",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "established_in",
-      "source": "value:剩餘迭代餘量",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "established_in",
-      "source": "value:認知重置覆蓋半徑",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "established_in",
-      "source": "value:認知重置有效期",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "established_in",
-      "source": "value:認知重置副作用",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "established_in",
-      "source": "value:認知重置西非試驗規模",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "established_in",
-      "source": "value:認知重置效果",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "established_in",
-      "source": "value:赫斯丈夫漢斯消融時間",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "established_in",
-      "source": "value:全息系統配置時間",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "established_in",
-      "source": "value:沈逸連續工作時間",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "established_in",
-      "source": "value:備餐區距螢幕牆",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "established_in",
-      "source": "value:城邦1024-C-0712連結密度",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "established_in",
-      "source": "value:經費協議數據同步條款",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "established_in",
-      "source": "value:項目啟動時間",
-      "target": "chapter:ch3"
-    },
-    {
-      "type": "established_in",
-      "source": "value:顧則體溫",
-      "target": "chapter:ch4"
-    },
-    {
-      "type": "established_in",
-      "source": "value:顧則自然醒時間",
-      "target": "chapter:ch4"
-    },
-    {
-      "type": "established_in",
-      "source": "value:異常觀察清單條目數",
-      "target": "chapter:ch4"
-    },
-    {
-      "type": "established_in",
-      "source": "value:紙割傷痛感延遲",
-      "target": "chapter:ch4"
-    },
-    {
-      "type": "established_in",
-      "source": "value:統計組同事",
-      "target": "chapter:ch4"
+      "r_line": "「你聽得見我嗎」",
+      "s_line": "「你聽得見我嗎」"
     }
-  ]
+  ],
+  "values": {
+    "研究所溫度": {
+      "value": "18°C",
+      "note": "R線環境（敘述中用「涼」「冷」）"
+    },
+    "研究所深度": {
+      "value": "地下42公尺",
+      "note": "陽明山北坡花崗岩層"
+    },
+    "研究所地面偽裝": {
+      "value": "廢棄溫泉旅館",
+      "note": "關了七年，招牌鏽蝕"
+    },
+    "控制室螢幕數": {
+      "value": "42塊子螢幕",
+      "note": "弧形陣列，半圓階梯佈局"
+    },
+    "創世引擎體積": {
+      "value": "三層樓高",
+      "note": "量子核心，藍綠冷卻液管路"
+    },
+    "模擬世界牆壁溫度": {
+      "value": "23°C",
+      "note": "S線異常（敘述中不說數字，用「一樣的涼」）"
+    },
+    "模擬速度(初始)": {
+      "value": "500年/小時",
+      "note": ""
+    },
+    "文明樣本數": {
+      "value": "37個",
+      "note": ""
+    },
+    "顧則年齡": {
+      "value": "32歲",
+      "note": ""
+    },
+    "林昭明年齡": {
+      "value": "32歲",
+      "note": "ch1確立"
+    },
+    "研究所人數": {
+      "value": "23人",
+      "note": ""
+    },
+    "赫斯期限": {
+      "value": "第1100次迭代",
+      "note": "敘述中用「即將用盡」而非精確倒數"
+    },
+    "當前迭代次數": {
+      "value": "1024",
+      "note": "ch1確立"
+    },
+    "沈逸未離開地下時間": {
+      "value": "3年",
+      "note": "ch1確立"
+    },
+    "林昭明入隊時間": {
+      "value": "5年前",
+      "note": "ch1確立"
+    },
+    "配餐週期": {
+      "value": "每6小時",
+      "note": "自動配餐系統，營養棒"
+    },
+    "空氣淨化層數": {
+      "value": "3層",
+      "note": ""
+    },
+    "自動記錄精度等級": {
+      "value": "Level 3（指令）/ Level 4（林昭明實際）",
+      "note": "ch1確立的上下級張力"
+    },
+    "文明病臨界模式": {
+      "value": "物質豐裕→連結斷裂→個體孤立→意義感崩塌",
+      "note": "1023次模擬的共同後半段走向"
+    },
+    "第三階段提前量": {
+      "value": "11個模擬年",
+      "note": "1024號相對歷史均值"
+    },
+    "異常標記ID": {
+      "value": "0xFFFF",
+      "note": "十六進制全F，系統「未定義」值"
+    },
+    "個體0447所在聚落": {
+      "value": "北半球河谷，67個虛擬個體",
+      "note": "展現美感萌芽行為"
+    },
+    "第847次模擬音樂體系": {
+      "value": "七聲音階",
+      "note": "創作個體最終完全孤立"
+    },
+    "複雜度臨界值": {
+      "value": "0.7334 ± 0.02",
+      "note": "ch2確立：37個文明在此複雜度指數開始靜默衰退，無一例外"
+    },
+    "複雜度指數定義": {
+      "value": "人口密度 × 資訊流量 × 技術迭代速度的複合指標",
+      "note": "ch2確立：顧則自定義指標"
+    },
+    "顧則報告標題": {
+      "value": "《文明崩潰的自相似結構：基於37個歷史樣本的數學分析》",
+      "note": "ch2確立"
+    },
+    "文明模型版本": {
+      "value": "v7.3",
+      "note": "ch2確立：顧則桌面資料夾名稱"
+    },
+    "顧則紀恆共事時間": {
+      "value": "3年",
+      "note": "ch2確立：共用辦公室三年"
+    },
+    "回歸分析次數": {
+      "value": "200多次",
+      "note": "ch2確立"
+    },
+    "第7號樣本": {
+      "value": "河谷文明，灌溉技術驅動，存續1600年",
+      "note": "ch2確立"
+    },
+    "第15號樣本": {
+      "value": "島鏈貿易聯盟，去中心化海洋商業，存續900年",
+      "note": "ch2確立"
+    },
+    "第23號樣本": {
+      "value": "高原軍事君主制，存續不到400年，技術迭代最快",
+      "note": "ch2確立"
+    },
+    "方院長外貌": {
+      "value": "六十多歲，細框眼鏡，看起來比實際硬朗",
+      "note": "ch2確立"
+    },
+    "研究院辦公室佈局": {
+      "value": "顧則紀恆共用三樓東側，兩桌隔兩公尺面牆，紀恆靠窗",
+      "note": "ch2確立"
+    },
+    "方院長辦公室位置": {
+      "value": "四樓最裡面",
+      "note": "ch2確立"
+    },
+    "赫斯年齡": {
+      "value": "60歲",
+      "note": "ch3確立"
+    },
+    "赫斯職稱": {
+      "value": "心智安全理事會理事長",
+      "note": "ch3確立"
+    },
+    "全球消融累計人口": {
+      "value": "超過120萬",
+      "note": "ch3確立（48小時新增37000例）"
+    },
+    "每日新增消融人數": {
+      "value": "超過7000人",
+      "note": "ch3確立"
+    },
+    "東亞北歐佔比": {
+      "value": "62%",
+      "note": "ch3確立"
+    },
+    "赫斯三條標準": {
+      "value": "①複雜度>0.73後有樣本未崩潰 ②統計顯著的初始條件修正 ③非預期現象獨立確認",
+      "note": "ch3確立"
+    },
+    "剩餘迭代餘量": {
+      "value": "76次（1100-1024）",
+      "note": "ch3確立"
+    },
+    "認知重置覆蓋半徑": {
+      "value": "200公里",
+      "note": "ch3確立"
+    },
+    "認知重置有效期": {
+      "value": "18-24個月",
+      "note": "ch3確立"
+    },
+    "認知重置副作用": {
+      "value": "前6個月記憶選擇性缺失（模糊化）",
+      "note": "ch3確立"
+    },
+    "認知重置西非試驗規模": {
+      "value": "4個社區、12000人",
+      "note": "ch3確立"
+    },
+    "認知重置效果": {
+      "value": "72小時內症狀消退、意義感指標回升至危機前80%",
+      "note": "ch3確立"
+    },
+    "赫斯丈夫漢斯消融時間": {
+      "value": "4年前",
+      "note": "ch3確立（最早一批）"
+    },
+    "全息系統配置時間": {
+      "value": "5年前",
+      "note": "ch3確立（赫斯批准經費時）"
+    },
+    "沈逸連續工作時間": {
+      "value": "31小時",
+      "note": "ch3確立"
+    },
+    "備餐區距螢幕牆": {
+      "value": "約6公尺",
+      "note": "ch3確立"
+    },
+    "城邦1024-C-0712連結密度": {
+      "value": "平均值1.3倍",
+      "note": "ch3確立（無統計顯著性）"
+    },
+    "經費協議數據同步條款": {
+      "value": "第17條第3款，每24小時同步",
+      "note": "ch3確立"
+    },
+    "項目啟動時間": {
+      "value": "5年前",
+      "note": "ch3確立（赫斯批准）"
+    },
+    "顧則體溫": {
+      "value": "36.5°C（21次測量，標準差為零）",
+      "note": "ch4確立：每天三次持續一週"
+    },
+    "顧則自然醒時間": {
+      "value": "6:47",
+      "note": "ch4確立：連續至少三天同一分鐘"
+    },
+    "異常觀察清單條目數": {
+      "value": "16條",
+      "note": "ch4確立：紙質筆記本記錄"
+    },
+    "紙割傷痛感延遲": {
+      "value": "0.5秒後開始，持續約4秒後線性衰減",
+      "note": "ch4確立"
+    },
+    "統計組同事": {
+      "value": "周琳、蔡文斌",
+      "note": "ch4確立：與顧則紀恆同組"
+    }
+  },
+  "concepts": {
+    "文明病": {
+      "introduced_in": 1
+    },
+    "創世引擎": {
+      "introduced_in": 1
+    },
+    "迭代（以迭代數計時）": {
+      "introduced_in": 1
+    },
+    "觀察者效應": {
+      "introduced_in": 1
+    },
+    "0xFFFF 異常標記": {
+      "introduced_in": 1
+    },
+    "模擬悼念": {
+      "introduced_in": 1
+    },
+    "靜默衰退": {
+      "introduced_in": 2
+    },
+    "複雜度指數 / 0.7334": {
+      "introduced_in": 2
+    },
+    "邊界條件": {
+      "introduced_in": 2
+    },
+    "消融": {
+      "introduced_in": 3
+    },
+    "心智安全理事會": {
+      "introduced_in": 3
+    },
+    "認知重置": {
+      "introduced_in": 3
+    },
+    "全息通訊": {
+      "introduced_in": 3
+    },
+    "失聯症": {
+      "introduced_in": null
+    },
+    "記憶肥大症": {
+      "introduced_in": null
+    },
+    "意義缺乏症": {
+      "introduced_in": null
+    },
+    "時間飢餓症": {
+      "introduced_in": null
+    },
+    "NeuLink": {
+      "introduced_in": null
+    },
+    "虛境商城": {
+      "introduced_in": null
+    },
+    "歸零運動": {
+      "introduced_in": null
+    },
+    "鏡像集團": {
+      "introduced_in": null
+    },
+    "無感區": {
+      "introduced_in": null
+    }
+  }
 }

@@ -10,11 +10,11 @@
 ```
 write_ai_agent/                    ← plugin 本體
 ├── .claude-plugin/plugin.json     ← plugin 定義
-├── agents/                        ← 工具限制的 sub-agents（全部 Write only）
-│   ├── chapter-writer.md          → 章節生成（不能讀檔，防止跨線汙染）
-│   ├── progress-updater.md        → 更新 story_log + story_graph
-│   ├── volume-planner.md          → 每卷開始前生成章級 beat sheet
-│   └── arc-reviewer.md            → 每卷結束後回顧 + 更新設計文件
+├── agents/                        ← sub-agents（工具限制各異）
+│   ├── chapter-writer.md          → Write only（不能讀檔，防止跨線汙染）
+│   ├── progress-updater.md        → Read + Write（讀章節 + story_graph.json）
+│   ├── volume-planner.md          → Read + Write + Glob（讀設計文件，輸出 YAML）
+│   └── arc-reviewer.md            → Read + Write + Glob（弧線回顧 + 更新設計文件）
 ├── skills/                        ← 主 agent 的工作流 skills
 │   ├── novel-writing/             → 入口 + pipeline
 │   ├── novel-chapter/             → 寫作哲學
@@ -27,8 +27,7 @@ write_ai_agent/                    ← plugin 本體
 └── scripts/                       ← Python 工具
     ├── assemble_context.py        → 三路召回（結構化 + 圖譜 + 語義）
     ├── index_chapter.py           → 章節 → ChromaDB 索引
-    ├── sync_graph.py              → story_graph.md → NetworkX JSON
-    ├── story_graph_nx.py          → NetworkX 圖結構 + 查詢 API
+    ├── story_graph_nx.py          → NetworkX 圖結構 + 查詢 API（扁平 JSON 格式）
     └── semantic_search.py         → ChromaDB 語義查詢
 ```
 
@@ -97,4 +96,4 @@ Stage 4 組裝 → 完整小說
   - plugin 快取已 symlink 到本地 repo，不需要 push/reinstall
 - **發佈更新**: `git push` → 其他機器用 `/plugins update novel-agents`
 - **Embedding model**: ChromaDB 使用 `BAAI/bge-small-zh-v1.5`（中文專用）
-- **圖資料庫**: NetworkX（`runtime/story_graph.json`），從 `story_graph.md` 同步
+- **圖資料庫**: NetworkX（`runtime/story_graph.json`，扁平 JSON 格式，由 progress-updater 直接更新）

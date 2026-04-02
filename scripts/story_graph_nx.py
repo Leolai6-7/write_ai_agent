@@ -37,6 +37,187 @@ class StoryGraph:
         with open(self.path, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
 
+    def load_flat(self, flat_data: dict) -> dict:
+        """Build graph from flat JSON format (produced by progress-updater agent)."""
+        self.G.clear()
+        stats = {"nodes": 0, "edges": 0}
+
+        # Characters
+        for name, info in (flat_data.get("characters") or {}).items():
+            char_id = f"character:{name}"
+            self.G.add_node(char_id, type="character", name=name,
+                           events=info.get("events", ""))
+            stats["nodes"] += 1
+            for ch_num in info.get("chapters", []):
+                ch_id = f"chapter:ch{ch_num}"
+                if not self.G.has_node(ch_id):
+                    self.G.add_node(ch_id, type="chapter", number=ch_num)
+                    stats["nodes"] += 1
+                self.G.add_edge(char_id, ch_id, type="appears_in")
+                stats["edges"] += 1
+
+        # Locations
+        for loc, info in (flat_data.get("locations") or {}).items():
+            loc_id = f"location:{loc}"
+            self.G.add_node(loc_id, type="location", name=loc,
+                           description=info.get("description", ""))
+            stats["nodes"] += 1
+            for ch_num in info.get("chapters", []):
+                ch_id = f"chapter:ch{ch_num}"
+                if not self.G.has_node(ch_id):
+                    self.G.add_node(ch_id, type="chapter", number=ch_num)
+                    stats["nodes"] += 1
+                self.G.add_edge(ch_id, loc_id, type="located_in")
+                stats["edges"] += 1
+
+        # Foreshadowing
+        for name, info in (flat_data.get("foreshadowing") or {}).items():
+            fs_id = f"foreshadow:{name}"
+            self.G.add_node(fs_id, type="foreshadow", name=name,
+                           status=info.get("status", ""))
+            stats["nodes"] += 1
+            for ch_num in info.get("planted_in", []):
+                ch_id = f"chapter:ch{ch_num}"
+                if not self.G.has_node(ch_id):
+                    self.G.add_node(ch_id, type="chapter", number=ch_num)
+                    stats["nodes"] += 1
+                self.G.add_edge(ch_id, fs_id, type="plants")
+                stats["edges"] += 1
+            for ch_num in info.get("hinted_in", []):
+                ch_id = f"chapter:ch{ch_num}"
+                if not self.G.has_node(ch_id):
+                    self.G.add_node(ch_id, type="chapter", number=ch_num)
+                    stats["nodes"] += 1
+                self.G.add_edge(ch_id, fs_id, type="hints")
+                stats["edges"] += 1
+            for ch_num in info.get("resolved_in", []):
+                ch_id = f"chapter:ch{ch_num}"
+                if not self.G.has_node(ch_id):
+                    self.G.add_node(ch_id, type="chapter", number=ch_num)
+                    stats["nodes"] += 1
+                self.G.add_edge(ch_id, fs_id, type="resolves")
+                stats["edges"] += 1
+
+        # Causal chains
+        for chain in flat_data.get("causal_chains") or []:
+            cause = chain.get("cause", "")
+            effect = chain.get("effect", "")
+            cause_ch = chain.get("cause_ch", "")
+            effect_ch = chain.get("effect_ch", "")
+            cause_id = f"event:{cause}"
+            effect_id = f"event:{effect}"
+            if not self.G.has_node(cause_id):
+                self.G.add_node(cause_id, type="event", description=cause, chapter=str(cause_ch))
+                stats["nodes"] += 1
+            if not self.G.has_node(effect_id):
+                self.G.add_node(effect_id, type="event", description=effect, chapter=str(effect_ch))
+                stats["nodes"] += 1
+            self.G.add_edge(cause_id, effect_id, type="causes")
+            stats["edges"] += 1
+
+        # Mirrors
+        for m in flat_data.get("mirrors") or []:
+            r_desc = m.get("r_line", "")
+            s_desc = m.get("s_line", "")
+            r_id = f"mirror_r:{r_desc}"
+            s_id = f"mirror_s:{s_desc}"
+            if not self.G.has_node(r_id):
+                self.G.add_node(r_id, type="mirror", line="R", description=r_desc)
+                stats["nodes"] += 1
+            if not self.G.has_node(s_id):
+                self.G.add_node(s_id, type="mirror", line="S", description=s_desc)
+                stats["nodes"] += 1
+            self.G.add_edge(r_id, s_id, type="mirrors")
+            stats["edges"] += 1
+
+        # Values
+        for setting, info in (flat_data.get("values") or {}).items():
+            val_id = f"value:{setting}"
+            self.G.add_node(val_id, type="value", setting=setting,
+                           value=info.get("value", ""), note=info.get("note", ""))
+            stats["nodes"] += 1
+
+        return stats
+
+    def to_flat(self) -> dict:
+        """Export graph to flat JSON format (for agent consumption)."""
+        flat = {
+            "characters": {},
+            "locations": {},
+            "foreshadowing": {},
+            "causal_chains": [],
+            "mirrors": [],
+            "values": {},
+            "concepts": {},
+        }
+
+        for node_id, data in self.G.nodes(data=True):
+            ntype = data.get("type", "")
+            if ntype == "character":
+                name = data.get("name", "")
+                chapters = sorted(
+                    self.G.nodes[t].get("number", 0)
+                    for _, t, ed in self.G.edges(node_id, data=True)
+                    if ed.get("type") == "appears_in"
+                )
+                flat["characters"][name] = {
+                    "chapters": chapters,
+                    "events": data.get("events", ""),
+                }
+            elif ntype == "location":
+                name = data.get("name", "")
+                chapters = sorted(
+                    self.G.nodes[s].get("number", 0)
+                    for s, _, ed in self.G.in_edges(node_id, data=True)
+                    if ed.get("type") == "located_in"
+                )
+                flat["locations"][name] = {
+                    "chapters": chapters,
+                    "description": data.get("description", ""),
+                }
+            elif ntype == "foreshadow":
+                name = data.get("name", "")
+                plants, hints, resolves = [], [], []
+                for s, _, ed in self.G.in_edges(node_id, data=True):
+                    ch_num = self.G.nodes[s].get("number", 0)
+                    if ed.get("type") == "plants":
+                        plants.append(ch_num)
+                    elif ed.get("type") == "hints":
+                        hints.append(ch_num)
+                    elif ed.get("type") == "resolves":
+                        resolves.append(ch_num)
+                flat["foreshadowing"][name] = {
+                    "status": data.get("status", ""),
+                    "planted_in": sorted(plants),
+                    "hinted_in": sorted(hints),
+                    "resolved_in": sorted(resolves),
+                }
+            elif ntype == "value":
+                flat["values"][data.get("setting", "")] = {
+                    "value": data.get("value", ""),
+                    "note": data.get("note", ""),
+                }
+
+        # Causal chains
+        for u, v, ed in self.G.edges(data=True):
+            if ed.get("type") == "causes":
+                flat["causal_chains"].append({
+                    "cause": self.G.nodes[u].get("description", u),
+                    "cause_ch": self.G.nodes[u].get("chapter", ""),
+                    "effect": self.G.nodes[v].get("description", v),
+                    "effect_ch": self.G.nodes[v].get("chapter", ""),
+                })
+
+        # Mirrors
+        for u, v, ed in self.G.edges(data=True):
+            if ed.get("type") == "mirrors":
+                flat["mirrors"].append({
+                    "r_line": self.G.nodes[u].get("description", u),
+                    "s_line": self.G.nodes[v].get("description", v),
+                })
+
+        return flat
+
     def sync_from_markdown(self, md_path: Path) -> dict:
         """Build graph from story_graph.md. Returns stats."""
         text = md_path.read_text(encoding="utf-8")

@@ -11,6 +11,7 @@ Usage:
         --chapter 2
 """
 
+import json
 import re
 from pathlib import Path
 
@@ -228,16 +229,19 @@ def check_graph_conditions(story_dir: Path, characters: list[str], chapter_num: 
     result = {"needed": False, "numerical_values": "", "graph_context": ""}
 
     if not json_path.exists():
-        md_path = story_dir / "runtime" / "story_graph.md"
-        if md_path.exists():
-            graph = StoryGraph(json_path)
-            graph.sync_from_markdown(md_path)
-            graph.save()
-        else:
-            return result
+        return result
 
     graph = StoryGraph(json_path)
-    graph.load()
+
+    # Try flat JSON format first, fall back to node_link_data
+    with open(json_path, encoding="utf-8") as f:
+        raw = json.load(f)
+    if "characters" in raw:
+        # Flat format (produced by progress-updater agent)
+        graph.load_flat(raw)
+    else:
+        # Legacy node_link_data format
+        graph.load()
 
     sections = []
 
@@ -309,16 +313,34 @@ def check_graph_conditions(story_dir: Path, characters: list[str], chapter_num: 
 
 
 def get_concept_tracking(story_dir: Path) -> str:
-    """Read concept introduction tracking table from story_graph."""
-    graph_path = story_dir / "runtime" / "story_graph.md"
-    if not graph_path.exists():
+    """Read concept introduction tracking from story_graph.json (or legacy .md)."""
+    json_path = story_dir / "runtime" / "story_graph.json"
+
+    # Try JSON first (flat format has "concepts" key)
+    if json_path.exists():
+        with open(json_path, encoding="utf-8") as f:
+            raw = json.load(f)
+        concepts = raw.get("concepts")
+        if concepts:
+            lines = ["Concepts NOT yet introduced to the reader (introduce naturally when first used):"]
+            found_any = False
+            for name, info in concepts.items():
+                if info.get("introduced_in") is None:
+                    lines.append(f"  ⚠ {name}")
+                    found_any = True
+            if not found_any:
+                return "All concepts have been introduced to the reader."
+            return "\n".join(lines)
+
+    # Legacy fallback: read from story_graph.md
+    md_path = story_dir / "runtime" / "story_graph.md"
+    if not md_path.exists():
         return "N/A"
-    text = graph_path.read_text(encoding="utf-8")
+    text = md_path.read_text(encoding="utf-8")
     section = extract_section(text, "概念引入追蹤", "## ")
     if not section:
         return "N/A"
 
-    # Extract just the not-yet-introduced concepts
     lines = ["Concepts NOT yet introduced to the reader (introduce naturally when first used):"]
     found_any = False
     for line in section.split("\n"):

@@ -227,34 +227,30 @@ If NEW_CHARACTERS reported, main agent appends to character_cast.md.
 
 **STEP 3 — Update Progress + Graph**
 
-Main agent reads chapter + current log + current graph, then launches
-**progress-updater plugin agent** (Write only):
+Launch **progress-updater plugin agent** (has Read + Write):
 
 ```
 subagent_type: novel-agents:progress-updater
 ```
 
-Paste ALL content into the prompt:
+Prompt (agent reads files itself):
 
-> === CHAPTER TEXT ===
-> {full content of chapter_{NNN}.md}
->
-> === CURRENT STORY LOG ===
-> {full content of runtime/story_log.md}
->
-> === CURRENT STORY GRAPH ===
-> {full content of runtime/story_graph.md}
->
+> Story directory: {STORY_DIR}
 > Chapter {N}: {title}
-> Update both files based on what happened in the chapter.
 >
+> Read these files:
+> - {STORY_DIR}/outputs/chapter_{NNN}.md (the chapter just written)
+> - {STORY_DIR}/runtime/story_log.md (current progress)
+> - {STORY_DIR}/runtime/story_graph.json (current graph — flat JSON format)
+>
+> Update both files based on what happened in the chapter.
 > Write updated story_log to: /tmp/story_log_updated.md
-> Write updated story_graph to: /tmp/story_graph_updated.md
+> Write updated story_graph to: /tmp/story_graph_updated.json
 
 After agent completes, main agent:
 1. Copies /tmp/story_log_updated.md → {STORY_DIR}/runtime/story_log.md
-2. Copies /tmp/story_graph_updated.md → {STORY_DIR}/runtime/story_graph.md
-3. Hook auto-triggers post-processing (index + sync)
+2. Copies /tmp/story_graph_updated.json → {STORY_DIR}/runtime/story_graph.json
+3. Hook auto-triggers post-processing (ChromaDB index)
 
 ---
 
