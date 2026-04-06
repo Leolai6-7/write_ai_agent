@@ -70,7 +70,7 @@ def parse_md_table(text: str, section_heading: str) -> list[dict]:
     next_heading = re.search(r"^##\s", rest, re.MULTILINE)
     section_text = rest[:next_heading.start()] if next_heading else rest
 
-    lines = [l.strip() for l in section_text.strip().split("\n") if l.strip()]
+    lines = [line.strip() for line in section_text.strip().split("\n") if line.strip()]
 
     # Need at least header + separator + 1 data row
     if len(lines) < 3:

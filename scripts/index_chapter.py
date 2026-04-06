@@ -70,7 +70,7 @@ def main():
     if not entry or not entry["summary"]:
         if chapter_file.exists():
             first_lines = chapter_file.read_text(encoding="utf-8").split("\n")[:5]
-            title_line = next((l for l in first_lines if l.strip()), "")
+            title_line = next((line for line in first_lines if line.strip()), "")
             entry = {
                 "title": title_line.strip("# ").strip(),
                 "summary": f"第{chapter_num}章",
