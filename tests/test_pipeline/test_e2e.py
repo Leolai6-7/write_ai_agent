@@ -1,17 +1,12 @@
 """End-to-end tests using mock LLM for multi-chapter pipeline validation."""
 
-import json
 import pytest
 
-from config.models import ChapterObjective, ChapterSummary, ChapterContext
+from config.models import ChapterObjective, ChapterSummary
 from infrastructure.db import Database
 from memory.memory_manager import MemoryManager
 from memory.retrieval import SemanticRetriever
-from pipeline.chapter_graph import build_chapter_graph, ChapterState, ChapterGraphBuilder
-from agents.chapter_generator import ChapterGeneratorAgent
-from agents.judge_agent import JudgeAgent
-from agents.rewrite_agent import RewriteAgent
-from agents.summarizer import SummarizerAgent
+from pipeline.chapter_graph import build_chapter_graph
 from tests.conftest import MockLLMClient
 
 

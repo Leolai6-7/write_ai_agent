@@ -2,9 +2,7 @@
 
 from __future__ import annotations
 
-import json
 from typing import Type
-from pathlib import Path
 
 import pytest
 from pydantic import BaseModel

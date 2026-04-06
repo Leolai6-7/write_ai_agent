@@ -85,7 +85,7 @@ class WorldState:
 
         magic = self._world.get("magic_system", {})
         if magic:
-            lines.append(f"\n### 魔法體系")
+            lines.append("\n### 魔法體系")
             if "source" in magic:
                 lines.append(f"來源：{magic['source']}")
             for rule in magic.get("rules", []):

@@ -10,7 +10,7 @@ from rich.console import Console
 from rich.table import Table
 
 from config.settings import NovelConfig
-from config.models import VolumeSpec, ChapterObjective
+from config.models import ChapterObjective
 from pipeline.orchestrator import NovelOrchestrator
 
 app = typer.Typer(help="AI 小說家寫作系統 v2.0")

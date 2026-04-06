@@ -9,7 +9,7 @@ from pathlib import Path
 
 from langgraph.checkpoint.memory import MemorySaver
 
-from config.models import VolumeSpec, ArcSpec, ChapterObjective, WorldBible, CharacterCast
+from config.models import VolumeSpec, ArcSpec, ChapterObjective
 from config.settings import NovelConfig
 from agents.volume_architect import VolumeArchitectAgent
 from agents.arc_planner import ArcPlannerAgent

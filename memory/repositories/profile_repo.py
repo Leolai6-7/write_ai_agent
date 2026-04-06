@@ -35,7 +35,6 @@ class ProfileRepository:
         self.db.conn.commit()
 
     def save_cast(self, cast: "CharacterCast") -> None:
-        from config.models import CharacterCast
         for char in cast.characters:
             self.save(char)
 

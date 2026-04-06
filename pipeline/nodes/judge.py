@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from config.models import JudgementResult
 from infrastructure.errors import node_handler
 from agents.judge_agent import JudgeAgent
 from memory.memory_manager import MemoryManager

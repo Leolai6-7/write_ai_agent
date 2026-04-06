@@ -2,7 +2,7 @@
 
 import pytest
 
-from config.models import ChapterSummary, ChapterObjective, CharacterState
+from config.models import ChapterSummary, ChapterObjective
 from infrastructure.db import Database
 from memory.memory_manager import MemoryManager
 from tests.conftest import MockLLMClient

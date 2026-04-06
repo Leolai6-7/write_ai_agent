@@ -8,7 +8,7 @@ from __future__ import annotations
 import json
 from typing import TYPE_CHECKING
 
-from config.models import ChapterContext, ChapterObjective, ChapterSummary, CharacterState
+from config.models import ChapterContext, ChapterObjective, ChapterSummary
 from infrastructure.logger import get_logger
 from memory.repositories import SummaryRepository, CharacterRepository, ThreadRepository, CompressedRepository
 from memory.token_budget import TokenBudget

@@ -2,7 +2,6 @@
 
 from config.models import JudgementResult
 from agents.base_agent import BaseAgent
-from tests.conftest import MockLLMClient
 
 
 class DummyAgent(BaseAgent):

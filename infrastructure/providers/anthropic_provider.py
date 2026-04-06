@@ -3,9 +3,7 @@
 from __future__ import annotations
 
 import json
-from typing import Type
 
-from pydantic import BaseModel
 
 from infrastructure.providers.base import LLMProvider
 
