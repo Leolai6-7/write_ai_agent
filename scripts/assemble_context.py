@@ -18,8 +18,7 @@ from pathlib import Path
 import yaml
 
 from _common import (
-    get_args, get_retriever, extract_section, extract_sections_from_files,
-    parse_md_table, PROJECT_ROOT,
+    get_args, get_retriever, extract_section,
 )
 
 # --- Thread number mapping (shared by YAML and legacy markdown) ---

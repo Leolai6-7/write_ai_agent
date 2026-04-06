@@ -9,7 +9,7 @@ Usage:
 
 from pathlib import Path
 
-from _common import get_args, get_retriever, json_output, json_error
+from _common import get_args, get_retriever, json_output
 
 
 def main():

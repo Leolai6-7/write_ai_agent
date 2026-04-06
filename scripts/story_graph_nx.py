@@ -11,7 +11,7 @@ from pathlib import Path
 import networkx as nx
 from networkx.readwrite import json_graph
 
-from _common import parse_md_table, PROJECT_ROOT
+from _common import parse_md_table
 
 
 class StoryGraph:
