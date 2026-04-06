@@ -3,9 +3,13 @@
 from __future__ import annotations
 
 import json
+from typing import TYPE_CHECKING
 
 from config.models import CharacterProfile
 from infrastructure.db import Database
+
+if TYPE_CHECKING:
+    from config.models import CharacterCast
 
 
 class ProfileRepository:

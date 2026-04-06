@@ -3,9 +3,12 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import Type
+from typing import TYPE_CHECKING, Type
 
 from pydantic import BaseModel
+
+if TYPE_CHECKING:
+    from infrastructure.llm_client import TokenUsage
 
 
 class LLMProvider(ABC):

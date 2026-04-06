@@ -36,5 +36,5 @@ def test_database_insert_and_query(tmp_db):
 
 def test_database_creates_parent_dirs(tmp_path):
     deep_path = tmp_path / "a" / "b" / "c" / "test.db"
-    with Database(deep_path) as db:
+    with Database(deep_path) as _db:
         assert deep_path.exists()
