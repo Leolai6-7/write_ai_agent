@@ -404,10 +404,6 @@ def main():
     for plan_file in sorted((story_dir / "planning").glob("arc_plan_*.md")):
         all_beat_text += "\n" + plan_file.read_text(encoding="utf-8")
 
-    # Read always-needed files
-    brief_path = story_dir / "planning" / "story_brief.md"
-    brief_text = brief_path.read_text(encoding="utf-8") if brief_path.exists() else ""
-
     recent_log = get_recent_log_entries(story_dir)
 
     # Build navigation references (agent reads files itself)
@@ -437,7 +433,7 @@ def main():
 
     # === Path 3: Semantic search ===
     query = f"{beat['objective']} {beat['key_events']}"
-    semantic_results = do_semantic_search(story_dir, query)
+    do_semantic_search(story_dir, query)  # side-effect: warms ChromaDB cache
 
     # === Previous chapter ending ===
     prev_ending = get_previous_chapter_ending(story_dir, chapter_num, beat["line"], all_beat_text)
@@ -447,12 +443,6 @@ def main():
 
     # === Dual-line awareness ===
     dual_line = get_dual_line_info(story_dir, beat["line"])
-
-    # === Extract prose style from brief ===
-    prose_style = ""
-    style_match = re.search(r"\*\*散文風格\*\*[：:]\s*(.+?)(?=\n-|\n\n|\Z)", brief_text, re.DOTALL)
-    if style_match:
-        prose_style = style_match.group(1).strip()
 
     # === Format output ===
     package = f"""=== CHAPTER CONTEXT PACKAGE — Chapter {chapter_num}: {beat['title']} ===
