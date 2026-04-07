@@ -49,48 +49,6 @@ def json_error(msg: str) -> None:
     sys.exit(1)
 
 
-def parse_md_table(text: str, section_heading: str) -> list[dict]:
-    """Parse a markdown table under a given heading into list of dicts.
-
-    Args:
-        text: Full markdown file content
-        section_heading: The heading to search for (e.g., "## 角色出場表")
-
-    Returns:
-        List of dicts keyed by column headers
-    """
-    # Find the section
-    pattern = rf"^{re.escape(section_heading)}\s*$"
-    match = re.search(pattern, text, re.MULTILINE)
-    if not match:
-        return []
-
-    # Extract lines after heading until next heading or end
-    rest = text[match.end():]
-    next_heading = re.search(r"^##\s", rest, re.MULTILINE)
-    section_text = rest[:next_heading.start()] if next_heading else rest
-
-    lines = [line.strip() for line in section_text.strip().split("\n") if line.strip()]
-
-    # Need at least header + separator + 1 data row
-    if len(lines) < 3:
-        return []
-
-    # Parse header
-    headers = [h.strip() for h in lines[0].split("|") if h.strip()]
-
-    # Skip separator line (lines[1])
-    rows = []
-    for line in lines[2:]:
-        if not line.startswith("|"):
-            break
-        cells = [c.strip() for c in line.split("|") if c.strip()]
-        if len(cells) >= len(headers):
-            rows.append(dict(zip(headers, cells[:len(headers)])))
-
-    return rows
-
-
 def extract_section(text: str, name: str, heading_level: str = "## ") -> str:
     """Extract a full section from markdown by searching for a name in headings.
 
@@ -124,14 +82,3 @@ def extract_section(text: str, name: str, heading_level: str = "## ") -> str:
     return text[start:end].strip()
 
 
-def extract_sections_from_files(files: list[Path], name: str, heading_level: str = "## ") -> str:
-    """Search multiple files for sections matching a name, combine results."""
-    results = []
-    for f in files:
-        if not f.exists():
-            continue
-        text = f.read_text(encoding="utf-8")
-        section = extract_section(text, name, heading_level)
-        if section:
-            results.append(section)
-    return "\n\n".join(results)
