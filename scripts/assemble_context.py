@@ -18,7 +18,7 @@ from pathlib import Path
 import yaml
 
 from _common import (
-    get_args, get_retriever, extract_section,
+    get_args, extract_section,
 )
 
 # --- Thread number mapping (shared by YAML and legacy markdown) ---
@@ -356,26 +356,6 @@ def get_concept_tracking(story_dir: Path) -> str:
     return "\n".join(lines)
 
 
-def do_semantic_search(story_dir: Path, query: str) -> str:
-    """Run semantic search if ChromaDB has indexed chapters."""
-    chroma_dir = story_dir / "chroma"
-    if not chroma_dir.exists():
-        return "N/A — no indexed chapters yet"
-    try:
-        retriever = get_retriever(story_dir)
-        if retriever.get_count() == 0:
-            return "N/A — no indexed chapters yet"
-        results = retriever.query(query_text=query, n_results=3, max_distance=1.0)
-        if not results:
-            return "N/A — no relevant results"
-        lines = []
-        for r in results:
-            lines.append(f"Chapter {r['chapter_id']} (distance: {r['distance']:.3f}): {r['summary']}")
-        return "\n".join(lines)
-    except Exception as e:
-        return f"N/A — error: {e}"
-
-
 def main():
     args = get_args(
         ("--chapter", {"type": int, "required": True}),
@@ -430,10 +410,6 @@ def main():
         if name:
             foreshadow_names_for_graph.append(name)
     graph_data = check_graph_conditions(story_dir, beat["characters"], chapter_num, foreshadow_names_for_graph)
-
-    # === Path 3: Semantic search ===
-    query = f"{beat['objective']} {beat['key_events']}"
-    do_semantic_search(story_dir, query)  # side-effect: warms ChromaDB cache
 
     # === Previous chapter ending ===
     prev_ending = get_previous_chapter_ending(story_dir, chapter_num, beat["line"], all_beat_text)
