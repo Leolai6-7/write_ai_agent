@@ -198,14 +198,6 @@ class CharacterState(BaseModel):
     last_appeared: int = 0
 
 
-class UnresolvedThread(BaseModel):
-    """A story thread that hasn't been resolved yet."""
-    description: str
-    introduced_chapter: int
-    resolved_chapter: int | None = None
-    related_characters: list[str] = Field(default_factory=list)
-
-
 # ── Story Bible Update ──────────────────────────────────────────
 
 class StoryBibleUpdate(BaseModel):
