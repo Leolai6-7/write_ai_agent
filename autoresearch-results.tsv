@@ -1,0 +1,8 @@
+iteration	commit	metric	delta	status	description
+0	-	9	0	baseline	initial state: 9 ruff errors in scripts/
+1	00801b1	4	-5	keep	auto-fix 5 unused imports (F401)
+2	a411a33	2	-2	keep	fix E741 ambiguous variable 'l' -> 'line' in 2 files
+3	1571030	0	-2	keep	fix F841 unused vars (semantic_results, prose_style, brief_text)
+4	14aaa0d	23	-61	keep	auto-fix 61 unused imports across full codebase
+5	87a08fd	3	-20	keep	add __all__ to 5 __init__.py files (20 F401 re-export errors)
+6	24c7cc0	0	-3	keep	fix F821 (TYPE_CHECKING imports) + F841 (unused var in test)

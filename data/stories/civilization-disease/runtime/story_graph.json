@@ -589,5 +589,72 @@
       "note": "ch4確立：與顧則紀恆同組"
     }
   },
-  "concepts": {}
+  "concepts": {
+    "文明病": {
+      "introduced_in": 1
+    },
+    "創世引擎": {
+      "introduced_in": 1
+    },
+    "迭代（以迭代數計時）": {
+      "introduced_in": 1
+    },
+    "觀察者效應": {
+      "introduced_in": 1
+    },
+    "0xFFFF 異常標記": {
+      "introduced_in": 1
+    },
+    "模擬悼念": {
+      "introduced_in": 1
+    },
+    "靜默衰退": {
+      "introduced_in": 2
+    },
+    "複雜度指數 / 0.7334": {
+      "introduced_in": 2
+    },
+    "邊界條件": {
+      "introduced_in": 2
+    },
+    "消融": {
+      "introduced_in": 3
+    },
+    "心智安全理事會": {
+      "introduced_in": 3
+    },
+    "認知重置": {
+      "introduced_in": 3
+    },
+    "全息通訊": {
+      "introduced_in": 3
+    },
+    "失聯症": {
+      "introduced_in": null
+    },
+    "記憶肥大症": {
+      "introduced_in": null
+    },
+    "意義缺乏症": {
+      "introduced_in": null
+    },
+    "時間飢餓症": {
+      "introduced_in": null
+    },
+    "NeuLink": {
+      "introduced_in": null
+    },
+    "虛境商城": {
+      "introduced_in": null
+    },
+    "歸零運動": {
+      "introduced_in": null
+    },
+    "鏡像集團": {
+      "introduced_in": null
+    },
+    "無感區": {
+      "introduced_in": null
+    }
+  }
 }
