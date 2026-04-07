@@ -24,10 +24,10 @@ write_ai_agent/                    ← plugin 本體
 │   ├── novel-foreshadowing/
 │   └── novel-style-audit/
 └── scripts/                       ← Python 工具
-    ├── assemble_context.py        → 三路召回（結構化 + 圖譜 + 語義）
+    ├── assemble_context.py        → 結構化 + 圖譜召回（wiki 精確匹配）
     ├── index_chapter.py           → 章節 → ChromaDB 索引
     ├── story_graph_nx.py          → NetworkX 圖結構 + 查詢 API（扁平 JSON 格式）
-    └── semantic_search.py         → ChromaDB 語義查詢
+    └── semantic_search.py         → ChromaDB 語義查詢（獨立工具）
 ```
 
 ## 多故事管理
@@ -38,8 +38,13 @@ data/
 └── stories/
     └── {story-name}/
         ├── world/                 → 活文件（Arc Review 時更新）
-        │   ├── world_bible.md
-        │   └── character_cast.md  → 含「設計」+「當前狀態」兩區塊
+        │   ├── _index.md          → wiki 索引（地點/設定/歷史摘要 + 連結）
+        │   ├── world_bible.md     → 完整世界觀（fallback，wiki 條目的原始來源）
+        │   ├── character_cast.md  → 含「設計」+「當前狀態」兩區塊
+        │   ├── locations/         → 每個地點一篇 wiki 條目
+        │   ├── setting/           → 時代背景、AI世代、文化肌理
+        │   ├── history/           → 圍棋消亡史
+        │   └── 留白區域.md        → 刻意未定義的設定
         ├── planning/              → 結構文檔
         │   ├── story_brief.md     → 全書級（不變）
         │   ├── structure.md       → 卷級弧線（少變）

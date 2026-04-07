@@ -140,8 +140,7 @@ def _match_wiki_location(loc_name: str, wiki_stems: dict[str, Path]) -> Path | N
     # Strip common prefixes for cleaner matching
     stripped = loc_name.replace("永壽棋院-", "").replace("棋院外部-", "").replace("棋院對街-", "")
     # Also strip floor/position prefixes like "一樓", "二樓"
-    import re as _re
-    core = _re.sub(r"^[一二三]樓", "", stripped)
+    core = re.sub(r"^[一二三]樓", "", stripped)
 
     # Try matching on the stripped/core name first (more specific)
     candidates = []
