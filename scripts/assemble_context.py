@@ -18,7 +18,7 @@ from pathlib import Path
 import yaml
 
 from _common import (
-    get_args, extract_section,
+    get_args,
 )
 
 # --- Thread number mapping (shared by YAML and legacy markdown) ---
@@ -312,45 +312,23 @@ def check_graph_conditions(story_dir: Path, characters: list[str], chapter_num: 
 
 
 def get_concept_tracking(story_dir: Path) -> str:
-    """Read concept introduction tracking from story_graph.json (or legacy .md)."""
+    """Read concept introduction tracking from story_graph.json."""
     json_path = story_dir / "runtime" / "story_graph.json"
-
-    # Try JSON first (flat format has "concepts" key)
-    if json_path.exists():
-        with open(json_path, encoding="utf-8") as f:
-            raw = json.load(f)
-        concepts = raw.get("concepts")
-        if concepts:
-            lines = ["Concepts NOT yet introduced to the reader (introduce naturally when first used):"]
-            found_any = False
-            for name, info in concepts.items():
-                if info.get("introduced_in") is None:
-                    lines.append(f"  ⚠ {name}")
-                    found_any = True
-            if not found_any:
-                return "All concepts have been introduced to the reader."
-            return "\n".join(lines)
-
-    # Legacy fallback: read from story_graph.md
-    md_path = story_dir / "runtime" / "story_graph.md"
-    if not md_path.exists():
+    if not json_path.exists():
         return "N/A"
-    text = md_path.read_text(encoding="utf-8")
-    section = extract_section(text, "概念引入追蹤", "## ")
-    if not section:
+
+    with open(json_path, encoding="utf-8") as f:
+        raw = json.load(f)
+    concepts = raw.get("concepts")
+    if not concepts:
         return "N/A"
 
     lines = ["Concepts NOT yet introduced to the reader (introduce naturally when first used):"]
     found_any = False
-    for line in section.split("\n"):
-        if not line.strip().startswith("|"):
-            continue
-        if ("❌" in line or "⚠" in line) and "概念" not in line:
-            cells = [c.strip() for c in line.split("|") if c.strip()]
-            if len(cells) >= 2:
-                lines.append(f"  ⚠ {cells[0]}")
-                found_any = True
-
+    for name, info in concepts.items():
+        if info.get("introduced_in") is None:
+            lines.append(f"  ⚠ {name}")
+            found_any = True
     if not found_any:
         return "All concepts have been introduced to the reader."
     return "\n".join(lines)
