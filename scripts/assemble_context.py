@@ -127,6 +127,47 @@ def _parse_foreshadow_tag_legacy(tag: str) -> list[str]:
     return threads
 
 
+def _match_wiki_location(loc_name: str, wiki_stems: dict[str, Path]) -> Path | None:
+    """Match a beat sheet location name to a wiki article via substring matching.
+
+    Beat sheet uses formats like "永壽棋院-入口走廊", "永壽棋院-一樓小廚房備品台",
+    "棋院外部-城市住處". Wiki files are named "棋院入口.md", "小廚房.md", etc.
+    """
+    # Exact match first
+    if loc_name in wiki_stems:
+        return wiki_stems[loc_name]
+
+    # Strip common prefixes for cleaner matching
+    stripped = loc_name.replace("永壽棋院-", "").replace("棋院外部-", "").replace("棋院對街-", "")
+    # Also strip floor/position prefixes like "一樓", "二樓"
+    import re as _re
+    core = _re.sub(r"^[一二三]樓", "", stripped)
+
+    # Try matching on the stripped/core name first (more specific)
+    candidates = []
+    for stem, path in wiki_stems.items():
+        if stem in core or core in stem:
+            candidates.append((len(stem), stem, path))
+
+    if not candidates:
+        # Fall back to matching on stripped name
+        for stem, path in wiki_stems.items():
+            if stem in stripped or stripped in stem:
+                candidates.append((len(stem), stem, path))
+
+    if not candidates:
+        # Last resort: match on full loc_name
+        for stem, path in wiki_stems.items():
+            if stem in loc_name:
+                candidates.append((len(stem), stem, path))
+
+    if candidates:
+        candidates.sort(reverse=True)
+        return candidates[0][2]
+
+    return None
+
+
 def extract_keywords(key_events: str) -> list[str]:
     """Extract Chinese names/nouns from key events text."""
     text = re.sub(r"[①②③④⑤⑥⑦⑧⑨⑩⑪⑫]", "", key_events)
@@ -366,12 +407,27 @@ def main():
 
     # Build navigation references (agent reads files itself)
     char_file = story_dir / "world" / "character_cast.md"
-    world_file = story_dir / "world" / "world_bible.md"
     foreshadow_file = story_dir / "planning" / "foreshadowing.md"
 
-    # Character and location references — just file paths, agent reads them
+    # Character references — just file paths, agent reads them
     char_refs = [f"  {name} → {char_file}" for name in beat["characters"]]
-    loc_refs = [f"  {loc} → {world_file}" for loc in beat["locations"]]
+
+    # Location references — wiki structure (per-location files) with fallback
+    wiki_loc_dir = story_dir / "world" / "locations"
+    world_file = story_dir / "world" / "world_bible.md"
+    loc_refs = []
+    # Cache wiki filenames for fuzzy matching
+    wiki_files = list(wiki_loc_dir.glob("*.md")) if wiki_loc_dir.exists() else []
+    wiki_stems = {f.stem: f for f in wiki_files}
+
+    for loc in beat["locations"]:
+        matched = _match_wiki_location(loc, wiki_stems)
+        if matched:
+            loc_refs.append(f"  {loc} → {matched}")
+        elif world_file.exists():
+            loc_refs.append(f"  {loc} → {world_file}")
+        else:
+            loc_refs.append(f"  {loc} → (no file found)")
 
     # Foreshadowing references
     thread_names = beat.get("foreshadow_threads", []) or _parse_foreshadow_tag_legacy(beat.get("foreshadow", ""))
