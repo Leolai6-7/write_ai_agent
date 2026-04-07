@@ -1,4 +1,4 @@
-"""Pydantic models for structured data types used by memory and pipeline."""
+"""Pydantic models for structured data types used by memory system."""
 
 from __future__ import annotations
 
@@ -6,16 +6,6 @@ from pydantic import BaseModel, Field
 
 
 # ── Foreshadowing ──────────────────────────────────────────────
-
-class Foreshadow(BaseModel):
-    """A single foreshadowing thread with lifecycle tracking."""
-    description: str
-    plant_chapter: int
-    hint_chapters: list[int] = Field(default_factory=list)
-    resolve_chapter: int
-    importance: str = "minor"  # "major" | "minor"
-    related_characters: list[str] = Field(default_factory=list)
-
 
 class ChapterForeshadowDirective(BaseModel):
     """Per-chapter foreshadowing instructions."""
@@ -62,25 +52,6 @@ class ChapterContext(BaseModel):
 
 
 # ── Character ──────────────────────────────────────────────────
-
-class CharacterProfile(BaseModel):
-    """Full character profile for design phase."""
-    name: str
-    role: str = "ally"
-    age: str = ""
-    personality: list[str] = Field(default_factory=list)
-    speaking_style: str = ""
-    motivation: str = ""
-    background: str = ""
-    arc_summary: str = ""
-    relationships: dict[str, str] = Field(default_factory=dict)
-
-
-class CharacterCast(BaseModel):
-    """Complete cast of characters."""
-    characters: list[CharacterProfile]
-    relationship_map: dict[str, dict[str, str]] = Field(default_factory=dict)
-
 
 class CharacterState(BaseModel):
     """Current runtime state of a character."""
