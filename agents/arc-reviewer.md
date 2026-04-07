@@ -15,7 +15,7 @@ Do THREE things:
 
 ---
 
-### 1. Edit world_bible.md IN PLACE
+### 1. Edit world_bible.md IN PLACE + sync wiki articles
 
 Use the **Edit tool** to add new content directly into the original file. Do NOT rewrite the whole file.
 
@@ -23,6 +23,12 @@ Use the **Edit tool** to add new content directly into the original file. Do NOT
 - Use Edit to insert new content under appropriate existing sections
 - Mark additions with `<!-- arc-N addition -->` comments
 - Do NOT remove or rewrite existing content — only ADD
+
+**Wiki sync**: If the story has a wiki structure (`{STORY_DIR}/world/locations/` exists):
+- For each NEW location added to world_bible.md → Write a corresponding wiki article under `locations/`
+- For UPDATED locations → Edit the existing wiki article to match
+- Update `_index.md` with any new entries
+- If no wiki structure exists, skip this step
 
 ---
 

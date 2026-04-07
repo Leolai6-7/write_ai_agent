@@ -72,6 +72,18 @@ Output in 繁體中文.
 ```
 → 3-line summary. "世界觀設定完成，要看詳情或調整嗎？"
 
+**1.1b: Wiki Expansion (after user confirms world bible)**
+Main agent splits `world_bible.md` into wiki structure:
+```
+mkdir -p {STORY_DIR}/world/{locations,setting,history}
+```
+For each location in world_bible → create `{STORY_DIR}/world/locations/{name}.md`
+For setting sections → create `{STORY_DIR}/world/setting/{name}.md`
+For history → create `{STORY_DIR}/world/history/{name}.md`
+Create `{STORY_DIR}/world/_index.md` with summary table linking all articles.
+Keep `world_bible.md` as fallback source.
+`assemble_context.py` auto-matches beat sheet locations to wiki articles.
+
 ### 1.2: Character Design
 ```
 Agent prompt:
@@ -137,6 +149,7 @@ Before planning chapters, check if the next arc needs new settings:
    - Re-run `novel-worldbuilding` skill with new requirements → Edit world_bible.md
    - Re-run `novel-characters` skill for new major characters → Edit character_cast.md
    - Or: conversational expansion with the user → main agent Edits directly
+   - **Wiki sync**: create new wiki articles under `{STORY_DIR}/world/locations/` etc. for any new settings, update `_index.md`
 4. If no new settings needed → skip to 2.0b
 
 For the FIRST arc of a story, this step is skipped (Stage 1 covers it).

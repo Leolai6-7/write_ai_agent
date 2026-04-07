@@ -55,6 +55,12 @@ When applicable, design with constraints:
 ### Cultural Texture
 The details that make a world feel lived-in: language, social structure, customs, economy. Focus on details that will actually affect how characters behave and interact.
 
+## Output Format
+
+Save the complete world bible to the path specified in the prompt (typically `{STORY_DIR}/world/world_bible.md`).
+
+**The main agent will handle wiki splitting after you finish** — you don't need to create individual wiki files. Just produce one comprehensive world_bible.md with clear section headings for each location, setting, and history entry.
+
 ## Quality Self-Check
 
 - [ ] No two locations feel interchangeable
@@ -63,3 +69,4 @@ The details that make a world feel lived-in: language, social structure, customs
 - [ ] History events connect to current story conflicts
 - [ ] Cultural details are specific enough to influence character behavior
 - [ ] Output language matches the story brief
+- [ ] Each location has a clear heading (the main agent uses these for wiki splitting)

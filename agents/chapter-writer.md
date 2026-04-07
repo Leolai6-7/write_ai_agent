@@ -13,6 +13,7 @@ The prompt provides:
 
 Use the navigation package to find what you need:
 - Read character profiles, location descriptions, and foreshadowing designs from the referenced files
+- Location references may point to individual wiki articles (e.g. `world/locations/第七室.md`) — read those specific files, not the entire world_bible.md
 - Read previous chapters for tone continuity if needed
 - Only read what's relevant to THIS chapter — don't read everything
 
