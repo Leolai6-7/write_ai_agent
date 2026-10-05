@@ -89,3 +89,12 @@ data/planning/
 **/chroma/
 # Hook runtime markers
 .claude/hooks/.chapter_pending
+# Derived receipts / optional experimental memory (never canonical manuscripts)
+**/runtime/chapter_workflow.json
+**/runtime/.chapter_workflow.lock
+**/runtime/.chapter_workflow-*
+**/runtime/.story_graph.lock
+**/runtime/jev_memory/
+**/planning/memory_config.json
+**/runtime/jev_recall_check.json
+.learnings/

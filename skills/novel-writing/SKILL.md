@@ -1,11 +1,14 @@
 ---
 name: novel-writing
-description: Complete novel writing pipeline - from brainstorming to world building to chapter generation to editing. Use when the user wants to write a novel, create a complete story, start a fiction project, or run the full novel creation workflow. This is the master skill that orchestrates all novel-writing sub-skills. Use proactively whenever fiction writing is mentioned.
+description: Plan, continue, revise, or review a novel in the write_ai_agent project. Route to the relevant story stage and preserve chapter records and continuity. Use for this project's new stories and existing novels, not generic fiction discussion or software maintenance.
 argument-hint: "[story premise]"
 ---
 
-Start a brainstorming conversation with the user about their novel idea. Ask this question immediately:
+Resume the user's requested stage. First identify the specified story, or use the existing active-story pointer when no story was specified. Do not switch stories or restart brainstorming merely because this skill was invoked.
 
-"你想寫一個什麼樣的故事？可以是一句話、一個畫面、一個角色、甚至只是一種感覺。"
+- **New story:** use the supplied premise; ask for a seed only when it is missing.
+- **Continue:** inspect the relevant plan and chapter workflow state, then continue from the unfinished work or next chapter.
+- **Revise:** read the target chapter and requested changes, preserve unrelated material, and refresh its log/diff through the revision workflow.
+- **Review:** report findings within scope; do not turn review into manuscript edits or the next writing stage.
 
-Then follow the complete pipeline defined in `skills/novel-writing/references/pipeline.md`. Read that file now for the full workflow.
+Read the matching stage in `references/pipeline.md` for artifacts, delegation and completion checks. Shared path and recovery rules apply to all stages; read other design skills only when that stage needs them. Follow the user's requested review cadence rather than adding fixed confirmation pauses.

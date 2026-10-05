@@ -1,5 +1,15 @@
 # Novel Writing Pipeline — Complete Workflow
 
+## Platform adapters
+
+The required artifacts and Python completion checks are shared by Codex and Claude.
+`novel-agents:*` below names the Claude adapter; with Codex, use the matching role
+instructions in `agents/` through available delegation, or execute the roles in
+sequence. Agent names/tool restrictions are not prerequisites of the core CLI.
+The Codex entry is `codex-skills/novel-writing/SKILL.md`; resume the existing stage
+instead of restarting brainstorming. Honor the user's requested scope and review
+cadence rather than introducing extra confirmation pauses.
+
 ## Multi-Story Path Convention
 
 All file paths use the active story directory:
@@ -8,12 +18,10 @@ STORY_DIR = data/stories/{active_story}/
 ```
 
 Before starting any work:
-1. Read `data/active_story.txt` to get the active story name
+1. Use the user's explicit story directory first; otherwise read `data/active_story.txt` and verify that the directory exists. A missing pointer is not permission to guess or create a replacement story.
 2. If starting a new story, create the directory and update active_story.txt:
-   ```
-   mkdir -p data/stories/{story-name}/{world,planning,outputs}
-   echo "{story-name}" > data/active_story.txt
-   ```
+   Create its `world`, `planning`, `runtime` and `outputs` directories and update
+   the active-story pointer through the file-editing tool. Preserve existing stories.
 3. All sub-agent prompts below use `{STORY_DIR}` — replace with the actual path
 
 ## Stage 0: Brainstorm (腦力激盪)
@@ -50,8 +58,7 @@ Show to user: "這個方向對嗎？要調整什麼？"
 ### 0.4: Confirm
 Create story directory and save:
 ```
-mkdir -p {STORY_DIR}/{world,planning,outputs}
-echo "{story-name}" > data/active_story.txt
+Create {STORY_DIR}/{world,planning,runtime,outputs} and update data/active_story.txt
 Save brief to: {STORY_DIR}/planning/story_brief.md
 ```
 Proceed to Stage 1.
@@ -60,7 +67,9 @@ Proceed to Stage 1.
 
 ## Stage 1: Conception (構思)
 
-Each step via Agent tool. Show BRIEF summary after each, confirm before next.
+Use delegation or perform the roles sequentially. Show brief progress summaries;
+pause for choices that materially change the story, or at the user's requested
+checkpoints. The sample questions below are optional prompts, not mandatory stops.
 
 ### 1.1: World Building
 ```
@@ -160,7 +169,7 @@ For the FIRST arc of a story, this step is skipped (Stage 1 covers it).
 
 After world expansion is complete, generate the chapter-level beat sheet.
 
-structure.md 把每卷分成 2-3 個弧線（例如弧線一 ch1-5、弧線二 ch6-10）。**按弧線規劃，不是按卷。**
+依 structure.md 已確認的弧線與章號範圍規劃；弧線數量由故事決定。**按當前弧線細化，不預先鎖定整卷逐章安排。**
 
 1. Determine which arc is next (read structure.md for arc ranges)
 2. Launch **volume-planner plugin agent**:
@@ -172,32 +181,44 @@ subagent_type: novel-agents:volume-planner
 > Story directory: {STORY_DIR}
 > Generate the chapter beat sheet for Arc {A}: {arc_name} (chapters {start}-{end}).
 >
-> Read design files in {STORY_DIR}/ (structure, story_brief, foreshadowing, world_bible, character_cast, story_log, story_graph.json).
+> Read relevant sections of the structure, brief, foreshadowing, world and character files. Use scoped chapter-bounded graph/log references for history, not the whole living graph as past knowledge.
 >
-> Write to: /tmp/arc_plan_{A}.yaml
+> Write BOTH outputs: {STORY_DIR}/planning/arc_synopsis_{A}.md and {STORY_DIR}/planning/arc_plan_{A}.yaml.
+> For consequential choices, establish the character's basis, trigger, credible alternatives and expected costs; optional decision_points carries that plan to the writer. Follow docs/character-decisions.md as needed, without imposing a decision template on ordinary scenes.
 
-3. Main agent copies to `{STORY_DIR}/planning/arc_plan_{A}.yaml`
+3. Main agent verifies both outputs and the intended arc/chapter range; preserve any plan outside the authorized scope.
 4. Show summary: "弧線{A}章節規劃完成，要看詳情或調整嗎？"
-5. After user confirms → proceed to chapter writing loop
+5. Proceed within the agreed scope; ask before a material story-direction change.
 
 ---
 
 ### Chapter Writing Loop
 
-For each chapter, follow these steps EXACTLY. Do not combine, skip, or reorder.
-Copy the prompts below and fill in {N} and {STORY_DIR}. One sub-agent per step.
+For each chapter, retain context → draft → lightweight edit → log/diff → graph update → validation.
+Fill in {N} and {STORY_DIR}. Roles may be delegated or performed sequentially;
+do not skip required artifacts or write dependent chapters concurrently.
 
 ---
 
 **STEP 1 — Context Assembly**
 ```
-python scripts/assemble_context.py --story-dir {STORY_DIR} --chapter {N}
+.venv/bin/python scripts/assemble_context.py --story-dir {STORY_DIR} --chapter {N} --format json
 ```
-Store the output as the CHAPTER CONTEXT PACKAGE.
+Pass `context_package` with its omission/source diagnostics to the writer. Successful assembly records a context receipt in the story's `runtime/chapter_workflow.json`. A smaller package does not mean omitted evidence is absent; use its exact source spans for targeted follow-up.
+
+The package includes the YAML/Markdown beat, previous same-line ending, earlier log entries, chapter-bounded graph facts, and one selected memory recall. Modes `off`/`shadow` use the existing local Chroma index; `active` uses only Jev-Mem. Shadow evidence is excluded from both writer text and JSON. An unavailable backend leaves structured sources and the canonical graph available; do not silently switch backends. See `docs/memory-workflow.md` for setup and recovery.
+
+Read the package's distinct author-intent, canon, POV knowledge/belief, continuity
+and reference sections according to their labels. No recorded POV/knowledge means
+unknown, not omniscience or proven ignorance. Optional `narrative_updates` must
+cite real manuscript lines; source hashing is handled by the graph CLI. The text
+package has a character budget and reports omitted optional blocks. Follow the
+listed source spans for targeted reading instead of loading full living profiles;
+never remove knowledge qualifiers to fit the budget. See `docs/narrative-context.md`.
 
 ---
 
-**STEP 2 — Chapter Generation**
+**STEP 2 — Chapter Draft and Lightweight Edit**
 
 Launch **chapter-writer plugin agent** (has Read + Write):
 
@@ -215,15 +236,22 @@ Prompt — agent reads files itself, context package is navigation only:
 >
 > {CHAPTER CONTEXT PACKAGE from Step 1 — navigation references + graph warnings}
 >
-> Write chapter to: {STORY_DIR}/outputs/chapter_{NNN}.md
+> Follow the lightweight editorial pass in the writing skill before handoff.
+> For major choices, check the prose supplies the reason for accepting the risk, not only the planned action or a warning. Trace missing support to its responsible stage before repairing it; keep planned later information outside earlier character knowledge.
+> Write the final chapter to: {STORY_DIR}/outputs/chapter_{NNN}.md
 
+Ordinary chapters use the writer's full-draft self-check, not a mandatory second
+agent or separate editorial report. The main agent may request a bounded independent
+review for a major turning point, an unresolved continuity concern or a user request.
+Resolve necessary scoped revisions before Step 3 reads the prose. Editorial checks
+are part of Step 2, not a new CLI receipt or a claim of objectively verified quality.
 New characters are detected by progress-updater in Step 3.
 
 ---
 
 **STEP 3 — Update Progress + Graph**
 
-Launch **progress-updater plugin agent** (has Read + Write):
+Launch **progress-updater plugin agent** (has Read + Edit + Write):
 
 ```
 subagent_type: novel-agents:progress-updater
@@ -235,23 +263,44 @@ Prompt (agent reads files, edits story_log, writes diff):
 > Chapter {N}: {title}
 >
 > Read the chapter: {STORY_DIR}/outputs/chapter_{NNN}.md
-> Read story_log: {STORY_DIR}/runtime/story_log.md
+> Read this chapter's existing log entry and the relevant prior entries in {STORY_DIR}/runtime/story_log.md.
+> Use the supplied relevant chapter-bounded narrative IDs and existing foreshadow keys. For revision, also read the previously applied diff for chapter {N}; it is an identity/completeness checklist, not proof that removed prose still happened.
 >
-> Edit story_log.md IN PLACE — append a new entry.
-> Write chapter diff to: /tmp/chapter_{N}_diff.yaml
+> Edit story_log.md IN PLACE — append a new entry, or replace this chapter's existing entry when revising.
+> Write the COMPLETE chapter diff to: {TASK_TMP_DIR}/chapter_{N}_diff.yaml. This is not merely the latest edit patch.
+
+The main agent creates a unique task temporary directory (for example with
+`mktemp -d`) and supplies its actual path. Do not share fixed `/tmp` filenames
+across stories. Extract only the requested chapter's prior diff and relevant
+IDs from the validated graph; do not pass its full cumulative state to the writer.
 
 After agent completes, main agent runs:
 ```
-python scripts/update_graph.py --story-dir {STORY_DIR} --diff /tmp/chapter_{N}_diff.yaml
+.venv/bin/python scripts/update_graph.py --story-dir {STORY_DIR} --diff {TASK_TMP_DIR}/chapter_{N}_diff.yaml
 ```
-Hook auto-triggers ChromaDB indexing when story_log.md is edited.
+This validates and atomically saves the graph, records the applied diff against the chapter and log, and queues optional Chroma indexing in `off`/`shadow` mode after the required steps are complete. `active` skips that index (`not_selected`); Jev capture remains an explicit `novel_memory.py sync --chapter N` action, not automatic ingestion. A log edit alone leaves the graph step pending.
+
+When replacing an already tracked chapter's diff, use `--replace`; the graph replays the recorded chapter history. Recheck affected later chapters because their prior context may have changed.
+
+Check status before reopening a historical chapter. `needs_review` means its own
+artifacts stayed unchanged but earlier evidence changed: inspect the impact and
+record `chapter_workflow.py review --story-dir {STORY_DIR} --chapter-num {N}
+--reason 'specific review conclusion'` if it still fits. A direct local edit needs
+the normal update steps. `needs_review` is not `complete` and cannot be used as
+current memory; it does not block the Stop hook. See `docs/memory-workflow.md`.
 
 ---
 
-**COMPLETION GATE**: All 3 steps must complete before proceeding to chapter {N+1}.
+**COMPLETION GATE**: Verify all 3 steps before proceeding to chapter {N+1}:
+
+```
+.venv/bin/python scripts/chapter_workflow.py status --story-dir {STORY_DIR} --chapter-num {N}
+```
+
+Proceed when `complete` is `true`. Otherwise, complete the steps named in `missing` and check again. Index states such as `pending`, `unavailable`, or `error` are reported separately and do not block the chapter. The optional semantic extra and embedding model can be installed explicitly; the chapter workflow does not download a model automatically.
 
 Report: "第{N}章完成：{summary}"
-Every 5 chapters: "前5章寫完了，要檢查再繼續嗎？"
+Use the agreed review cadence; do not stop every five chapters by default.
 
 ---
 
@@ -261,7 +310,7 @@ When all chapters in an arc are complete, run the arc review **before planning t
 
 This ensures expanded settings, updated characters, and new foreshadowing are incorporated into the next arc's planning.
 
-1. Main agent reads story_log.md (chapter summaries)
+1. Main agent uses relevant log entries to define the review scope and locate sources. The reviewer verifies those passages; reserve a second independent source check for consequential or disputed findings.
 2. Launch **arc-reviewer plugin agent**:
 
 ```
@@ -271,15 +320,16 @@ subagent_type: novel-agents:arc-reviewer
 > Story directory: {STORY_DIR}
 > Review Arc {A} (chapters {start}-{end}).
 >
-> === STORY LOG ===
-> {full content of story_log.md}
+> Read agents/arc-reviewer.md and the relevant log entries; verify proposed changes against the source chapters.
+> Scope: {review only / authorized arc maintenance / specific user-authorized setting revision}.
 >
-> Edit IN PLACE: world_bible.md, character_cast.md, foreshadowing.md, structure.md
-> Write NEW: {STORY_DIR}/planning/arc_review_{A}.md
-> Read for details: chapter files, story_graph.json, arc_plan_{A}.yaml
+> For authorized setting maintenance, edit only affected sections of world_bible.md, character_cast.md, foreshadowing.md and their corresponding wiki entries. Edit structure.md only when the user separately authorized the relevant plan change.
+> An authorized definition change replaces the original definition precisely; record old/new text, source and affected scope in the specified report. Do not silently canonize a draft contradiction or rewrite historical chapters.
+> Report: {STORY_DIR}/planning/arc_review_{A}.md — create or update only if a saved report is in scope; otherwise return findings.
+> Read relevant details from chapter files and arc_plan_{A}.yaml; use chapter-bounded graph references rather than treating today's full graph as past knowledge.
 
-3. Main agent reviews changes (`git diff`) and arc_review report
-4. Proceed to next arc → back to 2.0 Arc Planning
+3. Main agent checks actual edited sections and the report, including unchanged material outside scope (`git diff` where tracked). Setting edits do not automatically trigger chapter `needs_review`; list any affected chapters and unresolved continuity questions explicitly.
+4. Proceed to next arc → back to 2.0 Arc Planning once required decisions are settled. A review-only request ends with findings, not unrequested maintenance or next-arc generation.
 
 ---
 
@@ -300,7 +350,8 @@ Main agent combines chapters:
 3. Save to `{STORY_DIR}/outputs/novel_complete.md`
 
 ## Recovery
-1. Read `data/active_story.txt` — which story
-2. Read `{STORY_DIR}/runtime/story_log.md` — last chapter
-3. Read `{STORY_DIR}/planning/structure.md` — next objective
-4. Resume from next unwritten chapter
+1. Resume the explicitly requested story; otherwise read `data/active_story.txt` and verify its directory
+2. Read `{STORY_DIR}/runtime/story_log.md` and inspect the latest chapter files
+3. Query `chapter_workflow.py status` for the interrupted chapter and finish its `missing` steps; a log entry alone does not establish completion
+4. Read the current `arc_plan_N.yaml` (Markdown fallback) for the next chapter objective
+5. Resume the next chapter after the required-step status is complete; see `docs/memory-workflow.md` for older stories and optional memory setup

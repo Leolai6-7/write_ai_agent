@@ -6,6 +6,8 @@ argument-hint: "[chapter files or text to audit]"
 
 Audit writing style consistency across multiple chapters.
 
+Review requests produce findings, not manuscript edits. Apply revisions only when requested; save a report only when a destination or report file is in scope.
+
 ## Input
 
 From $ARGUMENTS or conversation:
@@ -42,35 +44,39 @@ Across chapters:
 
 ## Process
 
-1. Read each chapter (or first 2000 chars if full text is too long)
-2. Note style markers: sentence length distribution, vocabulary richness, dialogue-to-description ratio
-3. Compare across chapters for consistency
-4. Flag specific passages with issues
+1. Read the requested chapters in full when making a chapter-wide judgment. If sampling is necessary, identify the exact sampled passages (chapter + paragraph/line range or scene anchors), why they were selected, and what remains unread. The first 2000 characters are not a substitute for a full chapter.
+2. Note relevant style markers, such as sentence rhythm, vocabulary, and dialogue-to-description balance. Treat these as qualitative observations unless actually measured; do not invent distributions or ratios.
+3. Compare the passages actually read against the story's established voice and the scene's purpose. Distinguish intentional tonal changes or character growth from unsupported inconsistency.
+4. For each finding, give the original passage's location, a short quote or precise description, its concrete effect on the reader, and an actionable revision. Do not prescribe arbitrary numerical targets for prose.
+5. State the coverage limits of the conclusion. A sampled audit may report “no issue found in the passages read,” but must not declare unread passages or the whole chapter problem-free. Do not assign an X/10 score unless requested and supported by an explicit rubric and the stated reading coverage.
 
 ## Output Format
+
+Scale the report to the evidence; omit empty sections rather than inventing findings or praise to fill the template.
 
 ```markdown
 ## 文風審查報告
 
 ### 總覽
-- 審查章節數：N
-- 一致性評分：X/10
+- 審查範圍：[逐章列出全文，或具體抽樣段落／行號／場景]
+- 未讀範圍與限制：[無，或未讀章節／段落及因此無法判定的事項]
 - 主要問題：[簡述]
 
 ### 問題清單
-| # | 章節 | 類型 | 描述 | 建議修改 |
-|---|------|------|------|---------|
-| 1 | 第X章 | voice_shift | 第3段突然從第三人稱切換... | 改為... |
-| 2 | 第Y章 | dialogue_ooc | 米娜的語氣過於隨意... | 恢復她的緩慢語速... |
+| 原文位置 | 類型 | 原文／具體現象 | 具體影響 | 可執行建議 |
+|----------|------|---------------|----------|------------|
+| 第X章第3段 | voice_shift | [短引文：無提示切換敘述視角] | [使讀者誤認知覺主體] | [改回既定視角，或補上視角切換標記] |
 
 ### 正面觀察
-- [做得好的地方，供後續章節參考]
+- [附原文位置，說明有效之處，供後續章節參考]
 
 ### 風格指南建議
-[基於審查結果，給出 2-3 條具體的寫作準則供後續章節遵循]
+[按已讀證據提出需要的具體建議；不為湊數新增規則]
 ```
 
 ## Quality Criteria
+- [ ] 明示實際閱讀與未讀範圍，抽樣結論不擴張成全章保證
 - [ ] 每個問題都有具體的章節和段落引用
-- [ ] 建議是可操作的（不是「寫好一點」而是「把這段的句子長度從平均20字縮短到12字」）
-- [ ] 也指出做得好的地方（不只是挑毛病）
+- [ ] 每個問題說明具體影響，建議可操作且符合該場景目的
+- [ ] 無無根據的評分、統計或任意字數目標
+- [ ] 正面觀察如有，附具體原文依據；沒有充分證據時省略，不為平衡語氣硬加稱讚

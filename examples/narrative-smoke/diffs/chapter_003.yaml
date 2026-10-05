@@ -1,0 +1,31 @@
+chapter: 3
+characters_appeared:
+  - name: 小白
+    events: ch3：問清位置後取匙、開門，確認歸還處並放回鑰匙，送還收音機。
+  - name: 林青
+    events: ch3：說清鑰匙位置並承認忘記交代，協助裝袋。
+  - name: 黃伯
+    events: ch3：配合小白托住收音機，完成接收。
+locations_used: [河邊修理鋪]
+foreshadowing_updates:
+  - thread: ①後間鑰匙
+    action: resolve
+causal_chains:
+  - cause: 小白發現紅盒無匙後明確詢問
+    cause_ch: 2
+    effect: 林青告知位置，小白重述確認並取得鑰匙
+    effect_ch: 3
+narrative_updates:
+  - id: xiaobai-key-location
+    kind: knowledge
+    character: 小白
+    text: 小白聽林青告知高架藍布袋的位置，重述確認後親手翻開折口並取出鑰匙。
+    source: {chapter: 3, start_line: 3, end_line: 17}
+  - id: key-location
+    kind: fact
+    text: 小白用完銅鑰匙，確認歸還處後放回藍布袋，折好袋口再推回高架乾處。
+    source: {chapter: 3, start_line: 23, end_line: 27}
+  - id: radio-location
+    kind: fact
+    text: 小白將收音機送抵黃伯門前，待黃伯雙手接穩機身才鬆開提把。
+    source: {chapter: 3, start_line: 35, end_line: 41}

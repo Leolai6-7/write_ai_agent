@@ -11,7 +11,7 @@ Design the structural architecture for a long-form novel.
 From $ARGUMENTS or conversation, gather:
 - **Story premise**: main goal/conflict (1-2 sentences)
 - **Genre**: 奇幻、科幻、武俠、etc.
-- **Scale**: target volumes (1-5) and chapters per volume (30-200)
+- **Scale**: the user's intended length, volume structure, and approximate chapter expectations; leave undecided boundaries flexible
 - **Character cast** (optional): protagonist + key characters
 - **World setting** (optional): key locations, power systems
 
@@ -21,7 +21,9 @@ From $ARGUMENTS or conversation, gather:
 
 ### 1. Characters drive structure, not the other way around
 
-Every protagonist must make at least one ACTIVE choice per arc — driven by internal desire, not external pressure. "Being forced to" is not a choice. "Choosing to despite the cost" is. If a protagonist spends an entire arc only reacting, the structure has failed.
+Consequential choices should be understandable for this character: what they know or believe at that moment, what they want or feel, which alternatives are feasible and costly, and what makes the choice urgent now. Show why they accept an anticipated risk, not merely that they know it exists. Refusal, delay, impulse, mistaken judgment, and choices under pressure can all drive an arc; do not require optimal rationality or a fixed quota of active heroic acts.
+
+Do not justify a choice with a revelation or actual consequence that comes after it. If its basis is missing, revisit the plan rather than require the writer to invent a guarantee; consult `docs/character-decisions.md` as needed for consequential-choice planning.
 
 ### 2. Elements cast shadows before they arrive
 
@@ -37,7 +39,7 @@ Chapters that establish setting must still advance plot. World details are best 
 
 Tension and release should alternate naturally based on the story's emotional logic. Sustained tension without relief exhausts the reader. Sustained calm without stakes bores them. The rhythm should feel like breathing — the story itself tells you when it needs a pause.
 
-When designing multi-line narratives: each line must have its OWN momentum, not just serve as contrast. Both lines need active protagonists. The lines should create dramatic irony — the reader knows things from line A that make line B more tense.
+When designing multi-line narratives: each line must have its OWN momentum, not just serve as contrast. Each line's character responses and constraints should sustain that momentum. The lines should create dramatic irony — the reader knows things from line A that make line B more tense.
 
 ---
 
@@ -56,7 +58,7 @@ Volume size is FLEXIBLE. A volume ends when its thematic arc completes, not at a
 
 ### Step 2: Arc Decomposition
 
-For each volume, break into 2-4 story arcs (弧線). Only the FIRST arc needs detail; later arcs are sketches:
+Divide each volume into as many story arcs (弧線) as its progression needs, without a fixed quota. Only the NEXT arc needs detail; later arcs are sketches:
 - **弧線名稱**
 - **大致規模**: approximate chapters (e.g., 「約 3-5 章」)
 - **核心衝突**: the central tension driving this arc
@@ -64,17 +66,15 @@ For each volume, break into 2-4 story arcs (弧線). Only the FIRST arc needs de
 
 Later arcs in later volumes should be LESS detailed — just the core conflict and a sentence on the turning point. They will be refined when their turn comes (progressive planning).
 
-### Step 3: R/S Line Rhythm (for multi-line narratives)
+### Step 3: Narrative Lines (when applicable)
 
-If the story uses dual or multi-line narrative (e.g., R-line and S-line), define the line alternation pattern for each volume:
+Use the story's established line names. A single-line story can use `main`; existing names such as R/S remain valid. For multi-line stories, describe what each line contributes and where switching or convergence would help:
 
-```
-R/S 節奏：R-S-R-S-R-S-R-S-R-RS
-```
+- e.g., stay with 調查線 through a discovery, then switch to 家族線 when the contrast or withheld information matters.
 
-This gives the volume-planner agent the constraint it needs to assign narrative lines to chapters.
+These are planning intentions, not a compulsory alternating sequence. The volume-planner assigns lines for the current arc as pacing and actual story progression require.
 
-**Note**: Chapter-level beat sheets are NOT generated here. They are created by the `volume-planner` agent just before each volume begins writing, using the volume arcs and current story state as input. This allows the beat sheet to adapt to actual story progression rather than being locked at planning time.
+**Note**: Chapter-level beat sheets are NOT generated here. They are created by the `volume-planner` agent just before each arc begins writing, using the volume architecture and current story state as input. This allows the beat sheet to adapt to actual story progression rather than being locked at planning time.
 
 ---
 
@@ -109,7 +109,7 @@ This gives the volume-planner agent the constraint it needs to assign narrative 
 **Note**: No chapter-level beat sheet here. Chapter beats are generated per-arc by the `volume-planner` agent. Volume boundaries are approximate and confirmed during arc review.
 
 ## Quality Checklist
-- [ ] Every protagonist makes active choices, not just reacts
+- [ ] Major choices follow from character-specific knowledge/beliefs, priorities or emotion, feasible alternatives and costs, and a timely trigger; anticipated risk is not confused with later outcomes
 - [ ] Important elements cast shadows before full appearance
 - [ ] Each volume has a distinct theme
 - [ ] Arcs have causal connections (not just chronological)

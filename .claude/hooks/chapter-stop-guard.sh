@@ -1,25 +1,9 @@
 #!/bin/bash
-# Stop Guard Hook
-# Prevents Claude from stopping if a chapter workflow is incomplete.
-# Exit code 2 = block the stop action.
-
-PENDING_FILE="$CLAUDE_PROJECT_DIR/.claude/hooks/.chapter_pending"
-
-if [[ -f "$PENDING_FILE" ]]; then
-    CHAPTER_NUM=$(python3 -c "
-import json
-with open('$PENDING_FILE') as f:
-    d = json.load(f)
-if not d.get('log_done'):
-    print(d.get('chapter', '?'))
-else:
-    print('')
-" 2>/dev/null)
-
-    if [[ -n "$CHAPTER_NUM" ]]; then
-        echo "BLOCKED: Chapter $CHAPTER_NUM — story_log + story_graph not yet updated." >&2
-        exit 2
-    fi
+# Index failures are visible, but only the three required workflow steps block.
+set -u
+PROJECT_DIR="${CLAUDE_PROJECT_DIR:-$(cd "$(dirname "$0")/../.." && pwd)}"
+PYTHON="${NOVEL_PYTHON:-python3}"
+if [[ -x "$PROJECT_DIR/.venv/bin/python" ]] && [[ -z "${NOVEL_PYTHON:-}" ]]; then
+    PYTHON="$PROJECT_DIR/.venv/bin/python"
 fi
-
-exit 0
+exec "$PYTHON" "$PROJECT_DIR/scripts/chapter_workflow.py" stop --project-dir "$PROJECT_DIR"

@@ -1,0 +1,55 @@
+volume: 1
+arc: 排水口的字
+goal: 在一場洪災中讓操作者與模型居民建立可驗證的合作，並承擔改變方案的代價。
+chapters:
+  - chapter: 1
+    title: 排水口的字
+    line: main
+    pov: 余棠
+    target_length: "2,000–3,000 字"
+    objective: 余棠辨認求救，為核查舊水道而決定取下會使方案失準的底板。
+    key_events:
+      - 上午08:50，余棠在測潮所維修已完成試演、正在候潮的模型；09:00落印期限逼近。
+      - 排水口碎瓦被紅衣人重新排成求救；余棠用陰影與動作確認對方在回應她。
+      - 陸衡提出現實醫院與延誤風險；紅衣人指向底板舊孔，余棠看見不同深淺的刻痕。
+      - 余棠知道拆板即失去本次落印，仍開始鬆開固定螺栓；本章不證明舊渠有效或公布模型居民起源。
+    tone: 手藝人的日常／驚疑／承擔選擇
+    characters: [余棠, 陸衡, 紅衣人]
+    locations: [測潮所, 鹽燈街]
+    foreshadowing:
+      - {thread_id: fs-old-drain, name: 底板的舊水道, action: plant}
+      - {thread_id: fs-tally, name: 不同深淺的刻痕, action: plant}
+      - {thread_id: fs-lock-loss, name: 拆板失去落印, action: plant}
+  - chapter: 2
+    title: 作廢的方案
+    line: main
+    pov: 余棠
+    target_length: "2,000–3,000 字"
+    objective: 取下底板付出落印失效的代價，核查舊渠而非立刻獲得完美解。
+    key_events:
+      - 底板離座令工程鎖失準，不能再用舊方案；余棠向陸衡提出實地核查的位置。
+      - 透過排字與現實工班通訊確認舊渠及出口封牆，拆牆會有新的損失。
+      - 雙方提出代價，開始分工；具名新角色若出現，先補其必要設定。
+    tone: 時間壓力／懷疑轉為有限信任
+    characters: [余棠, 陸衡, 紅衣人]
+    locations: [測潮所, 鹽燈街, 北船塢舊渠]
+    foreshadowing:
+      - {thread_id: fs-old-drain, name: 底板的舊水道, action: hint}
+      - {thread_id: fs-tally, name: 不同深淺的刻痕, action: hint}
+      - {thread_id: fs-lock-loss, name: 拆板失去落印, action: resolve}
+  - chapter: 3
+    title: 下一次，先問我們
+    line: main
+    pov: 余棠
+    target_length: "2,000–3,000 字"
+    objective: 完成有損失的救援，讓紅衣人從求救者轉為對下一次試演提出條件的人。
+    key_events:
+      - 模型居民拆開自己的阻水建物，現實工班開通舊渠並人工操縱水門。
+      - 水勢降低但仍有損失；余棠與陸衡接受對此次決策的追問。
+      - 溝通確認刻痕與過往試演有關，紅衣人要求下一次先告知，保留居民不同意的權利。
+    tone: 緊繃後的喘息／未完但具體的希望
+    characters: [余棠, 陸衡, 紅衣人]
+    locations: [測潮所, 鹽燈街, 北船塢舊渠]
+    foreshadowing:
+      - {thread_id: fs-old-drain, name: 底板的舊水道, action: resolve}
+      - {thread_id: fs-tally, name: 不同深淺的刻痕, action: resolve}

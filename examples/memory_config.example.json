@@ -1,0 +1,9 @@
+{
+  "mode": "shadow",
+  "python": "/absolute/path/to/Jev-Mem/.venv/bin/python",
+  "source": "/absolute/path/to/Jev-Mem",
+  "mock": false,
+  "encoder_model": "BAAI/bge-small-zh-v1.5",
+  "jev_model": "jev-latest",
+  "timeout_seconds": 60
+}

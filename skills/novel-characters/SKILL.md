@@ -1,10 +1,10 @@
 ---
 name: novel-characters
-description: Design a cast of supporting characters for a novel. Use when the user wants to create character profiles, design character arcs, or build a character relationship map for fiction writing.
+description: Design protagonists and supporting characters for a novel. Use when the user wants to create character profiles, design character arcs, or build a character relationship map for fiction writing.
 argument-hint: "[story premise]"
 ---
 
-Design supporting characters for a novel. Read the story brief first to understand the story's needs.
+Design the requested characters for a novel. Read the story brief first to understand the story's needs. When building the cast, include a heading-searchable profile for each protagonist as well as supporting characters; preserve agreed protagonist designs and fill only relevant gaps. A request to update one character does not require rebuilding the cast.
 
 ## Input
 - **Story brief** (if available): determines genre, tone, what roles the cast needs to fill
@@ -40,15 +40,16 @@ For each character, create TWO sections:
 
 **Depth**:
 - Core motivation (what they WANT — must be understandable, even if wrong)
+- For important characters, show conflicting priorities and a blind spot: what they protect first under pressure, what they may sacrifice, and what they misread or avoid acknowledging. These should explain different choices in different relationships and situations, not give every character the same flaw or a fixed decision formula.
 - Secret/hidden dimension (what readers discover later)
 - Fatal flaw (what causes their biggest mistake)
-- Speaking style — MUST be specific and unique. Not "speaks politely" but "uses botanical metaphors, pauses mid-sentence as if weighing each word, slips into dialect under stress"
+- Speaking style — for important recurring characters, describe usable tendencies in vocabulary, rhythm, and responses to different people or pressures. Voices may overlap naturally; do not force a unique catchphrase for every person.
 
 **Arc**: Where they start → what changes them → where they end up
 
-#### 當前狀態（evolving — updated by arc-reviewer after each volume）
+#### 當前狀態（evolving — updated during authorized arc maintenance）
 
-Initialize as empty at creation. After each volume, the arc-reviewer agent updates this section:
+Initialize as empty at creation. After each arc, authorized maintenance updates the relevant fields from verified prose:
 - **位置**：current physical location
 - **情感狀態**：emotional state
 - **關鍵認知**：what they currently know
@@ -71,10 +72,10 @@ Show how characters relate to EACH OTHER, not just to the protagonist:
 - Hidden agendas
 - How relationships will evolve
 
-### Step 4: Dialogue Voice Test (CRITICAL)
-ALL characters respond to the SAME scenario in 2-3 lines. Choose a scenario relevant to the story.
+### Step 4: Dialogue Voice Test (optional)
+When useful, try a brief response to the same story-relevant scenario for important recurring characters. Minor characters do not need a separate voice exercise.
 
-This is the KEY validation — if you can't tell who is speaking without the name tag, the design failed.
+Look for differences in what they notice, want, avoid, and say. Shared language within a family or workplace can be intentional; judge the voice with its relationship and scene context, not solely by whether a nameless line is instantly identifiable.
 
 ## Naming and Searchability
 
@@ -86,9 +87,10 @@ The character file is read by an automated context assembly system that uses Gre
 - **Gender must be explicit** in 基本資料
 
 ## Quality Criteria
-- Each character identifiable by dialogue alone
+- Important recurring characters have usable voice tendencies, with contextual overlap where appropriate
 - Every character has a clear, understandable motivation
+- Important characters' priorities, emotional pressures, and blind spots explain consequential choices, including mistakes or refusal, without assuming they know future revelations or outcomes
 - Relationship map contains genuine conflict/tension
-- No two characters serve the same narrative function
-- Speaking styles are specific enough to maintain across 100+ chapters
+- Similar narrative functions are distinguished where the story needs them, rather than forcing every role to be unique
+- Speaking styles can be maintained over the story's intended length without becoming repetitive mannerisms
 - Every character in the beat sheet has a heading-searchable profile

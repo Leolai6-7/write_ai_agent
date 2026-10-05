@@ -1,13 +1,21 @@
 """Tests for ChromaDB semantic retrieval."""
 
+import os
+
 import pytest
 
 from memory.retrieval import SemanticRetriever
 
+pytestmark = pytest.mark.skipif(
+    os.getenv("NOVEL_TEST_SEMANTIC") != "1",
+    reason="Set NOVEL_TEST_SEMANTIC=1 for real Chroma/model integration tests",
+)
+
 
 @pytest.fixture
 def retriever(tmp_path):
-    return SemanticRetriever(tmp_path / "chroma_test")
+    return SemanticRetriever(tmp_path / "chroma_test", embedding_model=os.getenv(
+        "NOVEL_TEST_ENCODER", "BAAI/bge-small-zh-v1.5"))
 
 
 def test_add_and_query(retriever):
@@ -38,3 +46,15 @@ def test_upsert_same_chapter(retriever):
     assert retriever.get_count() == 1
     results = retriever.query("updated", n_results=1)
     assert "updated" in results[0]["summary"]
+
+
+def test_real_backend_chapter_boundary_and_exact_character_filter(retriever):
+    retriever.add_chapter(1, "米娜持有銅鑰匙", characters=["米娜"])
+    retriever.add_chapter(2, "米娜在碼頭等候", characters=["米娜"])
+    retriever.add_chapter(3, "未來米娜摧毀銅鑰匙", characters=["米娜"])
+    retriever.add_chapter(1_000, "米娜子持有銅鑰匙", characters=["米娜子"])
+    results = retriever.query("銅鑰匙", n_results=5, max_distance=2.0,
+                              before_chapter=3, filter_characters=["米娜"])
+    assert {r["chapter_id"] for r in results} == {1, 2}
+    assert retriever.query("銅鑰匙", n_results=5, max_distance=2.0,
+                           before_chapter=3, filter_characters=["米娜子"]) == []

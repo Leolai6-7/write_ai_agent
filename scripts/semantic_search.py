@@ -17,6 +17,8 @@ def main():
         ("--query", {"type": str, "required": True}),
         ("--characters", {"type": str, "default": ""}),
         ("--n", {"type": int, "default": 5}),
+        ("--before-chapter", {"type": int, "default": None,
+                              "help": "Only recall chapters before this chapter number"}),
     )
 
     story_dir = Path(args.story_dir)
@@ -38,6 +40,7 @@ def main():
         n_results=args.n,
         max_distance=1.0,  # Don't filter by distance; let the caller decide relevance
         filter_characters=characters,
+        before_chapter=args.before_chapter,
     )
 
     json_output({

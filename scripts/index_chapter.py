@@ -7,24 +7,25 @@ Usage:
         --chapter-file data/stories/civilization-disease/outputs/chapter_002.md
 """
 
+import argparse
+import json
 import re
+import sys
 from pathlib import Path
 
-from _common import get_args, get_retriever, json_output, json_error
+from chapter_workflow import chapter_log_entry, record_chapter, record_index, source_fingerprints
 
 
 def parse_story_log_entry(story_log_text: str, chapter_num: int) -> dict | None:
     """Parse a chapter entry from story_log.md."""
-    pattern = rf"## 第{chapter_num}章[：:](.+?)(?=\n## |\Z)"
-    match = re.search(pattern, story_log_text, re.DOTALL)
-    if not match:
+    entry_text = chapter_log_entry(story_log_text, chapter_num)
+    if not entry_text:
         return None
-
-    entry_text = match.group(0)
-    title = match.group(1).strip().split("\n")[0]
+    title = re.split(r"[：:]", entry_text.splitlines()[0], maxsplit=1)[1].strip()
 
     def extract_field(field_name: str) -> str:
-        m = re.search(rf"- {field_name}[：:](.+?)(?=\n-|\Z)", entry_text)
+        m = re.search(rf"^-[ \t]+{field_name}[：:][ \t]*(.*?)(?=\n-[ \t]|\Z)",
+                      entry_text, re.MULTILINE | re.DOTALL)
         return m.group(1).strip() if m else ""
 
     return {
@@ -43,63 +44,66 @@ def extract_character_names(character_changes: str) -> list[str]:
         m = re.match(r"\s*([一-龥]{2,4}?)(?:的|從|展現|開始|登場|首次|建立|以|在|把|被|和|與|跟)", part)
         if m:
             names.append(m.group(1))
-    return list(set(names)) if names else []
+    return list(dict.fromkeys(names))
+
+
+def index_chapter(story_dir: Path, chapter_num: int, chapter_file: Path,
+                  *, allow_model_download: bool = False, retriever_factory=None) -> dict:
+    """Index a real log summary and persist an honest result, even on dependency failure."""
+    story_dir = Path(story_dir).resolve()
+    chapter_file = Path(chapter_file).resolve()
+    if not story_dir.exists():
+        return {"status": "error", "error": f"Story directory not found: {story_dir}"}
+    sources = None
+    try:
+        if chapter_num < 1 or chapter_file.parent != story_dir / "outputs" or not re.fullmatch(
+                rf"chapter_0*{chapter_num}\.md", chapter_file.name):
+            raise ValueError("Chapter path does not match this story/chapter")
+        if not chapter_file.is_file() or not chapter_file.read_text(encoding="utf-8").strip():
+            raise ValueError("Chapter file is missing or empty")
+        story_log_path = story_dir / "runtime" / "story_log.md"
+        if not story_log_path.is_file():
+            raise ValueError("story_log.md is missing")
+        entry = parse_story_log_entry(story_log_path.read_text(encoding="utf-8"), chapter_num)
+        if not entry or not entry["summary"]:
+            raise ValueError(f"No nonempty story_log summary for chapter {chapter_num}")
+        record_chapter(story_dir, chapter_num, chapter_file)
+        sources = source_fingerprints(story_dir, chapter_num,
+                                      {"chapter_file": str(chapter_file.relative_to(story_dir))})
+        record_index(story_dir, chapter_num, "pending", sources=sources)
+        if retriever_factory is None:
+            sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+            from memory.retrieval import SemanticRetriever
+            retriever_factory = SemanticRetriever
+        retriever = retriever_factory(story_dir / "chroma",
+                                      allow_model_download=allow_model_download)
+        characters = extract_character_names(entry["character_changes"])
+        retriever.add_chapter(chapter_id=chapter_num, summary=entry["summary"],
+                              characters=characters)
+        state = record_index(story_dir, chapter_num, "ok", sources=sources)
+        return {"status": state["index"]["status"], "chapter_id": chapter_num,
+                "title": entry["title"], "summary": entry["summary"],
+                "characters": characters, "chroma_path": str(story_dir / "chroma")}
+    except Exception as exc:
+        status = "unavailable" if isinstance(exc, (ImportError, OSError)) else "error"
+        if chapter_num > 0:
+            record_index(story_dir, chapter_num, status, str(exc), sources=sources)
+        return {"status": status, "chapter_id": chapter_num, "error": str(exc)}
 
 
 def main():
-    args = get_args(
-        ("--chapter-num", {"type": int, "required": True}),
-        ("--chapter-file", {"type": str, "required": True}),
-    )
-
-    story_dir = Path(args.story_dir)
-    chapter_num = args.chapter_num
-    chapter_file = Path(args.chapter_file)
-
-    if not story_dir.exists():
-        json_error(f"Story directory not found: {story_dir}")
-
-    # Read story_log.md
-    story_log_path = story_dir / "runtime" / "story_log.md"
-    if not story_log_path.exists():
-        json_error(f"story_log.md not found: {story_log_path}")
-
-    story_log_text = story_log_path.read_text(encoding="utf-8")
-    entry = parse_story_log_entry(story_log_text, chapter_num)
-
-    if not entry or not entry["summary"]:
-        if chapter_file.exists():
-            first_lines = chapter_file.read_text(encoding="utf-8").split("\n")[:5]
-            title_line = next((line for line in first_lines if line.strip()), "")
-            entry = {
-                "title": title_line.strip("# ").strip(),
-                "summary": f"第{chapter_num}章",
-                "character_changes": "",
-                "foreshadow": "",
-                "emotional_arc": "",
-            }
-        else:
-            json_error(f"No story_log entry for chapter {chapter_num} and chapter file not found")
-
-    characters = extract_character_names(entry["character_changes"])
-
-    # Save to ChromaDB only
-    retriever = get_retriever(story_dir)
-    retriever.add_chapter(
-        chapter_id=chapter_num,
-        summary=entry["summary"],
-        characters=characters,
-    )
-
-    json_output({
-        "status": "ok",
-        "chapter_id": chapter_num,
-        "title": entry["title"],
-        "summary": entry["summary"],
-        "characters": characters,
-        "chroma_path": str(story_dir / "chroma"),
-    })
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--story-dir", type=Path, required=True)
+    parser.add_argument("--chapter-num", type=int, required=True)
+    parser.add_argument("--chapter-file", type=Path, required=True)
+    parser.add_argument("--allow-model-download", action="store_true",
+                        help="Explicitly allow downloading the embedding model")
+    args = parser.parse_args()
+    result = index_chapter(args.story_dir, args.chapter_num, args.chapter_file,
+                           allow_model_download=args.allow_model_download)
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0 if result["status"] == "ok" else 1
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

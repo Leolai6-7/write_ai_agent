@@ -17,137 +17,91 @@ From $ARGUMENTS or conversation, gather:
 - **Emotional tone**
 - **Context** (optional): previous chapter summary, character states, world details
 - **Foreshadowing directives** (optional): threads to plant/hint/resolve
+- **Decision points** (optional): the character's basis, trigger, alternatives and accepted costs for consequential choices; these are author plans, not established knowledge
 
 ---
 
-## Core Philosophy (always apply)
+## Priorities and boundaries
 
-These four principles govern every writing decision. When in doubt, return to these.
+The user's current instructions take priority over the story brief and chapter plan. Preserve established facts, the chosen POV, character-specific knowledge and the agreed scope of revision. A plan describes intended events, not proof that they have already happened. An unresolved conflict that would change the story's direction needs clarification, not an invented resolution.
 
-### 1. The world speaks through the prose
+The craft choices below are options, not acceptance gates. Choose them for the genre, narrator, chapter purpose and target length; do not force every story into literary suspense.
 
-The narrator's word choices carry the nature of the world — even when the character is unaware. The character lives in this world and sees nothing wrong. But the reader, accumulating hundreds of small word choices, feels something they can't name.
+## Craft choices
 
-Every world has an essence. Find it, then let it tint every description:
+### World texture
 
-```
-Simulated world → "too perfect": edges too sharp, temperatures too constant,
-   timing too regular. Everything works a little too well.
+Let selected details convey the world when they matter to the scene. A simulated world might feel unnaturally precise; an ordinary domestic scene might benefit from plain, unadorned language. Neither is a universal style requirement. Avoid repeating a motif in every paragraph or leaking hidden facts through a limited POV.
 
-Decaying world → "heavy": rust on every surface, conversations trail off,
-   even sunlight feels tired.
+### Clues and revelation
 
-Dreamlike world → "slippery": details shift when you look away, distances
-   don't quite add up, faces are hard to hold in memory.
+Choose how visible a clue should be and when to resolve it from the intended reader experience. A subtle anomaly can build unease; an obvious clue can drive an investigation or comedy. Planting and resolving a clue in the same chapter is appropriate when the plan calls for it. Do not manufacture ambiguity after a requested clear reveal.
 
-War-torn world → "brittle": silence is never safe, ordinary objects remind
-   of violence, people flinch at sudden sounds.
-```
+### Scene and explanation
 
-```
-❌ Neutral (no texture — could be any world):
-   陽光從窗戶照進來。茶是溫的。他走到辦公室花了十一分鐘。
+Use action, dialogue and sensory detail where experiencing the moment matters. Use summary, direct explanation or interior reflection where they improve clarity or pace. Cut explanations that merely repeat an already clear action, but retain information needed to understand a decision or transition.
 
-✅ Textured (world speaks through word choices):
-   陽光穿過落地窗斜切進來，在地磚上畫出一道精確的長方形光斑——
-   邊緣非常銳利，沒有任何漫射，像用尺子量過的。
-   （同樣的事件，但用詞暗示了世界的本質。角色不覺得奇怪。）
-```
+### Pacing and chapter purpose
 
-This texture should be woven throughout the entire chapter, not concentrated in any one scene.
-
-### 2. Small lever, great force
-
-When planting a clue or anomaly, it should feel like a hairline fracture — barely visible, easily rationalized away. The reader finishes the chapter feeling vaguely unsettled without knowing why.
-
-The chapter's job is to let the reader live through a normal day. The anomaly is a splinter under the skin. Don't dig it out in the same chapter you plant it.
-
-```
-❌ Shouted (character investigates, reader is told "this matters"):
-   他檢查了第一個線索，又檢查了第二個，拿出筆記本記錄。
-   他知道有什麼不對了。
-   （角色反應過大。伏筆 = 大聲宣布，毫無餘韻。）
-
-✅ Whispered (noticed, rationalized, lingers):
-   他路過的時候注意到一個細節。想了一秒。然後放下了。不值得想。
-   晚上躺在床上，不知道為什麼，那個細節還在腦子裡。
-   （角色幾乎沒有反應。異常像一粒沙，卡在讀者腦子裡。）
-```
-
-### 3. Show, then trust the reader
-
-Don't explain what was just demonstrated. Don't tell the reader how to feel. Let actions, dialogue, and silence carry the weight.
-
-```
-❌ 她把杯子重重放在桌上，轉身走開。她很生氣，因為他又一次
-   忽略了她的意見...（動作已經足夠，解釋削弱衝擊力）
-
-✅ 她把杯子重重放在桌上，轉身走開。
-   （讓讀者自己推理原因——他們會比你寫得更好）
-```
-
-### 4. Every scene pushes forward
-
-The reader should know more, feel more, or worry more by the end of each scene. A chapter without forward motion is a chapter that shouldn't exist.
-
-Each key event in the beat sheet is a full scene — with setting, dialogue, and sensory texture. A key event compressed into one sentence is a missed opportunity. A chapter with 3 key events typically needs 4-6 scenes.
+Allocate space by importance, not by the number of beat-sheet bullets. A key event may be a full scene, a brief exchange or a sentence of transition; several beats may share one scene. Quiet chapters can deepen a relationship, establish ordinary life or provide recovery. Check whether the chapter achieves its intended effect, not whether each scene escalates the plot.
 
 ---
 
 ## Craft Toolbox (reference as needed)
 
 ### Opening
-Start with action or dialogue that grounds the reader in a moment — not scenic description.
+Orient the reader in a way suited to the chapter: action, dialogue, setting or reflection. Avoid an opening that delays the intended scene without adding useful atmosphere or context.
 
 ### Ending
-Vary your endings. Not every chapter needs a cliffhanger. Options: unanswered question, suspended action, abrupt cut after revelation. Never explain the emotion at the end — let the image do the work.
+Choose closure, reflection, a resonant image or a cliffhanger according to the chapter's purpose. A direct emotional statement is fine when it belongs to the voice; do not force an unresolved hook.
 
 ### Dialogue
-Each character should sound different. Minimal tags — if the context makes the speaker clear, no tag is needed. Avoid said-bookism (「他厲聲呵斥道」).
+Keep speakers identifiable and consistent with their established voices. Use tags where needed for clarity; ornate tags are a choice of style, not a substitute for expressive dialogue.
 
 ### Metaphor
-One precise metaphor beats three stacked ones. If removing a metaphor loses nothing, delete it. Metaphors serve understanding, not decoration.
+Prefer images that contribute to meaning, voice or atmosphere. Trim redundant metaphors unless their accumulation is an intentional feature of the requested style.
 
 ### Character voice in narration
-Inner thoughts should sound different per character, not just dialogue. Analytical minds think in fragments and data. Emotional minds think in sensory images. Test: remove the name — can you tell who's thinking?
+Base interior language on this character's established voice, situation and viewpoint. Do not assign stock prose styles to personality labels such as “analytical” or “emotional.”
 
 ### Prose rhythm
 Repetition is a choice, not a habit. Punctuation serves rhythm — dashes and ellipses are powerful when intentional, invisible when habitual.
 
 ### Continuity
-Review established data before writing. If referencing a previously established value, use the same value. If it must change, the POV character must notice.
+Review established data before writing. A changed value needs an in-story cause or an authorized setting revision; the POV character need not notice every change. Do not silently treat a contradiction as new canon.
 
 ### World layer separation
-Multiple narrative layers each have their own setting data. Never bleed details from one layer into another unless the POV character notices it as a plot point.
+Keep each narrative layer's facts and knowledge separate. A deliberate crossover needs support in the plan and text; a character noticing it does not by itself establish that it is possible.
 
 ### Language
-Follow the story brief for language and style. Never use meta-narrative terms (主角, 第一章, 讀者) — characters don't know they're in a story.
+Follow the requested language and narrative convention. Avoid accidental meta-narrative language; intentional metafiction or direct reader address is allowed when part of the chosen form.
 
 ---
 
 ## Rewrite Mode
 
-If the input includes JUDGE FEEDBACK, this is a rewrite — not a fresh generation.
-- Read the existing chapter first
-- Preserve the skeleton: core plot events, character actions, structure
-- Fix ONLY what the feedback identifies
-- Maintain character voices and narrative style
-- Net positive length
+For a revision request, including JUDGE FEEDBACK:
+- Read the existing chapter and the requested changes first.
+- Preserve material outside the requested scope. A request to change structure or plot authorizes that specified change, not unrelated rewrites.
+- Keep voices and established facts consistent unless the user explicitly changes them.
+- Shorten, expand or rearrange as the task requires; more words are not inherently better.
+
+## Lightweight editorial pass
+
+After drafting, read the complete chapter once before handing it to the progress-updater. Check:
+
+- **Motivation and causality:** for consequential choices, find the passages that connect the character's information/beliefs, priorities and present trigger to this action rather than a credible alternative. Knowing the cost does not alone explain accepting it. A flawed, emotional or impulsive decision can be coherent; check its basis, not whether it was optimal or later succeeded. Missing support should be traced to planning, sources/context or expression before revising. See `docs/character-decisions.md` when this needs closer work.
+- **Pacing:** does the distribution of scene, summary and pause suit the intended effect and length?
+- **Readability and continuity:** are speakers, time/place changes and POV clear; do facts and requested beats fit the checked sources?
+
+Identify concrete passages, their effect and the smallest useful correction. Make necessary local revisions within the user's scope, then reread the affected passages and their transitions. Stop when the identified problems are addressed; do not keep rewriting to pursue a generic score or a different aesthetic.
+
+Ordinary chapters use this author self-check. For a major turning point, unresolved continuity concern or an explicit review request, the main agent may assign an independent reviewer a bounded question and relevant sources. Do not require a second agent for every chapter. If the user requested review only, return findings without modifying prose; changes in story direction outside the authorized scope require clarification.
+
+The final prose, after this pass, is the source for the chapter log and diff. No separate per-chapter editorial report is required. Workflow receipts check artifact consistency, not literary quality.
 
 ---
 
 ## Output
 
-Output the chapter text directly. No formatting markers, no explanations. Just the story prose.
-
-## Quality Checklist (verify before saving)
-
-- [ ] World texture woven throughout (prose carries the world's nature)
-- [ ] Anomalies whispered, not shouted
-- [ ] Shows, never explains
-- [ ] Every scene has forward motion
-- [ ] Every key event is a full scene
-- [ ] Characters sound different from each other
-- [ ] Length meets story brief target
-- [ ] No meta-narrative terms
-- [ ] No layer contamination
+For writing or revision, output the chapter prose in the requested format. Keep editorial notes out of the manuscript. If an unresolved issue prevents completion, report it separately instead of hiding it in the story.

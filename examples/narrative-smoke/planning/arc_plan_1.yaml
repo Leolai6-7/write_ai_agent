@@ -1,0 +1,39 @@
+volume: 1
+arc: 後間的門
+chapters:
+  - chapter: 1
+    title: 高一點的地方
+    line: R
+    pov: 林青
+    objective: 建立鑰匙已被改放，以及交代位置被打斷的日常缺口。
+    key_events:
+      - 林青為避漏水把後間銅鑰匙從紅木盒移到高架藍布袋。
+      - 小白在門口提到等會到紅盒拿鑰匙；林青受電話與漏水打斷，未告知新位置。
+    tone: 忙碌中微小的錯開
+    characters: [林青, 小白]
+    locations: [河邊修理鋪]
+    foreshadowing: [{thread: 1, action: plant}]
+  - chapter: 2
+    title: 空盒
+    line: R
+    pov: 小白
+    objective: 小白按舊經驗找鑰匙失敗，選擇向林青問清楚。
+    key_events:
+      - 為取出後間待交的收音機並送還黃伯，小白打開紅盒，發現沒有鑰匙。
+      - 他在合理範圍翻找仍無結果，處理眼前的漏水，最後開口詢問；停在回答之前。
+    tone: 逞強轉為願意求助
+    characters: [小白, 林青]
+    locations: [河邊修理鋪]
+    foreshadowing: [{thread: 1, action: hint}]
+  - chapter: 3
+    title: 把話說完
+    line: R
+    pov: 小白
+    objective: 經由明確問答取得新位置，找到鑰匙並完成收音機交付。
+    key_events:
+      - 接續前章的詢問，由林青當場說清楚位置，小白重述確認後親手找到鑰匙。
+      - 小白打開後間取回收音機，與林青安排遮雨送還黃伯；由行動收束，不說教。
+    tone: 具體而克制的舒展
+    characters: [小白, 林青]
+    locations: [河邊修理鋪]
+    foreshadowing: [{thread: 1, action: resolve}]

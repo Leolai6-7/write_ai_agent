@@ -1,0 +1,382 @@
+{
+  "chapters": [
+    1,
+    2,
+    3
+  ],
+  "characters": {
+    "林青": {
+      "chapters": [
+        1,
+        2,
+        3
+      ],
+      "events": "ch1：為避漏水改放後間鑰匙，交代被電話打斷後上樓。 · ch2：在樓上被小白叫住，腳步停下，尚未回答。 · ch3：說清鑰匙位置並承認忘記交代，協助裝袋。"
+    },
+    "小白": {
+      "chapters": [
+        1,
+        2,
+        3
+      ],
+      "events": "ch1：從門外詢問等會是否仍到紅盒拿鑰匙，搬入紙箱。 · ch2：發現紅盒無匙，有限翻找、接漏水後開口詢問位置。 · ch3：問清位置後取匙、開門，確認歸還處並放回鑰匙，送還收音機。"
+    },
+    "黃伯": {
+      "chapters": [
+        3
+      ],
+      "events": "ch3：配合小白托住收音機，完成接收。"
+    }
+  },
+  "locations": {
+    "河邊修理鋪": {
+      "chapters": [
+        1,
+        2,
+        3
+      ],
+      "description": ""
+    }
+  },
+  "foreshadowing": {
+    "①後間鑰匙": {
+      "status": "已收束",
+      "planted_in": [
+        1
+      ],
+      "hinted_in": [
+        2
+      ],
+      "resolved_in": [
+        3
+      ]
+    }
+  },
+  "causal_chains": [
+    {
+      "cause": "林青改放鑰匙卻未交代新位置",
+      "cause_ch": "1",
+      "effect": "小白沿用舊位置翻找落空後詢問",
+      "effect_ch": "2"
+    },
+    {
+      "cause": "小白發現紅盒無匙後明確詢問",
+      "cause_ch": "2",
+      "effect": "林青告知位置，小白重述確認並取得鑰匙",
+      "effect_ch": "3"
+    }
+  ],
+  "mirrors": [],
+  "values": {},
+  "concepts": {},
+  "narrative_state": {
+    "key-location": {
+      "id": "key-location",
+      "kind": "fact",
+      "text": "小白用完銅鑰匙，確認歸還處後放回藍布袋，折好袋口再推回高架乾處。",
+      "source": {
+        "chapter": 3,
+        "start_line": 23,
+        "end_line": 27,
+        "sha256": "aa8cd6b46087e4d9fa82534019a0170d572f6a47f772ccfd95335d84f5c95ddc"
+      },
+      "status": "active",
+      "introduced_in": 1,
+      "updated_in": 3
+    },
+    "linqing-key-location": {
+      "id": "linqing-key-location",
+      "kind": "knowledge",
+      "character": "林青",
+      "text": "林青親手把鑰匙放入高架藍布袋，知道這次改放的位置。",
+      "source": {
+        "chapter": 1,
+        "start_line": 13,
+        "end_line": 13,
+        "sha256": "60953deea57f937cc3ed094ab40e9ee2027bc393eedf2cf73cd20dfc64e82564"
+      },
+      "status": "active",
+      "introduced_in": 1,
+      "updated_in": 1
+    },
+    "xiaobai-key-redbox": {
+      "id": "xiaobai-key-redbox",
+      "kind": "belief",
+      "character": "小白",
+      "status": "retired",
+      "text": "小白已確認紅盒無匙，撤回鑰匙仍在紅盒的預期。",
+      "source": {
+        "chapter": 2,
+        "start_line": 39,
+        "end_line": 39,
+        "sha256": "931aa15857424969b62a7b401f0a3b6d8a07f97725987acdc7c9dc7f3c928c7f"
+      },
+      "introduced_in": 1,
+      "updated_in": 2
+    },
+    "radio-location": {
+      "id": "radio-location",
+      "kind": "fact",
+      "text": "小白將收音機送抵黃伯門前，待黃伯雙手接穩機身才鬆開提把。",
+      "source": {
+        "chapter": 3,
+        "start_line": 35,
+        "end_line": 41,
+        "sha256": "aa8cd6b46087e4d9fa82534019a0170d572f6a47f772ccfd95335d84f5c95ddc"
+      },
+      "status": "active",
+      "introduced_in": 1,
+      "updated_in": 3
+    },
+    "xiaobai-redbox-empty": {
+      "id": "xiaobai-redbox-empty",
+      "kind": "knowledge",
+      "character": "小白",
+      "text": "小白打開並查看紅盒，確認裡面沒有鑰匙。",
+      "source": {
+        "chapter": 2,
+        "start_line": 5,
+        "end_line": 7,
+        "sha256": "931aa15857424969b62a7b401f0a3b6d8a07f97725987acdc7c9dc7f3c928c7f"
+      },
+      "status": "active",
+      "introduced_in": 2,
+      "updated_in": 2
+    },
+    "xiaobai-key-location": {
+      "id": "xiaobai-key-location",
+      "kind": "knowledge",
+      "character": "小白",
+      "text": "小白聽林青告知高架藍布袋的位置，重述確認後親手翻開折口並取出鑰匙。",
+      "source": {
+        "chapter": 3,
+        "start_line": 3,
+        "end_line": 17,
+        "sha256": "aa8cd6b46087e4d9fa82534019a0170d572f6a47f772ccfd95335d84f5c95ddc"
+      },
+      "status": "active",
+      "introduced_in": 3,
+      "updated_in": 3
+    }
+  },
+  "_history": {
+    "version": 1,
+    "baseline": {
+      "chapters": [],
+      "characters": {},
+      "locations": {},
+      "foreshadowing": {},
+      "causal_chains": [],
+      "mirrors": [],
+      "values": {},
+      "concepts": {}
+    },
+    "diffs": {
+      "1": {
+        "chapter": 1,
+        "characters_appeared": [
+          {
+            "name": "林青",
+            "events": "ch1：為避漏水改放後間鑰匙，交代被電話打斷後上樓。"
+          },
+          {
+            "name": "小白",
+            "events": "ch1：從門外詢問等會是否仍到紅盒拿鑰匙，搬入紙箱。"
+          }
+        ],
+        "locations_used": [
+          "河邊修理鋪"
+        ],
+        "foreshadowing_updates": [
+          {
+            "thread": "①後間鑰匙",
+            "action": "plant"
+          }
+        ],
+        "narrative_updates": [
+          {
+            "id": "key-location",
+            "kind": "fact",
+            "text": "林青把後間銅鑰匙改放在高架上的藍布袋裡。",
+            "source": {
+              "chapter": 1,
+              "start_line": 13,
+              "end_line": 13,
+              "sha256": "60953deea57f937cc3ed094ab40e9ee2027bc393eedf2cf73cd20dfc64e82564"
+            },
+            "status": "active"
+          },
+          {
+            "id": "linqing-key-location",
+            "kind": "knowledge",
+            "character": "林青",
+            "text": "林青親手把鑰匙放入高架藍布袋，知道這次改放的位置。",
+            "source": {
+              "chapter": 1,
+              "start_line": 13,
+              "end_line": 13,
+              "sha256": "60953deea57f937cc3ed094ab40e9ee2027bc393eedf2cf73cd20dfc64e82564"
+            },
+            "status": "active"
+          },
+          {
+            "id": "xiaobai-key-redbox",
+            "kind": "belief",
+            "character": "小白",
+            "text": "小白仍把紅盒當預期取匙處，按慣例詢問等會是否到紅盒拿。",
+            "source": {
+              "chapter": 1,
+              "start_line": 15,
+              "end_line": 15,
+              "sha256": "60953deea57f937cc3ed094ab40e9ee2027bc393eedf2cf73cd20dfc64e82564"
+            },
+            "status": "active"
+          },
+          {
+            "id": "radio-location",
+            "kind": "fact",
+            "text": "黃伯修好的收音機放在後間靠門高凳上，插頭已束好。",
+            "source": {
+              "chapter": 1,
+              "start_line": 3,
+              "end_line": 7,
+              "sha256": "60953deea57f937cc3ed094ab40e9ee2027bc393eedf2cf73cd20dfc64e82564"
+            },
+            "status": "active"
+          }
+        ]
+      },
+      "2": {
+        "chapter": 2,
+        "characters_appeared": [
+          {
+            "name": "小白",
+            "events": "ch2：發現紅盒無匙，有限翻找、接漏水後開口詢問位置。"
+          },
+          {
+            "name": "林青",
+            "events": "ch2：在樓上被小白叫住，腳步停下，尚未回答。"
+          }
+        ],
+        "locations_used": [
+          "河邊修理鋪"
+        ],
+        "foreshadowing_updates": [
+          {
+            "thread": "①後間鑰匙",
+            "action": "hint"
+          }
+        ],
+        "causal_chains": [
+          {
+            "cause": "林青改放鑰匙卻未交代新位置",
+            "cause_ch": 1,
+            "effect": "小白沿用舊位置翻找落空後詢問",
+            "effect_ch": 2
+          }
+        ],
+        "narrative_updates": [
+          {
+            "id": "xiaobai-key-redbox",
+            "kind": "belief",
+            "character": "小白",
+            "status": "retired",
+            "text": "小白已確認紅盒無匙，撤回鑰匙仍在紅盒的預期。",
+            "source": {
+              "chapter": 2,
+              "start_line": 39,
+              "end_line": 39,
+              "sha256": "931aa15857424969b62a7b401f0a3b6d8a07f97725987acdc7c9dc7f3c928c7f"
+            }
+          },
+          {
+            "id": "xiaobai-redbox-empty",
+            "kind": "knowledge",
+            "character": "小白",
+            "text": "小白打開並查看紅盒，確認裡面沒有鑰匙。",
+            "source": {
+              "chapter": 2,
+              "start_line": 5,
+              "end_line": 7,
+              "sha256": "931aa15857424969b62a7b401f0a3b6d8a07f97725987acdc7c9dc7f3c928c7f"
+            },
+            "status": "active"
+          }
+        ]
+      },
+      "3": {
+        "chapter": 3,
+        "characters_appeared": [
+          {
+            "name": "小白",
+            "events": "ch3：問清位置後取匙、開門，確認歸還處並放回鑰匙，送還收音機。"
+          },
+          {
+            "name": "林青",
+            "events": "ch3：說清鑰匙位置並承認忘記交代，協助裝袋。"
+          },
+          {
+            "name": "黃伯",
+            "events": "ch3：配合小白托住收音機，完成接收。"
+          }
+        ],
+        "locations_used": [
+          "河邊修理鋪"
+        ],
+        "foreshadowing_updates": [
+          {
+            "thread": "①後間鑰匙",
+            "action": "resolve"
+          }
+        ],
+        "causal_chains": [
+          {
+            "cause": "小白發現紅盒無匙後明確詢問",
+            "cause_ch": 2,
+            "effect": "林青告知位置，小白重述確認並取得鑰匙",
+            "effect_ch": 3
+          }
+        ],
+        "narrative_updates": [
+          {
+            "id": "xiaobai-key-location",
+            "kind": "knowledge",
+            "character": "小白",
+            "text": "小白聽林青告知高架藍布袋的位置，重述確認後親手翻開折口並取出鑰匙。",
+            "source": {
+              "chapter": 3,
+              "start_line": 3,
+              "end_line": 17,
+              "sha256": "aa8cd6b46087e4d9fa82534019a0170d572f6a47f772ccfd95335d84f5c95ddc"
+            },
+            "status": "active"
+          },
+          {
+            "id": "key-location",
+            "kind": "fact",
+            "text": "小白用完銅鑰匙，確認歸還處後放回藍布袋，折好袋口再推回高架乾處。",
+            "source": {
+              "chapter": 3,
+              "start_line": 23,
+              "end_line": 27,
+              "sha256": "aa8cd6b46087e4d9fa82534019a0170d572f6a47f772ccfd95335d84f5c95ddc"
+            },
+            "status": "active"
+          },
+          {
+            "id": "radio-location",
+            "kind": "fact",
+            "text": "小白將收音機送抵黃伯門前，待黃伯雙手接穩機身才鬆開提把。",
+            "source": {
+              "chapter": 3,
+              "start_line": 35,
+              "end_line": 41,
+              "sha256": "aa8cd6b46087e4d9fa82534019a0170d572f6a47f772ccfd95335d84f5c95ddc"
+            },
+            "status": "active"
+          }
+        ]
+      }
+    }
+  }
+}

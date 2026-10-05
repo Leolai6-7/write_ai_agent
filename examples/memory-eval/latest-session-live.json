@@ -1,0 +1,1169 @@
+{
+  "mode": "live",
+  "scope": "equal_input_source_recall_not_full_writing_pipeline",
+  "coverage_method": "curated_exact_markers_not_semantic_verification",
+  "dataset_sha256": "993593677e184f795c7a1962d655900db7b96bbecbabb76ec8f10ae4c72a846c",
+  "corpus_view": "record",
+  "corpus_sha256": "e76c7adb7cf10775e5e69e0aa54172ee8ceab7b0467139eabf53e103e3093ed0",
+  "encoder_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "capture_audit": {
+    "summary": [
+      {
+        "case": "distant_code",
+        "requirement": "distant_code_meaning_reply",
+        "chapter": 1,
+        "source_quote": "遠距暗語「潮聲反走，第三盞不點」表示延後開船；接話者必須回答「等到第二聲鐘」。",
+        "captured": true,
+        "missing_markers": []
+      },
+      {
+        "case": "alias_and_handoff",
+        "requirement": "alias_identity",
+        "chapter": 2,
+        "source_quote": "「紙鳶」是沈葵在渡口使用的別名，並不是另一個人。",
+        "captured": false,
+        "missing_markers": [
+          "「紙鳶」是沈葵",
+          "使用的別名",
+          "並不是另一個人"
+        ]
+      },
+      {
+        "case": "alias_and_handoff",
+        "requirement": "alias_item_transfer",
+        "chapter": 4,
+        "source_quote": "紙鳶把藍銅鑰匙交給杜衡，囑咐他先代為保管。",
+        "captured": true,
+        "missing_markers": []
+      },
+      {
+        "case": "current_key_holder",
+        "requirement": "latest_key_transfer",
+        "chapter": 6,
+        "source_quote": "杜衡把藍銅鑰匙交給江硯，並說：「從今晚起由你保管。」",
+        "captured": false,
+        "missing_markers": [
+          "杜衡把藍銅鑰匙交給江硯",
+          "從今晚起由你保管"
+        ]
+      },
+      {
+        "case": "belief_is_not_fact",
+        "requirement": "mistaken_belief_and_truth",
+        "chapter": 3,
+        "source_quote": "林沅以為杜衡撕毀了渡船名冊，但這只是他的猜測；原本名冊仍完整藏在西櫃底層。",
+        "captured": false,
+        "missing_markers": [
+          "林沅以為杜衡撕毀了渡船名冊",
+          "只是他的猜測",
+          "原本名冊仍完整藏在西櫃底層"
+        ]
+      },
+      {
+        "case": "explicit_promise",
+        "requirement": "promise_deadline_place_original",
+        "chapter": 5,
+        "source_quote": "杜衡親口對林沅承諾：「月落以前，我會把原本的潮汐簿送回北塔；不交抄本。」",
+        "captured": true,
+        "missing_markers": []
+      },
+      {
+        "case": "bottom_door_sequence",
+        "requirement": "door_knocks_and_alarm",
+        "chapter": 7,
+        "source_quote": "北塔底門要連敲兩下，再停一息；連敲三下只會喚醒警鈴。",
+        "captured": false,
+        "missing_markers": [
+          "連敲兩下",
+          "再停一息",
+          "連敲三下只會喚醒警鈴"
+        ]
+      },
+      {
+        "case": "genuine_box_mark",
+        "requirement": "box_marks_distinction",
+        "chapter": 7,
+        "source_quote": "真封潮匣的玻璃底面有三角形刻痕；仿匣的玻璃底面只有圓點。",
+        "captured": false,
+        "missing_markers": [
+          "真封潮匣的玻璃底面有三角形刻痕",
+          "仿匣的玻璃底面只有圓點"
+        ]
+      },
+      {
+        "case": "similar_new_code",
+        "requirement": "new_code_meaning_reply",
+        "chapter": 8,
+        "source_quote": "「潮聲順走，第二盞不點」表示改走東棧橋，應答是「只看白帆」。",
+        "captured": true,
+        "missing_markers": []
+      }
+    ],
+    "record": [
+      {
+        "case": "distant_code",
+        "requirement": "distant_code_meaning_reply",
+        "chapter": 1,
+        "source_quote": "遠距暗語「潮聲反走，第三盞不點」表示延後開船；接話者必須回答「等到第二聲鐘」。",
+        "captured": true,
+        "missing_markers": []
+      },
+      {
+        "case": "alias_and_handoff",
+        "requirement": "alias_identity",
+        "chapter": 2,
+        "source_quote": "「紙鳶」是沈葵在渡口使用的別名，並不是另一個人。",
+        "captured": true,
+        "missing_markers": []
+      },
+      {
+        "case": "alias_and_handoff",
+        "requirement": "alias_item_transfer",
+        "chapter": 4,
+        "source_quote": "紙鳶把藍銅鑰匙交給杜衡，囑咐他先代為保管。",
+        "captured": true,
+        "missing_markers": []
+      },
+      {
+        "case": "current_key_holder",
+        "requirement": "latest_key_transfer",
+        "chapter": 6,
+        "source_quote": "杜衡把藍銅鑰匙交給江硯，並說：「從今晚起由你保管。」",
+        "captured": true,
+        "missing_markers": []
+      },
+      {
+        "case": "belief_is_not_fact",
+        "requirement": "mistaken_belief_and_truth",
+        "chapter": 3,
+        "source_quote": "林沅以為杜衡撕毀了渡船名冊，但這只是他的猜測；原本名冊仍完整藏在西櫃底層。",
+        "captured": true,
+        "missing_markers": []
+      },
+      {
+        "case": "explicit_promise",
+        "requirement": "promise_deadline_place_original",
+        "chapter": 5,
+        "source_quote": "杜衡親口對林沅承諾：「月落以前，我會把原本的潮汐簿送回北塔；不交抄本。」",
+        "captured": true,
+        "missing_markers": []
+      },
+      {
+        "case": "bottom_door_sequence",
+        "requirement": "door_knocks_and_alarm",
+        "chapter": 7,
+        "source_quote": "北塔底門要連敲兩下，再停一息；連敲三下只會喚醒警鈴。",
+        "captured": false,
+        "missing_markers": [
+          "連敲兩下",
+          "再停一息",
+          "連敲三下只會喚醒警鈴"
+        ]
+      },
+      {
+        "case": "genuine_box_mark",
+        "requirement": "box_marks_distinction",
+        "chapter": 7,
+        "source_quote": "真封潮匣的玻璃底面有三角形刻痕；仿匣的玻璃底面只有圓點。",
+        "captured": false,
+        "missing_markers": [
+          "真封潮匣的玻璃底面有三角形刻痕",
+          "仿匣的玻璃底面只有圓點"
+        ]
+      },
+      {
+        "case": "similar_new_code",
+        "requirement": "new_code_meaning_reply",
+        "chapter": 8,
+        "source_quote": "「潮聲順走，第二盞不點」表示改走東棧橋，應答是「只看白帆」。",
+        "captured": true,
+        "missing_markers": []
+      }
+    ]
+  },
+  "coverage_totals": {
+    "summary": {
+      "requirements": 9,
+      "captured": 4,
+      "capture_gaps": 5
+    },
+    "record": {
+      "requirements": 9,
+      "captured": 7,
+      "capture_gaps": 2
+    }
+  },
+  "backends": {
+    "chroma": {
+      "status": "ok",
+      "input_matched": true,
+      "build_seconds": 4.083040957921185,
+      "cases": [
+        {
+          "case": "distant_code",
+          "status": "ok",
+          "hits": [
+            8
+          ],
+          "requirements": [
+            {
+              "id": "distant_code_meaning_reply",
+              "chapter": 1,
+              "diagnosis": "retrieval_miss"
+            }
+          ],
+          "capturable_requirements": 1,
+          "recall_on_captured": 0,
+          "all_evidence_available": true,
+          "all_evidence_retrieved": false,
+          "elapsed_seconds": 0.0217394579667598,
+          "trace": {
+            "eligible_chapters": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ],
+            "max_distance": 1
+          }
+        },
+        {
+          "case": "alias_and_handoff",
+          "status": "ok",
+          "hits": [
+            4,
+            2
+          ],
+          "requirements": [
+            {
+              "id": "alias_identity",
+              "chapter": 2,
+              "diagnosis": "retrieved"
+            },
+            {
+              "id": "alias_item_transfer",
+              "chapter": 4,
+              "diagnosis": "retrieved"
+            }
+          ],
+          "capturable_requirements": 2,
+          "recall_on_captured": 1,
+          "all_evidence_available": true,
+          "all_evidence_retrieved": true,
+          "elapsed_seconds": 0.036096875090152025,
+          "trace": {
+            "eligible_chapters": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "max_distance": 1
+          }
+        },
+        {
+          "case": "current_key_holder",
+          "status": "ok",
+          "hits": [
+            4,
+            6
+          ],
+          "requirements": [
+            {
+              "id": "latest_key_transfer",
+              "chapter": 6,
+              "diagnosis": "retrieved"
+            }
+          ],
+          "capturable_requirements": 1,
+          "recall_on_captured": 1,
+          "all_evidence_available": true,
+          "all_evidence_retrieved": true,
+          "elapsed_seconds": 0.02637537498958409,
+          "trace": {
+            "eligible_chapters": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "max_distance": 1
+          }
+        },
+        {
+          "case": "belief_is_not_fact",
+          "status": "ok",
+          "hits": [
+            3
+          ],
+          "requirements": [
+            {
+              "id": "mistaken_belief_and_truth",
+              "chapter": 3,
+              "diagnosis": "retrieved"
+            }
+          ],
+          "capturable_requirements": 1,
+          "recall_on_captured": 1,
+          "all_evidence_available": true,
+          "all_evidence_retrieved": true,
+          "elapsed_seconds": 0.02933870896231383,
+          "trace": {
+            "eligible_chapters": [
+              1,
+              2,
+              3
+            ],
+            "max_distance": 1
+          }
+        },
+        {
+          "case": "explicit_promise",
+          "status": "ok",
+          "hits": [
+            5
+          ],
+          "requirements": [
+            {
+              "id": "promise_deadline_place_original",
+              "chapter": 5,
+              "diagnosis": "retrieved"
+            }
+          ],
+          "capturable_requirements": 1,
+          "recall_on_captured": 1,
+          "all_evidence_available": true,
+          "all_evidence_retrieved": true,
+          "elapsed_seconds": 0.02727804204914719,
+          "trace": {
+            "eligible_chapters": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ],
+            "max_distance": 1
+          }
+        },
+        {
+          "case": "bottom_door_sequence",
+          "status": "ok",
+          "hits": [
+            7
+          ],
+          "requirements": [
+            {
+              "id": "door_knocks_and_alarm",
+              "chapter": 7,
+              "diagnosis": "capture_gap"
+            }
+          ],
+          "capturable_requirements": 0,
+          "recall_on_captured": null,
+          "all_evidence_available": false,
+          "all_evidence_retrieved": false,
+          "elapsed_seconds": 0.012839625007472932,
+          "trace": {
+            "eligible_chapters": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "max_distance": 1
+          }
+        },
+        {
+          "case": "genuine_box_mark",
+          "status": "ok",
+          "hits": [
+            7
+          ],
+          "requirements": [
+            {
+              "id": "box_marks_distinction",
+              "chapter": 7,
+              "diagnosis": "capture_gap"
+            }
+          ],
+          "capturable_requirements": 0,
+          "recall_on_captured": null,
+          "all_evidence_available": false,
+          "all_evidence_retrieved": false,
+          "elapsed_seconds": 0.01406983402557671,
+          "trace": {
+            "eligible_chapters": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "max_distance": 1
+          }
+        },
+        {
+          "case": "similar_new_code",
+          "status": "ok",
+          "hits": [
+            8
+          ],
+          "requirements": [
+            {
+              "id": "new_code_meaning_reply",
+              "chapter": 8,
+              "diagnosis": "retrieved"
+            }
+          ],
+          "capturable_requirements": 1,
+          "recall_on_captured": 1,
+          "all_evidence_available": true,
+          "all_evidence_retrieved": true,
+          "elapsed_seconds": 0.013881375081837177,
+          "trace": {
+            "eligible_chapters": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ],
+            "max_distance": 1
+          }
+        }
+      ],
+      "build_trace": {}
+    },
+    "jev": {
+      "status": "ok",
+      "input_matched": true,
+      "build_seconds": 8.160388916963711,
+      "cases": [
+        {
+          "case": "distant_code",
+          "status": "ok",
+          "hits": [
+            1
+          ],
+          "requirements": [
+            {
+              "id": "distant_code_meaning_reply",
+              "chapter": 1,
+              "diagnosis": "retrieved"
+            }
+          ],
+          "capturable_requirements": 1,
+          "recall_on_captured": 1,
+          "all_evidence_available": true,
+          "all_evidence_retrieved": true,
+          "elapsed_seconds": 4.078158790944144,
+          "trace": {
+            "controller": "jev-mem",
+            "stopping_decision": "further_retrieval_unhelpful",
+            "jev_calls": 4,
+            "llm_calls": 0,
+            "fallback_events": [],
+            "nodes_visited": 4,
+            "edges_examined": 4,
+            "latency_seconds": 1.1856226669624448,
+            "mock": false,
+            "excluded_nodes": 1,
+            "eligible_chapters": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ],
+            "timings": {
+              "setup_seconds": 2.120381874963641,
+              "encoder_seconds": 0.7348537079524249,
+              "load_seconds": 0.0016981250373646617,
+              "prune_seconds": 0.00004604097921401262,
+              "query_seconds": 1.1863550839480013,
+              "build_seconds": 0,
+              "cleanup_seconds": 0.0007155420025810599,
+              "encoder_reused": false,
+              "worker_mode": "session",
+              "total_seconds": 4.044110040995292
+            },
+            "api_calls": [
+              {
+                "status": "ok",
+                "status_code": 200,
+                "elapsed_seconds": 0.3449392500333488
+              },
+              {
+                "status": "ok",
+                "status_code": 200,
+                "elapsed_seconds": 0.23721149994526058
+              },
+              {
+                "status": "ok",
+                "status_code": 200,
+                "elapsed_seconds": 0.2360205000732094
+              },
+              {
+                "status": "ok",
+                "status_code": 200,
+                "elapsed_seconds": 0.2520216250559315
+              }
+            ],
+            "api_timing_scope": "client_http_request_not_server_inference"
+          }
+        },
+        {
+          "case": "alias_and_handoff",
+          "status": "ok",
+          "hits": [
+            4,
+            2
+          ],
+          "requirements": [
+            {
+              "id": "alias_identity",
+              "chapter": 2,
+              "diagnosis": "retrieved"
+            },
+            {
+              "id": "alias_item_transfer",
+              "chapter": 4,
+              "diagnosis": "retrieved"
+            }
+          ],
+          "capturable_requirements": 2,
+          "recall_on_captured": 1,
+          "all_evidence_available": true,
+          "all_evidence_retrieved": true,
+          "elapsed_seconds": 0.5143712920835242,
+          "trace": {
+            "controller": "jev-mem",
+            "stopping_decision": "further_retrieval_unhelpful",
+            "jev_calls": 2,
+            "llm_calls": 0,
+            "fallback_events": [],
+            "nodes_visited": 2,
+            "edges_examined": 0,
+            "latency_seconds": 0.5086298750247806,
+            "mock": false,
+            "excluded_nodes": 5,
+            "eligible_chapters": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "timings": {
+              "setup_seconds": 0.00022816704586148262,
+              "encoder_seconds": 0,
+              "load_seconds": 0.002566833049058914,
+              "prune_seconds": 0.00008925003930926323,
+              "query_seconds": 0.5088078749831766,
+              "build_seconds": 0,
+              "cleanup_seconds": 0.00035087496507912874,
+              "encoder_reused": true,
+              "worker_mode": "session",
+              "total_seconds": 0.5120877079898492
+            },
+            "api_calls": [
+              {
+                "status": "ok",
+                "status_code": 200,
+                "elapsed_seconds": 0.2507991250604391
+              },
+              {
+                "status": "ok",
+                "status_code": 200,
+                "elapsed_seconds": 0.23057391704060137
+              }
+            ],
+            "api_timing_scope": "client_http_request_not_server_inference"
+          }
+        },
+        {
+          "case": "current_key_holder",
+          "status": "ok",
+          "hits": [
+            4,
+            6
+          ],
+          "requirements": [
+            {
+              "id": "latest_key_transfer",
+              "chapter": 6,
+              "diagnosis": "retrieved"
+            }
+          ],
+          "capturable_requirements": 1,
+          "recall_on_captured": 1,
+          "all_evidence_available": true,
+          "all_evidence_retrieved": true,
+          "elapsed_seconds": 0.572963957907632,
+          "trace": {
+            "controller": "jev-mem",
+            "stopping_decision": "evidence_sufficient",
+            "jev_calls": 2,
+            "llm_calls": 0,
+            "fallback_events": [],
+            "nodes_visited": 2,
+            "edges_examined": 0,
+            "latency_seconds": 0.5668915000278503,
+            "mock": false,
+            "excluded_nodes": 2,
+            "eligible_chapters": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "timings": {
+              "setup_seconds": 0.00020112399943172932,
+              "encoder_seconds": 0,
+              "load_seconds": 0.002564875059761107,
+              "prune_seconds": 0.00006879097782075405,
+              "query_seconds": 0.5671243329998106,
+              "build_seconds": 0,
+              "cleanup_seconds": 0.00040583405643701553,
+              "encoder_reused": true,
+              "worker_mode": "session",
+              "total_seconds": 0.5704415000509471
+            },
+            "api_calls": [
+              {
+                "status": "ok",
+                "status_code": 200,
+                "elapsed_seconds": 0.2646321670617908
+              },
+              {
+                "status": "ok",
+                "status_code": 200,
+                "elapsed_seconds": 0.2795137909706682
+              }
+            ],
+            "api_timing_scope": "client_http_request_not_server_inference"
+          }
+        },
+        {
+          "case": "belief_is_not_fact",
+          "status": "ok",
+          "hits": [
+            3
+          ],
+          "requirements": [
+            {
+              "id": "mistaken_belief_and_truth",
+              "chapter": 3,
+              "diagnosis": "retrieved"
+            }
+          ],
+          "capturable_requirements": 1,
+          "recall_on_captured": 1,
+          "all_evidence_available": true,
+          "all_evidence_retrieved": true,
+          "elapsed_seconds": 0.5748864590423182,
+          "trace": {
+            "controller": "jev-mem",
+            "stopping_decision": "evidence_sufficient",
+            "jev_calls": 2,
+            "llm_calls": 0,
+            "fallback_events": [],
+            "nodes_visited": 1,
+            "edges_examined": 0,
+            "latency_seconds": 0.5696047079982236,
+            "mock": false,
+            "excluded_nodes": 6,
+            "eligible_chapters": [
+              1,
+              2,
+              3
+            ],
+            "timings": {
+              "setup_seconds": 0.0002075409283861518,
+              "encoder_seconds": 0,
+              "load_seconds": 0.002565832925029099,
+              "prune_seconds": 0.0000991669949144125,
+              "query_seconds": 0.5697864170651883,
+              "build_seconds": 0,
+              "cleanup_seconds": 0.00038479105569422245,
+              "encoder_reused": true,
+              "worker_mode": "session",
+              "total_seconds": 0.5731277500744909
+            },
+            "api_calls": [
+              {
+                "status": "ok",
+                "status_code": 200,
+                "elapsed_seconds": 0.28393579192925245
+              },
+              {
+                "status": "ok",
+                "status_code": 200,
+                "elapsed_seconds": 0.2638352500507608
+              }
+            ],
+            "api_timing_scope": "client_http_request_not_server_inference"
+          }
+        },
+        {
+          "case": "explicit_promise",
+          "status": "ok",
+          "hits": [
+            5
+          ],
+          "requirements": [
+            {
+              "id": "promise_deadline_place_original",
+              "chapter": 5,
+              "diagnosis": "retrieved"
+            }
+          ],
+          "capturable_requirements": 1,
+          "recall_on_captured": 1,
+          "all_evidence_available": true,
+          "all_evidence_retrieved": true,
+          "elapsed_seconds": 0.47074924991466105,
+          "trace": {
+            "controller": "jev-mem",
+            "stopping_decision": "further_retrieval_unhelpful",
+            "jev_calls": 2,
+            "llm_calls": 0,
+            "fallback_events": [],
+            "nodes_visited": 1,
+            "edges_examined": 0,
+            "latency_seconds": 0.4664592919871211,
+            "mock": false,
+            "excluded_nodes": 1,
+            "eligible_chapters": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ],
+            "timings": {
+              "setup_seconds": 0.0002732920693233609,
+              "encoder_seconds": 0,
+              "load_seconds": 0.002792750019580126,
+              "prune_seconds": 0.00006274995394051075,
+              "query_seconds": 0.4665193340042606,
+              "build_seconds": 0,
+              "cleanup_seconds": 0.00008579203858971596,
+              "encoder_reused": true,
+              "worker_mode": "session",
+              "total_seconds": 0.46975416608620435
+            },
+            "api_calls": [
+              {
+                "status": "ok",
+                "status_code": 200,
+                "elapsed_seconds": 0.2584310000529513
+              },
+              {
+                "status": "ok",
+                "status_code": 200,
+                "elapsed_seconds": 0.1956798330647871
+              }
+            ],
+            "api_timing_scope": "client_http_request_not_server_inference"
+          }
+        },
+        {
+          "case": "bottom_door_sequence",
+          "status": "ok",
+          "hits": [
+            7
+          ],
+          "requirements": [
+            {
+              "id": "door_knocks_and_alarm",
+              "chapter": 7,
+              "diagnosis": "capture_gap"
+            }
+          ],
+          "capturable_requirements": 0,
+          "recall_on_captured": null,
+          "all_evidence_available": false,
+          "all_evidence_retrieved": false,
+          "elapsed_seconds": 0.9918221669504419,
+          "trace": {
+            "controller": "jev-mem",
+            "stopping_decision": "max_jev_calls",
+            "jev_calls": 4,
+            "llm_calls": 0,
+            "fallback_events": [],
+            "nodes_visited": 4,
+            "edges_examined": 5,
+            "latency_seconds": 0.9887744579464197,
+            "mock": false,
+            "excluded_nodes": 2,
+            "eligible_chapters": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "timings": {
+              "setup_seconds": 0.0001560840755701065,
+              "encoder_seconds": 0,
+              "load_seconds": 0.0017394169699400663,
+              "prune_seconds": 0.0000504170311614871,
+              "query_seconds": 0.9888459580251947,
+              "build_seconds": 0,
+              "cleanup_seconds": 0.00008237501606345177,
+              "encoder_reused": true,
+              "worker_mode": "session",
+              "total_seconds": 0.9908921659225598
+            },
+            "api_calls": [
+              {
+                "status": "ok",
+                "status_code": 200,
+                "elapsed_seconds": 0.29711124999448657
+              },
+              {
+                "status": "ok",
+                "status_code": 200,
+                "elapsed_seconds": 0.23493433406110853
+              },
+              {
+                "status": "ok",
+                "status_code": 200,
+                "elapsed_seconds": 0.2305053329328075
+              },
+              {
+                "status": "ok",
+                "status_code": 200,
+                "elapsed_seconds": 0.21075558301527053
+              }
+            ],
+            "api_timing_scope": "client_http_request_not_server_inference"
+          }
+        },
+        {
+          "case": "genuine_box_mark",
+          "status": "ok",
+          "hits": [
+            7
+          ],
+          "requirements": [
+            {
+              "id": "box_marks_distinction",
+              "chapter": 7,
+              "diagnosis": "capture_gap"
+            }
+          ],
+          "capturable_requirements": 0,
+          "recall_on_captured": null,
+          "all_evidence_available": false,
+          "all_evidence_retrieved": false,
+          "elapsed_seconds": 1.0994565410073847,
+          "trace": {
+            "controller": "jev-mem",
+            "stopping_decision": "max_jev_calls",
+            "jev_calls": 4,
+            "llm_calls": 0,
+            "fallback_events": [],
+            "nodes_visited": 4,
+            "edges_examined": 5,
+            "latency_seconds": 1.0962477090070024,
+            "mock": false,
+            "excluded_nodes": 2,
+            "eligible_chapters": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "timings": {
+              "setup_seconds": 0.00017175008542835712,
+              "encoder_seconds": 0,
+              "load_seconds": 0.0018945829942822456,
+              "prune_seconds": 0.00005000003147870302,
+              "query_seconds": 1.0963145419955254,
+              "build_seconds": 0,
+              "cleanup_seconds": 0.00007216702215373516,
+              "encoder_reused": true,
+              "worker_mode": "session",
+              "total_seconds": 1.0985197910340503
+            },
+            "api_calls": [
+              {
+                "status": "ok",
+                "status_code": 200,
+                "elapsed_seconds": 0.3360700000775978
+              },
+              {
+                "status": "ok",
+                "status_code": 200,
+                "elapsed_seconds": 0.2290362500352785
+              },
+              {
+                "status": "ok",
+                "status_code": 200,
+                "elapsed_seconds": 0.2737705829786137
+              },
+              {
+                "status": "ok",
+                "status_code": 200,
+                "elapsed_seconds": 0.2299365409417078
+              }
+            ],
+            "api_timing_scope": "client_http_request_not_server_inference"
+          }
+        },
+        {
+          "case": "similar_new_code",
+          "status": "ok",
+          "hits": [
+            8
+          ],
+          "requirements": [
+            {
+              "id": "new_code_meaning_reply",
+              "chapter": 8,
+              "diagnosis": "retrieved"
+            }
+          ],
+          "capturable_requirements": 1,
+          "recall_on_captured": 1,
+          "all_evidence_available": true,
+          "all_evidence_retrieved": true,
+          "elapsed_seconds": 0.6267269169911742,
+          "trace": {
+            "controller": "jev-mem",
+            "stopping_decision": "evidence_sufficient",
+            "jev_calls": 2,
+            "llm_calls": 0,
+            "fallback_events": [],
+            "nodes_visited": 1,
+            "edges_examined": 0,
+            "latency_seconds": 0.6237263340735808,
+            "mock": false,
+            "excluded_nodes": 1,
+            "eligible_chapters": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ],
+            "timings": {
+              "setup_seconds": 0.00016883399803191423,
+              "encoder_seconds": 0,
+              "load_seconds": 0.0019134170142933726,
+              "prune_seconds": 0.00004812504630535841,
+              "query_seconds": 0.6237819170346484,
+              "build_seconds": 0,
+              "cleanup_seconds": 0.00006724998820573092,
+              "encoder_reused": true,
+              "worker_mode": "session",
+              "total_seconds": 0.6259942919714376
+            },
+            "api_calls": [
+              {
+                "status": "ok",
+                "status_code": 200,
+                "elapsed_seconds": 0.3247797499643639
+              },
+              {
+                "status": "ok",
+                "status_code": 200,
+                "elapsed_seconds": 0.2867720000213012
+              }
+            ],
+            "api_timing_scope": "client_http_request_not_server_inference"
+          }
+        }
+      ],
+      "build_trace": {
+        "controller": "jev-mem",
+        "mock": false,
+        "llm_calls": 0,
+        "nodes": 9,
+        "timings": {
+          "setup_seconds": 2.118019583984278,
+          "encoder_seconds": 0.762580000096932,
+          "load_seconds": 1.6600824892520905e-7,
+          "prune_seconds": 0,
+          "query_seconds": 0,
+          "build_seconds": 4.720705832936801,
+          "cleanup_seconds": 0.00017933303024619818,
+          "encoder_reused": false,
+          "worker_mode": "oneshot",
+          "total_seconds": 7.6014972910052165
+        },
+        "api_calls": [
+          {
+            "status": "ok",
+            "status_code": 200,
+            "elapsed_seconds": 0.35153441701550037
+          },
+          {
+            "status": "ok",
+            "status_code": 200,
+            "elapsed_seconds": 0.21639024990145117
+          },
+          {
+            "status": "ok",
+            "status_code": 200,
+            "elapsed_seconds": 0.22036266699433327
+          },
+          {
+            "status": "ok",
+            "status_code": 200,
+            "elapsed_seconds": 0.21386287501081824
+          },
+          {
+            "status": "ok",
+            "status_code": 200,
+            "elapsed_seconds": 0.2427768330089748
+          },
+          {
+            "status": "ok",
+            "status_code": 200,
+            "elapsed_seconds": 0.2651395839639008
+          },
+          {
+            "status": "ok",
+            "status_code": 200,
+            "elapsed_seconds": 0.2451389580965042
+          },
+          {
+            "status": "ok",
+            "status_code": 200,
+            "elapsed_seconds": 0.22799925005529076
+          },
+          {
+            "status": "ok",
+            "status_code": 200,
+            "elapsed_seconds": 0.22774341702461243
+          },
+          {
+            "status": "ok",
+            "status_code": 200,
+            "elapsed_seconds": 0.2496216669678688
+          },
+          {
+            "status": "ok",
+            "status_code": 200,
+            "elapsed_seconds": 0.23541650001425296
+          },
+          {
+            "status": "ok",
+            "status_code": 200,
+            "elapsed_seconds": 0.24689575005322695
+          },
+          {
+            "status": "ok",
+            "status_code": 200,
+            "elapsed_seconds": 0.27417666593100876
+          },
+          {
+            "status": "ok",
+            "status_code": 200,
+            "elapsed_seconds": 0.2120879580033943
+          },
+          {
+            "status": "ok",
+            "status_code": 200,
+            "elapsed_seconds": 0.4929530000081286
+          },
+          {
+            "status": "ok",
+            "status_code": 200,
+            "elapsed_seconds": 0.21689362498000264
+          },
+          {
+            "status": "ok",
+            "status_code": 200,
+            "elapsed_seconds": 0.22538095794152468
+          }
+        ],
+        "api_timing_scope": "client_http_request_not_server_inference"
+      }
+    }
+  },
+  "comparison_ready": true,
+  "metadata": {
+    "comparison_kind": "same_corpus_recall",
+    "production_workflow_benchmark": false,
+    "corpus_sha256": "e76c7adb7cf10775e5e69e0aa54172ee8ceab7b0467139eabf53e103e3093ed0",
+    "corpus_chapters": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "encoder_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "jev_model": "jev-1.13.0",
+    "jev_worker": "session",
+    "jev_session_first_query_includes_startup": true,
+    "jev_source_sha256": "2c29450f081a1adb1ada629ba244a11cd2baec7be3ca2caf7d7ca11745dd41cd",
+    "case_count": 8,
+    "temporary_stores": true,
+    "model_downloads_allowed": false,
+    "chroma_max_distance": 1,
+    "jev_entities": "empty_for_all_records",
+    "gold_sent_to_backends": false,
+    "limitations": [
+      "No production completion receipts or freshness checks",
+      "Equal text/model names do not guarantee identical embedding preprocessing",
+      "Equal-input recall comparison, not isolated algorithm benchmarking",
+      "Jev builds once on the whole corpus; queries prune future nodes",
+      "Backend build and query latency are measured separately"
+    ]
+  },
+  "environment_versions": {
+    "chromadb": "1.5.9",
+    "sentence-transformers": "6.1.0",
+    "torch": "2.14.0",
+    "transformers": "5.18.0",
+    "numpy": "2.5.3",
+    "networkx": "3.7"
+  },
+  "command_exit_code": 0,
+  "run_elapsed_seconds": 25.833821333013475,
+  "recorded_at": "2026-10-01T06:40:43.310645+00:00"
+}

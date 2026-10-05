@@ -1,0 +1,4 @@
+interface:
+  display_name: "小說寫作與章節記憶"
+  short_description: "接續小說專案的規劃、寫作與修訂，核對故事來源並維護章節記錄與圖譜"
+  default_prompt: "使用 $novel-writing 接續目前的小說專案，先確認章節進度與故事脈絡。"

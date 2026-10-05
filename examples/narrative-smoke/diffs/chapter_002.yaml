@@ -1,0 +1,27 @@
+chapter: 2
+characters_appeared:
+  - name: 小白
+    events: ch2：發現紅盒無匙，有限翻找、接漏水後開口詢問位置。
+  - name: 林青
+    events: ch2：在樓上被小白叫住，腳步停下，尚未回答。
+locations_used: [河邊修理鋪]
+foreshadowing_updates:
+  - thread: ①後間鑰匙
+    action: hint
+causal_chains:
+  - cause: 林青改放鑰匙卻未交代新位置
+    cause_ch: 1
+    effect: 小白沿用舊位置翻找落空後詢問
+    effect_ch: 2
+narrative_updates:
+  - id: xiaobai-key-redbox
+    kind: belief
+    character: 小白
+    status: retired
+    text: 小白已確認紅盒無匙，撤回鑰匙仍在紅盒的預期。
+    source: {chapter: 2, start_line: 39, end_line: 39}
+  - id: xiaobai-redbox-empty
+    kind: knowledge
+    character: 小白
+    text: 小白打開並查看紅盒，確認裡面沒有鑰匙。
+    source: {chapter: 2, start_line: 5, end_line: 7}

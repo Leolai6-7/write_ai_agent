@@ -1,0 +1,29 @@
+chapter: 1
+characters_appeared:
+  - name: 林青
+    events: ch1：為避漏水改放後間鑰匙，交代被電話打斷後上樓。
+  - name: 小白
+    events: ch1：從門外詢問等會是否仍到紅盒拿鑰匙，搬入紙箱。
+locations_used: [河邊修理鋪]
+foreshadowing_updates:
+  - thread: ①後間鑰匙
+    action: plant
+narrative_updates:
+  - id: key-location
+    kind: fact
+    text: 林青把後間銅鑰匙改放在高架上的茶罐裡。
+    source: {chapter: 1, start_line: 13, end_line: 13}
+  - id: linqing-key-location
+    kind: knowledge
+    character: 林青
+    text: 林青親手把鑰匙放入高架茶罐，知道這次改放的位置。
+    source: {chapter: 1, start_line: 13, end_line: 13}
+  - id: xiaobai-key-redbox
+    kind: belief
+    character: 小白
+    text: 小白仍把紅盒當預期取匙處，按慣例詢問等會是否到紅盒拿。
+    source: {chapter: 1, start_line: 15, end_line: 15}
+  - id: radio-location
+    kind: fact
+    text: 黃伯修好的收音機放在後間靠門高凳上，插頭已束好。
+    source: {chapter: 1, start_line: 7, end_line: 7}

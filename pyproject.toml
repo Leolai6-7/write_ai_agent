@@ -13,10 +13,14 @@ dependencies = [
     "pydantic>=2.7",
     "pydantic-settings>=2.3",
     "pyyaml>=6.0",
-    "chromadb>=0.5",
+    "networkx>=3.2,<4",
 ]
 
 [project.optional-dependencies]
+semantic = [
+    "chromadb>=0.5,<2",
+    "sentence-transformers>=3,<7",
+]
 dev = [
     "pytest>=8.0",
     "pytest-asyncio>=0.23",
@@ -33,3 +37,6 @@ line-length = 100
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 asyncio_mode = "auto"
+markers = [
+    "integration: opt-in model/service integration tests (NOVEL_TEST_SEMANTIC or NOVEL_TEST_JEV_LIVE)",
+]

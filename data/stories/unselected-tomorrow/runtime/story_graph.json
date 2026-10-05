@@ -1,0 +1,647 @@
+{
+  "chapters": [
+    1,
+    2
+  ],
+  "characters": {
+    "余棠": {
+      "chapters": [
+        1,
+        2
+      ],
+      "events": "ch1: 清理城模時確認紅衣人求救與回應，發現圖外舊孔，簽下維修原因並開始鬆動底板第一顆螺栓；未完成拆板。 · ch2: 拆下底板，循石槽提供北船塢查勘位置；以修件片投字影，答應模型居民先搭橋再拆牆，協助照明而未替他們搬人。"
+    },
+    "陸衡": {
+      "chapters": [
+        1,
+        2
+      ],
+      "events": "ch1: 親自移動燈光確認紅衣人回應，說明醫院防洪、落印期限及拆板代價；要求記錄後拿起電話，尚未描寫工班接獲通知。 · ch2: 試出工程鎖失準，聯絡工班、醫院及救災指揮；回報人工開閘最早09:14但未確定，仍安排原閘分流，另讓船塢工班清場試拆。"
+    },
+    "紅衣人": {
+      "chapters": [
+        1,
+        2
+      ],
+      "events": "ch1: 阻止清走求救瓦字，回應余棠與陸衡的燈光，指向舊孔與刻痕；在拆修開始前退上石階。 · ch2: 指出棚屋困人，阻止另一居民破牆，回指刻痕並在泥上寫『先接人』；搬妥工具後協助取門板、搭橋，尚未救出高窗中的人。"
+    }
+  },
+  "locations": {
+    "測潮所": {
+      "chapters": [
+        1,
+        2
+      ],
+      "description": ""
+    },
+    "鹽燈街": {
+      "chapters": [
+        1,
+        2
+      ],
+      "description": ""
+    },
+    "北船塢舊渠": {
+      "chapters": [
+        2
+      ],
+      "description": ""
+    }
+  },
+  "foreshadowing": {
+    "fs-old-drain": {
+      "status": "已暗示",
+      "planted_in": [
+        1
+      ],
+      "hinted_in": [
+        2
+      ],
+      "resolved_in": []
+    },
+    "fs-tally": {
+      "status": "已暗示",
+      "planted_in": [
+        1
+      ],
+      "hinted_in": [
+        2
+      ],
+      "resolved_in": []
+    },
+    "fs-lock-loss": {
+      "status": "已收束",
+      "planted_in": [
+        1
+      ],
+      "hinted_in": [],
+      "resolved_in": [
+        2
+      ]
+    }
+  },
+  "causal_chains": [
+    {
+      "cause": "紅衣人阻止清瓦並排出求救字樣",
+      "cause_ch": "1",
+      "effect": "余棠與陸衡以移動燈光查證回應，暫停清理",
+      "effect_ch": "1"
+    },
+    {
+      "cause": "紅衣人指出板下孔口，余棠找到現用水道圖未列的水磨痕",
+      "cause_ch": "1",
+      "effect": "余棠決定進一步拆查，簽名記錄未確認通路並開始鬆開固定螺栓",
+      "effect_ch": "1"
+    },
+    {
+      "cause": "拆板將使舊方案無法落印，而現實醫院仍需分流保護",
+      "cause_ch": "1",
+      "effect": "余棠要求先準備人工開閘，陸衡拿起電話",
+      "effect_ch": "1"
+    },
+    {
+      "cause": "余棠取下維修底板，潮痕散去",
+      "cause_ch": "2",
+      "effect": "工程鎖失準，原定自動分流失效，改靠尚未到場的工班人工開閘",
+      "effect_ch": "2"
+    },
+    {
+      "cause": "底板後露出往北船塢延伸的石槽，余棠提供具體定位",
+      "cause_ch": "2",
+      "effect": "工班依位置查勘，回報舊拱口封在倉庫牆內且出水溝淤塞",
+      "effect_ch": "2"
+    },
+    {
+      "cause": "紅衣人要求先接人，斷橋又無法通行",
+      "cause_ch": "2",
+      "effect": "余棠承諾先橋後牆，居民先搬工具再拆門板搭橋",
+      "effect_ch": "2"
+    }
+  ],
+  "mirrors": [],
+  "values": {},
+  "concepts": {
+    "城模": {
+      "introduced_in": 1
+    },
+    "候潮": {
+      "introduced_in": 1
+    },
+    "落印": {
+      "introduced_in": 1
+    },
+    "修件片字影通信": {
+      "introduced_in": 2
+    }
+  },
+  "narrative_state": {
+    "red-figure-responsive-plea": {
+      "id": "red-figure-responsive-plea",
+      "kind": "fact",
+      "text": "模型中的紅衣人排出求救瓦字，並隨余棠及陸衡移動的燈光改變動作。",
+      "source": {
+        "chapter": 1,
+        "start_line": 25,
+        "end_line": 49,
+        "sha256": "963f7c008982026f02dd7aaf39342e8d060bde2e82bb7094f75ae2123f2b7d82"
+      },
+      "status": "active",
+      "introduced_in": 1,
+      "updated_in": 1
+    },
+    "yutang-response-observation": {
+      "id": "yutang-response-observation",
+      "kind": "knowledge",
+      "character": "余棠",
+      "text": "余棠親眼確認紅衣人會回應自己的燈光與動作。",
+      "source": {
+        "chapter": 1,
+        "start_line": 35,
+        "end_line": 63,
+        "sha256": "963f7c008982026f02dd7aaf39342e8d060bde2e82bb7094f75ae2123f2b7d82"
+      },
+      "status": "active",
+      "introduced_in": 1,
+      "updated_in": 1
+    },
+    "luheng-response-observation": {
+      "id": "luheng-response-observation",
+      "kind": "knowledge",
+      "character": "陸衡",
+      "text": "陸衡親自移動光帶，看見紅衣人轉向搬瓦；他確認有人回應，但仍要求下一步處置。",
+      "source": {
+        "chapter": 1,
+        "start_line": 43,
+        "end_line": 61,
+        "sha256": "963f7c008982026f02dd7aaf39342e8d060bde2e82bb7094f75ae2123f2b7d82"
+      },
+      "status": "active",
+      "introduced_in": 1,
+      "updated_in": 1
+    },
+    "yutang-flood-plan-briefing": {
+      "id": "yutang-flood-plan-briefing",
+      "kind": "knowledge",
+      "character": "余棠",
+      "text": "余棠聽陸衡說人工開閘最早09:14、至少比原定09:10晚四分鐘，工班尚未到場，時間仍不確定；原閘仍需開，舊渠只能分擔部分水量與爭取撤離時間。",
+      "source": {
+        "chapter": 2,
+        "start_line": 25,
+        "end_line": 35,
+        "sha256": "2785311824c7e9665eb177cc8c8a4dd20a88f1a53ae582d41ddb68a4037e7841"
+      },
+      "status": "active",
+      "introduced_in": 1,
+      "updated_in": 2
+    },
+    "old-hole-and-tally-observed": {
+      "id": "old-hole-and-tally-observed",
+      "kind": "fact",
+      "text": "底板後已露出兩條石槽，一條止於鏽斑，另一條向北延伸到船塢棚屋牆底；可見槽口狹窄。",
+      "source": {
+        "chapter": 2,
+        "start_line": 19,
+        "end_line": 39,
+        "sha256": "2785311824c7e9665eb177cc8c8a4dd20a88f1a53ae582d41ddb68a4037e7841"
+      },
+      "status": "active",
+      "introduced_in": 1,
+      "updated_in": 2
+    },
+    "yutang-board-removal-cost": {
+      "id": "yutang-board-removal-cost",
+      "kind": "knowledge",
+      "character": "余棠",
+      "text": "余棠知道取下底板會散去潮痕、使兩鎖失準；即使期限前裝回，也須等下次退潮，舊方案不能落印。",
+      "source": {
+        "chapter": 1,
+        "start_line": 109,
+        "end_line": 119,
+        "sha256": "963f7c008982026f02dd7aaf39342e8d060bde2e82bb7094f75ae2123f2b7d82"
+      },
+      "status": "active",
+      "introduced_in": 1,
+      "updated_in": 1
+    },
+    "first-board-intervention-state": {
+      "id": "first-board-intervention-state",
+      "kind": "fact",
+      "text": "余棠已完整取下維修底板，潮痕散去；陸衡插入工程鑰匙後無法轉到底。底板被置於修件架，裝回不能恢復潮痕。",
+      "source": {
+        "chapter": 2,
+        "start_line": 9,
+        "end_line": 19,
+        "sha256": "2785311824c7e9665eb177cc8c8a4dd20a88f1a53ae582d41ddb68a4037e7841"
+      },
+      "status": "active",
+      "introduced_in": 1,
+      "updated_in": 2
+    },
+    "yutang-real-channel-report": {
+      "id": "yutang-real-channel-report",
+      "kind": "knowledge",
+      "character": "余棠",
+      "text": "余棠經陸衡得知工班發現倉庫牆內舊拱口、牆腳滲水，外側出水溝淤泥多；現場擬先拆小口察看，木料與機件不能及時全搬走。這是電話查勘回報，不是她親到現場所見。",
+      "source": {
+        "chapter": 2,
+        "start_line": 51,
+        "end_line": 65,
+        "sha256": "2785311824c7e9665eb177cc8c8a4dd20a88f1a53ae582d41ddb68a4037e7841"
+      },
+      "status": "active",
+      "introduced_in": 2,
+      "updated_in": 2
+    },
+    "projected-writing-exchange": {
+      "id": "projected-writing-exchange",
+      "kind": "fact",
+      "text": "余棠在罩外透明修件片上寫字，以工作燈把字影投到模型白牆；紅衣人在模型濕泥上劃字，余棠用放大鏡辨讀。兩邊仍無可直接交談的聲音。",
+      "source": {
+        "chapter": 2,
+        "start_line": 75,
+        "end_line": 89,
+        "sha256": "2785311824c7e9665eb177cc8c8a4dd20a88f1a53ae582d41ddb68a4037e7841"
+      },
+      "status": "active",
+      "introduced_in": 2,
+      "updated_in": 2
+    },
+    "model-rescue-before-demolition": {
+      "id": "model-rescue-before-demolition",
+      "kind": "fact",
+      "text": "紅衣人寫下『先接人』並壓住破牆長桿；余棠以『先橋，後牆』回覆。居民先搬走工具，再拆下棚門作為橋板，未同意先拆棚牆。",
+      "source": {
+        "chapter": 2,
+        "start_line": 81,
+        "end_line": 109,
+        "sha256": "2785311824c7e9665eb177cc8c8a4dd20a88f1a53ae582d41ddb68a4037e7841"
+      },
+      "status": "active",
+      "introduced_in": 2,
+      "updated_in": 2
+    },
+    "yutang-hospital-power-report": {
+      "id": "yutang-hospital-power-report",
+      "kind": "knowledge",
+      "character": "余棠",
+      "text": "陸衡轉述醫院已為搬運安全斷掉地下層電源，上層暫時仍有電，電工正在搬設備；又說現實倉庫開始鑿牆，機件只搬出一半。",
+      "source": {
+        "chapter": 2,
+        "start_line": 111,
+        "end_line": 119,
+        "sha256": "2785311824c7e9665eb177cc8c8a4dd20a88f1a53ae582d41ddb68a4037e7841"
+      },
+      "status": "active",
+      "introduced_in": 2,
+      "updated_in": 2
+    },
+    "flood-response-state": {
+      "id": "flood-response-state",
+      "kind": "fact",
+      "text": "09:09時現實分流閘尚未開，模型棚牆完整；居民正在將門板送往斷橋，余棠留下『先橋，後牆』字影。尚未完成救人或驗證舊渠排洪效果。",
+      "source": {
+        "chapter": 2,
+        "start_line": 125,
+        "end_line": 131,
+        "sha256": "2785311824c7e9665eb177cc8c8a4dd20a88f1a53ae582d41ddb68a4037e7841"
+      },
+      "status": "active",
+      "introduced_in": 2,
+      "updated_in": 2
+    }
+  },
+  "_history": {
+    "version": 1,
+    "baseline": {
+      "chapters": [],
+      "characters": {},
+      "locations": {},
+      "foreshadowing": {},
+      "causal_chains": [],
+      "mirrors": [],
+      "values": {},
+      "concepts": {}
+    },
+    "diffs": {
+      "1": {
+        "chapter": 1,
+        "characters_appeared": [
+          {
+            "name": "余棠",
+            "events": "ch1: 清理城模時確認紅衣人求救與回應，發現圖外舊孔，簽下維修原因並開始鬆動底板第一顆螺栓；未完成拆板。"
+          },
+          {
+            "name": "陸衡",
+            "events": "ch1: 親自移動燈光確認紅衣人回應，說明醫院防洪、落印期限及拆板代價；要求記錄後拿起電話，尚未描寫工班接獲通知。"
+          },
+          {
+            "name": "紅衣人",
+            "events": "ch1: 阻止清走求救瓦字，回應余棠與陸衡的燈光，指向舊孔與刻痕；在拆修開始前退上石階。"
+          }
+        ],
+        "locations_used": [
+          "測潮所",
+          "鹽燈街"
+        ],
+        "foreshadowing_updates": [
+          {
+            "thread": "fs-old-drain",
+            "action": "plant"
+          },
+          {
+            "thread": "fs-tally",
+            "action": "plant"
+          },
+          {
+            "thread": "fs-lock-loss",
+            "action": "plant"
+          }
+        ],
+        "causal_chains": [
+          {
+            "cause": "紅衣人阻止清瓦並排出求救字樣",
+            "cause_ch": 1,
+            "effect": "余棠與陸衡以移動燈光查證回應，暫停清理",
+            "effect_ch": 1
+          },
+          {
+            "cause": "紅衣人指出板下孔口，余棠找到現用水道圖未列的水磨痕",
+            "cause_ch": 1,
+            "effect": "余棠決定進一步拆查，簽名記錄未確認通路並開始鬆開固定螺栓",
+            "effect_ch": 1
+          },
+          {
+            "cause": "拆板將使舊方案無法落印，而現實醫院仍需分流保護",
+            "cause_ch": 1,
+            "effect": "余棠要求先準備人工開閘，陸衡拿起電話",
+            "effect_ch": 1
+          }
+        ],
+        "concepts_introduced": [
+          {
+            "name": "城模"
+          },
+          {
+            "name": "候潮"
+          },
+          {
+            "name": "落印"
+          }
+        ],
+        "narrative_updates": [
+          {
+            "id": "red-figure-responsive-plea",
+            "kind": "fact",
+            "text": "模型中的紅衣人排出求救瓦字，並隨余棠及陸衡移動的燈光改變動作。",
+            "source": {
+              "chapter": 1,
+              "start_line": 25,
+              "end_line": 49,
+              "sha256": "963f7c008982026f02dd7aaf39342e8d060bde2e82bb7094f75ae2123f2b7d82"
+            },
+            "status": "active"
+          },
+          {
+            "id": "yutang-response-observation",
+            "kind": "knowledge",
+            "character": "余棠",
+            "text": "余棠親眼確認紅衣人會回應自己的燈光與動作。",
+            "source": {
+              "chapter": 1,
+              "start_line": 35,
+              "end_line": 63,
+              "sha256": "963f7c008982026f02dd7aaf39342e8d060bde2e82bb7094f75ae2123f2b7d82"
+            },
+            "status": "active"
+          },
+          {
+            "id": "luheng-response-observation",
+            "kind": "knowledge",
+            "character": "陸衡",
+            "text": "陸衡親自移動光帶，看見紅衣人轉向搬瓦；他確認有人回應，但仍要求下一步處置。",
+            "source": {
+              "chapter": 1,
+              "start_line": 43,
+              "end_line": 61,
+              "sha256": "963f7c008982026f02dd7aaf39342e8d060bde2e82bb7094f75ae2123f2b7d82"
+            },
+            "status": "active"
+          },
+          {
+            "id": "yutang-flood-plan-briefing",
+            "kind": "knowledge",
+            "character": "余棠",
+            "text": "余棠得知方案須09:00前落印、09:10分流；陸衡說明現實鹽燈街將進水以保醫院，街區到戶撤離回報尚未收齊。",
+            "source": {
+              "chapter": 1,
+              "start_line": 55,
+              "end_line": 75,
+              "sha256": "963f7c008982026f02dd7aaf39342e8d060bde2e82bb7094f75ae2123f2b7d82"
+            },
+            "status": "active"
+          },
+          {
+            "id": "old-hole-and-tally-observed",
+            "kind": "fact",
+            "text": "城模鹽燈街的補板遮著孔口及水磨痕，現用圖未列其後通路；孔邊有不同深淺的短痕，含義未明，真實通路也未核查。",
+            "source": {
+              "chapter": 1,
+              "start_line": 83,
+              "end_line": 121,
+              "sha256": "963f7c008982026f02dd7aaf39342e8d060bde2e82bb7094f75ae2123f2b7d82"
+            },
+            "status": "active"
+          },
+          {
+            "id": "yutang-board-removal-cost",
+            "kind": "knowledge",
+            "character": "余棠",
+            "text": "余棠知道取下底板會散去潮痕、使兩鎖失準；即使期限前裝回，也須等下次退潮，舊方案不能落印。",
+            "source": {
+              "chapter": 1,
+              "start_line": 109,
+              "end_line": 119,
+              "sha256": "963f7c008982026f02dd7aaf39342e8d060bde2e82bb7094f75ae2123f2b7d82"
+            },
+            "status": "active"
+          },
+          {
+            "id": "first-board-intervention-state",
+            "kind": "fact",
+            "text": "八點五十八分後，余棠剪斷鉛封並鬆動第一顆螺栓，底板仍平貼原位；尚未取下，方案尚未因拆板失準。",
+            "source": {
+              "chapter": 1,
+              "start_line": 137,
+              "end_line": 151,
+              "sha256": "963f7c008982026f02dd7aaf39342e8d060bde2e82bb7094f75ae2123f2b7d82"
+            },
+            "status": "active"
+          }
+        ]
+      },
+      "2": {
+        "chapter": 2,
+        "characters_appeared": [
+          {
+            "name": "余棠",
+            "events": "ch2: 拆下底板，循石槽提供北船塢查勘位置；以修件片投字影，答應模型居民先搭橋再拆牆，協助照明而未替他們搬人。"
+          },
+          {
+            "name": "陸衡",
+            "events": "ch2: 試出工程鎖失準，聯絡工班、醫院及救災指揮；回報人工開閘最早09:14但未確定，仍安排原閘分流，另讓船塢工班清場試拆。"
+          },
+          {
+            "name": "紅衣人",
+            "events": "ch2: 指出棚屋困人，阻止另一居民破牆，回指刻痕並在泥上寫『先接人』；搬妥工具後協助取門板、搭橋，尚未救出高窗中的人。"
+          }
+        ],
+        "locations_used": [
+          "測潮所",
+          "鹽燈街",
+          "北船塢舊渠"
+        ],
+        "foreshadowing_updates": [
+          {
+            "thread": "fs-lock-loss",
+            "action": "resolve"
+          },
+          {
+            "thread": "fs-old-drain",
+            "action": "hint"
+          },
+          {
+            "thread": "fs-tally",
+            "action": "hint"
+          }
+        ],
+        "causal_chains": [
+          {
+            "cause": "余棠取下維修底板，潮痕散去",
+            "cause_ch": 2,
+            "effect": "工程鎖失準，原定自動分流失效，改靠尚未到場的工班人工開閘",
+            "effect_ch": 2
+          },
+          {
+            "cause": "底板後露出往北船塢延伸的石槽，余棠提供具體定位",
+            "cause_ch": 2,
+            "effect": "工班依位置查勘，回報舊拱口封在倉庫牆內且出水溝淤塞",
+            "effect_ch": 2
+          },
+          {
+            "cause": "紅衣人要求先接人，斷橋又無法通行",
+            "cause_ch": 2,
+            "effect": "余棠承諾先橋後牆，居民先搬工具再拆門板搭橋",
+            "effect_ch": 2
+          }
+        ],
+        "concepts_introduced": [
+          {
+            "name": "修件片字影通信",
+            "chapter": 2
+          }
+        ],
+        "narrative_updates": [
+          {
+            "id": "first-board-intervention-state",
+            "kind": "fact",
+            "text": "余棠已完整取下維修底板，潮痕散去；陸衡插入工程鑰匙後無法轉到底。底板被置於修件架，裝回不能恢復潮痕。",
+            "source": {
+              "chapter": 2,
+              "start_line": 9,
+              "end_line": 19,
+              "sha256": "2785311824c7e9665eb177cc8c8a4dd20a88f1a53ae582d41ddb68a4037e7841"
+            },
+            "status": "active"
+          },
+          {
+            "id": "old-hole-and-tally-observed",
+            "kind": "fact",
+            "text": "底板後已露出兩條石槽，一條止於鏽斑，另一條向北延伸到船塢棚屋牆底；可見槽口狹窄。",
+            "source": {
+              "chapter": 2,
+              "start_line": 19,
+              "end_line": 39,
+              "sha256": "2785311824c7e9665eb177cc8c8a4dd20a88f1a53ae582d41ddb68a4037e7841"
+            },
+            "status": "active"
+          },
+          {
+            "id": "yutang-flood-plan-briefing",
+            "kind": "knowledge",
+            "character": "余棠",
+            "text": "余棠聽陸衡說人工開閘最早09:14、至少比原定09:10晚四分鐘，工班尚未到場，時間仍不確定；原閘仍需開，舊渠只能分擔部分水量與爭取撤離時間。",
+            "source": {
+              "chapter": 2,
+              "start_line": 25,
+              "end_line": 35,
+              "sha256": "2785311824c7e9665eb177cc8c8a4dd20a88f1a53ae582d41ddb68a4037e7841"
+            },
+            "status": "active"
+          },
+          {
+            "id": "yutang-real-channel-report",
+            "kind": "knowledge",
+            "character": "余棠",
+            "text": "余棠經陸衡得知工班發現倉庫牆內舊拱口、牆腳滲水，外側出水溝淤泥多；現場擬先拆小口察看，木料與機件不能及時全搬走。這是電話查勘回報，不是她親到現場所見。",
+            "source": {
+              "chapter": 2,
+              "start_line": 51,
+              "end_line": 65,
+              "sha256": "2785311824c7e9665eb177cc8c8a4dd20a88f1a53ae582d41ddb68a4037e7841"
+            },
+            "status": "active"
+          },
+          {
+            "id": "projected-writing-exchange",
+            "kind": "fact",
+            "text": "余棠在罩外透明修件片上寫字，以工作燈把字影投到模型白牆；紅衣人在模型濕泥上劃字，余棠用放大鏡辨讀。兩邊仍無可直接交談的聲音。",
+            "source": {
+              "chapter": 2,
+              "start_line": 75,
+              "end_line": 89,
+              "sha256": "2785311824c7e9665eb177cc8c8a4dd20a88f1a53ae582d41ddb68a4037e7841"
+            },
+            "status": "active"
+          },
+          {
+            "id": "model-rescue-before-demolition",
+            "kind": "fact",
+            "text": "紅衣人寫下『先接人』並壓住破牆長桿；余棠以『先橋，後牆』回覆。居民先搬走工具，再拆下棚門作為橋板，未同意先拆棚牆。",
+            "source": {
+              "chapter": 2,
+              "start_line": 81,
+              "end_line": 109,
+              "sha256": "2785311824c7e9665eb177cc8c8a4dd20a88f1a53ae582d41ddb68a4037e7841"
+            },
+            "status": "active"
+          },
+          {
+            "id": "yutang-hospital-power-report",
+            "kind": "knowledge",
+            "character": "余棠",
+            "text": "陸衡轉述醫院已為搬運安全斷掉地下層電源，上層暫時仍有電，電工正在搬設備；又說現實倉庫開始鑿牆，機件只搬出一半。",
+            "source": {
+              "chapter": 2,
+              "start_line": 111,
+              "end_line": 119,
+              "sha256": "2785311824c7e9665eb177cc8c8a4dd20a88f1a53ae582d41ddb68a4037e7841"
+            },
+            "status": "active"
+          },
+          {
+            "id": "flood-response-state",
+            "kind": "fact",
+            "text": "09:09時現實分流閘尚未開，模型棚牆完整；居民正在將門板送往斷橋，余棠留下『先橋，後牆』字影。尚未完成救人或驗證舊渠排洪效果。",
+            "source": {
+              "chapter": 2,
+              "start_line": 125,
+              "end_line": 131,
+              "sha256": "2785311824c7e9665eb177cc8c8a4dd20a88f1a53ae582d41ddb68a4037e7841"
+            },
+            "status": "active"
+          }
+        ]
+      }
+    }
+  }
+}

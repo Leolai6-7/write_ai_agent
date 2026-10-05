@@ -43,7 +43,8 @@ Not all threads need all 3 beats. A minor detail can be planted and resolved wit
 
 For each foreshadowing thread:
 ```
-### [Thread Name]
+### fs-lost-letter｜失蹤的信
+- **thread_id**: fs-lost-letter
 - **Type**: major / minor / red_herring
 - **Description**: one sentence
 - **Related characters**
@@ -53,11 +54,23 @@ For each foreshadowing thread:
 - **Connection to main conflict**: how this thread serves the story
 ```
 
+Keep identity separate from the display name. Give each new thread a stable,
+nonempty ID and reuse it in chapter plans and graph updates; changing its title
+does not create a new thread. Preserve existing graph keys for older stories;
+do not renumber or migrate them automatically. Plain names and old numbered
+headings remain usable, but a name beginning with a number is not itself an ID.
+
+The chapter plan uses `{thread_id: fs-lost-letter, name: 失蹤的信, action: hint}`.
+The chapter graph diff uses `{thread: fs-lost-letter, action: hint}`. Use only
+`plant`, `hint`, or `resolve`; retain multiple actions when a thread is planted
+and resolved in the same chapter. These are plans until supported by final prose.
+See `docs/narrative-context.md` section「伏筆識別與本章動作」 for legacy handling.
+
 ### Per-Chapter Directive Table
 
 For the planned range, show what each chapter plants, hints, and resolves:
 ```
-| Chapter | Plant | Hint | Resolve |
+| Chapter | Plant (ID + name) | Hint (ID + name) | Resolve (ID + name) |
 |---------|-------|------|---------|
 ```
 
